@@ -90,14 +90,14 @@ const nextConfig = {
     ];
   },
 
-  // ── Redirects ────────────────────────────────────────────────────
-// async redirects() {
-//   return [
-//     { source: '/home', destination: '/', permanent: true },
-//     { source: '/login', destination: '/(auth)/login', permanent: false },
-//     { source: '/signup', destination: '/(auth)/signup', permanent: false },
-//   ];
-// }
+async redirects() {
+  return [
+    { source: '/home', destination: '/', permanent: true },
+    { source: '/login', destination: '/(auth)/login', permanent: false },
+    { source: '/signup', destination: '/(auth)/signup', permanent: false },
+  ];
+}  // ── Redirects ────────────────────────────────────────────────────
+
 // ── Sentry integration (only if DSN is configured) ──────────────
 const sentinelDSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
