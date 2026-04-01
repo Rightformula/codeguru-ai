@@ -1,0 +1,216 @@
+[
+  {
+    "id": "java-m6-l1",
+    "moduleId": "java-m6",
+    "title": "Arrays: Storing Collections of Data",
+    "order": 1,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Storing and Processing Multiple Values with Java Arrays",
+      "content": "# Arrays in Java\n\nImagine a classroom with 30 students. Without arrays, you would need 30 separate variables: `score1`, `score2`, ..., `score30`. An **array** stores multiple values of the same type under one name, accessed by a numeric index.\n\n## Declaring and Creating Arrays\n\n```java\n// Method 1: declare then allocate\nint[] scores = new int[5];       // 5 slots, all initialised to 0\n\n// Method 2: declare and initialise with values\nint[] marks = {85, 92, 78, 95, 88};\n\n// Method 3: typed array with new keyword\nString[] names = new String[]{\"Rahul\", \"Priya\", \"Amit\"};\n```\n\n## Accessing Elements\n\nJava arrays use **zero-based indexing** — the first element is at index 0:\n\n```java\nint[] arr = {10, 20, 30, 40, 50};\nSystem.out.println(arr[0]);   // 10 — first element\nSystem.out.println(arr[4]);   // 50 — last element\nSystem.out.println(arr.length); // 5 — count of elements (not a method)\n```\n\nAccessing `arr[5]` would throw an `ArrayIndexOutOfBoundsException`.\n\n## Modifying Elements\n\n```java\nmarks[2] = 90;   // replace index 2 (was 78, now 90)\n```\n\n## Iterating Over Arrays\n\n```java\n// Classic for — use when you need the index\nfor (int i = 0; i < scores.length; i++) {\n    System.out.println(\"Index \" + i + \": \" + scores[i]);\n}\n\n// Enhanced for — use when you only need the value\nfor (int score : scores) {\n    System.out.println(score);\n}\n```\n\n## Common Array Operations\n\n```java\n// Sum all elements\nint total = 0;\nfor (int v : arr) total += v;\n\n// Find maximum\nint max = arr[0];\nfor (int v : arr) if (v > max) max = v;\n\n// Sort (ascending) — from java.util.Arrays\njava.util.Arrays.sort(arr);   // modifies arr in place\n```\n\n## 2D Arrays\n\nA 2D array stores rows and columns — like a spreadsheet:\n\n```java\nint[][] matrix = {\n    {1, 2, 3},\n    {4, 5, 6},\n    {7, 8, 9}\n};\nSystem.out.println(matrix[1][2]);  // row 1, column 2 → 6\n```\n\nIn the code example below, you will see array creation, iteration, and the accumulator pattern applied to a class score report."
+    },
+    "codeExample": {
+      "title": "Class Score Report",
+      "language": "java",
+      "code": "public class Main {\n\n    public static void main(String[] args) {\n\n        String[] names  = {\"Rahul\", \"Priya\", \"Amit\", \"Sneha\", \"Vikram\"};\n        int[]    scores = {88, 95, 72, 91, 67};\n\n        // Compute total, average, highest\n        int    total   = 0;\n        int    highest = scores[0];\n        String topName = names[0];\n\n        for (int i = 0; i < scores.length; i++) {\n            total += scores[i];\n            if (scores[i] > highest) {\n                highest = scores[i];\n                topName = names[i];     // track who has the highest\n            }\n        }\n\n        double average = (double) total / scores.length;\n\n        // Print report\n        System.out.println(\"=== Class Report ===\");\n        for (int i = 0; i < names.length; i++) {\n            String grade = scores[i] >= 90 ? \"A\" :\n                           scores[i] >= 75 ? \"B\" : \"C\";\n            System.out.printf(\"%-10s %3d  %s%n\",\n                              names[i], scores[i], grade);\n        }\n        System.out.println(\"---\");\n        System.out.printf(\"Average : %.1f%n\", average);\n        System.out.printf(\"Top     : %s (%d)%n\", topName, highest);\n    }\n}",
+      "explanation": "- `scores[0]` — zero-based indexing; the first element is at index 0, the last at `length - 1`\n- `for (int i = 0; i < scores.length; i++)` — classic for loop used because we need the index `i` for both arrays\n- `scores[i] > highest` — comparison inside the loop; updates `highest` and `topName` together when a new high is found\n- `(double) total / scores.length` — casting to `double` forces decimal division; without it, integer division truncates\n- `%-10s` in printf — left-aligns the string in a 10-character field; the minus sign flips the default right-alignment"
+    },
+    "exercise": {
+      "title": "Compute Array Statistics",
+      "instructions": "Given int[] data = {14, 38, 7, 56, 23, 45, 9}, write code to compute: sum of all elements, the minimum value, the maximum value, and the average as a double. Print all four results on separate labelled lines using printf. Use a single for-each loop to compute sum, min, and max together.\n\nExpected output:\nSum: 192\nMin: 7\nMax: 56\nAverage: 27.4",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        int[] data = {14, 38, 7, 56, 23, 45, 9};\n\n        int    sum = 0;\n        int    min = data[0];\n        int    max = data[0];\n\n        for (int v : data) {\n            sum += v;\n            if (v < min) min = v;\n            if (v > max) max = v;\n        }\n\n        double average = (double) sum / data.length;\n\n        System.out.println(\"Sum: \" + sum);\n        // Your code: print min, max, average\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        int[] data = {14, 38, 7, 56, 23, 45, 9};\n\n        int sum = 0, min = data[0], max = data[0];\n        for (int v : data) {\n            sum += v;\n            if (v < min) min = v;\n            if (v > max) max = v;\n        }\n        double average = (double) sum / data.length;\n\n        System.out.println(\"Sum: \" + sum);\n        System.out.println(\"Min: \" + min);\n        System.out.println(\"Max: \" + max);\n        System.out.printf(\"Average: %.1f%n\", average);\n    }\n}",
+      "hints": [
+        "💡 Print min: System.out.println(\"Min: \" + min); and max: System.out.println(\"Max: \" + max);",
+        "💡 Print average with printf: System.out.printf(\"Average: %.1f%n\", average); to get exactly one decimal place.",
+        "💡 The loop logic is already complete — you only need to add the three missing print statements."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Sum: 192",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Average: 27.4",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m6-l1-q1",
+          "question": "What index holds the first element of a Java array?",
+          "options": [
+            "1",
+            "0",
+            "-1",
+            "The length of the array"
+          ],
+          "correct": 1,
+          "explanation": "Java arrays use zero-based indexing. The first element is at index 0, the second at index 1, and the last element at index array.length - 1. Attempting to access an index equal to or greater than array.length throws an ArrayIndexOutOfBoundsException at runtime."
+        },
+        {
+          "id": "java-m6-l1-q2",
+          "question": "How do you get the number of elements in a Java array?",
+          "options": [
+            "arr.size()",
+            "arr.count()",
+            "arr.length",
+            "arr.length()"
+          ],
+          "correct": 2,
+          "explanation": "For arrays in Java, the element count is accessed via the .length field — no parentheses because it is a property, not a method. Compare this with String where you call .length() with parentheses (it is a method). ArrayList and other collections use .size()."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m6-l2",
+    "moduleId": "java-m6",
+    "title": "ArrayList and Working with Collections",
+    "order": 2,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Dynamic Collections with Java's ArrayList",
+      "content": "# Limitations of Arrays\n\nJava arrays have a fixed size — once created, you cannot add or remove elements. If you do not know the final count in advance, or if the collection grows as the program runs, you need a more flexible data structure.\n\n## ArrayList\n\n`ArrayList` is a resizable list from `java.util`. It grows automatically as you add elements:\n\n```java\nimport java.util.ArrayList;\n\nArrayList<String> names = new ArrayList<>();\nnames.add(\"Rahul\");\nnames.add(\"Priya\");\nnames.add(\"Amit\");\nSystem.out.println(names.size());   // 3\nSystem.out.println(names.get(0));   // Rahul\n```\n\nThe `<String>` in angle brackets is a **type parameter** — it tells Java what type of objects the list holds.\n\n## Common ArrayList Methods\n\n| Method | Description |\n|---|---|\n| `.add(element)` | Appends to the end |\n| `.add(index, element)` | Inserts at position |\n| `.get(index)` | Returns element at index |\n| `.set(index, element)` | Replaces element at index |\n| `.remove(index)` | Removes by index |\n| `.remove(object)` | Removes first occurrence of object |\n| `.size()` | Returns count of elements |\n| `.contains(element)` | Returns true if element present |\n| `.indexOf(element)` | Returns first index or -1 |\n| `.clear()` | Removes all elements |\n| `.isEmpty()` | Returns true if size is 0 |\n\n## Iterating Over an ArrayList\n\n```java\n// Enhanced for — most readable\nfor (String name : names) {\n    System.out.println(name);\n}\n\n// Classic for — use when you need the index\nfor (int i = 0; i < names.size(); i++) {\n    System.out.println(i + \": \" + names.get(i));\n}\n```\n\n## ArrayList vs Array — When to Use Which\n\n| Situation | Use |\n|---|---|\n| Fixed size, known at creation | `int[]` array |\n| Size changes at runtime | `ArrayList<Integer>` |\n| Primitive performance critical | Array |\n| Need .contains(), .indexOf() | ArrayList |\n\nIn the code example below, you will see an ArrayList managing a dynamic student roster with add, remove, and search operations."
+    },
+    "codeExample": {
+      "title": "Dynamic Student Roster",
+      "language": "java",
+      "code": "import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n\n        // Create an ArrayList of student names\n        ArrayList<String> roster = new ArrayList<>();\n        roster.add(\"Rahul Sharma\");\n        roster.add(\"Priya Verma\");\n        roster.add(\"Amit Patel\");\n        roster.add(\"Sneha Iyer\");\n        roster.add(\"Vikram Singh\");\n\n        // Display the roster\n        System.out.println(\"=== Current Roster ===\" );\n        for (int i = 0; i < roster.size(); i++) {\n            System.out.printf(\"%d. %s%n\", i + 1, roster.get(i));\n        }\n\n        // Add a student\n        roster.add(\"Kavitha Nair\");\n        System.out.println(\"\\nAdded: Kavitha Nair\");\n        System.out.println(\"Total students: \" + roster.size());\n\n        // Remove a student by name\n        boolean removed = roster.remove(\"Amit Patel\");\n        System.out.println(\"Removed Amit: \" + removed);\n\n        // Search\n        String search = \"Sneha Iyer\";\n        int    idx    = roster.indexOf(search);\n        System.out.println(search + \" is at position: \" + (idx + 1));\n\n        // Filter: names starting with 'P'\n        System.out.println(\"\\n=== Names starting with P ===\");\n        for (String name : roster) {\n            if (name.startsWith(\"P\")) {\n                System.out.println(name);\n            }\n        }\n    }\n}",
+      "explanation": "- `ArrayList<String> roster = new ArrayList<>()` — the type parameter `<String>` ensures only Strings can be added\n- `.add(\"Kavitha Nair\")` — appends to the end; the list grows automatically\n- `.remove(\"Amit Patel\")` — removes the first matching element; returns `true` if found\n- `.indexOf(search)` — returns the zero-based position; `idx + 1` converts to 1-based for display\n- `for (String name : roster)` — the enhanced for loop works with ArrayList just like arrays\n- `.startsWith(\"P\")` — String method used inside the loop to filter matching elements"
+    },
+    "exercise": {
+      "title": "Build a Course Enrolment Manager",
+      "instructions": "Create an ArrayList<String> named courses. Add these four courses: 'Python', 'JavaScript', 'Java', 'HTML/CSS'. Print the count using size(). Check if 'Java' is in the list using contains() and print the result. Remove 'Python' and print the updated list using a for-each loop. Add 'React' and print the final count.\n\nExpected output includes size 4, Java present true, Python removed, and final size 4.",
+      "starterCode": "import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n\n        ArrayList<String> courses = new ArrayList<>();\n        courses.add(\"Python\");\n        courses.add(\"JavaScript\");\n        courses.add(\"Java\");\n        courses.add(\"HTML/CSS\");\n\n        System.out.println(\"Count: \" + courses.size());\n        System.out.println(\"Has Java: \" + courses.contains(\"Java\"));\n\n        // Remove Python and print updated list\n        courses.remove(\"Python\");\n        System.out.println(\"After removing Python:\");\n        // Your code: for-each loop to print each course\n\n        // Add React and print final count\n        courses.add(\"React\");\n        // Your code: print final count\n    }\n}",
+      "solutionCode": "import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<String> courses = new ArrayList<>();\n        courses.add(\"Python\");\n        courses.add(\"JavaScript\");\n        courses.add(\"Java\");\n        courses.add(\"HTML/CSS\");\n\n        System.out.println(\"Count: \" + courses.size());\n        System.out.println(\"Has Java: \" + courses.contains(\"Java\"));\n\n        courses.remove(\"Python\");\n        System.out.println(\"After removing Python:\");\n        for (String c : courses) {\n            System.out.println(\"  \" + c);\n        }\n\n        courses.add(\"React\");\n        System.out.println(\"Final count: \" + courses.size());\n    }\n}",
+      "hints": [
+        "💡 Add a for-each loop: for (String c : courses) { System.out.println(\"  \" + c); }",
+        "💡 After adding React, print: System.out.println(\"Final count: \" + courses.size());",
+        "💡 ArrayList uses .size() (not .length) to return the number of elements."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Has Java: true",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Final count: 4",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m6-l2-q1",
+          "question": "What is the key advantage of ArrayList over a regular Java array?",
+          "options": [
+            "ArrayList holds primitive types directly; arrays require wrappers",
+            "ArrayList can grow and shrink dynamically; arrays have a fixed size set at creation",
+            "ArrayList is faster than arrays for all operations",
+            "ArrayList can hold multiple types simultaneously; arrays cannot"
+          ],
+          "correct": 1,
+          "explanation": "A Java array has a fixed size determined when it is created with new int[5] — you cannot add or remove elements. ArrayList dynamically resizes as you call add() and remove(). This makes ArrayList ideal when the number of elements is not known in advance or changes during program execution."
+        },
+        {
+          "id": "java-m6-l2-q2",
+          "question": "How do you access the element at index 2 in an ArrayList named list?",
+          "options": [
+            "list[2]",
+            "list.element(2)",
+            "list.get(2)",
+            "list.fetch(2)"
+          ],
+          "correct": 2,
+          "explanation": "ArrayList elements are accessed with the .get(index) method. Unlike arrays (which use arr[index] bracket notation), ArrayList requires a method call. list.get(2) returns the element at zero-based index 2. Attempting bracket notation on an ArrayList causes a compile error."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m6-l3",
+    "moduleId": "java-m6",
+    "title": "Mini Project: Student Grade System",
+    "order": 3,
+    "xpReward": 25,
+    "duration": "20 min",
+    "explanation": {
+      "title": "Building a Complete Student Grade System Using All Core Java Concepts",
+      "content": "# The Mini Project\n\nYou have now learned every core building block of Java programming:\n\n1. **Java structure** — class, main method, output, comments\n2. **Variables and types** — primitives, String, casting, parsing\n3. **Operators** — arithmetic, comparison, logical, ternary\n4. **Conditions** — if/else if/else, switch\n5. **Loops** — for, for-each, while, break, continue\n6. **Methods** — declaration, parameters, return values, overloading\n7. **Arrays** — creation, access, iteration, common patterns\n8. **ArrayList** — dynamic collections, add, remove, search\n\nIn this lesson, you will build a **Student Grade System** — a complete program that stores student records, computes statistics, ranks students, and prints a formatted report. Every concept from every module is used here.\n\n## Design: What the System Must Do\n\n- Store each student's name and three subject scores\n- Compute average for each student\n- Assign a letter grade based on average\n- Find the top student\n- Compute class average\n- Print a formatted ranked report\n\n## Data Structure Choice\n\nWe use **parallel arrays** — separate arrays for names and scores that are linked by index. Student at `names[i]` has scores at `scores[i]`.\n\n```java\nString[] names  = {\"Rahul\", \"Priya\", ...};\nint[][]  scores = {{85, 72, 90}, {92, 88, 95}, ...};\n```\n\n## Method Decomposition\n\nBreaking the problem into focused methods:\n\n- `computeAverage(int[])` — average of a student's three scores\n- `assignGrade(double)` — letter grade for an average\n- `findTopStudent(String[], int[][])` — name of highest-average student\n- `printReport(String[], int[][], ...)` — formatted table output\n\nThis decomposition mirrors real professional Java code. Each method is independently testable and reusable.\n\nIn the code example below, you will see the complete Student Grade System implemented using every concept from this course. Study each method before reading the main method."
+    },
+    "codeExample": {
+      "title": "Complete Student Grade System",
+      "language": "java",
+      "code": "public class Main {\n\n    // Average of three integer scores\n    public static double computeAverage(int[] subjectScores) {\n        int total = 0;\n        for (int s : subjectScores) total += s;\n        return (double) total / subjectScores.length;\n    }\n\n    // Letter grade based on average\n    public static String assignGrade(double avg) {\n        if      (avg >= 90) return \"A\";\n        else if (avg >= 75) return \"B\";\n        else if (avg >= 60) return \"C\";\n        else                return \"F\";\n    }\n\n    // Index of the student with the highest average\n    public static int findTopIndex(int[][] allScores) {\n        int    topIdx = 0;\n        double topAvg = computeAverage(allScores[0]);\n        for (int i = 1; i < allScores.length; i++) {\n            double avg = computeAverage(allScores[i]);\n            if (avg > topAvg) { topAvg = avg; topIdx = i; }\n        }\n        return topIdx;\n    }\n\n    public static void main(String[] args) {\n\n        // --- Data ---\n        String[] names = {\"Rahul\", \"Priya\", \"Amit\", \"Sneha\", \"Vikram\"};\n        int[][]  scores = {\n            {85, 72, 90},   // Rahul\n            {92, 88, 95},   // Priya\n            {62, 55, 70},   // Amit\n            {78, 83, 91},   // Sneha\n            {45, 50, 48}    // Vikram\n        };\n\n        // --- Report header ---\n        System.out.println(\"================================================\");\n        System.out.println(\"          STUDENT GRADE REPORT\");\n        System.out.println(\"================================================\");\n        System.out.printf(\"%-10s %4s %4s %4s %7s %5s%n\",\n                          \"Name\", \"M\", \"S\", \"E\", \"Avg\", \"Grade\");\n        System.out.println(\"------------------------------------------------\");\n\n        // --- Per-student rows + class total ---\n        double classTotal = 0;\n        for (int i = 0; i < names.length; i++) {\n            double avg   = computeAverage(scores[i]);\n            String grade = assignGrade(avg);\n            classTotal  += avg;\n            System.out.printf(\"%-10s %4d %4d %4d %7.1f %5s%n\",\n                names[i],\n                scores[i][0], scores[i][1], scores[i][2],\n                avg, grade);\n        }\n\n        // --- Summary ---\n        double classAvg = classTotal / names.length;\n        int    topIdx   = findTopIndex(scores);\n        System.out.println(\"================================================\");\n        System.out.printf(\"Class Average : %.1f%n\", classAvg);\n        System.out.printf(\"Top Student   : %s (%.1f)%n\",\n                          names[topIdx],\n                          computeAverage(scores[topIdx]));\n        System.out.printf(\"Pass count    : %d/%d%n\",\n                          countPassing(scores), names.length);\n    }\n\n    // Count students with average >= 60\n    public static int countPassing(int[][] allScores) {\n        int count = 0;\n        for (int[] s : allScores)\n            if (computeAverage(s) >= 60) count++;\n        return count;\n    }\n}",
+      "explanation": "- `for (int s : subjectScores) total += s` — for-each over a method parameter array; accumulates the total\n- `(double) total / subjectScores.length` — cast before dividing to force decimal division\n- `int[][] scores` — a 2D array; each row is one student's three subject scores\n- `computeAverage(scores[i])` — passing a row of the 2D array to a method that accepts `int[]`\n- `%-10s %4s %4s %4d %7.1f %5s` — format string with width/alignment codes for a neat table layout\n- `countPassing` defined after `main` — Java allows methods in any order within a class"
+    },
+    "exercise": {
+      "title": "Extend the Grade System with a Remark",
+      "instructions": "Add a static method getRemark(String grade) to the grade system that returns: 'Excellent!' for A, 'Well done!' for B, 'Keep going!' for C, and 'Seek help.' for F. Then add a loop in main that prints each student's name, grade, and remark on one line. Use the same names and scores arrays from the code example.\n\nExpected output includes lines like: Priya A Excellent!",
+      "starterCode": "public class Main {\n\n    public static double computeAverage(int[] s) {\n        int total = 0;\n        for (int v : s) total += v;\n        return (double) total / s.length;\n    }\n\n    public static String assignGrade(double avg) {\n        if      (avg >= 90) return \"A\";\n        else if (avg >= 75) return \"B\";\n        else if (avg >= 60) return \"C\";\n        else                return \"F\";\n    }\n\n    // Add getRemark(String grade) method here\n\n    public static void main(String[] args) {\n        String[] names  = {\"Rahul\", \"Priya\", \"Amit\", \"Sneha\", \"Vikram\"};\n        int[][]  scores = {\n            {85, 72, 90}, {92, 88, 95}, {62, 55, 70},\n            {78, 83, 91}, {45, 50, 48}\n        };\n\n        // Loop: print name, grade, remark for each student\n        for (int i = 0; i < names.length; i++) {\n            double avg    = computeAverage(scores[i]);\n            String grade  = assignGrade(avg);\n            // Your code: get remark and print name, grade, remark\n        }\n    }\n}",
+      "solutionCode": "public class Main {\n\n    public static double computeAverage(int[] s) {\n        int total = 0;\n        for (int v : s) total += v;\n        return (double) total / s.length;\n    }\n\n    public static String assignGrade(double avg) {\n        if      (avg >= 90) return \"A\";\n        else if (avg >= 75) return \"B\";\n        else if (avg >= 60) return \"C\";\n        else                return \"F\";\n    }\n\n    public static String getRemark(String grade) {\n        switch (grade) {\n            case \"A\": return \"Excellent!\";\n            case \"B\": return \"Well done!\";\n            case \"C\": return \"Keep going!\";\n            default : return \"Seek help.\";\n        }\n    }\n\n    public static void main(String[] args) {\n        String[] names  = {\"Rahul\", \"Priya\", \"Amit\", \"Sneha\", \"Vikram\"};\n        int[][]  scores = {\n            {85, 72, 90}, {92, 88, 95}, {62, 55, 70},\n            {78, 83, 91}, {45, 50, 48}\n        };\n\n        for (int i = 0; i < names.length; i++) {\n            double avg    = computeAverage(scores[i]);\n            String grade  = assignGrade(avg);\n            String remark = getRemark(grade);\n            System.out.println(names[i] + \" \" + grade + \" \" + remark);\n        }\n    }\n}",
+      "hints": [
+        "💡 Write getRemark using a switch: switch (grade) { case \"A\": return \"Excellent!\"; case \"B\": return \"Well done!\"; ... default: return \"Seek help.\"; }",
+        "💡 Inside the loop, call: String remark = getRemark(grade); then print: System.out.println(names[i] + \" \" + grade + \" \" + remark);",
+        "💡 grade is already computed earlier in the loop — pass it directly to getRemark(grade)."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Priya A Excellent!",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m6-l3-q1",
+          "question": "Why is breaking a large program into multiple static methods better than writing everything in main?",
+          "options": [
+            "Multiple methods run faster than a single main method",
+            "Java requires at least five methods in every class",
+            "Each method can be tested independently and the logic is easier to read and reuse",
+            "Static methods use less memory than the code inside main"
+          ],
+          "correct": 2,
+          "explanation": "Decomposing a program into focused methods makes each piece independently testable, easier to understand (a well-named method communicates intent), and reusable across the codebase. A change to one method only affects callers of that method. This is the Single Responsibility Principle — each method does one thing well."
+        },
+        {
+          "id": "java-m6-l3-q2",
+          "question": "How does passing int[][] scores[i] to a method that accepts int[] work?",
+          "options": [
+            "It does not work — a 2D array cannot be passed to a 1D array parameter",
+            "scores[i] is one row of the 2D array, which is a regular int[] — an exact type match",
+            "Java automatically converts the entire 2D array to 1D when passed to a method",
+            "The method receives a copy of the entire 2D array, not just one row"
+          ],
+          "correct": 1,
+          "explanation": "A 2D array in Java is an array of arrays. scores is an int[][] — an array of int[] rows. scores[i] accesses the i-th row, which is a regular int[] object. Passing scores[i] to a method that accepts int[] is a perfect type match — the method receives the row as a normal single-dimensional array."
+        },
+        {
+          "id": "java-m6-l3-q3",
+          "question": "Which six Java concepts did the Student Grade System mini project combine?",
+          "options": [
+            "GUI, networking, file I/O, databases, threads, and encryption",
+            "Variables and types, conditions, loops, methods, arrays, and output formatting",
+            "Classes, inheritance, polymorphism, interfaces, exceptions, and generics",
+            "Recursion, sorting algorithms, searching algorithms, trees, graphs, and hashing"
+          ],
+          "correct": 1,
+          "explanation": "The Student Grade System used: typed variables and arrays (Module 1-2), if/else conditions and switch for grading (Module 3), for and for-each loops to process data (Module 4), static methods with parameters and return values (Module 5), and 2D arrays with printf formatting (Module 6). These are the exact six beginner building blocks of Java."
+        }
+      ]
+    }
+  }
+]

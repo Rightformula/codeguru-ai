@@ -1,0 +1,235 @@
+[
+  {
+    "id": "py-m1-l1",
+    "moduleId": "py-m1",
+    "title": "What is Python?",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "8 min",
+    "explanation": {
+      "title": "What is Python and Why Should You Learn It?",
+      "content": "# What is Python?\n\nImagine you want to give instructions to a very precise robot. The robot does exactly what you say, but it only understands one specific language. If you speak in that language correctly, the robot obeys every instruction perfectly. **Python** is one of those languages — but instead of a robot, you are giving instructions to a computer.\n\nMore formally, Python is a **programming language** — a set of words and rules that lets humans write instructions a computer can execute. It was created by Guido van Rossum and first released in 1991. The name comes from the British comedy show *Monty Python's Flying Circus*, not from the snake.\n\n## Why Python Is Special\n\nThere are hundreds of programming languages in the world. Python stands out for several reasons that make it the most popular choice for beginners and professionals alike.\n\n- **Readable syntax** — Python code looks almost like plain English sentences, which means you spend less time decoding the language and more time solving real problems\n- **Versatile** — the same language is used for web development, artificial intelligence, data analysis, automation, and game development\n- **Huge ecosystem** — Python has thousands of free libraries (pre-written code packages) that let you build powerful things quickly\n- **Strong job market** — Python developers are among the most in-demand professionals in India and worldwide\n\n## Where Python Is Used Today\n\n| Industry | Real-World Example |\n|---|---|\n| Artificial Intelligence | ChatGPT and image recognition systems are built with Python |\n| Web Development | Instagram and Pinterest run on Python backends |\n| Data Science | Banks and research institutions analyse data with Python |\n| Automation | Repetitive tasks like filling forms or renaming files are automated with Python scripts |\n| Education | Python is the first language taught at MIT, IITs, and most engineering colleges |\n\n## Python Compared to Other Languages\n\nYou may have heard of other programming languages. Here is how Python compares:\n\n| Feature | Python | Java | C++ |\n|---|---|---|---|\n| Beginner-friendly | Very easy | Moderate | Difficult |\n| Lines to print \"Hello\" | 1 line | 5 lines | 4 lines |\n| Main use | Everything | Enterprise, Android | System software, games |\n| Typing style | Dynamic | Static | Static |\n\nThe key insight is that Python lets you express ideas in fewer lines of code than almost any other language, which means you build things faster and make fewer mistakes.\n\nIn the code example below, you will see your first Python program — a simple set of `print()` statements that demonstrate how natural Python code reads compared to other languages."
+    },
+    "codeExample": {
+      "title": "Python Says Hello to the World",
+      "language": "python",
+      "code": "# Welcome to Python! Lines starting with # are comments.\n# Python ignores comments — they are notes for you, the programmer.\n\n# The print() function displays text on the screen.\nprint(\"Hello, World!\")\n\n# You can print any text you like inside the quotes.\nprint(\"My name is CodeGuru AI.\")\nprint(\"I am written in Python.\")\n\n# Python can also do arithmetic directly inside print().\nprint(\"The year Python was created:\", 1991)\nprint(\"Years of Python so far:\", 2025 - 1991)\n\n# You can print multiple items by separating them with commas.\nprint(\"Python\", \"is\", \"awesome!\")",
+      "explanation": "- `# comment text` — the `#` symbol starts a comment; Python ignores everything after it on that line\n- `print()` — the built-in function that sends output to the screen; everything inside the parentheses gets displayed\n- `\"text in quotes\"` — text surrounded by double quotes is called a **string**; strings are a fundamental data type\n- `print(\"label:\", 1991)` — commas inside `print()` separate items; Python adds a single space between each automatically\n- `2025 - 1991` — Python evaluates arithmetic expressions before printing; the output shows the result `34`, not the expression"
+    },
+    "exercise": {
+      "title": "Write Your Personal Introduction Program",
+      "instructions": "Write a Python program that introduces you. It must print exactly four lines: your name on the first line, your city on the second line, your age as a number on the third line, and your favorite subject on the fourth line. Each line must be printed using its own print() statement. Example expected output:\nRahul Sharma\nDelhi\n20\nComputer Science",
+      "starterCode": "# Personal Introduction Program\n# Replace each placeholder with your actual information\n\n# Line 1: Print your full name\nprint(\"Your Name Here\")\n\n# Line 2: Print your city\nprint(\"Your City Here\")\n\n# Line 3: Print your age as a number (no quotes needed)\n# Your code here\n\n# Line 4: Print your favorite subject\n# Your code here",
+      "solutionCode": "# Personal Introduction Program\n\nprint(\"Rahul Sharma\")\nprint(\"Delhi\")\nprint(20)\nprint(\"Computer Science\")",
+      "hints": [
+        "💡 Each piece of information needs its own print() statement on a separate line.",
+        "💡 Text values like names and cities go inside quotes, but a number like your age does not need quotes.",
+        "💡 Copy the pattern of the first two print() statements and write two more below them for age and subject."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": null,
+          "checkType": "contains_print"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m1-l1-q1",
+          "question": "What is Python most accurately described as?",
+          "options": [
+            "A type of snake used as a programming mascot",
+            "A programming language that gives instructions to a computer",
+            "A software application you download from the internet",
+            "A hardware component inside a computer"
+          ],
+          "correct": 1,
+          "explanation": "Python is a programming language — a set of words and rules that allows humans to write instructions that a computer can understand and execute. It is not hardware, an application, or named after the snake (it is named after Monty Python's Flying Circus)."
+        },
+        {
+          "id": "py-m1-l1-q2",
+          "question": "What does the # symbol do at the start of a Python line?",
+          "options": [
+            "It multiplies the numbers that follow it",
+            "It causes a syntax error and stops the program",
+            "It starts a comment that Python completely ignores",
+            "It prints the rest of the line to the screen"
+          ],
+          "correct": 2,
+          "explanation": "The # symbol starts a comment. Python ignores everything on that line after the # character. Comments are notes written by the programmer for other humans reading the code — they have no effect on how the program runs."
+        },
+        {
+          "id": "py-m1-l1-q3",
+          "question": "Which of the following correctly prints the word Hello to the screen in Python?",
+          "options": [
+            "print Hello",
+            "PRINT(\"Hello\")",
+            "print(\"Hello\")",
+            "display(\"Hello\")"
+          ],
+          "correct": 2,
+          "explanation": "print(\"Hello\") is the correct syntax. The function name must be lowercase — Python is case-sensitive, so PRINT or Print will cause a NameError. The text to display must be inside parentheses and surrounded by quotes. There is no display() function in Python's standard library."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m1-l2",
+    "moduleId": "py-m1",
+    "title": "Installing Python and Setting Up",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "10 min",
+    "explanation": {
+      "title": "How to Install Python and Run Your First Program",
+      "content": "# Installing Python\n\nBefore you can run Python programs on your own computer, you need to install two things: **Python itself** (the engine that reads and executes your code) and a place to write your code (a text editor or IDE). Think of it like this — Python is the engine of a car, and your code editor is the steering wheel and dashboard you use to control it.\n\n## Step 1 — Download Python\n\nPython is completely free. To download it:\n\n1. Open your web browser and go to `python.org/downloads`\n2. The website automatically detects your operating system and recommends the correct version\n3. Click the yellow **Download Python 3.x.x** button (always choose Python 3, never Python 2)\n4. Run the installer file that downloads\n\n## Step 2 — Install Python (Windows)\n\nWhen the Windows installer opens, you will see a checkbox at the bottom that says **\"Add Python to PATH\"**. This is the most important step — check that box before clicking Install Now. Without it, your computer will not be able to find Python when you type commands.\n\nFor macOS and Linux users, Python 3 may already be installed. Open a terminal and type `python3 --version` to check.\n\n## Step 3 — Verify the Installation\n\nAfter installation, verify everything worked correctly:\n\n- On **Windows**: press `Win + R`, type `cmd`, press Enter, then type `python --version`\n- On **macOS/Linux**: open Terminal and type `python3 --version`\n\nIf Python installed correctly, you will see output like `Python 3.12.0`. If you see an error, revisit Step 2 and make sure you checked the PATH checkbox.\n\n## Step 4 — Choose a Code Editor\n\nYou can write Python in any text editor, but a dedicated code editor makes the experience much better. The best free options are:\n\n| Editor | Best for | Download |\n|---|---|---|\n| **VS Code** | All skill levels, most popular | `code.visualstudio.com` |\n| **IDLE** | Absolute beginners, comes with Python | Already installed |\n| **PyCharm Community** | Intermediate learners | `jetbrains.com/pycharm` |\n\nFor this course, you can use the built-in code editor right here — no installation needed. But installing Python locally is a valuable skill you will use throughout your programming career.\n\n## Running a Python File\n\nOnce Python and an editor are installed, you run a Python file from the terminal:\n\n```\npython hello.py\n```\n\nThis command tells Python to find the file named `hello.py` and execute every line inside it from top to bottom.\n\nIn the code example below, you will see what a complete Python source file looks like and how Python executes the instructions inside it in order."
+    },
+    "codeExample": {
+      "title": "Python Installation Verifier Program",
+      "language": "python",
+      "code": "# This program confirms Python is working correctly.\n# It also demonstrates that Python executes line by line, top to bottom.\n\nimport sys   # sys is a standard library module — always available\n\n# Print the Python version currently running\nprint(\"Python version:\", sys.version)\n\n# Print the platform (operating system)\nprint(\"Platform:\", sys.platform)\n\n# Demonstrate that Python runs top to bottom\nprint(\"Step 1: Python found the file\")\nprint(\"Step 2: Python read the import statement\")\nprint(\"Step 3: Python executed each print() in order\")\nprint(\"Step 4: Program complete — Python stops here\")\n\n# Python's built-in functions are always available without importing\nprint(\"Built-in function example:\", abs(-42))   # abs() gives absolute value\nprint(\"Another built-in:\", len(\"Hello\"))         # len() counts characters",
+      "explanation": "- `import sys` — imports the `sys` module from Python's standard library; modules are collections of pre-written functions\n- `sys.version` — a property of `sys` containing the exact Python version string; useful for verifying which Python is running\n- `sys.platform` — returns a string identifying the OS: `'win32'` for Windows, `'darwin'` for macOS, `'linux'` for Linux\n- The five `print()` calls show that Python executes instructions top to bottom, one line at a time, with no skipping\n- `abs(-42)` and `len(\"Hello\")` are **built-in functions** — always available without any import statement"
+    },
+    "exercise": {
+      "title": "Explore Your Python Environment",
+      "instructions": "Write a program that uses the sys module to display information about your Python installation. The program must: (1) import the sys module, (2) print the Python version using sys.version, (3) print the platform using sys.platform, (4) print the path to the Python executable using sys.executable. Each item must be printed on its own labeled line. Expected output format:\nVersion: [version info]\nPlatform: [platform name]\nExecutable: [path to python]",
+      "starterCode": "# Explore Your Python Environment\n# Import the sys module to access system information\nimport sys\n\n# Print the Python version with the label \"Version:\"\nprint(\"Version:\", sys.version)\n\n# Print the platform with the label \"Platform:\"\n# Your code here\n\n# Print the Python executable path with the label \"Executable:\"\n# Your code here",
+      "solutionCode": "# Explore Your Python Environment\nimport sys\n\nprint(\"Version:\",    sys.version)\nprint(\"Platform:\",   sys.platform)\nprint(\"Executable:\", sys.executable)",
+      "hints": [
+        "💡 The sys module must be imported before you can access sys.platform or sys.executable.",
+        "💡 All three attributes follow the same pattern: sys.version, sys.platform, sys.executable — each is accessed with a dot after sys.",
+        "💡 Copy the pattern of the first print statement exactly — replace sys.version with sys.platform and then sys.executable for the remaining two lines."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Version:",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m1-l2-q1",
+          "question": "When installing Python on Windows, which option must you enable to use Python from the command line?",
+          "options": [
+            "Install for all users",
+            "Add Python to PATH",
+            "Install pip separately",
+            "Enable Python launcher"
+          ],
+          "correct": 1,
+          "explanation": "The 'Add Python to PATH' checkbox is the most critical option during Windows installation. PATH is a system variable that lists directories where Windows looks for executable programs. Without adding Python to PATH, your computer cannot find the python command and you will get a 'command not found' error every time you try to run a Python program from the terminal."
+        },
+        {
+          "id": "py-m1-l2-q2",
+          "question": "What command do you type in a terminal to confirm that Python installed correctly?",
+          "options": [
+            "python --check",
+            "python --version",
+            "check python",
+            "python --install"
+          ],
+          "correct": 1,
+          "explanation": "python --version (or python3 --version on macOS and Linux) asks Python to report its version number. If Python is installed correctly and on PATH, you will see output like 'Python 3.12.0'. If you see an error such as 'python is not recognized', Python was not added to PATH during installation."
+        },
+        {
+          "id": "py-m1-l2-q3",
+          "question": "What does the import sys statement at the top of a Python file do?",
+          "options": [
+            "Downloads the sys package from the internet",
+            "Creates a new module called sys",
+            "Makes the sys module's functions and variables available in your program",
+            "Saves a backup copy of your file"
+          ],
+          "correct": 2,
+          "explanation": "The import statement loads a module and makes its contents available in your program. The sys module is part of Python's standard library — it comes with every Python installation and never needs to be downloaded. After writing import sys, you can access sys.version, sys.platform, sys.executable, and many other system properties using dot notation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m1-l3",
+    "moduleId": "py-m1",
+    "title": "Your First Python Program",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Writing, Understanding, and Running Your First Real Python Program",
+      "content": "# Your First Python Program\n\nEvery programmer remembers writing their first real program. It is a milestone — the moment a computer does something because *you* told it to. In this lesson, you will write a program that collects information and presents it in a formatted way. Before writing any code, let us understand the building blocks you will use.\n\n## The print() Function\n\nYou have already seen `print()`. It is Python's most fundamental output tool — it takes whatever you give it and displays it on the screen.\n\n```python\nprint(\"Welcome to CodeGuru AI\")   # displays text\nprint(42)                          # displays a number\nprint(3.14)                        # displays a decimal\n```\n\nYou can print multiple values on one line by separating them with commas:\n\n```python\nprint(\"Score:\", 95, \"out of\", 100)\n```\nOutput: `Score: 95 out of 100`\n\nPython automatically adds a single space between each comma-separated item.\n\n## Variables — Storing Information\n\nA **variable** is a named container that stores a value so you can use it later. Creating a variable in Python takes one line:\n\n```python\nstudent_name = \"Rahul Sharma\"\ncourse       = \"Python Basics\"\nscore        = 87\n```\n\nThe `=` sign here is the **assignment operator** — it puts the value on the right side into the container on the left side. It does not mean 'equals' in the mathematical sense.\n\n## Strings — Working With Text\n\nText values in Python are called **strings**. A string is any sequence of characters surrounded by quotes. You can use single quotes `'text'` or double quotes `\"text\"` — both work identically.\n\nOne of the most useful string features is the **f-string** (formatted string literal), which lets you embed variable values directly inside text:\n\n```python\nname  = \"Priya\"\nmarks = 92\nprint(f\"Student {name} scored {marks} marks.\")\n```\nOutput: `Student Priya scored 92 marks.`\n\nThe `f` before the opening quote activates the f-string. Variables inside `{}` braces are replaced with their values automatically.\n\n## Comments — Notes for Humans\n\nA **comment** starts with `#` and extends to the end of the line. Python ignores comments completely. They are notes you write to explain your code to yourself and to anyone else who reads it later.\n\n```python\n# This calculates the final price after tax\nprice    = 1000\ntax_rate = 0.18                     # 18% GST\nfinal    = price + (price * tax_rate)\n```\n\nWriting clear comments is a professional habit. Code without comments is like a recipe without instructions — the ingredients are there but the method is unclear.\n\n## Putting It Together\n\nIn the code example below, you will see a complete program that creates a student report card using variables, f-strings, and comments. It demonstrates how these three elements work together to produce readable, meaningful output."
+    },
+    "codeExample": {
+      "title": "Student Report Card Generator",
+      "language": "python",
+      "code": "# ── Student Report Card Generator ──────────────────────────\n# This program creates a formatted report card for a student.\n\n# Step 1: Store student information in variables\nstudent_name   = \"Ananya Krishnan\"   # string — student's full name\nroll_number    = 42                   # integer — class roll number\ncity           = \"Bangalore\"          # string — home city\n\n# Step 2: Store subject marks in variables\nmaths_marks    = 91    # out of 100\nscience_marks  = 88    # out of 100\nenglish_marks  = 84    # out of 100\n\n# Step 3: Calculate total and average\ntotal_marks    = maths_marks + science_marks + english_marks\naverage_marks  = total_marks / 3      # division always gives a decimal in Python 3\n\n# Step 4: Print the report card using f-strings\nprint(\"╔══════════════════════════════╗\")\nprint(\"║       STUDENT REPORT CARD   ║\")\nprint(\"╠══════════════════════════════╣\")\nprint(f\"  Name      : {student_name}\")\nprint(f\"  Roll No.  : {roll_number}\")\nprint(f\"  City      : {city}\")\nprint(\"──────────────────────────────\")\nprint(f\"  Maths     : {maths_marks}/100\")\nprint(f\"  Science   : {science_marks}/100\")\nprint(f\"  English   : {english_marks}/100\")\nprint(\"──────────────────────────────\")\nprint(f\"  Total     : {total_marks}/300\")\nprint(f\"  Average   : {average_marks:.1f}%\")  # :.1f formats to 1 decimal place\nprint(\"╚══════════════════════════════╝\")",
+      "explanation": "- `student_name = \"Ananya Krishnan\"` — creates a string variable; stored and reused wherever the name appears later\n- `total_marks = maths_marks + science_marks + english_marks` — Python evaluates the arithmetic and stores the result\n- `average_marks = total_marks / 3` — in Python 3 the `/` operator always returns a decimal, even when dividing whole numbers\n- `f\"  Name : {student_name}\"` — the `f` prefix enables variable substitution; anything inside `{}` becomes the variable's value\n- `{average_marks:.1f}` — the `:.1f` format specifier rounds to exactly one decimal place before displaying"
+    },
+    "exercise": {
+      "title": "Build Your Own Report Card",
+      "instructions": "Create a report card program for a student of your choice. Define variables for: a student name (string), a roll number (integer), and marks for three subjects (integers, each out of 100). Calculate the total marks and the average. Print a report showing all information.\n\nRequired output must include:\n- Student name and roll number\n- All three subject marks\n- Total and average rounded to one decimal place\n\nExample: a student with marks 88, 75, 92 has a total of 255 and average of 85.0.",
+      "starterCode": "# My Report Card Program\n\n# Step 1: Define student information\nstudent_name = \"Your Name Here\"    # replace with any name\nroll_number  = 1                    # replace with any number\n\n# Step 2: Define three subject marks (integers from 0 to 100)\n# Choose any three subjects you like\nsubject1_marks = 0    # replace with a mark\nsubject2_marks = 0    # replace with a mark\nsubject3_marks = 0    # replace with a mark\n\n# Step 3: Calculate total and average\ntotal   = subject1_marks + subject2_marks + subject3_marks\naverage = total / 3\n\n# Step 4: Print the report card\n# Use f-strings to include variable values in your output\nprint(f\"Student: {student_name}\")\nprint(f\"Roll No: {roll_number}\")\n# Print the three subject marks here — add three more print statements\n\n# Print the total and average here\nprint(f\"Total: {total}/300\")\n# Your code here for average",
+      "solutionCode": "# My Report Card Program\n\nstudent_name   = \"Vikram Mehta\"\nroll_number    = 7\nsubject1_marks = 88\nsubject2_marks = 75\nsubject3_marks = 92\n\ntotal   = subject1_marks + subject2_marks + subject3_marks\naverage = total / 3\n\nprint(f\"Student : {student_name}\")\nprint(f\"Roll No : {roll_number}\")\nprint(f\"Maths   : {subject1_marks}/100\")\nprint(f\"Science : {subject2_marks}/100\")\nprint(f\"English : {subject3_marks}/100\")\nprint(f\"Total   : {total}/300\")\nprint(f\"Average : {average:.1f}%\")",
+      "hints": [
+        "💡 Replace the 0 placeholder values with real numbers between 0 and 100 for each subject mark.",
+        "💡 Use an f-string to print each subject mark — write f\"Subject: {subject1_marks}/100\" and repeat the same pattern for the other two subjects.",
+        "💡 To print the average rounded to one decimal place, use the format specifier :.1f inside the f-string braces: f\"Average: {average:.1f}%\""
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Student",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Total",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m1-l3-q1",
+          "question": "What does the = operator do in the statement score = 87?",
+          "options": [
+            "Tests whether score is equal to 87",
+            "Stores the value 87 in a variable named score",
+            "Prints the number 87 to the screen",
+            "Declares score as a constant that cannot change"
+          ],
+          "correct": 1,
+          "explanation": "In Python, = is the assignment operator — it stores the value on its right side into the variable named on its left side. It does not compare values. To compare values in Python, you use == (two equals signs). After writing score = 87, the variable score holds the integer 87 and you can use it anywhere in your program."
+        },
+        {
+          "id": "py-m1-l3-q2",
+          "question": "What is an f-string in Python and how do you create one?",
+          "options": [
+            "A string that stores floating-point numbers — created by writing float(\"text\")",
+            "A formatted string that embeds variable values — created by placing f before the opening quote",
+            "A string stored in a file — created by writing file(\"text\")",
+            "A function string that executes code — created by placing func before the opening quote"
+          ],
+          "correct": 1,
+          "explanation": "An f-string (formatted string literal) embeds variable values directly inside text. You create one by placing the letter f before the opening quote: f\"text {variable} more text\". Anything inside curly braces is replaced with the variable's value when displayed. F-strings were introduced in Python 3.6 and are the recommended way to format output strings."
+        },
+        {
+          "id": "py-m1-l3-q3",
+          "question": "What will Python output when it executes total = 91 + 88 + 84 followed by print(total)?",
+          "options": [
+            "91 + 88 + 84",
+            "total",
+            "263",
+            "An error because total was not defined before use"
+          ],
+          "correct": 2,
+          "explanation": "Python evaluates the arithmetic expression 91 + 88 + 84 first, which equals 263, and stores that result in the variable total. When print(total) is executed, Python looks up the value stored in total and displays 263. Python never prints the variable name itself or the original expression — it always prints the resolved value."
+        }
+      ]
+    }
+  }
+]

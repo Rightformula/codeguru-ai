@@ -1,0 +1,216 @@
+[
+  {
+    "id": "java-m2-l1",
+    "moduleId": "java-m2",
+    "title": "Arithmetic Operators and Math",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Performing Calculations with Java's Arithmetic Operators",
+      "content": "# Arithmetic Operators\n\nJava supports all standard arithmetic operations. Every Java program that handles numbers — from calculating a bank balance to computing a student's average — uses these operators.\n\n## The Six Arithmetic Operators\n\n| Operator | Name | Example | Result |\n|---|---|---|---|\n| `+` | Addition | `10 + 3` | `13` |\n| `-` | Subtraction | `10 - 3` | `7` |\n| `*` | Multiplication | `10 * 3` | `30` |\n| `/` | Division | `10 / 3` | `3` (integer!) |\n| `%` | Modulo (remainder) | `10 % 3` | `1` |\n| `**` | (No power in Java — use `Math.pow()`) | | |\n\n### Integer Division Warning\n\nWhen both operands are `int`, Java performs **integer division** — the decimal part is truncated:\n\n```java\nint result = 10 / 3;       // result is 3, not 3.333\ndouble d   = 10.0 / 3;    // d is 3.333... — one double operand forces double result\n```\n\nAlways use at least one `double` operand when you need a decimal result.\n\n## Augmented Assignment Operators\n\n```java\nint x = 10;\nx += 5;   // x = 15\nx -= 3;   // x = 12\nx *= 2;   // x = 24\nx /= 4;   // x = 6\nx %= 4;   // x = 2\n```\n\n## Increment and Decrement\n\n```java\nint count = 0;\ncount++;   // count = 1 (post-increment)\ncount--;   // count = 0 (post-decrement)\n```\n\n## The Math Class\n\nJava's `Math` class provides mathematical functions:\n\n| Method | Description | Example |\n|---|---|---|\n| `Math.abs(x)` | Absolute value | `Math.abs(-7)` → `7` |\n| `Math.pow(x, n)` | x raised to power n | `Math.pow(2, 8)` → `256.0` |\n| `Math.sqrt(x)` | Square root | `Math.sqrt(16)` → `4.0` |\n| `Math.round(x)` | Round to nearest long | `Math.round(3.7)` → `4` |\n| `Math.max(a, b)` | Larger value | `Math.max(10, 20)` → `20` |\n| `Math.min(a, b)` | Smaller value | `Math.min(10, 20)` → `10` |\n| `Math.floor(x)` | Round down | `Math.floor(3.9)` → `3.0` |\n| `Math.ceil(x)` | Round up | `Math.ceil(3.1)` → `4.0` |\n\nIn the code example below, you will see arithmetic operators and several Math methods applied to a GST invoice calculation."
+    },
+    "codeExample": {
+      "title": "GST Invoice Calculator",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        int    quantity  = 4;\n        double unitPrice = 1250.0;\n        double gstRate   = 0.18;      // 18%\n\n        // Basic arithmetic\n        double subtotal  = unitPrice * quantity;\n        double gstAmount = subtotal * gstRate;\n        double total     = subtotal + gstAmount;\n\n        System.out.printf(\"Unit Price : Rs %.2f%n\", unitPrice);\n        System.out.printf(\"Quantity   : %d%n\",      quantity);\n        System.out.printf(\"Subtotal   : Rs %.2f%n\", subtotal);\n        System.out.printf(\"GST (18%%) : Rs %.2f%n\", gstAmount);\n        System.out.printf(\"Total      : Rs %.2f%n\", total);\n\n        // Integer division and modulo demo\n        int eggs   = 50;\n        int dozens = eggs / 12;          // integer division\n        int leftover = eggs % 12;        // remainder\n        System.out.printf(\"%d eggs = %d dozen + %d left over%n\",\n                          eggs, dozens, leftover);\n\n        // Math class\n        double discount = Math.round(total * 0.05 * 100.0) / 100.0;\n        System.out.printf(\"5%% discount: Rs %.2f%n\", discount);\n    }\n}",
+      "explanation": "- `unitPrice * quantity` — multiplying a `double` by an `int` produces a `double` result automatically\n- `%%` inside `printf` — to print a literal `%` sign in a format string, write `%%`; a single `%` starts a specifier\n- `eggs / 12` — both are `int`, so result is `4` (integer division); `eggs % 12` gives the remainder `2`\n- `Math.round(total * 0.05 * 100.0) / 100.0` — multiplying by 100 then dividing rounds to 2 decimal places\n- `%d` in printf formats an `int`; `%.2f` formats a `double` to 2 decimal places"
+    },
+    "exercise": {
+      "title": "Build a Simple EMI Calculator",
+      "instructions": "Write a Java program that calculates a simple loan EMI. Declare: double principal = 100000.0, double annualRate = 0.12, int months = 12. Calculate: double interest = principal * annualRate, double total = principal + interest, double emi = total / months. Use Math.round() to round emi to the nearest whole number. Print principal, interest, total, and rounded EMI using printf.\n\nExpected output shows principal, interest, total, and EMI rounded to whole number.",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        double principal  = 100000.0;\n        double annualRate = 0.12;\n        int    months     = 12;\n\n        // Calculate interest and total\n        double interest = principal * annualRate;\n        double total    = principal + interest;\n\n        // Calculate EMI and round to nearest whole number\n        double emi        = total / months;\n        long   roundedEmi = Math.round(emi);\n\n        // Print results using printf\n        System.out.printf(\"Principal : Rs %.2f%n\", principal);\n        System.out.printf(\"Interest  : Rs %.2f%n\", interest);\n        // Your code: print total and roundedEmi\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        double principal  = 100000.0;\n        double annualRate = 0.12;\n        int    months     = 12;\n\n        double interest   = principal * annualRate;\n        double total      = principal + interest;\n        double emi        = total / months;\n        long   roundedEmi = Math.round(emi);\n\n        System.out.printf(\"Principal : Rs %.2f%n\", principal);\n        System.out.printf(\"Interest  : Rs %.2f%n\", interest);\n        System.out.printf(\"Total     : Rs %.2f%n\", total);\n        System.out.printf(\"EMI       : Rs %d%n\",   roundedEmi);\n    }\n}",
+      "hints": [
+        "💡 Print total with: System.out.printf(\"Total : Rs %.2f%n\", total);",
+        "💡 roundedEmi is a long, so use %d (not %.2f) in the format string: System.out.printf(\"EMI : Rs %d%n\", roundedEmi);",
+        "💡 Math.round() returns a long — that is why roundedEmi is declared as long, not double."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Principal",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "EMI",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m2-l1-q1",
+          "question": "What is the result of 10 / 3 when both operands are int in Java?",
+          "options": [
+            "3.333...",
+            "3",
+            "4",
+            "A compile error"
+          ],
+          "correct": 1,
+          "explanation": "When both operands of the / operator are integers in Java, integer division is performed — the decimal portion is truncated (not rounded). So 10 / 3 equals 3, not 3.333. To get a decimal result, at least one operand must be a double or float: 10.0 / 3 gives 3.3333."
+        },
+        {
+          "id": "java-m2-l1-q2",
+          "question": "Which Math method returns the larger of two numeric values?",
+          "options": [
+            "Math.abs(a, b)",
+            "Math.ceil(a, b)",
+            "Math.max(a, b)",
+            "Math.greater(a, b)"
+          ],
+          "correct": 2,
+          "explanation": "Math.max(a, b) returns the larger of the two arguments. For example, Math.max(10, 20) returns 20. The complementary method Math.min(a, b) returns the smaller value. Math.abs() takes only one argument and returns its absolute value. There is no Math.greater() method in Java."
+        },
+        {
+          "id": "java-m2-l1-q3",
+          "question": "What does the % operator compute in Java?",
+          "options": [
+            "The percentage of the left number relative to the right",
+            "The result of dividing and rounding to the nearest integer",
+            "The remainder after integer division of the left by the right",
+            "The absolute difference between two numbers"
+          ],
+          "correct": 2,
+          "explanation": "The % operator (modulo) returns the remainder after integer division. For example, 10 % 3 is 1 because 10 divided by 3 is 3 with a remainder of 1. It is commonly used to check divisibility: n % 2 == 0 is true when n is even."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m2-l2",
+    "moduleId": "java-m2",
+    "title": "Strings and String Methods",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Working with Text: Java Strings and Their Methods",
+      "content": "# Strings in Java\n\nIn Java, `String` is not a primitive type — it is a **class**. This means String values are objects with built-in methods you call using dot notation.\n\n```java\nString name = \"Priya Sharma\";\nSystem.out.println(name.length());        // 12\nSystem.out.println(name.toUpperCase());   // PRIYA SHARMA\n```\n\n## String Concatenation\n\nThe `+` operator joins strings:\n\n```java\nString first = \"Rahul\";\nString last  = \"Sharma\";\nString full  = first + \" \" + last;  // \"Rahul Sharma\"\n```\n\nWhen `+` is used with a non-String (like an `int`), Java converts it to String automatically:\n\n```java\nint score = 95;\nSystem.out.println(\"Score: \" + score);  // Score: 95\n```\n\n## Essential String Methods\n\n| Method | Returns | Example |\n|---|---|---|\n| `.length()` | int — character count | `\"Hello\".length()` → `5` |\n| `.toUpperCase()` | String | `\"hello\".toUpperCase()` → `\"HELLO\"` |\n| `.toLowerCase()` | String | `\"HELLO\".toLowerCase()` → `\"hello\"` |\n| `.trim()` | String — no surrounding spaces | `\" hi \".trim()` → `\"hi\"` |\n| `.charAt(i)` | char at index `i` | `\"Hello\".charAt(0)` → `'H'` |\n| `.substring(s, e)` | String from index `s` to `e` | `\"Hello\".substring(1, 4)` → `\"ell\"` |\n| `.contains(s)` | boolean | `\"Hello\".contains(\"ell\")` → `true` |\n| `.replace(a, b)` | String | `\"cats\".replace(\"cats\", \"dogs\")` → `\"dogs\"` |\n| `.equals(s)` | boolean — exact match | `\"hi\".equals(\"hi\")` → `true` |\n| `.equalsIgnoreCase(s)` | boolean — case-insensitive | `\"Hi\".equalsIgnoreCase(\"hi\")` → `true` |\n| `.indexOf(s)` | int — first position | `\"Hello\".indexOf(\"l\")` → `2` |\n| `.split(regex)` | String[] — array | `\"a,b,c\".split(\",\")` → `[\"a\",\"b\",\"c\"]` |\n\n## Comparing Strings: equals() Not ==\n\nNever use `==` to compare String content in Java:\n\n```java\nString a = \"hello\";\nString b = \"hello\";\na == b          // might be true or false (compares memory addresses)\na.equals(b)     // always true — compares actual characters\n```\n\nAlways use `.equals()` to compare string values.\n\nIn the code example below, you will see String methods applied to format and validate an email address."
+    },
+    "codeExample": {
+      "title": "Email Formatter and Validator",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        String rawEmail = \"  Rahul.Sharma@Example.COM  \";\n\n        // Clean up\n        String trimmed = rawEmail.trim();           // remove spaces\n        String lower   = trimmed.toLowerCase();     // normalise case\n        System.out.println(\"Cleaned: \" + lower);\n\n        // Extract username (before @)\n        int    atIndex  = lower.indexOf(\"@\");\n        String username = lower.substring(0, atIndex);\n        System.out.println(\"Username: \" + username);\n\n        // Basic validation\n        boolean hasAt  = lower.contains(\"@\");\n        boolean hasDot = lower.contains(\".\");\n        System.out.println(\"Valid email: \" + (hasAt && hasDot));\n\n        // Length and case check\n        System.out.println(\"Length: \" + lower.length());\n        System.out.println(\"Uppercase: \" + lower.toUpperCase());\n\n        // Replace domain\n        String updated = lower.replace(\"example.com\", \"codeguru.ai\");\n        System.out.println(\"Updated: \" + updated);\n    }\n}",
+      "explanation": "- `.trim()` — removes all leading and trailing whitespace; does not affect characters in the middle\n- `.toLowerCase()` — returns a new String with all characters in lowercase; strings are immutable in Java\n- `.indexOf(\"@\")` — returns the zero-based position of the first occurrence; returns `-1` if not found\n- `.substring(0, atIndex)` — extracts characters from index `0` up to (not including) `atIndex`\n- `.contains(\"@\")` — returns `true` if the substring appears anywhere in the string\n- `.replace(\"example.com\", \"codeguru.ai\")` — returns a new string with all occurrences replaced"
+    },
+    "exercise": {
+      "title": "Build a Username Generator",
+      "instructions": "Write a Java program that generates a username from a full name. Given String fullName = \"  Ananya Krishnan  \", generate a username by: (1) trimming whitespace, (2) converting to lowercase, (3) replacing the space between names with an underscore using replace(). Print the original trimmed name and the generated username on separate labelled lines.\n\nExpected output:\nOriginal: Ananya Krishnan\nUsername: ananya_krishnan",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        String fullName = \"  Ananya Krishnan  \";\n\n        // Step 1: trim whitespace\n        String trimmed = fullName.trim();\n\n        // Step 2: convert to lowercase\n        String lower = trimmed.toLowerCase();\n\n        // Step 3: replace space with underscore\n        // Your code here — store result in 'username'\n\n        System.out.println(\"Original: \" + trimmed);\n        System.out.println(\"Username: \" + username);\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        String fullName = \"  Ananya Krishnan  \";\n        String trimmed  = fullName.trim();\n        String lower    = trimmed.toLowerCase();\n        String username = lower.replace(\" \", \"_\");\n        System.out.println(\"Original: \" + trimmed);\n        System.out.println(\"Username: \" + username);\n    }\n}",
+      "hints": [
+        "💡 Use lower.replace(\" \", \"_\") to replace every space with an underscore and store it as username.",
+        "💡 .replace() returns a new String — assign it: String username = lower.replace(\" \", \"_\");",
+        "💡 The trimmed name and lowercase steps are already done — username only needs the replace step applied to lower."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "ananya_krishnan",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m2-l2-q1",
+          "question": "Why must you use .equals() instead of == to compare two String values in Java?",
+          "options": [
+            ".equals() is faster than == for strings",
+            "== compares memory addresses of objects, not their character content",
+            "== only works with primitive types, so it throws an error for strings",
+            ".equals() is deprecated and should be replaced with =="
+          ],
+          "correct": 1,
+          "explanation": "In Java, == compares whether two references point to the exact same object in memory. Two String objects with identical content may be stored at different memory locations, causing == to return false even when the content matches. .equals() compares the actual character sequences, so it reliably returns true when the strings have the same content."
+        },
+        {
+          "id": "java-m2-l2-q2",
+          "question": "What does \"Hello\".substring(1, 4) return in Java?",
+          "options": [
+            "\"Hell\"",
+            "\"Hello\"",
+            "\"ell\"",
+            "\"ello\""
+          ],
+          "correct": 2,
+          "explanation": "substring(start, end) extracts characters from index start up to but not including index end. In \"Hello\", index 0 is 'H', index 1 is 'e', index 2 is 'l', index 3 is 'l'. substring(1, 4) extracts indices 1, 2, and 3, giving \"ell\". The character at index 4 ('o') is excluded because the end index is non-inclusive."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m2-l3",
+    "moduleId": "java-m2",
+    "title": "Type Casting and Conversion",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Converting Between Types with Casting and Parsing",
+      "content": "# Type Casting in Java\n\nBecause Java is statically typed, moving a value from one type to another requires explicit action. There are two kinds of casting: **widening** (safe, automatic) and **narrowing** (manual, may lose data).\n\n## Widening Conversion — Automatic\n\nJava automatically converts a smaller type to a larger compatible type:\n\n```java\nint    score = 88;\ndouble gpa   = score;   // int → double, automatic — no data loss\nSystem.out.println(gpa); // 88.0\n```\n\nWidening order: `byte` → `short` → `int` → `long` → `float` → `double`\n\n## Narrowing Conversion — Manual Cast\n\nGoing the other direction risks losing data, so Java requires an explicit cast:\n\n```java\ndouble pi    = 3.14159;\nint    whole = (int) pi;   // explicit cast — truncates to 3\nSystem.out.println(whole); // 3\n```\n\nThe cast operator `(int)` tells Java: \"I know there may be data loss — do it anyway.\"\n\n## Casting Between Numeric Types\n\n```java\nlong bigNum   = 100_000L;\nint  smallNum = (int) bigNum;    // OK if value fits in int\n\ndouble avg    = 7.0 / 3;        // 2.333...\nint    truncated = (int) avg;   // 2 — decimal dropped\nint    rounded   = (int) Math.round(avg); // 2 — nearest\n```\n\n## String to Number Conversion\n\nWhen data arrives as text (from user input or files), you must parse it:\n\n```java\nString ageText   = \"25\";\nint    age       = Integer.parseInt(ageText);    // \"25\" → 25\n\nString priceText = \"1299.99\";\ndouble price     = Double.parseDouble(priceText); // \"1299.99\" → 1299.99\n```\n\nIf the string is not a valid number (e.g., `\"hello\"`), `parseInt` throws a `NumberFormatException`.\n\n## Number to String Conversion\n\n```java\nint    code  = 42;\nString text  = String.valueOf(code);    // 42 → \"42\"\nString text2 = Integer.toString(code);  // equivalent\nString text3 = \"\" + code;              // concatenation trick\n```\n\nIn the code example below, you will see widening, narrowing, parsing, and String conversion all demonstrated together."
+    },
+    "codeExample": {
+      "title": "Type Conversion Showcase",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        // Widening: int → double (automatic)\n        int    marks  = 87;\n        double dMarks = marks;               // no cast needed\n        System.out.printf(\"int to double: %.1f%n\", dMarks); // 87.0\n\n        // Narrowing: double → int (explicit cast, truncates)\n        double avg  = 73.89;\n        int    iAvg = (int) avg;             // 73 — decimal dropped\n        int    rAvg = (int) Math.round(avg); // 74 — nearest integer\n        System.out.println(\"Truncated: \" + iAvg);\n        System.out.println(\"Rounded  : \" + rAvg);\n\n        // char ↔ int (char stores Unicode code point)\n        char   letter = 'A';\n        int    code   = letter;              // 65 (widening)\n        char   back   = (char)(code + 1);   // 'B' (narrowing cast)\n        System.out.println(\"char to int: \" + code);\n        System.out.println(\"int to char: \" + back);\n\n        // String → number parsing\n        String scoreStr = \"92\";\n        int    score    = Integer.parseInt(scoreStr);\n        System.out.println(\"Parsed int: \" + (score + 8)); // 100\n\n        // Number → String\n        String label = \"Score: \" + String.valueOf(score);\n        System.out.println(label);\n    }\n}",
+      "explanation": "- `double dMarks = marks` — widening; Java promotes `int` to `double` automatically, no data loss\n- `(int) avg` — narrowing cast; the decimal portion is truncated (not rounded): `73.89` becomes `73`\n- `(int) Math.round(avg)` — `Math.round` returns a `long`; the outer cast converts it to `int`\n- `int code = letter` — `char` widens to `int`, giving the Unicode code point (65 for 'A')\n- `Integer.parseInt(scoreStr)` — parses a numeric string to `int`; throws `NumberFormatException` if invalid\n- `String.valueOf(score)` — converts any primitive to its String representation"
+    },
+    "exercise": {
+      "title": "Fix a Type Bug in a Score Calculator",
+      "instructions": "Three exam scores arrive as Strings: score1 = \"78\", score2 = \"92\", score3 = \"85\". Parse each to int using Integer.parseInt(). Then compute the total and cast the average to int (truncated). Also compute a double average for printf output. Print total and both average versions on labelled lines.\n\nExpected output:\nTotal: 255\nAverage (truncated): 85\nAverage (decimal): 85.00",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        // Scores arrive as Strings\n        String score1 = \"78\";\n        String score2 = \"92\";\n        String score3 = \"85\";\n\n        // Parse to int\n        int s1 = Integer.parseInt(score1);\n        // Your code: parse score2 and score3\n\n        // Compute total\n        int total = s1 + s2 + s3;\n\n        // Compute double average then cast to int\n        double avg     = (double) total / 3;\n        int    avgInt  = (int) avg;\n\n        System.out.println(\"Total: \" + total);\n        // Your code: print avgInt and avg\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        String score1 = \"78\";\n        String score2 = \"92\";\n        String score3 = \"85\";\n\n        int s1 = Integer.parseInt(score1);\n        int s2 = Integer.parseInt(score2);\n        int s3 = Integer.parseInt(score3);\n\n        int    total  = s1 + s2 + s3;\n        double avg    = (double) total / 3;\n        int    avgInt = (int) avg;\n\n        System.out.println(\"Total: \" + total);\n        System.out.println(\"Average (truncated): \" + avgInt);\n        System.out.printf (\"Average (decimal): %.2f%n\", avg);\n    }\n}",
+      "hints": [
+        "💡 Parse score2 and score3 with: int s2 = Integer.parseInt(score2); int s3 = Integer.parseInt(score3);",
+        "💡 Print truncated average: System.out.println(\"Average (truncated): \" + avgInt);",
+        "💡 Print decimal average: System.out.printf(\"Average (decimal): %.2f%n\", avg);"
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Total: 255",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "85",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m2-l3-q1",
+          "question": "What is the result of (int) 9.99 in Java?",
+          "options": [
+            "10 — it rounds to the nearest integer",
+            "9 — it truncates the decimal portion",
+            "An error because double cannot be cast to int",
+            "9.0 — the decimal is kept as zero"
+          ],
+          "correct": 1,
+          "explanation": "The narrowing cast (int) truncates the decimal portion — it does not round. So (int) 9.99 gives 9, not 10. If you need rounding, use Math.round() first: (int) Math.round(9.99) gives 10. Truncation always moves toward zero: (int) -9.99 gives -9, not -10."
+        },
+        {
+          "id": "java-m2-l3-q2",
+          "question": "Which method converts the String \"42\" to the integer 42 in Java?",
+          "options": [
+            "String.toInt(\"42\")",
+            "Integer.parseInt(\"42\")",
+            "(int) \"42\"",
+            "Integer.convert(\"42\")"
+          ],
+          "correct": 1,
+          "explanation": "Integer.parseInt(String s) parses a numeric string and returns the corresponding int value. It throws a NumberFormatException if the string is not a valid integer. The cast (int) does not work on String objects. String.toInt() and Integer.convert() do not exist in Java."
+        }
+      ]
+    }
+  }
+]

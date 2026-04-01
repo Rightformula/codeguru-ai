@@ -1,0 +1,427 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codeguru.ai/schemas/lesson.schema.json",
+  "title": "CodeGuru AI Lesson Schema",
+  "description": "Authoritative schema for every lesson in the CodeGuru AI course content library. This schema defines every field required by the lesson viewer, the code executor, the quiz engine, the hint system, and the progress tracker.",
+  "version": "1.0.0",
+
+  "type": "object",
+  "required": [
+    "id",
+    "moduleId",
+    "title",
+    "order",
+    "xpReward",
+    "duration",
+    "explanation",
+    "codeExample",
+    "exercise",
+    "quiz"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+
+    "id": {
+      "type": "string",
+      "description": "Globally unique lesson identifier. Format: {lang}-m{module}-l{lesson}. Used as the primary key in Firestore progress tracking, URL routing, and XP award validation on the server.",
+      "pattern": "^[a-z][a-z0-9]*-m[0-9]+-l[0-9]+$",
+      "examples": [
+        "py-m1-l1",
+        "js-m3-l2",
+        "java-m4-l3",
+        "html-m1-l2",
+        "css-m2-l3"
+      ]
+    },
+
+    "moduleId": {
+      "type": "string",
+      "description": "ID of the parent module that contains this lesson. Must match an existing module id in the course. Used to look up module metadata and apply sequential locking logic.",
+      "pattern": "^[a-z][a-z0-9]*-m[0-9]+$",
+      "examples": [
+        "py-m1",
+        "js-m3",
+        "java-m4",
+        "html-m1",
+        "css-m2"
+      ]
+    },
+
+    "title": {
+      "type": "string",
+      "description": "Human-readable lesson title. Shown in: the module lesson list, the lesson viewer top bar, navigation breadcrumbs, and the activity log. Should be concise (4-8 words), specific to the concept taught, and written in title case.",
+      "minLength": 3,
+      "maxLength": 60,
+      "examples": [
+        "Variables and Data Types",
+        "Introduction to for Loops",
+        "Classes and Objects",
+        "The CSS Box Model",
+        "Async/Await in JavaScript"
+      ]
+    },
+
+    "order": {
+      "type": "integer",
+      "description": "Position of this lesson within its module. Determines sequential display order in the module list and the previous/next navigation arrows in the lesson viewer. Lessons are locked until all lessons with a lower order in the same module are completed.",
+      "minimum": 1,
+      "maximum": 10
+    },
+
+    "xpReward": {
+      "type": "integer",
+      "description": "Experience points awarded when the learner completes this lesson (reaches 100% quiz score and clicks 'Complete Lesson'). The server validates this value against a server-side XP map to prevent manipulation. Typical values: 10 (introductory), 15 (standard), 20 (complex), 25 (advanced).",
+      "minimum": 5,
+      "maximum": 50,
+      "multipleOf": 5,
+      "examples": [10, 15, 20, 25]
+    },
+
+    "duration": {
+      "type": "string",
+      "description": "Estimated completion time shown to the learner before they start the lesson. Calculated as the sum of reading time (explanation) + code reading time + exercise time + quiz time. Format: '{number} min'.",
+      "pattern": "^[0-9]+ min$",
+      "examples": [
+        "8 min",
+        "10 min",
+        "12 min",
+        "15 min",
+        "20 min"
+      ]
+    },
+
+    "explanation": {
+      "type": "object",
+      "description": "The first tab of the lesson viewer (the 'Explain' tab). Contains a structured markdown article that teaches the concept from first principles. Must be self-contained — a learner who has completed all previous lessons should be able to understand this without any external resources.",
+      "required": ["title", "content"],
+      "additionalProperties": false,
+      "properties": {
+
+        "title": {
+          "type": "string",
+          "description": "The headline shown at the top of the explanation tab. More descriptive than the lesson title — can be a question or a statement. Shown in large text as the article heading.",
+          "minLength": 5,
+          "maxLength": 80,
+          "examples": [
+            "What is a Variable and Why Do We Need One?",
+            "Storing Collections of Data with Lists",
+            "Making Your Website Respond to Clicks with Events",
+            "Understanding the CSS Box Model"
+          ]
+        },
+
+        "content": {
+          "type": "string",
+          "description": "The full explanation body rendered as Markdown by the ExplanationBlock component. The renderer supports: h1 (#), h2 (##), h3 (###), bold (**text**), inline code (`code`), unordered lists (-), ordered lists (1.), tables (|col|col|), and fenced code blocks (```language). IMPORTANT RULES: (1) Start with a relatable real-world analogy before any technical definition. (2) Every new term must be defined the first time it appears. (3) Inline code blocks must use backticks for ALL code — never write code in plain text. (4) Tables must have a header row and a separator row. (5) The very last paragraph must preview what the code example will demonstrate.",
+          "minLength": 300,
+          "contentMediaType": "text/markdown",
+          "examples": [
+            "# What is a Variable?\n\nImagine you are working at a grocery store and you need to remember the price of apples. You write '₹50' on a sticky note labeled 'apple_price'. That sticky note is a **variable** — a named container that holds a piece of information.\n\n## Creating Variables in Python\n\nIn Python, creating a variable takes one line:\n\n```python\napple_price = 50\n```\n\nThe `=` sign does not mean 'equals' here — it means **assign**. You are putting the value `50` into a container named `apple_price`.\n\n## Rules for Variable Names\n\n- Must start with a letter or underscore\n- Can contain letters, numbers, and underscores\n- Case-sensitive: `price` and `Price` are two different variables\n- Cannot be a Python keyword like `if`, `for`, or `while`\n\n| Valid Names | Invalid Names | Reason |\n|---|---|---|\n| `age` | `1age` | Starts with a number |\n| `user_name` | `user-name` | Contains a hyphen |\n| `_total` | `for` | Reserved keyword |\n\nIn the code example below, you will see three variables being created and used together to print a formatted message."
+          ]
+        }
+      }
+    },
+
+    "codeExample": {
+      "type": "object",
+      "description": "The second tab of the lesson viewer (the 'Code' tab). A complete, runnable program that demonstrates the lesson concept in action. The learner reads this code, runs it with the Run button, sees the output, and then attempts the exercise. Must be a complete working program — not a fragment.",
+      "required": ["title", "language", "code", "explanation"],
+      "additionalProperties": false,
+      "properties": {
+
+        "title": {
+          "type": "string",
+          "description": "Short descriptive title shown in the code tab header. Describes what the program does, not what concept it teaches. Should be 3-6 words.",
+          "minLength": 3,
+          "maxLength": 50,
+          "examples": [
+            "Student Grade Calculator",
+            "Shopping Cart Manager",
+            "Word Frequency Counter",
+            "Bank Account Simulator",
+            "Responsive Card Layout"
+          ]
+        },
+
+        "language": {
+          "type": "string",
+          "description": "The programming language of the code. Must exactly match one of the four supported language identifiers used by Judge0 and the syntax highlighter. 'html-css' is rendered as a live preview in the browser (not sent to Judge0). 'python', 'javascript', and 'java' are executed via Judge0 CE.",
+          "enum": ["python", "javascript", "java", "html-css"],
+          "examples": ["python", "javascript", "java", "html-css"]
+        },
+
+        "code": {
+          "type": "string",
+          "description": "The complete, executable source code of the example program. REQUIREMENTS: (1) Must run without errors and produce deterministic output. (2) Must include comments on every non-obvious line. (3) Maximum 40 lines — if longer, split into two lessons. (4) Must only use standard library — no third-party packages (Judge0 has no pip install). (5) For Python: use Python 3 syntax. (6) For JavaScript: use ES6+ (Node.js environment — no DOM access). (7) For Java: class must be named 'Main' and contain public static void main. (8) For html-css: must be a complete HTML document including DOCTYPE, html, head, and body tags.",
+          "minLength": 20,
+          "maxLength": 3000
+        },
+
+        "explanation": {
+          "type": "string",
+          "description": "A line-by-line or block-by-block explanation of the code displayed below the output panel. Rendered as Markdown with inline code support. Should explain the WHAT and WHY of each significant part — not just restate what the code says. Format: use bullet points starting with the code reference in backticks. Maximum 8 bullet points.",
+          "minLength": 50,
+          "maxLength": 600,
+          "contentMediaType": "text/markdown",
+          "examples": [
+            "- `scores = [85, 92, 78]` creates a list — an ordered collection of three integers\n- `sum(scores)` is a built-in function that adds all items; `len(scores)` counts them\n- `total / count` performs division — in Python 3 this always returns a decimal number\n- `:.2f` inside the f-string formats the result to exactly 2 decimal places"
+          ]
+        }
+      }
+    },
+
+    "exercise": {
+      "type": "object",
+      "description": "The third tab of the lesson viewer (the 'Exercise' tab). An interactive coding challenge where the learner writes their own code. The learner is given starter code with blanks or placeholder comments and must complete it. The solution is hidden behind a reveal button. The AI hint system cycles through the static hints before falling back to Claude.",
+      "required": [
+        "title",
+        "instructions",
+        "starterCode",
+        "solutionCode",
+        "hints"
+      ],
+      "additionalProperties": false,
+      "properties": {
+
+        "title": {
+          "type": "string",
+          "description": "The challenge title shown as the exercise heading. Should sound like an achievable task, not an abstract concept. Use action verbs.",
+          "minLength": 3,
+          "maxLength": 60,
+          "examples": [
+            "Build a Temperature Converter",
+            "Write a Name Formatter Function",
+            "Create a Product Inventory Dictionary",
+            "Style a Profile Card"
+          ]
+        },
+
+        "instructions": {
+          "type": "string",
+          "description": "Clear, numbered instructions describing exactly what the learner must implement. Displayed in a highlighted box above the code editor. RULES: (1) State the goal in the first sentence. (2) List every specific requirement. (3) Show expected output for at least one example input. (4) Do not hint at the implementation approach — that is what hints are for. Plain text only — no Markdown.",
+          "minLength": 50,
+          "maxLength": 500,
+          "examples": [
+            "Write a function called calculate_bmi(weight_kg, height_m) that computes Body Mass Index using the formula: BMI = weight / (height * height). Call it with weight=70 and height=1.75 and print the result rounded to 1 decimal place. Expected output: 22.9"
+          ]
+        },
+
+        "starterCode": {
+          "type": "string",
+          "description": "The initial code loaded into the learner's editor. REQUIREMENTS: (1) Must be syntactically valid — it may be incomplete but must not have syntax errors. (2) Must include a function signature or class skeleton if the exercise requires one. (3) Must include comments marking WHERE the learner should add their code (e.g., '# Your code here'). (4) Must include the test call at the bottom so the learner can verify their solution by running it. (5) Should scaffold as much boilerplate as possible — the learner only writes the core logic.",
+          "minLength": 30,
+          "maxLength": 1500
+        },
+
+        "solutionCode": {
+          "type": "string",
+          "description": "The complete, correct solution that will replace the starter code when the learner clicks 'Reveal Solution'. REQUIREMENTS: (1) Must be a complete, runnable program — not just the missing parts. (2) Must produce the exact output described in the instructions. (3) Should be the simplest correct solution, not the most clever one. (4) Must not use any language features not yet covered at this point in the curriculum.",
+          "minLength": 20,
+          "maxLength": 1500
+        },
+
+        "hints": {
+          "type": "array",
+          "description": "An ordered array of progressively more specific hints. The lesson viewer cycles through these one at a time as the learner clicks 'Get Hint'. After all static hints are shown, the AI hint system calls Claude for a dynamic hint. RULES: (1) Minimum 2, maximum 5 hints. (2) Start very gentle (nudge toward the right concept). (3) End near-explicit (give the approach but not the code). (4) Each hint must begin with the '💡' emoji. (5) Each hint is a single sentence — 10 to 25 words.",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "description": "A single hint. Must begin with '💡'. Must be a complete sentence between 10 and 30 words.",
+            "pattern": "^💡",
+            "minLength": 15,
+            "maxLength": 150,
+            "examples": [
+              "💡 The formula for BMI is weight divided by height squared — that means height multiplied by itself.",
+              "💡 Use the ** operator in Python to compute a power: height ** 2 gives height squared.",
+              "💡 The round() function takes two arguments: the number and the number of decimal places to keep."
+            ]
+          }
+        },
+
+        "testCases": {
+          "type": "array",
+          "description": "Optional array of automated test cases used by the test runner to validate the learner's code. If omitted, the exercise is validated manually by the learner running their code and observing the output. When provided, test cases are checked in order and the learner must pass all of them.",
+          "items": {
+            "type": "object",
+            "required": ["input", "expectedOutput", "checkType"],
+            "additionalProperties": false,
+            "properties": {
+              "input": {
+                "type": "string",
+                "description": "The stdin input string to pass to the program when running the test. Use an empty string for programs that require no input."
+              },
+              "expectedOutput": {
+                "type": ["string", "null"],
+                "description": "The expected output string. Set to null when checkType is 'contains_print' and any non-empty output is acceptable."
+              },
+              "checkType": {
+                "type": "string",
+                "description": "How to compare actual output against expectedOutput. 'exact': entire output must match exactly (whitespace sensitive). 'contains': output must contain expectedOutput as a substring. 'contains_print': any output to stdout is acceptable (just checks something was printed). 'regex': expectedOutput is treated as a regular expression.",
+                "enum": ["exact", "contains", "contains_print", "regex"]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "quiz": {
+      "type": "object",
+      "description": "The fourth and final tab of the lesson viewer (the 'Quiz' tab). A multiple-choice assessment that the learner must complete before they can mark the lesson as done. The quiz score is saved to Firestore via recordQuizScore() and used by the weak topic detector. 100% scores unlock the 'perfect_quiz' badge.",
+      "required": ["questions"],
+      "additionalProperties": false,
+      "properties": {
+        "questions": {
+          "type": "array",
+          "description": "Array of quiz questions. Minimum 2, maximum 3 questions per lesson. Each question tests a distinct concept covered in the explanation or code example — not trivia or memorization. Questions must be answerable by someone who read and understood the explanation.",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/QuizQuestion"
+          }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+
+    "QuizQuestion": {
+      "type": "object",
+      "description": "A single multiple-choice question in the lesson quiz. Displayed one at a time. After the learner selects an answer, the correct answer and the explanation are revealed before they can advance.",
+      "required": ["id", "question", "options", "correct", "explanation"],
+      "additionalProperties": false,
+      "properties": {
+
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this question within the entire content library. Format: {lessonId}-q{number}. Used as a Firestore document ID when saving quiz results and for weak topic analysis.",
+          "pattern": "^[a-z][a-z0-9]*-m[0-9]+-l[0-9]+-q[0-9]+$",
+          "examples": [
+            "py-m1-l1-q1",
+            "py-m1-l1-q2",
+            "js-m3-l2-q1",
+            "java-m4-l3-q2"
+          ]
+        },
+
+        "question": {
+          "type": "string",
+          "description": "The question text displayed in bold above the answer options. RULES: (1) Must be a complete sentence ending with a question mark. (2) Must test conceptual understanding, not rote memorization or trivia. (3) Should be answerable from the explanation alone — no outside knowledge required. (4) Avoid 'trick questions' — test understanding, not gotchas. (5) Maximum 120 characters — if longer, the UI wraps poorly on mobile.",
+          "minLength": 15,
+          "maxLength": 200,
+          "examples": [
+            "What is the correct way to compare two strings for equality in Java?",
+            "Which array method transforms every element and returns a new array of the same length?",
+            "What does the 'padding' property in CSS control?",
+            "When does a Python for loop use the else clause?"
+          ]
+        },
+
+        "options": {
+          "type": "array",
+          "description": "Array of exactly 4 answer choices displayed as labeled buttons (A, B, C, D). RULES: (1) Exactly 4 options — no more, no fewer. (2) The correct answer must not always be in the same position — vary it across questions. (3) All incorrect options (distractors) must be plausible — a learner who partially understood the topic should pause before dismissing them. (4) Options should be similar in length and style. (5) Do not use 'All of the above' or 'None of the above' — they discourage reasoning.",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150
+          }
+        },
+
+        "correct": {
+          "type": "integer",
+          "description": "Zero-based index of the correct answer in the options array. 0 = option A, 1 = option B, 2 = option C, 3 = option D. The quiz engine uses this to determine whether the learner's selection was right and to highlight the correct answer in green after submission.",
+          "minimum": 0,
+          "maximum": 3
+        },
+
+        "explanation": {
+          "type": "string",
+          "description": "Explanation shown after the learner answers — whether they got it right or wrong. RULES: (1) Must explain WHY the correct answer is correct. (2) Must explain why the most commonly confused wrong answer is incorrect. (3) Should reinforce the key concept from the lesson. (4) Written in plain, beginner-friendly language — no jargon without definition. (5) Length: 2 to 4 sentences. Shown in a highlighted box below the answer buttons.",
+          "minLength": 40,
+          "maxLength": 400,
+          "examples": [
+            "In Java, the == operator compares object references (memory addresses), not the content of the strings. Two different String objects with the same text will fail a == comparison. The .equals() method compares the actual characters, which is always what you want when comparing text content.",
+            "map() applies a transformation function to every element and always returns a new array of exactly the same length. If you need to reduce the number of elements, use filter(). If you need a single value, use reduce().",
+            "Padding is the space between the content of an element and its border — it is inside the border. Margin is the space outside the border, between the element and its neighbors. Getting these two confused is one of the most common CSS mistakes."
+          ]
+        }
+      }
+    }
+  },
+
+  "examples": [
+    {
+      "id": "py-m1-l2",
+      "moduleId": "py-m1",
+      "title": "Variables and Data Types",
+      "order": 2,
+      "xpReward": 10,
+      "duration": "10 min",
+
+      "explanation": {
+        "title": "What is a Variable and Why Do We Need One?",
+        "content": "# What is a Variable?\n\nImagine you are filling out a form and you need to remember someone's name so you can use it in three different places on the same page. Instead of writing 'Rahul Sharma' three times, you write it once on a sticky note labeled **name** and then just refer to that note whenever you need it. That sticky note is a variable.\n\nIn Python, a variable is a named container that stores a value. You create one using the assignment operator `=`:\n\n```python\nname = \"Rahul Sharma\"\n```\n\nThe `=` sign here does not mean 'is equal to' — it means **assign**. Read it as: 'put the value `\"Rahul Sharma\"` into a container called `name`'.\n\n## The Four Basic Data Types\n\nPython automatically detects what kind of data you are storing. The four most common types are:\n\n| Type | Example | What it stores |\n|---|---|---|\n| `str` | `\"Rahul\"` | Text (any characters in quotes) |\n| `int` | `21` | Whole numbers (no decimal point) |\n| `float` | `3.14` | Decimal numbers |\n| `bool` | `True` | Only two values: True or False |\n\n## Naming Rules\n\nVariable names must follow these rules:\n\n- Can contain letters, digits, and underscores\n- Must start with a letter or underscore — not a digit\n- Are case-sensitive: `age` and `Age` are two completely different variables\n- Cannot be a Python keyword such as `if`, `for`, `while`, or `print`\n\nBy convention, Python variable names use **snake_case** — all lowercase with underscores between words: `first_name`, `total_price`, `is_student`.\n\n## Printing Variables\n\nTo display a variable's value, pass it to `print()`:\n\n```python\nname = \"Rahul\"\nprint(name)         # prints: Rahul\nprint(\"Name:\", name)  # prints: Name: Rahul\n```\n\nThe code example below creates variables of all four types and prints them in a formatted message."
+      },
+
+      "codeExample": {
+        "title": "Student Profile Variables",
+        "language": "python",
+        "code": "# Create variables of different types\nname       = \"Priya Sharma\"    # str  — text in quotes\nage        = 20                # int  — whole number\ngpa        = 3.85              # float — decimal number\nis_enrolled = True             # bool — True or False\n\n# Print each variable on its own line\nprint(\"Name:\",       name)\nprint(\"Age:\",        age)\nprint(\"GPA:\",        gpa)\nprint(\"Enrolled:\",   is_enrolled)\n\n# Check the type of any variable using type()\nprint(type(name))    # <class 'str'>\nprint(type(age))     # <class 'int'>\n\n# Update a variable — just assign a new value\nage = 21\nprint(\"Updated age:\", age)",
+        "explanation": "- The `=` operator assigns a value to a variable name — it does not test equality\n- String values must be wrapped in quotes; numbers and booleans must not be\n- `True` and `False` are Python's boolean literals — they are always capitalized\n- `type(variable)` reveals the data type — useful for debugging unexpected behavior\n- Reassigning a variable (`age = 21`) simply replaces the old value with the new one"
+      },
+
+      "exercise": {
+        "title": "Build a Contact Card",
+        "instructions": "Create four variables to represent a contact: full_name (a string with any name), phone (a string like '9876543210'), age (an integer), and is_active (a boolean set to True). Then print each variable on its own labeled line in the format 'Label: value'. Expected output should show four lines, one for each variable.",
+        "starterCode": "# Create the four variables here\nfull_name = \"\"\nphone     = \"\"\nage       = 0\nis_active = False\n\n# Print each variable with a label\nprint(\"Name:\",   full_name)\nprint(\"Phone:\",  phone)\n# Add the remaining two print statements below\n",
+        "solutionCode": "full_name = \"Amit Verma\"\nphone     = \"9876543210\"\nage       = 28\nis_active = True\n\nprint(\"Name:\",     full_name)\nprint(\"Phone:\",    phone)\nprint(\"Age:\",      age)\nprint(\"Active:\",   is_active)\n",
+        "hints": [
+          "💡 String values go inside quotes — write phone as '9876543210' not as a plain number.",
+          "💡 Boolean values are either True or False — they are always capitalized and never in quotes.",
+          "💡 Copy the pattern of the first two print statements to add the remaining two for age and is_active."
+        ],
+        "testCases": [
+          {
+            "input": "",
+            "expectedOutput": null,
+            "checkType": "contains_print"
+          }
+        ]
+      },
+
+      "quiz": {
+        "questions": [
+          {
+            "id": "py-m1-l2-q1",
+            "question": "What does the = operator do when you write name = 'Rahul' in Python?",
+            "options": [
+              "Tests whether name is equal to 'Rahul'",
+              "Assigns the string 'Rahul' to a variable called name",
+              "Prints the word Rahul to the screen",
+              "Creates a constant that cannot be changed"
+            ],
+            "correct": 1,
+            "explanation": "In Python, = is the assignment operator — it stores a value in a variable. To test equality, Python uses the == operator (two equals signs). Writing name = 'Rahul' creates a variable called name and places the string 'Rahul' inside it."
+          },
+          {
+            "id": "py-m1-l2-q2",
+            "question": "Which of the following variable names is valid in Python?",
+            "options": [
+              "2nd_place",
+              "first-name",
+              "user_age",
+              "for"
+            ],
+            "correct": 2,
+            "explanation": "user_age is valid — it starts with a letter and uses only letters and underscores. '2nd_place' is invalid because variable names cannot start with a digit. 'first-name' is invalid because hyphens are not allowed. 'for' is a reserved keyword that Python uses for loops and cannot be used as a variable name."
+          }
+        ]
+      }
+    }
+  ]
+}

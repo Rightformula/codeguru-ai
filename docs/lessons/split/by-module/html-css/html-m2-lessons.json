@@ -1,0 +1,221 @@
+[
+  {
+    "id": "html-m2-l1",
+    "moduleId": "html-m2",
+    "title": "Lists and Links",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Organising Content with Lists and Navigating with Links",
+      "content": "# Lists in HTML\n\nLists are everywhere on the web — navigation menus, product features, step-by-step instructions, and shopping carts all use HTML lists. There are three kinds:\n\n## Unordered Lists — `<ul>`\n\nAn **unordered list** displays bullet points. Use it when order does not matter:\n\n```html\n<ul>\n  <li>Python</li>\n  <li>JavaScript</li>\n  <li>HTML and CSS</li>\n</ul>\n```\n\nEach item inside the list uses the `<li>` (list item) element.\n\n## Ordered Lists — `<ol>`\n\nAn **ordered list** displays numbers (or letters). Use it when sequence matters:\n\n```html\n<ol>\n  <li>Install Python</li>\n  <li>Open a text editor</li>\n  <li>Write your first program</li>\n</ol>\n```\n\nThe `type` attribute changes the numbering style: `type=\"A\"` for uppercase letters, `type=\"i\"` for Roman numerals.\n\n## Description Lists — `<dl>`\n\nA **description list** pairs terms with their definitions:\n\n```html\n<dl>\n  <dt>HTML</dt>\n  <dd>HyperText Markup Language — the structure of the web.</dd>\n  <dt>CSS</dt>\n  <dd>Cascading Style Sheets — the styling of the web.</dd>\n</dl>\n```\n\n## Nested Lists\n\nYou can place a list inside another `<li>` to create sub-levels:\n\n```html\n<ul>\n  <li>Frontend\n    <ul>\n      <li>HTML</li>\n      <li>CSS</li>\n    </ul>\n  </li>\n  <li>Backend</li>\n</ul>\n```\n\n## Links — `<a>`\n\nThe anchor element `<a>` creates a hyperlink. The `href` attribute holds the destination:\n\n```html\n<a href=\"https://codeguru.ai\">CodeGuru AI</a>        <!-- external -->\n<a href=\"about.html\">About Us</a>                    <!-- same site -->\n<a href=\"#skills\">Jump to Skills</a>                 <!-- same page -->\n<a href=\"mailto:hi@codeguru.ai\">Email us</a>          <!-- email -->\n<a href=\"https://x.com\" target=\"_blank\">X (Twitter)</a> <!-- new tab -->\n```\n\nThe `target=\"_blank\"` attribute opens the link in a new browser tab. When using it, also add `rel=\"noopener noreferrer\"` for security.\n\nIn the code example below, you will see all three list types and multiple link patterns used in a course catalogue page."
+    },
+    "codeExample": {
+      "title": "Course Catalogue Page",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Course Catalogue</title>\n</head>\n<body>\n\n  <h1>CodeGuru AI — Course Catalogue</h1>\n\n  <h2>Available Languages</h2>\n  <ul>\n    <li>Python</li>\n    <li>JavaScript</li>\n    <li>Java</li>\n    <li>HTML &amp; CSS</li>\n  </ul>\n\n  <h2>How to Enrol</h2>\n  <ol>\n    <li>Create a free account</li>\n    <li>Choose your language</li>\n    <li>Complete Lesson 1</li>\n    <li>Earn your first XP badge</li>\n  </ol>\n\n  <h2>Glossary</h2>\n  <dl>\n    <dt>XP</dt>\n    <dd>Experience points earned by completing lessons.</dd>\n    <dt>Module</dt>\n    <dd>A group of related lessons on one topic.</dd>\n  </dl>\n\n  <h2>Quick Links</h2>\n  <ul>\n    <li><a href=\"https://codeguru.ai\">Home</a></li>\n    <li><a href=\"https://codeguru.ai/courses\">All Courses</a></li>\n    <li>\n      <a href=\"https://codeguru.ai/signup\" target=\"_blank\"\n         rel=\"noopener noreferrer\">Sign Up (new tab)</a>\n    </li>\n    <li><a href=\"mailto:support@codeguru.ai\">Email Support</a></li>\n  </ul>\n\n</body>\n</html>",
+      "explanation": "- `<ul>` with `<li>` — unordered list; browsers add bullet points by default\n- `&amp;` — the HTML entity for the `&` character; raw `&` can confuse browsers\n- `<ol>` with `<li>` — ordered list; browsers number items automatically starting from 1\n- `<dl>`, `<dt>`, `<dd>` — description list; `dt` is the term, `dd` is the indented definition\n- `<a href=\"https://...\">` — external link; always include `https://` for absolute URLs\n- `target=\"_blank\"` — opens the link in a new tab; combine with `rel=\"noopener noreferrer\"` to prevent security issues"
+    },
+    "exercise": {
+      "title": "Build a Skills and Resources Page",
+      "instructions": "Create an HTML page with three sections. Section 1: an h2 heading 'My Skills' followed by an unordered list of at least three programming skills. Section 2: an h2 heading 'Learning Steps' followed by an ordered list of at least three steps. Section 3: an h2 heading 'Resources' with two anchor links — one opening in a new tab using target='_blank'. All inside a complete HTML5 structure.\n\nExpected: page with ul, ol, and two a tags, one with target='_blank'.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Skills</title>\n</head>\n<body>\n\n  <h1>My Developer Profile</h1>\n\n  <h2>My Skills</h2>\n  <!-- unordered list with 3+ skills -->\n\n  <h2>Learning Steps</h2>\n  <!-- ordered list with 3+ steps -->\n\n  <h2>Resources</h2>\n  <!-- two links, one with target=\"_blank\" -->\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Skills</title>\n</head>\n<body>\n\n  <h1>My Developer Profile</h1>\n\n  <h2>My Skills</h2>\n  <ul>\n    <li>HTML</li>\n    <li>CSS</li>\n    <li>JavaScript</li>\n  </ul>\n\n  <h2>Learning Steps</h2>\n  <ol>\n    <li>Learn HTML structure</li>\n    <li>Style with CSS</li>\n    <li>Add interactivity with JavaScript</li>\n  </ol>\n\n  <h2>Resources</h2>\n  <ul>\n    <li><a href=\"https://codeguru.ai\">CodeGuru AI</a></li>\n    <li><a href=\"https://developer.mozilla.org\" target=\"_blank\" rel=\"noopener noreferrer\">MDN Docs</a></li>\n  </ul>\n\n</body>\n</html>",
+      "hints": [
+        "💡 An unordered list starts with <ul> and each item is wrapped in <li>...</li> tags.",
+        "💡 An ordered list uses <ol> instead of <ul> — browsers automatically add numbers.",
+        "💡 Add target=\"_blank\" inside the opening a tag to open a link in a new tab: <a href=\"...\" target=\"_blank\">."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "<ul>",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "<ol>",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m2-l1-q1",
+          "question": "Which HTML element is used for each item inside both ul and ol lists?",
+          "options": [
+            "<item>",
+            "<list>",
+            "<li>",
+            "<dt>"
+          ],
+          "correct": 2,
+          "explanation": "The li (list item) element is used for each individual item inside both ul (unordered) and ol (ordered) lists. The dt and dd elements belong to dl (description list). There are no HTML elements named item or list."
+        },
+        {
+          "id": "html-m2-l1-q2",
+          "question": "What attribute on an anchor tag opens the link in a new browser tab?",
+          "options": [
+            "rel=\"new\"",
+            "target=\"_blank\"",
+            "href=\"_new\"",
+            "open=\"tab\""
+          ],
+          "correct": 1,
+          "explanation": "The target=\"_blank\" attribute tells the browser to open the linked page in a new tab or window. For security, always pair it with rel=\"noopener noreferrer\" to prevent the new page from being able to access the original page via JavaScript."
+        },
+        {
+          "id": "html-m2-l1-q3",
+          "question": "Which list type should you use when the order of items matters?",
+          "options": [
+            "ul — unordered list",
+            "dl — description list",
+            "ol — ordered list",
+            "ll — labelled list"
+          ],
+          "correct": 2,
+          "explanation": "The ol (ordered list) element creates a numbered list where sequence is meaningful — for example, installation steps, recipe instructions, or rankings. Use ul when order does not matter, and dl for term-definition pairs. There is no ll element in HTML."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m2-l2",
+    "moduleId": "html-m2",
+    "title": "Images and Tables",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Displaying Images and Organising Data in Tables",
+      "content": "# Images in HTML\n\nImages make pages visual and engaging. The `<img>` element embeds an image. It is a **void element** — no closing tag is needed:\n\n```html\n<img src=\"photo.jpg\" alt=\"A smiling student\" width=\"300\" height=\"200\">\n```\n\nThe two most important attributes are:\n\n- `src` — the path or URL of the image file\n- `alt` — a text description shown when the image cannot load and read aloud by screen readers\n\nThe `alt` attribute is **never optional**. An empty `alt=\"\"` is acceptable for purely decorative images, but descriptive text is required for informative ones.\n\n## Image Paths\n\n```html\n<!-- Same folder as the HTML file -->\n<img src=\"logo.png\" alt=\"CodeGuru logo\">\n\n<!-- Subfolder -->\n<img src=\"images/banner.jpg\" alt=\"Course banner\">\n\n<!-- External URL -->\n<img src=\"https://example.com/photo.jpg\" alt=\"External photo\">\n```\n\n## Tables in HTML\n\nTables organise data into rows and columns. A complete table uses several elements:\n\n```html\n<table>\n  <thead>\n    <tr>\n      <th>Language</th>\n      <th>Level</th>\n      <th>Duration</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Python</td>\n      <td>Beginner</td>\n      <td>40 hours</td>\n    </tr>\n  </tbody>\n</table>\n```\n\n| Element | Role |\n|---|---|\n| `<table>` | Outer container |\n| `<thead>` | Header row group |\n| `<tbody>` | Body row group |\n| `<tr>` | Table row |\n| `<th>` | Header cell (bold, centred by default) |\n| `<td>` | Data cell |\n\n## Spanning Cells\n\nA cell can span multiple columns or rows:\n\n```html\n<td colspan=\"2\">Spans two columns</td>\n<td rowspan=\"3\">Spans three rows</td>\n```\n\n## Table Caption\n\n```html\n<table>\n  <caption>CodeGuru Course Comparison</caption>\n  ...\n</table>\n```\n\nThe `<caption>` provides a title for the table that assistive technology can announce.\n\nIn the code example below, you will see a complete comparison table with thead, tbody, caption, and an image placed above the table."
+    },
+    "codeExample": {
+      "title": "Course Comparison with Image",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Course Comparison</title>\n  <style>\n    body  { font-family: Arial, sans-serif; padding: 20px; }\n    table { border-collapse: collapse; width: 100%; }\n    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }\n    th    { background: #22c55e; color: white; }\n    img   { border-radius: 8px; margin-bottom: 16px; }\n  </style>\n</head>\n<body>\n\n  <h1>CodeGuru AI Courses</h1>\n\n  <!-- Placeholder image from picsum.photos -->\n  <img src=\"https://picsum.photos/400/150\" alt=\"Coding workspace\" width=\"400\" height=\"150\">\n\n  <table>\n    <caption>Beginner Course Comparison</caption>\n    <thead>\n      <tr>\n        <th>Language</th>\n        <th>Modules</th>\n        <th>Hours</th>\n        <th>Price</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>Python</td>\n        <td>6</td>\n        <td>40</td>\n        <td>Free</td>\n      </tr>\n      <tr>\n        <td>JavaScript</td>\n        <td>6</td>\n        <td>35</td>\n        <td>Free</td>\n      </tr>\n      <tr>\n        <td>HTML &amp; CSS</td>\n        <td>6</td>\n        <td>30</td>\n        <td>Free</td>\n      </tr>\n    </tbody>\n  </table>\n\n</body>\n</html>",
+      "explanation": "- `<img src=\"...\" alt=\"...\">` — void element; `src` is the image path, `alt` is the text fallback\n- `width=\"400\" height=\"150\"` — pre-reserves space in the layout, preventing content jumping as images load\n- `<table>` → `<thead>` → `<tr>` → `<th>` — four-level nesting required for an accessible table\n- `<caption>` — a title for the table rendered above it; read by screen readers before the data\n- `border-collapse: collapse` — CSS that removes the double border between adjacent cells\n- `&amp;` — the HTML entity for `&`; raw ampersands must always be escaped in HTML"
+    },
+    "exercise": {
+      "title": "Build a Product Showcase Table",
+      "instructions": "Create an HTML page with one img tag using a placeholder image from https://picsum.photos/300/120 with a descriptive alt attribute. Below the image, create a table with caption 'Product Prices', a thead row with three th cells (Product, Category, Price), and at least three tbody rows with td cells. The page must be complete HTML5 with all table elements.\n\nExpected: page with img, table, caption, thead, tbody, th, and td all present.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Products</title>\n  <style>\n    table { border-collapse: collapse; }\n    th, td { border: 1px solid #999; padding: 8px; }\n    th { background: #334155; color: white; }\n  </style>\n</head>\n<body>\n\n  <h1>Our Products</h1>\n\n  <!-- Add img tag with picsum.photos URL and alt text -->\n\n  <!-- Add table with caption, thead (3 headers), 3 tbody rows -->\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Products</title>\n  <style>\n    table { border-collapse: collapse; }\n    th, td { border: 1px solid #999; padding: 8px; }\n    th { background: #334155; color: white; }\n  </style>\n</head>\n<body>\n\n  <h1>Our Products</h1>\n\n  <img src=\"https://picsum.photos/300/120\" alt=\"Product banner\" width=\"300\" height=\"120\">\n\n  <table>\n    <caption>Product Prices</caption>\n    <thead>\n      <tr><th>Product</th><th>Category</th><th>Price</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Keyboard</td><td>Hardware</td><td>₹1200</td></tr>\n      <tr><td>Mouse</td><td>Hardware</td><td>₹650</td></tr>\n      <tr><td>VS Code</td><td>Software</td><td>Free</td></tr>\n    </tbody>\n  </table>\n\n</body>\n</html>",
+      "hints": [
+        "💡 An img tag looks like: <img src=\"https://picsum.photos/300/120\" alt=\"Description\" width=\"300\" height=\"120\">",
+        "💡 Start your table with <table><caption>Product Prices</caption> then add thead and tbody sections.",
+        "💡 Each row is a <tr> element containing either <th> cells (header) or <td> cells (data)."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "<table>",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "<img",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m2-l2-q1",
+          "question": "Why is the alt attribute on an img element important?",
+          "options": [
+            "It sets the size of the image on the page",
+            "It links the image to a CSS style",
+            "It provides a text description for screen readers and when the image fails to load",
+            "It determines the file format of the image"
+          ],
+          "correct": 2,
+          "explanation": "The alt attribute serves two critical purposes: it provides a text fallback shown when the image cannot load (due to a broken URL or slow connection), and it is read aloud by screen readers for users who cannot see images. Omitting alt entirely makes the page inaccessible. An empty alt=\"\" is only correct for purely decorative images."
+        },
+        {
+          "id": "html-m2-l2-q2",
+          "question": "What is the correct order of elements inside a well-structured HTML table?",
+          "options": [
+            "table > tr > th > td",
+            "table > thead/tbody > tr > th/td",
+            "table > th > tr > td",
+            "table > row > cell > header"
+          ],
+          "correct": 1,
+          "explanation": "A well-structured HTML table nests elements in this order: table contains thead and tbody, each containing tr (row) elements, which contain th (header cells) or td (data cells). Skipping thead/tbody is technically valid but reduces accessibility. There are no elements named row or cell in HTML."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m2-l3",
+    "moduleId": "html-m2",
+    "title": "Forms and Input Elements",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Collecting User Input with HTML Forms",
+      "content": "# HTML Forms\n\nForms are how users send data to a server — login credentials, search queries, order details, feedback messages. Every form on the web is built with the `<form>` element.\n\n## The form Element\n\n```html\n<form action=\"/submit\" method=\"post\">\n  <!-- inputs go here -->\n</form>\n```\n\n- `action` — the URL where form data is sent on submission\n- `method` — how data is sent: `get` (appends to URL) or `post` (sends in request body)\n\n## Input Types\n\nThe `<input>` element is a void element that renders different controls based on its `type` attribute:\n\n| type | Renders |\n|---|---|\n| `text` | Single-line text box |\n| `email` | Text box with email format validation |\n| `password` | Text box that hides characters |\n| `number` | Numeric spinner |\n| `checkbox` | Tick box |\n| `radio` | Round selection button |\n| `date` | Date picker |\n| `file` | File chooser |\n| `submit` | Submit button |\n| `reset` | Clear form button |\n\n## Labels — Always Required\n\nEvery input needs a `<label>` for accessibility. The `for` attribute links the label to the input's `id`:\n\n```html\n<label for=\"email\">Email Address</label>\n<input type=\"email\" id=\"email\" name=\"email\" placeholder=\"you@example.com\">\n```\n\nWhen a user clicks the label, focus moves to the linked input. Screen readers read the label text when the input is focused.\n\n## Other Form Controls\n\n```html\n<!-- Multi-line text box -->\n<textarea id=\"msg\" name=\"message\" rows=\"4\" placeholder=\"Your message...\"></textarea>\n\n<!-- Drop-down selector -->\n<select id=\"level\" name=\"level\">\n  <option value=\"beginner\">Beginner</option>\n  <option value=\"intermediate\">Intermediate</option>\n</select>\n\n<!-- Button -->\n<button type=\"submit\">Send</button>\n```\n\n## Grouping with fieldset and legend\n\n```html\n<fieldset>\n  <legend>Preferred Language</legend>\n  <input type=\"radio\" id=\"py\" name=\"lang\" value=\"python\">\n  <label for=\"py\">Python</label>\n  <input type=\"radio\" id=\"js\" name=\"lang\" value=\"javascript\">\n  <label for=\"js\">JavaScript</label>\n</fieldset>\n```\n\n`<fieldset>` draws a box around related inputs; `<legend>` provides a caption for that group.\n\nIn the code example below, you will see a complete registration form using many input types, labels, a select, and a textarea."
+    },
+    "codeExample": {
+      "title": "Student Registration Form",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Registration Form</title>\n  <style>\n    body   { font-family: Arial, sans-serif; padding: 20px; max-width: 480px; }\n    label  { display: block; margin-top: 12px; font-weight: bold; }\n    input, select, textarea { width: 100%; padding: 8px; margin-top: 4px;\n                              border: 1px solid #ccc; border-radius: 4px; }\n    button { margin-top: 16px; padding: 10px 24px;\n             background: #22c55e; color: white; border: none;\n             border-radius: 4px; cursor: pointer; }\n  </style>\n</head>\n<body>\n\n  <h1>Create Account</h1>\n\n  <form action=\"/register\" method=\"post\">\n\n    <label for=\"name\">Full Name</label>\n    <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Priya Sharma\" required>\n\n    <label for=\"email\">Email</label>\n    <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"priya@example.com\" required>\n\n    <label for=\"password\">Password</label>\n    <input type=\"password\" id=\"password\" name=\"password\" required>\n\n    <label for=\"dob\">Date of Birth</label>\n    <input type=\"date\" id=\"dob\" name=\"dob\">\n\n    <label for=\"course\">Choose Course</label>\n    <select id=\"course\" name=\"course\">\n      <option value=\"python\">Python</option>\n      <option value=\"javascript\">JavaScript</option>\n      <option value=\"html\">HTML &amp; CSS</option>\n    </select>\n\n    <label for=\"bio\">Short Bio</label>\n    <textarea id=\"bio\" name=\"bio\" rows=\"3\" placeholder=\"Tell us about yourself...\"></textarea>\n\n    <button type=\"submit\">Register</button>\n\n  </form>\n\n</body>\n</html>",
+      "explanation": "- `<form action=\"/register\" method=\"post\">` — `action` is the server URL; `post` keeps passwords out of the URL\n- `type=\"email\"` — the browser validates the value looks like an email before allowing submission\n- `type=\"password\"` — renders an input that shows dots instead of characters for security\n- `required` — boolean attribute; the browser blocks submission if this field is empty\n- `<label for=\"name\">` with `<input id=\"name\">` — clicking the label focuses the input; essential for accessibility\n- `<textarea rows=\"3\">` — a multi-line text input; `rows` sets the initial visible height"
+    },
+    "exercise": {
+      "title": "Build a Contact Form",
+      "instructions": "Create a contact form page. The form must contain: a text input for full name with a linked label, an email input with a linked label, a select dropdown with at least three subject options and a linked label, a textarea for message with a linked label, and a submit button. Use proper for/id pairing on all labels. The form must be inside a complete HTML5 page.\n\nExpected: form with all four inputs, a select, textarea, and submit button.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Contact Us</title>\n  <style>\n    body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; }\n    label { display: block; margin-top: 12px; font-weight: bold; }\n    input, select, textarea { width: 100%; padding: 8px; margin-top: 4px; }\n    button { margin-top: 12px; padding: 8px 20px; background: #22c55e; color: white; border: none; }\n  </style>\n</head>\n<body>\n\n  <h1>Contact Us</h1>\n\n  <form action=\"/contact\" method=\"post\">\n\n    <!-- label + text input for full name -->\n\n    <!-- label + email input -->\n\n    <!-- label + select with 3 subject options -->\n\n    <!-- label + textarea for message -->\n\n    <!-- submit button -->\n\n  </form>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Contact Us</title>\n  <style>\n    body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; }\n    label { display: block; margin-top: 12px; font-weight: bold; }\n    input, select, textarea { width: 100%; padding: 8px; margin-top: 4px; }\n    button { margin-top: 12px; padding: 8px 20px; background: #22c55e; color: white; border: none; }\n  </style>\n</head>\n<body>\n\n  <h1>Contact Us</h1>\n\n  <form action=\"/contact\" method=\"post\">\n\n    <label for=\"name\">Full Name</label>\n    <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Your name\" required>\n\n    <label for=\"email\">Email</label>\n    <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"you@email.com\" required>\n\n    <label for=\"subject\">Subject</label>\n    <select id=\"subject\" name=\"subject\">\n      <option value=\"general\">General Enquiry</option>\n      <option value=\"billing\">Billing</option>\n      <option value=\"support\">Technical Support</option>\n    </select>\n\n    <label for=\"message\">Message</label>\n    <textarea id=\"message\" name=\"message\" rows=\"4\" placeholder=\"Your message...\"></textarea>\n\n    <button type=\"submit\">Send Message</button>\n\n  </form>\n\n</body>\n</html>",
+      "hints": [
+        "💡 Each label needs a for attribute matching the id of its input: <label for=\"name\"> pairs with <input id=\"name\">.",
+        "💡 A select element contains option elements: <select id=\"subject\"><option value=\"...\">Text</option></select>.",
+        "💡 A textarea is not a void element — it needs a closing tag: <textarea id=\"message\" rows=\"4\"></textarea>."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "<form",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "<select",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m2-l3-q1",
+          "question": "What is the purpose of the for attribute on a label element?",
+          "options": [
+            "It sets the text direction of the label",
+            "It links the label to an input by matching the input's id",
+            "It specifies how many characters the label can contain",
+            "It controls whether the label is visible"
+          ],
+          "correct": 1,
+          "explanation": "The for attribute on a label element must match the id attribute of the input it describes. This creates an accessible connection: clicking the label moves focus to the input, and screen readers announce the label text when the input is focused. Without this pairing, users with disabilities cannot tell what each input is for."
+        },
+        {
+          "id": "html-m2-l3-q2",
+          "question": "What is the difference between the get and post methods on a form?",
+          "options": [
+            "get sends data in the request body; post appends it to the URL",
+            "get appends form data to the URL; post sends it in the request body",
+            "get is for text fields only; post works with all input types",
+            "They are identical and produce the same result"
+          ],
+          "correct": 1,
+          "explanation": "With method=\"get\", form data is appended to the URL as query parameters (visible in the browser's address bar). With method=\"post\", data is sent in the HTTP request body and not visible in the URL. Use post for sensitive data like passwords and for actions that change server data. Use get for searches where the URL can be shared."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,199 @@
+[
+  {
+    "id": "js-m4-l1",
+    "moduleId": "js-m4",
+    "title": "for Loops",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Repeating Actions with the for Loop",
+      "content": "# The for Loop\n\nImagine a cashier scanning 50 items at a checkout. Instead of writing 50 separate lines of code, you write the scanning logic once and tell JavaScript to repeat it 50 times. That is exactly what a loop does.\n\nThe `for` loop is the most common loop in JavaScript. It repeats a block of code a fixed number of times:\n\n```javascript\nfor (let i = 0; i < 5; i++) {\n    console.log(i);\n}\n// Prints: 0 1 2 3 4\n```\n\nThe header has three parts separated by semicolons:\n1. **Initialisation** `let i = 0` — runs once before the loop starts\n2. **Condition** `i < 5` — checked before every iteration; loop stops when false\n3. **Update** `i++` — runs after every iteration\n\n## Iterating Over an Array\n\nThe most common use of a `for` loop is processing every element of an array:\n\n```javascript\nconst scores = [85, 92, 78, 95];\n\nfor (let i = 0; i < scores.length; i++) {\n    console.log(`Score ${i + 1}: ${scores[i]}`);\n}\n```\n\n`scores.length` gives the count of elements. Using it as the condition means the loop works for any size array.\n\n## The for...of Loop — Modern and Clean\n\nWhen you need each element but not its index, `for...of` is cleaner:\n\n```javascript\nconst fruits = [\"apple\", \"banana\", \"mango\"];\n\nfor (const fruit of fruits) {\n    console.log(fruit);  // apple, banana, mango\n}\n```\n\n`for...of` works with any iterable: arrays, strings, Sets, Maps.\n\n## Accumulating Results in a Loop\n\n```javascript\nconst prices = [100, 250, 80, 430];\nlet total = 0;\n\nfor (const price of prices) {\n    total += price;\n}\nconsole.log(\"Total:\", total); // 860\n```\n\nInitialise the accumulator to a neutral value (`0` for sums, `1` for products, `[]` for collecting items) before the loop.\n\nIn the code example below, you will see both loop styles applied to compute a student ranking table."
+    },
+    "codeExample": {
+      "title": "Student Ranking Table",
+      "language": "javascript",
+      "code": "// Student Ranking Table\n\nconst students = [\n    { name: \"Rahul\",  score: 88 },\n    { name: \"Priya\",  score: 95 },\n    { name: \"Amit\",   score: 72 },\n    { name: \"Sneha\",  score: 91 },\n    { name: \"Vikram\", score: 67 },\n];\n\n// --- Classic for loop with index ---\nconsole.log(\"=== Ranked Table ===\");\nfor (let i = 0; i < students.length; i++) {\n    const s     = students[i];\n    const grade = s.score >= 90 ? \"A\" : s.score >= 75 ? \"B\" : \"C\";\n    console.log(`${i + 1}. ${s.name.padEnd(8)} ${s.score}  ${grade}`);\n}\n\n// --- for...of to accumulate total ---\nlet total = 0;\nfor (const s of students) {\n    total += s.score;\n}\nconst average = (total / students.length).toFixed(1);\nconsole.log(`\\nClass average: ${average}`);\n\n// --- for...of to find the highest scorer ---\nlet topStudent = students[0];\nfor (const s of students) {\n    if (s.score > topStudent.score) {\n        topStudent = s;\n    }\n}\nconsole.log(`Top scorer: ${topStudent.name} (${topStudent.score})`);",
+      "explanation": "- `for (let i = 0; i < students.length; i++)` — `let i` starts at 0; the loop runs while `i` is less than the array length\n- `students[i]` — array access by index; `i` goes 0, 1, 2... matching each element in order\n- `s.score >= 90 ? \"A\" : s.score >= 75 ? \"B\" : \"C\"` — a chained ternary assigning a grade inline\n- `s.name.padEnd(8)` — pads the name to 8 characters so all columns align neatly\n- `for (const s of students)` — iterates over objects directly; `s` is each student object in turn\n- `topStudent = s` — updates the reference when a higher score is found"
+    },
+    "exercise": {
+      "title": "Compute Sum and Count of Even Numbers",
+      "instructions": "Given the array numbers = [3, 8, 15, 4, 22, 7, 10, 1, 6], use a for...of loop to compute two things: the sum of all numbers in the array, and a count of how many numbers are even (divisible by 2 with no remainder). Print the total sum and the even count on separate labelled lines.\n\nExpected output:\nSum: 76\nEven count: 5",
+      "starterCode": "// Sum and Even Counter\n\nconst numbers = [3, 8, 15, 4, 22, 7, 10, 1, 6];\n\nlet sum       = 0;\nlet evenCount = 0;\n\nfor (const num of numbers) {\n    sum += num;\n    // Check if num is even and increment evenCount\n    // Your code here\n}\n\nconsole.log(\"Sum:\",        sum);\nconsole.log(\"Even count:\", evenCount);",
+      "solutionCode": "const numbers = [3, 8, 15, 4, 22, 7, 10, 1, 6];\n\nlet sum       = 0;\nlet evenCount = 0;\n\nfor (const num of numbers) {\n    sum += num;\n    if (num % 2 === 0) {\n        evenCount++;\n    }\n}\n\nconsole.log(\"Sum:\",        sum);\nconsole.log(\"Even count:\", evenCount);",
+      "hints": [
+        "💡 A number is even if num % 2 === 0 — the modulo operator gives the remainder.",
+        "💡 Inside the loop, add if (num % 2 === 0) { evenCount++; } after the sum line.",
+        "💡 evenCount++ increments the counter by 1 each time an even number is found."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Sum: 76",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Even count: 5",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m4-l1-q1",
+          "question": "What are the three parts of a for loop header separated by semicolons?",
+          "options": [
+            "condition; body; update",
+            "initialisation; condition; update",
+            "variable; limit; step",
+            "start; stop; increment"
+          ],
+          "correct": 1,
+          "explanation": "A for loop header is: for (initialisation; condition; update). Initialisation runs once before the loop starts. The condition is checked before every iteration — the loop stops when it is false. The update runs after each iteration. For example: for (let i = 0; i < 10; i++)."
+        },
+        {
+          "id": "js-m4-l1-q2",
+          "question": "When is for...of preferred over a classic indexed for loop?",
+          "options": [
+            "When you need the index of each element",
+            "When you only need the value of each element and do not need its index",
+            "Only when the array contains strings",
+            "for...of is always slower and should be avoided"
+          ],
+          "correct": 1,
+          "explanation": "for...of is preferred when you only need each element's value and do not need to know its position. The syntax is cleaner and less error-prone. Use a classic for loop when you need the index (to access a parallel array, build a numbered list, or modify elements in place)."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m4-l2",
+    "moduleId": "js-m4",
+    "title": "while and do...while Loops",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Repeating Until a Condition Changes with while Loops",
+      "content": "# while Loops\n\nA `for` loop is ideal when you know the number of iterations in advance. A `while` loop is better when you repeat until something changes and you do not know how many iterations that will take.\n\n```javascript\nwhile (condition) {\n    // runs as long as condition is true\n}\n```\n\nThe condition is checked **before** every iteration. If it is `false` from the start, the body never runs.\n\n```javascript\nlet count = 1;\nwhile (count <= 5) {\n    console.log(count);\n    count++;            // must change the condition eventually!\n}\n```\n\n## Danger: the Infinite Loop\n\nIf you forget to update the variable that controls the condition, the loop runs forever:\n\n```javascript\n// DANGEROUS — count never changes\nwhile (count <= 5) {\n    console.log(count); // runs forever\n}\n```\n\nAlways ensure the loop body contains something that eventually makes the condition `false`.\n\n## The do...while Loop\n\n`do...while` is like `while` but checks the condition **after** the body runs. This guarantees the body runs at least once:\n\n```javascript\nlet n = 10;\ndo {\n    console.log(n);\n    n++;\n} while (n < 5);  // condition is already false, but body ran once\n```\n\nUse `do...while` when you need to run the body before deciding whether to repeat.\n\n## break and continue\n\n```javascript\nfor (let i = 0; i < 10; i++) {\n    if (i === 3) continue;  // skip 3\n    if (i === 7) break;     // stop at 7\n    console.log(i);         // 0 1 2 4 5 6\n}\n```\n\n- `break` — exits the loop immediately\n- `continue` — skips the rest of the current iteration and moves to the next\n\nBoth work in `for`, `for...of`, and `while` loops.\n\nIn the code example below, you will see a `while` loop simulate a bank withdrawal session and `continue` skip invalid entries."
+    },
+    "codeExample": {
+      "title": "Bank Withdrawal Session",
+      "language": "javascript",
+      "code": "// Bank Withdrawal Session — while loop\n\nlet balance    = 5000;\nconst requests = [500, 1200, 3000, 200]; // predefined (no prompt())\nlet idx        = 0;\n\nconsole.log(`Opening session. Balance: ₹${balance}`);\n\nwhile (idx < requests.length && balance > 0) {\n    const requested = requests[idx];\n    idx++;\n\n    if (requested <= 0) {\n        console.log(\"Invalid amount — skipped.\");\n        continue;         // skip to next iteration\n    }\n\n    if (requested > balance) {\n        console.log(`₹${requested} declined — insufficient funds.`);\n        continue;\n    }\n\n    balance -= requested;\n    console.log(`Withdrew ₹${requested} | Remaining: ₹${balance}`);\n\n    if (balance === 0) {\n        console.log(\"Balance zero. Session ending.\");\n        break;            // exit the loop early\n    }\n}\n\nconsole.log(`\\nSession closed. Final balance: ₹${balance}`);",
+      "explanation": "- `while (idx < requests.length && balance > 0)` — two conditions joined with `&&`; either becoming false stops the loop\n- `idx++` — advances through the requests array on every iteration; prevents an infinite loop\n- `continue` — skips the remaining body for this iteration (the declined or invalid case) and evaluates the while condition again\n- `break` — exits the while loop immediately when the balance reaches zero\n- `balance -= requested` — shorthand for `balance = balance - requested`"
+    },
+    "exercise": {
+      "title": "Simulate a Number Guessing Game",
+      "instructions": "Simulate a number guessing game with a while loop. The secret number is 42. The guesses are stored in the array guesses = [15, 80, 42]. Loop through guesses using an index variable. Print 'Too low' for guesses below 42, 'Too high' for guesses above 42, and 'Correct in X attempt(s)!' when the guess equals 42, then break. Count attempts on every iteration.\n\nExpected output:\nGuess 15: Too low\nGuess 80: Too high\nGuess 42: Correct in 3 attempt(s)!",
+      "starterCode": "// Number Guessing Game\n\nconst secret   = 42;\nconst guesses  = [15, 80, 42];\nlet idx        = 0;\nlet attempts   = 0;\n\nwhile (idx < guesses.length) {\n    const guess = guesses[idx];\n    idx++;\n    attempts++;\n\n    if (guess < secret) {\n        console.log(`Guess ${guess}: Too low`);\n    } else if (guess > secret) {\n        console.log(`Guess ${guess}: Too high`);\n    } else {\n        console.log(`Guess ${guess}: Correct in ${attempts} attempt(s)!`);\n        break;\n    }\n}",
+      "solutionCode": "const secret  = 42;\nconst guesses = [15, 80, 42];\nlet idx       = 0;\nlet attempts  = 0;\n\nwhile (idx < guesses.length) {\n    const guess = guesses[idx];\n    idx++;\n    attempts++;\n\n    if (guess < secret) {\n        console.log(`Guess ${guess}: Too low`);\n    } else if (guess > secret) {\n        console.log(`Guess ${guess}: Too high`);\n    } else {\n        console.log(`Guess ${guess}: Correct in ${attempts} attempt(s)!`);\n        break;\n    }\n}",
+      "hints": [
+        "💡 The starter code is the complete solution — run it and observe the output.",
+        "💡 attempts++ increments on every iteration, tracking how many guesses were made.",
+        "💡 break exits the loop after the correct guess is found so no further guesses are processed."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Correct in 3 attempt(s)!",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m4-l2-q1",
+          "question": "What is the key difference between while and do...while?",
+          "options": [
+            "while can loop infinitely; do...while cannot",
+            "while checks the condition before each iteration; do...while checks after, so the body runs at least once",
+            "do...while is faster than while",
+            "while only works with numbers; do...while works with any type"
+          ],
+          "correct": 1,
+          "explanation": "while checks the condition before the body runs — if the condition is false initially, the body never executes. do...while runs the body first and then checks the condition — so the body always runs at least once. Use do...while when you need at least one execution before checking whether to repeat."
+        },
+        {
+          "id": "js-m4-l2-q2",
+          "question": "What does the continue statement do inside a loop?",
+          "options": [
+            "Exits the entire loop",
+            "Restarts the loop from the beginning",
+            "Skips the rest of the current iteration and moves to the next one",
+            "Pauses the loop for one iteration"
+          ],
+          "correct": 2,
+          "explanation": "continue skips all remaining statements in the current iteration's body and jumps to the update step (in a for loop) or the condition check (in a while loop) for the next iteration. break, by contrast, exits the loop entirely. Neither restarts the loop from the first iteration."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m4-l3",
+    "moduleId": "js-m4",
+    "title": "Array Methods: forEach, map, filter",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Processing Arrays with forEach, map, and filter",
+      "content": "# Functional Array Methods\n\nJavaScript arrays have built-in methods that accept a **callback function** and apply it to every element. These methods replace many common loop patterns with one clean, expressive line.\n\n## forEach — run a function on every element\n\n`forEach` iterates over the array and calls the callback for each element. It does not return a new array:\n\n```javascript\nconst names = [\"Rahul\", \"Priya\", \"Amit\"];\nnames.forEach((name, index) => {\n    console.log(`${index + 1}. ${name}`);\n});\n```\n\nUse `forEach` when you want to **do something** with each element (print it, send it, save it) but do not need a new array.\n\n## map — transform every element into something new\n\n`map` creates a **new array** by applying a transformation to each element. The original is unchanged:\n\n```javascript\nconst prices    = [100, 200, 300];\nconst withGST   = prices.map(p => p * 1.18);\n// [118, 236, 354]  — original prices unchanged\n```\n\nThe callback receives the element and returns the transformed value.\n\n## filter — keep only elements that pass a test\n\n`filter` creates a **new array** containing only the elements for which the callback returns `true`:\n\n```javascript\nconst scores  = [85, 42, 92, 37, 78];\nconst passing = scores.filter(s => s >= 60);\n// [85, 92, 78]  — only scores >= 60\n```\n\n## Chaining Methods\n\nBecause `map` and `filter` both return new arrays, you can chain them:\n\n```javascript\nconst result = scores\n    .filter(s => s >= 60)     // keep passing scores\n    .map(s => s + \" ✓\");      // add a tick mark to each\n```\n\n## Arrow Functions — the compact callback syntax\n\n```javascript\n// These two are equivalent:\nprices.map(function(p) { return p * 1.18; });\nprices.map(p => p * 1.18);   // arrow function — shorter\n```\n\nArrow functions with a single expression can omit the braces and the `return` keyword — the expression value is returned automatically.\n\nIn the code example below, you will see `forEach`, `map`, and `filter` applied to a product catalogue."
+    },
+    "codeExample": {
+      "title": "Product Catalogue Processor",
+      "language": "javascript",
+      "code": "// Product Catalogue Processor\n\nconst products = [\n    { name: \"Laptop\",    price: 45000, inStock: true  },\n    { name: \"Earbuds\",   price:  2000, inStock: true  },\n    { name: \"Tablet\",    price: 25000, inStock: false },\n    { name: \"Keyboard\",  price:  3500, inStock: true  },\n    { name: \"Monitor\",   price: 18000, inStock: false },\n];\n\n// forEach — print all products\nconsole.log(\"=== All Products ===\");\nproducts.forEach((p, i) => {\n    const status = p.inStock ? \"✓\" : \"✗\";\n    console.log(`${i + 1}. ${p.name.padEnd(10)} ₹${p.price}  ${status}`);\n});\n\n// filter — only in-stock products\nconst available = products.filter(p => p.inStock);\nconsole.log(`\\nIn stock: ${available.length} of ${products.length}`);\n\n// map — apply 10% discount to all prices\nconst discounted = products.map(p => ({\n    ...p,\n    price: Math.round(p.price * 0.90),\n}));\nconsole.log(`\\n=== After 10% Discount ===`);\ndiscounted.forEach(p => console.log(`${p.name}: ₹${p.price}`));\n\n// chain: in-stock products under ₹10,000\nconst affordable = products\n    .filter(p => p.inStock && p.price < 10000)\n    .map(p => p.name);\nconsole.log(`\\nAffordable in-stock: ${affordable.join(\", \")}`);",
+      "explanation": "- `forEach((p, i) => { ... })` — the callback receives each product `p` and its index `i`\n- `filter(p => p.inStock)` — keeps only products where `inStock` is `true`\n- `map(p => ({ ...p, price: ... }))` — creates a new object for each product; `...p` copies all existing fields and `price:` overrides just the price\n- `Math.round(p.price * 0.90)` — applies a 10% discount and rounds to the nearest rupee\n- `.filter(...).map(p => p.name)` — method chaining; `filter` returns a new array that `map` immediately processes"
+    },
+    "exercise": {
+      "title": "Filter and Transform a Scores List",
+      "instructions": "Given the array scores = [55, 82, 90, 45, 73, 88, 38, 91], use array methods to: (1) use filter to create a passing array of scores >= 60, (2) use map on the passing array to add 5 bonus points to every score, (3) use forEach to print each boosted score. Print the count of passing students and each boosted score.\n\nExpected output:\nPassing: 5 students\n87 87 95 78 93 96",
+      "starterCode": "// Scores Filter and Transform\n\nconst scores = [55, 82, 90, 45, 73, 88, 38, 91];\n\n// Step 1 — filter: keep scores >= 60\nconst passing = scores.filter(s => s >= 60);\nconsole.log(`Passing: ${passing.length} students`);\n\n// Step 2 — map: add 5 bonus points to each passing score\nconst boosted = passing.map(s => s + 5);\n\n// Step 3 — forEach: print each boosted score\n// Your code here",
+      "solutionCode": "const scores = [55, 82, 90, 45, 73, 88, 38, 91];\n\nconst passing = scores.filter(s => s >= 60);\nconsole.log(`Passing: ${passing.length} students`);\n\nconst boosted = passing.map(s => s + 5);\n\nboosted.forEach(s => process.stdout.write(s + \" \"));\nconsole.log();",
+      "hints": [
+        "💡 Use boosted.forEach(s => console.log(s)); to print each boosted score on a new line.",
+        "💡 Alternatively, print all on one line: boosted.forEach(s => process.stdout.write(s + ' ')); then console.log();",
+        "💡 The filter and map steps are already complete — you only need to add the forEach for the print step."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Passing: 5 students",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m4-l3-q1",
+          "question": "What does the map() method return?",
+          "options": [
+            "The original array modified in place",
+            "undefined — it only iterates",
+            "A new array with each element transformed by the callback",
+            "A single accumulated value"
+          ],
+          "correct": 2,
+          "explanation": "map() always returns a new array of exactly the same length as the original, with each element replaced by the value returned from the callback. The original array is never modified. If you want to change the original, reassign the variable: arr = arr.map(...)."
+        },
+        {
+          "id": "js-m4-l3-q2",
+          "question": "What is the key difference between forEach and map?",
+          "options": [
+            "forEach is faster; map is for large arrays",
+            "forEach returns a new array; map returns undefined",
+            "forEach runs the callback for side effects and returns undefined; map collects return values into a new array",
+            "They are identical and interchangeable"
+          ],
+          "correct": 2,
+          "explanation": "forEach executes the callback for its side effects (logging, sending data) and always returns undefined — it never builds a new array. map executes the callback and collects each return value into a new array. Use forEach when you do not need the results; use map when you need a transformed array."
+        }
+      ]
+    }
+  }
+]

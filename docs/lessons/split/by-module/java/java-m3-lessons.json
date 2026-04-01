@@ -1,0 +1,211 @@
+[
+  {
+    "id": "java-m3-l1",
+    "moduleId": "java-m3",
+    "title": "if, else if, and else Statements",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Making Decisions in Java with if, else if, and else",
+      "content": "# Conditional Statements in Java\n\nEvery useful program makes decisions. Think of an ATM: it checks your PIN, then checks your balance before dispensing cash. An `if` statement lets your Java program do the same — run a block of code only when a specific condition is true.\n\n## The if Statement\n\n```java\nint temperature = 38;\nif (temperature > 37) {\n    System.out.println(\"You have a fever.\");\n}\n```\n\nTwo essential rules:\n1. The condition goes inside **parentheses** `()`\n2. The body goes inside **curly braces** `{}`\n\nUnlike Python, Java uses braces rather than indentation to define blocks.\n\n## Adding else\n\n```java\nif (temperature > 37) {\n    System.out.println(\"Fever detected.\");\n} else {\n    System.out.println(\"Temperature is normal.\");\n}\n```\n\nThe `else` block runs when the `if` condition is `false`. It has no condition of its own.\n\n## Multiple Conditions with else if\n\n```java\nint score = 75;\n\nif (score >= 90) {\n    System.out.println(\"Grade: A\");\n} else if (score >= 80) {\n    System.out.println(\"Grade: B\");\n} else if (score >= 70) {\n    System.out.println(\"Grade: C\");\n} else {\n    System.out.println(\"Grade: F\");\n}\n```\n\nJava evaluates conditions top to bottom and executes only the first block whose condition is `true`. All remaining branches are skipped.\n\n## The Ternary Operator\n\nFor simple two-outcome decisions, the ternary operator provides a one-line shortcut:\n\n```java\nString status = score >= 50 ? \"Pass\" : \"Fail\";\n```\n\nThis is equivalent to:\n```java\nString status;\nif (score >= 50) { status = \"Pass\"; }\nelse             { status = \"Fail\"; }\n```\n\n## Nested if Statements\n\nAn `if` block can contain another `if` block. Keep nesting depth to two levels maximum to maintain readability:\n\n```java\nif (hasAccount) {\n    if (balance >= amount) {\n        System.out.println(\"Transaction approved.\");\n    } else {\n        System.out.println(\"Insufficient funds.\");\n    }\n}\n```\n\nIn the code example below, you will see a complete grade classifier using all branching forms."
+    },
+    "codeExample": {
+      "title": "Student Grade Classifier",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        String studentName = \"Sneha Patel\";\n        int    score       = 83;\n\n        // Multi-branch grade assignment\n        String grade, feedback;\n\n        if (score >= 90) {\n            grade    = \"A\";\n            feedback = \"Outstanding performance!\";\n        } else if (score >= 80) {\n            grade    = \"B\";\n            feedback = \"Great work, keep it up!\";\n        } else if (score >= 70) {\n            grade    = \"C\";\n            feedback = \"Good effort, room to improve.\";\n        } else if (score >= 60) {\n            grade    = \"D\";\n            feedback = \"Needs more practice.\";\n        } else {\n            grade    = \"F\";\n            feedback = \"Please seek extra help.\";\n        }\n\n        System.out.println(\"Student  : \" + studentName);\n        System.out.println(\"Score    : \" + score + \"/100\");\n        System.out.println(\"Grade    : \" + grade);\n        System.out.println(\"Feedback : \" + feedback);\n\n        // Ternary operator\n        String result = score >= 50 ? \"PASS\" : \"FAIL\";\n        System.out.println(\"Result   : \" + result);\n    }\n}",
+      "explanation": "- `if (score >= 90)` — condition in parentheses; body in braces; both are required in Java\n- `else if (score >= 80)` — evaluated only when all previous conditions were `false`\n- `String grade, feedback;` — both variables declared before the if-chain; they must be assigned in every branch\n- `grade = \"B\"; feedback = \"Great work!\";` — assigning inside a branch; Java's compiler verifies every branch assigns both variables\n- `score >= 50 ? \"PASS\" : \"FAIL\"` — ternary; evaluates to `\"PASS\"` when condition is true, `\"FAIL\"` otherwise"
+    },
+    "exercise": {
+      "title": "Write a Cinema Ticket Price Calculator",
+      "instructions": "Write a Java program that determines cinema ticket price based on age. Use if/else if/else with these rules: under 5 = free (price 0), 5 to 12 = Rs 100, 13 to 17 = Rs 150, 18 to 59 = Rs 200, 60 and above = Rs 120. Declare int age = 25 and int ticketPrice. Assign ticketPrice in the branches. Print age and ticket price with labels.\n\nExpected output with age 25:\nAge: 25\nTicket Price: Rs 200",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        int age         = 25;\n        int ticketPrice = 0;\n\n        if (age < 5) {\n            ticketPrice = 0;\n        } else if (age <= 12) {\n            ticketPrice = 100;\n        }\n        // Add else if for 13-17 (150) and 18-59 (200) and else (120)\n\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Ticket Price: Rs \" + ticketPrice);\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        int age         = 25;\n        int ticketPrice = 0;\n\n        if (age < 5) {\n            ticketPrice = 0;\n        } else if (age <= 12) {\n            ticketPrice = 100;\n        } else if (age <= 17) {\n            ticketPrice = 150;\n        } else if (age <= 59) {\n            ticketPrice = 200;\n        } else {\n            ticketPrice = 120;\n        }\n\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Ticket Price: Rs \" + ticketPrice);\n    }\n}",
+      "hints": [
+        "💡 Add else if (age <= 17) { ticketPrice = 150; } after the age <= 12 branch.",
+        "💡 Add else if (age <= 59) { ticketPrice = 200; } for adults.",
+        "💡 The final else covers age 60 and above — no condition needed since all lower ages are already handled."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Ticket Price: Rs 200",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m3-l1-q1",
+          "question": "What is the correct Java syntax to start an if statement?",
+          "options": [
+            "if condition {",
+            "if (condition):",
+            "if (condition) {",
+            "IF (condition) {"
+          ],
+          "correct": 2,
+          "explanation": "Java's if statement syntax requires parentheses around the condition and curly braces around the body: if (condition) { ... }. Java is case-sensitive — IF is invalid. Unlike Python, there is no colon. The parentheses are not optional as they are in some other languages."
+        },
+        {
+          "id": "java-m3-l1-q2",
+          "question": "What does the expression score >= 90 ? \"A\" : \"B\" evaluate to when score is 85?",
+          "options": [
+            "\"A\"",
+            "\"B\"",
+            "true",
+            "A compile error"
+          ],
+          "correct": 1,
+          "explanation": "The ternary operator evaluates the condition (score >= 90). Since 85 < 90, the condition is false, so the expression evaluates to the value after the colon — \"B\". The ternary operator is shorthand for a two-branch if/else and produces a value that can be assigned to a variable."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m3-l2",
+    "moduleId": "java-m3",
+    "title": "Comparison and Logical Operators",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Comparing Values and Combining Conditions in Java",
+      "content": "# Comparison Operators\n\nA condition inside an `if` statement must evaluate to a `boolean` — either `true` or `false`. Comparison operators produce this boolean result by comparing two values:\n\n| Operator | Meaning | Example | Result |\n|---|---|---|---|\n| `==` | Equal to | `5 == 5` | `true` |\n| `!=` | Not equal to | `5 != 3` | `true` |\n| `>` | Greater than | `7 > 3` | `true` |\n| `<` | Less than | `3 < 7` | `true` |\n| `>=` | Greater or equal | `5 >= 5` | `true` |\n| `<=` | Less or equal | `4 <= 3` | `false` |\n\n**Critical rule:** Use `==` only for primitives. For `String` comparison, always use `.equals()`:\n\n```java\n\"hello\" == \"hello\"         // unreliable — compares references\n\"hello\".equals(\"hello\")    // always correct — compares content\n```\n\n## Logical Operators\n\nCombine multiple boolean conditions:\n\n| Operator | Meaning | Short-circuits? |\n|---|---|---|\n| `&&` | AND — both must be true | Yes — skips right if left is false |\n| `||` | OR — at least one must be true | Yes — skips right if left is true |\n| `!` | NOT — flips true/false | N/A |\n\n```java\nint age    = 25;\nboolean hasId = true;\n\nif (age >= 18 && hasId) {\n    System.out.println(\"Access granted.\");\n}\n\nif (!hasId || age < 18) {\n    System.out.println(\"Access denied.\");\n}\n```\n\n## Short-Circuit Evaluation\n\nWith `&&`, if the left operand is `false`, Java never evaluates the right operand. With `||`, if the left is `true`, the right is skipped. This is called **short-circuit evaluation** and prevents errors:\n\n```java\n// Safe: if s is null, s.length() is never called\nif (s != null && s.length() > 0) {\n    System.out.println(\"Non-empty string.\");\n}\n```\n\n## Operator Precedence\n\nIn an expression with multiple operators:\n1. `!` (NOT) — highest\n2. `>`, `<`, `>=`, `<=` — comparisons\n3. `==`, `!=` — equality checks\n4. `&&` (AND)\n5. `||` (OR) — lowest\n\nUse parentheses to make complex conditions clear:\n```java\nif ((a > b && b > c) || isSpecialCase) { ... }\n```\n\nIn the code example below, you will see logical operators used to build a complete bank loan eligibility checker."
+    },
+    "codeExample": {
+      "title": "Loan Eligibility Checker",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        int     age           = 30;\n        double  monthlyIncome = 45000.0;\n        boolean hasLoan       = false;\n        String  creditRating  = \"Good\";\n\n        // All conditions must be true\n        boolean ageOk    = age >= 21 && age <= 60;\n        boolean incomeOk = monthlyIncome >= 25000.0;\n        boolean loanOk   = !hasLoan;  // no existing loan\n        boolean creditOk = creditRating.equals(\"Good\")\n                        || creditRating.equals(\"Excellent\");\n\n        System.out.println(\"Age check    : \" + ageOk);\n        System.out.println(\"Income check : \" + incomeOk);\n        System.out.println(\"No loan      : \" + loanOk);\n        System.out.println(\"Credit check : \" + creditOk);\n\n        if (ageOk && incomeOk && loanOk && creditOk) {\n            System.out.println(\"Result: ELIGIBLE for loan\");\n        } else {\n            System.out.println(\"Result: NOT eligible\");\n        }\n\n        // Short-circuit example: name is checked before length\n        String name = null;\n        if (name != null && name.length() > 0) {\n            System.out.println(\"Name: \" + name);\n        } else {\n            System.out.println(\"No name provided.\");\n        }\n    }\n}",
+      "explanation": "- `age >= 21 && age <= 60` — both comparisons must be true; short-circuits on first false\n- `!hasLoan` — `!` flips `false` to `true`; eligible only when no existing loan exists\n- `creditRating.equals(\"Good\") || creditRating.equals(\"Excellent\")` — `.equals()` compares String content; `||` needs only one true\n- `ageOk && incomeOk && loanOk && creditOk` — all four must be true for loan approval\n- `name != null && name.length() > 0` — short-circuit safety; if `name` is `null`, `.length()` is never called, preventing a NullPointerException"
+    },
+    "exercise": {
+      "title": "Build a Platform Access Validator",
+      "instructions": "Write a Java program that validates access to an online platform. Declare: int age = 16, boolean hasParentConsent = true, String membershipType = \"free\". Using logical operators, determine: isAgeValid (age >= 13), canAccess (isAgeValid && (age >= 18 || hasParentConsent)), isPremium (membershipType.equals(\"premium\")). Print each boolean result and a final access message.\n\nExpected: isAgeValid=true, canAccess=true, isPremium=false, access granted.",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        int     age              = 16;\n        boolean hasParentConsent = true;\n        String  membershipType   = \"free\";\n\n        // Compute boolean results\n        boolean isAgeValid = age >= 13;\n        boolean canAccess  = isAgeValid && (age >= 18 || hasParentConsent);\n        boolean isPremium  = membershipType.equals(\"premium\");\n\n        System.out.println(\"isAgeValid : \" + isAgeValid);\n        System.out.println(\"canAccess  : \" + canAccess);\n        System.out.println(\"isPremium  : \" + isPremium);\n\n        // Print access message based on canAccess\n        // Your code here\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        int     age              = 16;\n        boolean hasParentConsent = true;\n        String  membershipType   = \"free\";\n\n        boolean isAgeValid = age >= 13;\n        boolean canAccess  = isAgeValid && (age >= 18 || hasParentConsent);\n        boolean isPremium  = membershipType.equals(\"premium\");\n\n        System.out.println(\"isAgeValid : \" + isAgeValid);\n        System.out.println(\"canAccess  : \" + canAccess);\n        System.out.println(\"isPremium  : \" + isPremium);\n\n        if (canAccess) {\n            System.out.println(\"Access granted.\");\n        } else {\n            System.out.println(\"Access denied.\");\n        }\n    }\n}",
+      "hints": [
+        "💡 Add an if/else block at the end: if (canAccess) { System.out.println(\"Access granted.\"); } else { ... }",
+        "💡 canAccess is already computed — just use it as the condition in your if statement.",
+        "💡 All the boolean logic is already done; you only need to print a message based on the canAccess result."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "canAccess  : true",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Access granted.",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m3-l2-q1",
+          "question": "What is short-circuit evaluation in Java's && operator?",
+          "options": [
+            "Java evaluates both operands before checking the result",
+            "If the left operand is false, Java skips evaluating the right operand",
+            "The && operator only works with boolean primitives",
+            "Java evaluates the right operand first to improve performance"
+          ],
+          "correct": 1,
+          "explanation": "With &&, if the left operand evaluates to false, the entire expression is already false regardless of the right operand. Java skips evaluating the right side entirely. This is useful for safety checks like obj != null && obj.method() — if obj is null, the method call is never made and no NullPointerException occurs."
+        },
+        {
+          "id": "java-m3-l2-q2",
+          "question": "Why should you not use == to compare two String objects in Java?",
+          "options": [
+            "== does not compile for reference types",
+            "== compares memory references, not character content, and may return false for equal strings",
+            "== is slower than .equals() for strings",
+            "== only works when both strings are literals"
+          ],
+          "correct": 1,
+          "explanation": "For objects like String, == compares whether both variables point to the exact same object in memory. Two String objects containing identical characters can exist at different memory locations, causing == to return false even though their content is the same. .equals() always compares the actual character sequences, reliably returning true for equal content."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m3-l3",
+    "moduleId": "java-m3",
+    "title": "The switch Statement",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Branching on Exact Values with Java's switch Statement",
+      "content": "# The switch Statement\n\nWhen you need to compare one variable against many specific values, a long `if/else if` chain becomes hard to read. The `switch` statement provides a cleaner alternative for matching a single expression against a fixed list of values.\n\n## Classic switch Syntax\n\n```java\nswitch (expression) {\n    case value1:\n        // code\n        break;\n    case value2:\n        // code\n        break;\n    default:\n        // code for no match\n}\n```\n\nThe `expression` is evaluated once. Java jumps to the matching `case` label and executes code until it hits a `break`. Without `break`, execution **falls through** to the next case.\n\n## Supported Types\n\nThe `switch` expression can be: `int`, `byte`, `short`, `char`, `String`, or an enum. It cannot be `long`, `double`, or `boolean`.\n\n## Fall-Through — Intentional and Accidental\n\n```java\nint day = 3;\nswitch (day) {\n    case 1:\n    case 2:\n    case 3:\n    case 4:\n    case 5:\n        System.out.println(\"Weekday\");  // all 5 cases share this\n        break;\n    case 6:\n    case 7:\n        System.out.println(\"Weekend\");\n        break;\n    default:\n        System.out.println(\"Invalid day\");\n}\n```\n\nGrouping cases this way is intentional fall-through — useful when multiple values should produce the same result.\n\n## Switch Expressions (Java 14+)\n\nJava 14 introduced enhanced switch expressions with arrow syntax — cleaner and safer:\n\n```java\nString dayName = switch (day) {\n    case 1 -> \"Monday\";\n    case 2 -> \"Tuesday\";\n    case 6, 7 -> \"Weekend\";    // multiple values per arrow case\n    default  -> \"Unknown\";\n};\n```\n\nArrow cases do not fall through and do not require `break`. They produce a value that can be assigned directly.\n\n## switch vs if/else if\n\nUse `switch` when:\n- Comparing one variable against specific literal values\n- You have 4 or more branches\n- All conditions test the same variable\n\nUse `if/else if` when:\n- Conditions involve ranges (`score >= 90`)\n- Different variables are tested in different branches\n\nIn the code example below, you will see both classic and enhanced switch handling a course plan selection."
+    },
+    "codeExample": {
+      "title": "Course Plan Feature Selector",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        String plan = \"pro\";\n\n        // Classic switch with fall-through grouping\n        System.out.println(\"=== Classic switch ===\");\n        switch (plan) {\n            case \"bundle\":\n                System.out.println(\"All 4 languages\");\n                System.out.println(\"Offline mode\");\n                // falls through to pro features\n            case \"pro\":\n                System.out.println(\"AI mentor hints\");\n                System.out.println(\"Progress tracker\");\n                break;\n            case \"starter\":\n                System.out.println(\"1 language\");\n                break;\n            default:\n                System.out.println(\"Python only (free)\");\n        }\n\n        // Switch expression (Java 14+)\n        System.out.println(\"\\n=== Switch expression ===\");\n        int courseCount = switch (plan) {\n            case \"bundle\" -> 4;\n            case \"pro\"    -> 2;\n            case \"starter\"-> 1;\n            default       -> 0;\n        };\n        System.out.println(\"Courses in plan: \" + courseCount);\n\n        // Switch on char\n        char grade = 'B';\n        String feedback = switch (grade) {\n            case 'A' -> \"Outstanding!\";\n            case 'B' -> \"Well done!\";\n            case 'C' -> \"Keep practising.\";\n            default  -> \"Seek guidance.\";\n        };\n        System.out.println(\"Feedback: \" + feedback);\n    }\n}",
+      "explanation": "- `switch (plan)` — evaluates `plan` once; jumps to the matching `case` label\n- `case \"bundle\":` without `break` — intentional fall-through; bundle plan first prints extra features, then falls into `pro`\n- `break` — required to exit the switch; without it execution continues into the next case\n- `int courseCount = switch (plan) { case \"bundle\" -> 4; ... }` — switch expression assigns a value; no `break` needed\n- `case 'A' -> \"Outstanding!\"` — arrow syntax; no fall-through, no `break`, produces a value directly\n- `default` — handles any value not matched by an explicit case; always include it"
+    },
+    "exercise": {
+      "title": "Build a Month Name Converter",
+      "instructions": "Write a Java program that converts a month number to its name using a switch expression (Java 14+ style). Declare int month = 8. Use a switch expression that maps 1 to 'January', 2 to 'February', ... 8 to 'August', and groups 9-12 by using separate arrow cases. For default return 'Invalid month'. Print 'Month 8 is: August'.\n\nExpected output: Month 8 is: August",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        int month = 8;\n\n        // Use switch expression with arrow syntax\n        String monthName = switch (month) {\n            case 1  -> \"January\";\n            case 2  -> \"February\";\n            case 3  -> \"March\";\n            case 4  -> \"April\";\n            case 5  -> \"May\";\n            case 6  -> \"June\";\n            case 7  -> \"July\";\n            // Add case 8 for August\n            // Add cases 9-12 and default\n            default -> \"Invalid month\";\n        };\n\n        System.out.println(\"Month \" + month + \" is: \" + monthName);\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        int month = 8;\n\n        String monthName = switch (month) {\n            case 1  -> \"January\";\n            case 2  -> \"February\";\n            case 3  -> \"March\";\n            case 4  -> \"April\";\n            case 5  -> \"May\";\n            case 6  -> \"June\";\n            case 7  -> \"July\";\n            case 8  -> \"August\";\n            case 9  -> \"September\";\n            case 10 -> \"October\";\n            case 11 -> \"November\";\n            case 12 -> \"December\";\n            default -> \"Invalid month\";\n        };\n\n        System.out.println(\"Month \" + month + \" is: \" + monthName);\n    }\n}",
+      "hints": [
+        "💡 Add case 8 -> \"August\"; after the July case using the same arrow syntax pattern.",
+        "💡 Add cases 9 through 12 with their month names, each on its own case line.",
+        "💡 The default is already written — it handles any number outside 1-12."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Month 8 is: August",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m3-l3-q1",
+          "question": "What happens in a classic switch statement if you forget to add break at the end of a case?",
+          "options": [
+            "The program throws a runtime exception",
+            "Only the matching case runs — break is optional",
+            "Execution falls through and runs the next case's code too",
+            "The compiler generates an error"
+          ],
+          "correct": 2,
+          "explanation": "Without break, execution falls through from the matched case into the next case, running its code too — and continues falling through until either a break or the end of the switch is reached. This is sometimes intentional (grouping cases), but is usually a bug. Arrow-style switch expressions (Java 14+) never fall through."
+        },
+        {
+          "id": "java-m3-l3-q2",
+          "question": "Which of the following types CANNOT be used as a switch expression in Java?",
+          "options": [
+            "String",
+            "int",
+            "double",
+            "char"
+          ],
+          "correct": 2,
+          "explanation": "Java's switch statement supports int, byte, short, char, String, and enums as the switch expression. double and float are not supported because floating-point equality comparisons are unreliable due to precision issues. long is also not directly supported in switch."
+        },
+        {
+          "id": "java-m3-l3-q3",
+          "question": "What advantage does the switch expression arrow syntax (case x -> value) have over classic switch?",
+          "options": [
+            "It runs faster than classic switch",
+            "It eliminates fall-through and does not require break statements",
+            "It supports more data types than classic switch",
+            "It can replace all if/else statements"
+          ],
+          "correct": 1,
+          "explanation": "Arrow-case switch expressions (Java 14+) do not fall through between cases, so break statements are not needed. Each arrow case is isolated. They also produce a value that can be assigned to a variable or returned from a method, making them more expressive than classic switch statements."
+        }
+      ]
+    }
+  }
+]

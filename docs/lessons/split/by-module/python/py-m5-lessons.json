@@ -1,0 +1,228 @@
+[
+  {
+    "id": "py-m5-l1",
+    "moduleId": "py-m5",
+    "title": "Defining and Calling Functions",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Creating Reusable Blocks of Code with Functions",
+      "content": "# Functions\n\nImagine a chef who makes the same omelette recipe every morning. Instead of re-reading the full recipe each time, they memorise the steps under the name \"make omelette\" and repeat them on demand. A **function** works the same way in Python — you write a block of code once, give it a name, and call that name whenever you need those steps.\n\n## Defining a Function\n\n```python\ndef greet():\n    print(\"Hello, World!\")\n    print(\"Welcome to Python.\")\n```\n\nA function definition starts with `def`, followed by the function name, parentheses, and a colon. The body is indented by four spaces. The function does not run yet — you have only described the recipe.\n\n## Calling a Function\n\nTo execute the function, write its name followed by parentheses:\n\n```python\ngreet()    # calls the function — runs both print() statements\ngreet()    # calls it again — same code, re-executed\n```\n\nThis is the central benefit of functions: **write once, call many times**.\n\n## Functions with Parameters\n\nA **parameter** is a placeholder variable that receives a value when the function is called. The value you pass is called an **argument**:\n\n```python\ndef greet(name):          # 'name' is the parameter\n    print(f\"Hello, {name}!\")\n\ngreet(\"Rahul\")            # \"Rahul\" is the argument\ngreet(\"Priya\")            # each call can use a different value\n```\n\n## Multiple Parameters\n\n```python\ndef introduce(name, city, age):\n    print(f\"{name}, {age}, from {city}\")\n\nintroduce(\"Amit\", \"Delhi\", 22)\n```\n\n## Returning a Value\n\nA `return` statement sends a value back to the caller:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(10, 5)    # result = 15\nprint(result)\n```\n\nIf there is no `return` statement, the function returns `None`. A `return` without a value also returns `None`.\n\nIn the code example below, you will see several functions that perform a calculation, return a result, and print a formatted report."
+    },
+    "codeExample": {
+      "title": "Area and Perimeter Calculator",
+      "language": "python",
+      "code": "# Area and Perimeter Calculator — functions with parameters and return\n\ndef rectangle_area(width, height):\n    \"\"\"Return the area of a rectangle.\"\"\"\n    return width * height\n\ndef rectangle_perimeter(width, height):\n    \"\"\"Return the perimeter of a rectangle.\"\"\"\n    return 2 * (width + height)\n\ndef circle_area(radius):\n    \"\"\"Return the area of a circle (pi approximated as 3.14159).\"\"\"\n    pi = 3.14159\n    return pi * radius ** 2\n\ndef print_shape_report(shape_name, area, perimeter=None):\n    \"\"\"Print a formatted report for a shape.\"\"\"\n    print(f\"\\n--- {shape_name} ---\")\n    print(f\"Area     : {area:.2f}\")\n    if perimeter is not None:\n        print(f\"Perimeter: {perimeter:.2f}\")\n\n# Use the functions\nw, h = 8, 5\narea = rectangle_area(w, h)\nperim = rectangle_perimeter(w, h)\nprint_shape_report(\"Rectangle 8x5\", area, perim)\n\nr = 7\nc_area = circle_area(r)\nprint_shape_report(f\"Circle r={r}\", c_area)",
+      "explanation": "- `def rectangle_area(width, height):` — defines a function with two parameters; the names `width` and `height` are local to this function\n- `\"\"\"Return the area...\"\"\"` — a **docstring**; a string on the first line of a function body that documents what the function does\n- `return width * height` — sends the computed value back to the caller; the function ends immediately at `return`\n- `perimeter=None` — a **default parameter**; if no perimeter is passed, it defaults to `None`\n- `if perimeter is not None:` — checks whether an optional value was actually provided before using it"
+    },
+    "exercise": {
+      "title": "Build a Temperature Converter with Functions",
+      "instructions": "Write two functions: celsius_to_fahrenheit(c) that returns the result of (c * 9/5) + 32, and fahrenheit_to_celsius(f) that returns (f - 32) * 5/9. Then call each function with test values and print the results rounded to 1 decimal place.\n\nTest calls: celsius_to_fahrenheit(100) should return 212.0, fahrenheit_to_celsius(98.6) should return 37.0.\n\nExpected output:\n100C = 212.0F\n98.6F = 37.0C",
+      "starterCode": "# Temperature Converter Functions\n\ndef celsius_to_fahrenheit(c):\n    # Return (c * 9/5) + 32\n    # Your code here\n    pass\n\ndef fahrenheit_to_celsius(f):\n    # Return (f - 32) * 5/9\n    # Your code here\n    pass\n\n# Test the functions\nf_result = celsius_to_fahrenheit(100)\nc_result  = fahrenheit_to_celsius(98.6)\n\nprint(f\"100C = {f_result:.1f}F\")\nprint(f\"98.6F = {c_result:.1f}C\")",
+      "solutionCode": "def celsius_to_fahrenheit(c):\n    return (c * 9 / 5) + 32\n\ndef fahrenheit_to_celsius(f):\n    return (f - 32) * 5 / 9\n\nf_result = celsius_to_fahrenheit(100)\nc_result  = fahrenheit_to_celsius(98.6)\n\nprint(f\"100C = {f_result:.1f}F\")\nprint(f\"98.6F = {c_result:.1f}C\")",
+      "hints": [
+        "💡 Replace pass with a return statement: return (c * 9 / 5) + 32 for the Celsius to Fahrenheit function.",
+        "💡 For Fahrenheit to Celsius, return (f - 32) * 5 / 9 — mind the parentheses, subtraction before multiplication.",
+        "💡 Use {result:.1f} in the f-string to display the returned value rounded to one decimal place."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "100C = 212.0F",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "98.6F = 37.0C",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m5-l1-q1",
+          "question": "What is the difference between a parameter and an argument in Python?",
+          "options": [
+            "They are two different names for the same thing",
+            "A parameter is in the function definition; an argument is the value passed when calling the function",
+            "A parameter is the returned value; an argument is the function name",
+            "Parameters are only for built-in functions; arguments are for user-defined functions"
+          ],
+          "correct": 1,
+          "explanation": "A parameter is the variable name in the function definition — it is a placeholder. An argument is the actual value you supply when you call the function. In def add(a, b), a and b are parameters. In add(10, 5), 10 and 5 are arguments. The argument's value is bound to the parameter for the duration of the function call."
+        },
+        {
+          "id": "py-m5-l1-q2",
+          "question": "What does a function return if it has no return statement?",
+          "options": [
+            "0",
+            "An empty string",
+            "None",
+            "A SyntaxError is raised"
+          ],
+          "correct": 2,
+          "explanation": "If a function body completes without hitting a return statement, or if it hits return with no value, Python automatically returns None. None is Python's way of representing 'no value'. This is why printing the result of a void-like function shows None."
+        },
+        {
+          "id": "py-m5-l1-q3",
+          "question": "When does the code inside a function definition actually execute?",
+          "options": [
+            "When Python reads the def line",
+            "Never — def only stores the code for later",
+            "Only when the function is called with its name followed by parentheses",
+            "When the Python file is saved"
+          ],
+          "correct": 2,
+          "explanation": "Defining a function with def only stores the code — it does not run it. The code executes only when the function is called: greet(). Every time you call the function, the body runs from the top. A function that is defined but never called simply has no effect on the program's output."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m5-l2",
+    "moduleId": "py-m5",
+    "title": "Default Arguments and Multiple Return Values",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Default Arguments, Keyword Arguments, and Returning Multiple Values",
+      "content": "# Default Parameters\n\nA **default parameter** gives a function a fallback value when the caller does not supply that argument:\n\n```python\ndef greet(name, language=\"English\"):\n    if language == \"Hindi\":\n        print(f\"Namaste, {name}!\")\n    else:\n        print(f\"Hello, {name}!\")\n\ngreet(\"Rahul\")              # uses default: Hello, Rahul!\ngreet(\"Priya\", \"Hindi\")    # overrides default: Namaste, Priya!\n```\n\nDefault parameters must come **after** all required parameters in the function definition.\n\n## Keyword Arguments\n\nWhen calling a function, you can name the arguments explicitly. This lets you pass them in any order:\n\n```python\ndef register(name, age, city):\n    print(f\"{name}, {age}, {city}\")\n\nregister(age=22, city=\"Chennai\", name=\"Kavya\")  # order does not matter\n```\n\n## *args — Variable Positional Arguments\n\nWhen you do not know how many arguments a caller will pass, use `*args`. It collects all extra positional arguments into a **tuple**:\n\n```python\ndef total(*numbers):\n    return sum(numbers)\n\nprint(total(1, 2, 3))           # 6\nprint(total(10, 20, 30, 40))    # 100\n```\n\n## Returning Multiple Values\n\nA function can return more than one value by separating them with commas. Python packages them into a **tuple** automatically:\n\n```python\ndef min_max(numbers):\n    return min(numbers), max(numbers)\n\nlowest, highest = min_max([4, 9, 2, 7, 1])\nprint(lowest, highest)    # 1 9\n```\n\nThis is called **tuple unpacking** — you assign each returned value to a separate variable on the left side.\n\n## Docstrings\n\nEvery function should have a **docstring** — a string literal on the first line of the body that documents what the function does, its parameters, and its return value:\n\n```python\ndef circle_area(radius):\n    \"\"\"Calculate and return the area of a circle.\n\n    Args:\n        radius: The radius of the circle in centimetres.\n    Returns:\n        The area as a float.\n    \"\"\"\n    return 3.14159 * radius ** 2\n```\n\nIn the code example below, you will see default arguments, `*args`, and multiple return values combined in a statistics calculator."
+    },
+    "codeExample": {
+      "title": "Statistics Calculator",
+      "language": "python",
+      "code": "# Statistics Calculator — default args, *args, multiple return values\n\ndef summarise(*numbers, label=\"Data\"):\n    \"\"\"Return count, total, minimum, and maximum of any number of values.\"\"\"\n    if not numbers:\n        return 0, 0, None, None\n    count   = len(numbers)\n    total   = sum(numbers)\n    minimum = min(numbers)\n    maximum = max(numbers)\n    return count, total, minimum, maximum\n\ndef print_summary(label, count, total, minimum, maximum):\n    \"\"\"Print a formatted statistics summary.\"\"\"\n    average = total / count if count > 0 else 0\n    print(f\"\\n=== {label} ===\")\n    print(f\"Count  : {count}\")\n    print(f\"Total  : {total}\")\n    print(f\"Average: {average:.2f}\")\n    print(f\"Min    : {minimum}\")\n    print(f\"Max    : {maximum}\")\n\n# Unpack multiple return values\ncount, total, lo, hi = summarise(78, 92, 85, 67, 95, 88, label=\"Exam Scores\")\nprint_summary(\"Exam Scores\", count, total, lo, hi)\n\n# Call with different numbers of arguments\ncount2, total2, lo2, hi2 = summarise(15, 30, 45)\nprint_summary(\"Quick Test\", count2, total2, lo2, hi2)",
+      "explanation": "- `def summarise(*numbers, label=\"Data\"):` — `*numbers` collects any positional arguments into a tuple; `label` is a keyword-only default\n- `if not numbers:` — evaluates to `True` when the tuple is empty (an empty tuple is falsy)\n- `return count, total, minimum, maximum` — Python packs these four values into a tuple automatically\n- `count, total, lo, hi = summarise(...)` — **tuple unpacking** assigns each returned value to a separate variable\n- `average = total / count if count > 0 else 0` — a ternary expression guarding against division by zero"
+    },
+    "exercise": {
+      "title": "Build a Flexible Discount Calculator",
+      "instructions": "Write a function apply_discount(price, discount_pct=10) where discount_pct defaults to 10. The function must return two values: the discount amount and the final price after discount. Call it twice: once with just a price (using the default 10% discount), and once with a price and a custom 25% discount. Print both returned values for each call.\n\nTest: apply_discount(2000) should give discount=200.0, final=1800.0.\nTest: apply_discount(2000, 25) should give discount=500.0, final=1500.0.",
+      "starterCode": "# Flexible Discount Calculator\n\ndef apply_discount(price, discount_pct=10):\n    \"\"\"Return (discount_amount, final_price) after applying the discount.\"\"\"\n    # Calculate discount amount (price * discount_pct / 100)\n    # Your code here\n\n    # Calculate final price (price minus discount)\n    # Your code here\n\n    # Return both values\n    # Your code here\n\n# Test with default discount (10%)\ndiscount, final = apply_discount(2000)\nprint(f\"Default 10%: discount={discount}, final={final}\")\n\n# Test with custom discount (25%)\ndiscount2, final2 = apply_discount(2000, 25)\nprint(f\"Custom 25%: discount={discount2}, final={final2}\")",
+      "solutionCode": "def apply_discount(price, discount_pct=10):\n    discount_amount = price * discount_pct / 100\n    final_price     = price - discount_amount\n    return discount_amount, final_price\n\ndiscount, final = apply_discount(2000)\nprint(f\"Default 10%: discount={discount}, final={final}\")\n\ndiscount2, final2 = apply_discount(2000, 25)\nprint(f\"Custom 25%: discount={discount2}, final={final2}\")",
+      "hints": [
+        "💡 Calculate discount_amount as price * discount_pct / 100 inside the function body.",
+        "💡 Calculate final_price as price - discount_amount.",
+        "💡 Return both values on one line: return discount_amount, final_price — Python creates a tuple automatically."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "discount=200.0, final=1800.0",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m5-l2-q1",
+          "question": "What does *args collect in a Python function definition?",
+          "options": [
+            "All keyword arguments into a dictionary",
+            "All extra positional arguments into a tuple",
+            "All arguments into a list",
+            "Only the first extra argument passed"
+          ],
+          "correct": 1,
+          "explanation": "*args in a function definition collects any number of extra positional arguments into a tuple. For example, def total(*numbers) lets callers pass total(1), total(1,2,3), or total(1,2,3,4,5) and all the numbers are available inside numbers as a tuple."
+        },
+        {
+          "id": "py-m5-l2-q2",
+          "question": "When a function returns two values separated by a comma, what does Python create?",
+          "options": [
+            "A list containing both values",
+            "Two separate return values that must each be assigned separately",
+            "A tuple containing both values",
+            "A dictionary mapping position to value"
+          ],
+          "correct": 2,
+          "explanation": "When a return statement contains comma-separated values, Python automatically packs them into a tuple. The caller can unpack the tuple by assigning multiple variables: a, b = my_function(). If you assign the result to a single variable, that variable holds the full tuple."
+        },
+        {
+          "id": "py-m5-l2-q3",
+          "question": "Where must default parameters appear relative to required parameters?",
+          "options": [
+            "Before all required parameters",
+            "After all required parameters",
+            "They can appear in any position",
+            "They must be placed at the start and end only"
+          ],
+          "correct": 1,
+          "explanation": "Default parameters must always come after all required (non-default) parameters. Writing def f(x=1, y) is a SyntaxError because Python cannot determine which argument corresponds to which parameter when optional parameters precede required ones. The rule: required first, optional last."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m5-l3",
+    "moduleId": "py-m5",
+    "title": "Scope: Local and Global Variables",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Understanding Variable Scope in Python Functions",
+      "content": "# Variable Scope\n\nImagine your living room and your neighbour's living room. You can see and rearrange everything in your own room, but not in your neighbour's. **Scope** works the same way in Python — it defines which parts of your program can see and use a particular variable.\n\n## Local Scope\n\nA variable created **inside** a function is **local** — it exists only for the duration of that function call and is invisible everywhere else:\n\n```python\ndef calculate():\n    result = 100     # local variable\n    print(result)    # works fine inside the function\n\ncalculate()\nprint(result)        # NameError: result is not defined here\n```\n\n## Global Scope\n\nA variable created **outside** all functions is **global** — it is visible to all code in the file, including inside functions (for reading):\n\n```python\ntax_rate = 0.18       # global variable\n\ndef calculate_gst(price):\n    return price * tax_rate    # can READ the global tax_rate\n```\n\n## Reading vs Modifying Global Variables\n\nFunctions can read global variables freely. But to **modify** a global variable from inside a function, you must declare it with `global`:\n\n```python\ncounter = 0\n\ndef increment():\n    global counter     # declare intent to modify the global\n    counter += 1\n\nincrement()\nincrement()\nprint(counter)         # 2\n```\n\nWithout the `global` keyword, `counter += 1` would create a new local variable named `counter` and leave the global untouched.\n\n## Why Limiting Global Variables Is Good Practice\n\nRelying on global variables makes programs hard to test and debug — any function could change a global at any time, making bugs difficult to trace. Prefer passing values as arguments and returning results instead.\n\n## The LEGB Rule\n\nWhen Python looks up a variable name, it searches scopes in this order:\n\n1. **L**ocal — inside the current function\n2. **E**nclosing — in any outer (enclosing) function\n3. **G**lobal — at the module (file) level\n4. **B**uilt-in — Python's built-in names like `print`, `len`, `range`\n\nIn the code example below, you will see local variables, a global constant, and the `global` keyword used to maintain a session counter."
+    },
+    "codeExample": {
+      "title": "Session Counter with Scope",
+      "language": "python",
+      "code": "# Session Counter — local scope, global scope, and global keyword\n\n# Global constant — readable anywhere (convention: UPPER_CASE for constants)\nMAX_SESSIONS = 5\nsession_count = 0     # global variable we will modify\n\ndef start_session(user_name):\n    \"\"\"Start a new session for a user.\"\"\"\n    global session_count          # declare intent to modify the global\n    if session_count >= MAX_SESSIONS:\n        print(\"Maximum sessions reached.\")\n        return False\n    session_count += 1            # modifies the global\n    session_id = session_count    # local variable — unique to this call\n    print(f\"Session {session_id} started for {user_name}.\")\n    return session_id             # return the local value before it disappears\n\ndef session_report():\n    \"\"\"Print a report using the global counter.\"\"\"\n    remaining = MAX_SESSIONS - session_count    # reads both globals\n    print(f\"\\nSessions used  : {session_count}\")\n    print(f\"Sessions left  : {remaining}\")\n\n# Open several sessions\nstart_session(\"Rahul\")\nstart_session(\"Priya\")\nstart_session(\"Amit\")\nsession_report()",
+      "explanation": "- `MAX_SESSIONS = 5` — a global constant; UPPER_CASE signals it should not be changed during the program\n- `global session_count` — required before `session_count += 1`; without it Python creates a new local variable\n- `session_id = session_count` — a local variable that exists only inside this function call\n- `return session_id` — sends the local value to the caller before the local scope is destroyed\n- `remaining = MAX_SESSIONS - session_count` — reads two globals; no `global` needed because it only reads, not modifies"
+    },
+    "exercise": {
+      "title": "Build a Score Tracker with Global State",
+      "instructions": "Create a quiz score tracker using a global variable. Define a global variable total_score = 0. Write a function add_score(points) that uses the global keyword to add points to total_score. Write a function get_grade() that reads total_score (no global keyword needed) and returns 'A' if >= 90, 'B' if >= 70, 'C' if >= 50, else 'F'. Call add_score three times (30, 45, 20), then print total_score and the grade.\n\nExpected output:\nTotal Score: 95\nGrade: A",
+      "starterCode": "# Quiz Score Tracker\n\ntotal_score = 0    # global variable\n\ndef add_score(points):\n    \"\"\"Add points to the global total_score.\"\"\"\n    global total_score\n    # Your code here: add points to total_score\n\ndef get_grade():\n    \"\"\"Read total_score and return a letter grade.\"\"\"\n    # Your code here: return 'A', 'B', 'C', or 'F' based on total_score\n    pass\n\n# Add three scores\nadd_score(30)\nadd_score(45)\nadd_score(20)\n\nprint(\"Total Score:\", total_score)\nprint(\"Grade:\",       get_grade())",
+      "solutionCode": "total_score = 0\n\ndef add_score(points):\n    global total_score\n    total_score += points\n\ndef get_grade():\n    if   total_score >= 90: return \"A\"\n    elif total_score >= 70: return \"B\"\n    elif total_score >= 50: return \"C\"\n    else:                   return \"F\"\n\nadd_score(30)\nadd_score(45)\nadd_score(20)\n\nprint(\"Total Score:\", total_score)\nprint(\"Grade:\",       get_grade())",
+      "hints": [
+        "💡 Inside add_score, write total_score += points to add to the global — but the global keyword must appear first.",
+        "💡 get_grade() only reads total_score, so no global keyword is needed — Python finds it in the global scope automatically.",
+        "💡 Use if/elif/else in get_grade() to check total_score against 90, 70, 50 in that order and return the letter."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Total Score: 95",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Grade: A",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m5-l3-q1",
+          "question": "What happens to a local variable after the function it belongs to finishes?",
+          "options": [
+            "It becomes a global variable",
+            "Its value is saved for the next call to the same function",
+            "It is destroyed and can no longer be accessed",
+            "It is moved to the built-in scope"
+          ],
+          "correct": 2,
+          "explanation": "Local variables are created when a function is called and destroyed when the function returns. Each call creates a completely fresh set of local variables. If you need a value to persist between calls, you must either return it and store it outside the function, or use a global variable."
+        },
+        {
+          "id": "py-m5-l3-q2",
+          "question": "Why is the global keyword required to modify a global variable inside a function?",
+          "options": [
+            "It is not required — Python automatically detects global variables",
+            "Without it, Python creates a new local variable with the same name instead of modifying the global",
+            "It makes the operation faster",
+            "It is only required for string variables, not integers"
+          ],
+          "correct": 1,
+          "explanation": "Without the global keyword, any assignment inside a function creates a new local variable. So counter += 1 without global counter would try to read a local counter that does not exist yet, raising an UnboundLocalError. The global keyword tells Python 'do not create a local; use the existing global variable instead'."
+        }
+      ]
+    }
+  }
+]

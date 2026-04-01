@@ -1,0 +1,211 @@
+[
+  {
+    "id": "js-m6-l1",
+    "moduleId": "js-m6",
+    "title": "Arrays: Core Methods and Patterns",
+    "order": 1,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Mastering JavaScript Arrays and Their Core Methods",
+      "content": "# Arrays in JavaScript\n\nAn **array** is an ordered list of values. It is the most frequently used data structure in JavaScript. Arrays are **zero-indexed** — the first element is at position 0.\n\n```javascript\nconst fruits  = [\"apple\", \"banana\", \"mango\"];\nconst scores  = [85, 92, 78, 95];\nconst mixed   = [42, \"hello\", true];  // different types allowed\nconst empty   = [];\n```\n\n## Accessing and Modifying Elements\n\n```javascript\nfruits[0]          // \"apple\"\nfruits[fruits.length - 1]  // \"mango\" — last element\nfruits[1] = \"grape\";       // replace at index 1\n```\n\n## Mutating Methods — change the original array\n\n| Method | Effect |\n|---|---|\n| `.push(item)` | Add to the end |\n| `.pop()` | Remove and return the last item |\n| `.unshift(item)` | Add to the beginning |\n| `.shift()` | Remove and return the first item |\n| `.splice(i, n)` | Remove `n` items starting at index `i` |\n| `.sort()` | Sort in place (default: alphabetical) |\n| `.reverse()` | Reverse in place |\n\n## Non-Mutating Methods — return a new array or value\n\n| Method | Returns |\n|---|---|\n| `.slice(s, e)` | New array from index `s` to `e` (exclusive) |\n| `.concat(arr)` | New array joining two arrays |\n| `.indexOf(v)` | First index of value `v`, or `-1` |\n| `.includes(v)` | `true` if value `v` is in the array |\n| `.join(sep)` | String joining all elements with separator |\n| `.find(fn)` | First element where `fn` returns `true` |\n| `.findIndex(fn)` | Index of first match, or `-1` |\n| `.some(fn)` | `true` if any element passes `fn` |\n| `.every(fn)` | `true` if all elements pass `fn` |\n| `.reduce(fn, init)` | Single accumulated value |\n\n## Spread and Destructuring\n\n```javascript\nconst a = [1, 2, 3];\nconst b = [4, 5, 6];\nconst combined = [...a, ...b];       // [1,2,3,4,5,6]\n\nconst [first, second, ...rest] = combined;  // destructuring\n// first=1, second=2, rest=[3,4,5,6]\n```\n\nIn the code example below, you will see `reduce`, `find`, `some`, `every`, and destructuring applied to a product inventory."
+    },
+    "codeExample": {
+      "title": "Product Inventory Analysis",
+      "language": "javascript",
+      "code": "// Product Inventory Analysis\n\nconst inventory = [120, 45, 0, 230, 88, 0, 310];\n\n// reduce — total stock\nconst totalStock = inventory.reduce((sum, qty) => sum + qty, 0);\nconsole.log(\"Total stock:\", totalStock);\n\n// some — any out-of-stock items?\nconst hasOutOfStock = inventory.some(qty => qty === 0);\nconsole.log(\"Has out-of-stock:\", hasOutOfStock);\n\n// every — all items stocked?\nconst allStocked = inventory.every(qty => qty > 0);\nconsole.log(\"All stocked:\", allStocked);\n\n// filter + reduce — total of only stocked items\nconst stockedTotal = inventory\n    .filter(qty => qty > 0)\n    .reduce((sum, qty) => sum + qty, 0);\nconsole.log(\"Stocked total:\", stockedTotal);\n\n// Spread to copy and sort without mutating original\nconst sorted = [...inventory].sort((a, b) => b - a);\nconsole.log(\"Sorted desc:\", sorted);\nconsole.log(\"Original unchanged:\", inventory);\n\n// Destructuring\nconst [highest, second] = sorted;\nconsole.log(`Top two: ${highest}, ${second}`);",
+      "explanation": "- `reduce((sum, qty) => sum + qty, 0)` — accumulates a running total starting from `0`\n- `some(qty => qty === 0)` — returns `true` if any element is zero; stops at the first match\n- `every(qty => qty > 0)` — returns `true` only if every element is positive\n- `[...inventory].sort(...)` — the spread creates a copy so `sort()` does not mutate the original array\n- `.sort((a, b) => b - a)` — custom comparator; returns negative when `b < a`, sorting in descending order\n- `const [highest, second] = sorted` — array destructuring assigns the first two elements to named variables"
+    },
+    "exercise": {
+      "title": "Analyse a Sales Figures Array",
+      "instructions": "Given the array sales = [12000, 8500, 21000, 4500, 17000, 9000, 25000], compute: (1) total using reduce, (2) average as total divided by array length, (3) the highest sale using Math.max with spread, (4) count of sales above 10000 using filter. Print all four results on separate labelled lines.\n\nExpected output:\nTotal: 97000\nAverage: 13857.142857142857\nHighest: 25000\nAbove 10k: 4",
+      "starterCode": "// Sales Analysis\n\nconst sales = [12000, 8500, 21000, 4500, 17000, 9000, 25000];\n\nconst total   = sales.reduce((sum, s) => sum + s, 0);\nconst average = total / sales.length;\nconst highest = Math.max(...sales);\nconst above10k = sales.filter(s => s > 10000).length;\n\nconsole.log(\"Total:\",   total);\nconsole.log(\"Average:\", average);\nconsole.log(\"Highest:\", highest);\nconsole.log(\"Above 10k:\", above10k);",
+      "solutionCode": "const sales = [12000, 8500, 21000, 4500, 17000, 9000, 25000];\n\nconst total    = sales.reduce((sum, s) => sum + s, 0);\nconst average  = total / sales.length;\nconst highest  = Math.max(...sales);\nconst above10k = sales.filter(s => s > 10000).length;\n\nconsole.log(\"Total:\",    total);\nconsole.log(\"Average:\",  average);\nconsole.log(\"Highest:\",  highest);\nconsole.log(\"Above 10k:\", above10k);",
+      "hints": [
+        "💡 The starter code is already the complete solution — run it to see the output.",
+        "💡 Math.max(...sales) uses the spread operator to pass all array elements as individual arguments.",
+        "💡 .filter(s => s > 10000).length counts elements by filtering and checking the length of the result."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Total: 97000",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Above 10k: 4",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m6-l1-q1",
+          "question": "What is the second argument of Array.reduce() used for?",
+          "options": [
+            "The maximum number of iterations",
+            "The initial value of the accumulator",
+            "The index to start from",
+            "A callback to run when reduce finishes"
+          ],
+          "correct": 1,
+          "explanation": "The second argument to reduce() is the initial value of the accumulator — the value that the first parameter starts with before the first iteration. For summing numbers, use 0. For building an array, use []. For counting, use 0. If omitted, reduce() uses the first array element as the initial value."
+        },
+        {
+          "id": "js-m6-l1-q2",
+          "question": "What does [...arr].sort() do that arr.sort() does not?",
+          "options": [
+            "It sorts faster because it uses spread",
+            "It creates a sorted copy, leaving the original array unchanged",
+            "It sorts in descending order by default",
+            "They are identical — both mutate the original"
+          ],
+          "correct": 1,
+          "explanation": "Array.sort() mutates the original array in place. Using the spread operator [...arr] creates a shallow copy first, so the sort() call modifies the copy and the original array remains unchanged. This is the standard pattern when you need a sorted version without destroying the original order."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m6-l2",
+    "moduleId": "js-m6",
+    "title": "Objects: Properties and Methods",
+    "order": 2,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Organising Data with JavaScript Objects",
+      "content": "# JavaScript Objects\n\nAn **object** groups related data and behaviour into one named container. Think of a student's record card: it has a name field, an age field, and a GPA field — all belonging to the same person. An object in JavaScript is exactly this: a set of **key-value pairs**.\n\n```javascript\nconst student = {\n    name:      \"Priya Sharma\",\n    age:       21,\n    gpa:       3.8,\n    isActive:  true,\n};\n```\n\n## Accessing Properties\n\n```javascript\nstudent.name         // \"Priya Sharma\" — dot notation\nstudent[\"name\"]      // \"Priya Sharma\" — bracket notation\n\nconst key = \"age\";\nstudent[key]         // 21 — dynamic key using bracket notation\n```\n\n## Adding, Updating, and Deleting\n\n```javascript\nstudent.email   = \"priya@example.com\";  // add\nstudent.gpa     = 3.9;                  // update\ndelete student.isActive;                // remove\n```\n\n## Methods — functions as properties\n\nAn object's value can be a function. Such a property is called a **method**:\n\n```javascript\nconst account = {\n    balance: 5000,\n    deposit(amount) {\n        this.balance += amount;\n    },\n    getBalance() {\n        return this.balance;\n    },\n};\n\naccount.deposit(1000);\nconsole.log(account.getBalance()); // 6000\n```\n\n`this` inside a method refers to the object the method belongs to.\n\n## Object Destructuring\n\n```javascript\nconst { name, age, city = \"Unknown\" } = student;\n// Extracts name, age, and city (defaulting to \"Unknown\")\n```\n\n## Iterating Over an Object\n\n```javascript\nfor (const key in student) {\n    console.log(`${key}: ${student[key]}`);\n}\n\nObject.keys(student)     // array of keys\nObject.values(student)   // array of values\nObject.entries(student)  // array of [key, value] pairs\n```\n\nIn the code example below, you will see an object with methods, destructuring, and `Object.entries()` used in a bank account simulation."
+    },
+    "codeExample": {
+      "title": "Bank Account Object",
+      "language": "javascript",
+      "code": "// Bank Account Object — properties and methods\n\nconst account = {\n    owner:        \"Rahul Sharma\",\n    balance:      10000,\n    transactions: [],\n\n    deposit(amount) {\n        if (amount <= 0) return \"Invalid amount.\";\n        this.balance += amount;\n        this.transactions.push({ type: \"deposit\", amount });\n        return `Deposited ₹${amount}. New balance: ₹${this.balance}`;\n    },\n\n    withdraw(amount) {\n        if (amount <= 0)          return \"Invalid amount.\";\n        if (amount > this.balance) return \"Insufficient funds.\";\n        this.balance -= amount;\n        this.transactions.push({ type: \"withdraw\", amount });\n        return `Withdrew ₹${amount}. New balance: ₹${this.balance}`;\n    },\n\n    statement() {\n        console.log(`\\n--- Statement: ${this.owner} ---`);\n        this.transactions.forEach((t, i) => {\n            console.log(`  ${i + 1}. ${t.type}: ₹${t.amount}`);\n        });\n        console.log(`  Balance: ₹${this.balance}`);\n    },\n};\n\nconsole.log(account.deposit(5000));\nconsole.log(account.withdraw(2000));\nconsole.log(account.withdraw(20000));  // fails\naccount.statement();\n\n// Destructure properties\nconst { owner, balance } = account;\nconsole.log(`\\n${owner}'s balance: ₹${balance}`);",
+      "explanation": "- `deposit(amount)` — method shorthand; equivalent to `deposit: function(amount) {}`\n- `this.balance += amount` — `this` refers to `account`; without `this`, JavaScript would look for a local `balance` variable\n- `this.transactions.push(...)` — `push` adds to the array stored as a property of the same object\n- `this.transactions.forEach(...)` — iterates over the transactions array using a callback\n- `const { owner, balance } = account` — destructuring extracts two properties into separate variables"
+    },
+    "exercise": {
+      "title": "Build a Student Record Object",
+      "instructions": "Create an object called student with properties: name (string), marks (an array of three numbers), and two methods: getAverage() that returns the average of the marks array, and getGrade() that returns 'A' if average >= 90, 'B' if >= 75, 'C' if >= 60, else 'F'. Add a property city after creation. Print name, city, average, and grade.\n\nTest: marks = [88, 92, 85]. Expected average 88.33..., grade B.",
+      "starterCode": "// Student Record Object\n\nconst student = {\n    name:  \"Kavitha\",\n    marks: [88, 92, 85],\n\n    getAverage() {\n        const total = this.marks.reduce((s, m) => s + m, 0);\n        return total / this.marks.length;\n    },\n\n    getGrade() {\n        const avg = this.getAverage();\n        if      (avg >= 90) return \"A\";\n        else if (avg >= 75) return \"B\";\n        else if (avg >= 60) return \"C\";\n        else                return \"F\";\n    },\n};\n\n// Add city property after creation\nstudent.city = \"Chennai\";\n\nconsole.log(\"Name:\",    student.name);\nconsole.log(\"City:\",    student.city);\nconsole.log(\"Average:\", student.getAverage().toFixed(2));\nconsole.log(\"Grade:\",   student.getGrade());",
+      "solutionCode": "const student = {\n    name:  \"Kavitha\",\n    marks: [88, 92, 85],\n    getAverage() {\n        return this.marks.reduce((s, m) => s + m, 0) / this.marks.length;\n    },\n    getGrade() {\n        const avg = this.getAverage();\n        if      (avg >= 90) return \"A\";\n        else if (avg >= 75) return \"B\";\n        else if (avg >= 60) return \"C\";\n        else                return \"F\";\n    },\n};\n\nstudent.city = \"Chennai\";\n\nconsole.log(\"Name:\",    student.name);\nconsole.log(\"City:\",    student.city);\nconsole.log(\"Average:\", student.getAverage().toFixed(2));\nconsole.log(\"Grade:\",   student.getGrade());",
+      "hints": [
+        "💡 The starter code is complete — run it to observe the output.",
+        "💡 this.marks.reduce((s, m) => s + m, 0) sums the marks array; divide by this.marks.length for the average.",
+        "💡 getGrade() calls this.getAverage() — one method can call another method on the same object using this."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Grade: B",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m6-l2-q1",
+          "question": "What does the this keyword refer to inside an object method?",
+          "options": [
+            "The global window object",
+            "The function itself",
+            "The object the method belongs to",
+            "The parent scope of the function"
+          ],
+          "correct": 2,
+          "explanation": "Inside a regular method (defined with the function keyword or method shorthand), this refers to the object the method was called on. So this.balance inside account.deposit() refers to account.balance. Arrow functions do not have their own this, so avoid arrow functions for object methods that need to access other properties."
+        },
+        {
+          "id": "js-m6-l2-q2",
+          "question": "What does Object.entries(obj) return?",
+          "options": [
+            "An array of all property values",
+            "An array of all property keys",
+            "An array of [key, value] pairs for each property",
+            "A new object with swapped keys and values"
+          ],
+          "correct": 2,
+          "explanation": "Object.entries(obj) returns an array of [key, value] pairs, one for each own enumerable property. For example, Object.entries({a: 1, b: 2}) returns [[\"a\", 1], [\"b\", 2]]. It is commonly used with for...of or forEach to iterate over an object's properties alongside their values."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m6-l3",
+    "moduleId": "js-m6",
+    "title": "Mini Project: Student Report System",
+    "order": 3,
+    "xpReward": 25,
+    "duration": "20 min",
+    "explanation": {
+      "title": "Putting It All Together: A Student Report System in JavaScript",
+      "content": "# The Mini Project\n\nYou have now studied the six building blocks of JavaScript:\n\n1. **Variables and types** — `let`, `const`, strings, numbers, booleans\n2. **Operators and conditions** — arithmetic, comparison, `if/else`, `switch`\n3. **Loops** — `for`, `for...of`, `while`, `forEach`, `map`, `filter`\n4. **Functions** — declarations, arrow functions, default parameters, closures\n5. **Arrays** — methods like `reduce`, `find`, `sort`, spread, destructuring\n6. **Objects** — properties, methods, `this`, `Object.entries()`\n\nA real application combines all of these. In this lesson, you will build a **Student Report System** — a program that stores student records as an array of objects, computes statistics using array methods, and prints a formatted report using functions.\n\n## Design Before Coding\n\nA good programmer thinks about structure before writing code.\n\n**Data model** — each student is an object:\n```javascript\n{ name: \"Rahul\", maths: 88, science: 75, english: 82 }\n```\n\n**Functions needed:**\n- `getAverage(student)` — compute average of three subject marks\n- `getGrade(average)` — return letter grade\n- `printRow(student, rank)` — print one formatted table row\n- `printSummary(students)` — print class statistics\n\n**Array methods used:**\n- `map()` to add computed fields to each student\n- `sort()` to rank students by average\n- `reduce()` to compute class total\n\n## Why This Matters\n\nEvery professional JavaScript application uses this exact pattern: arrays of objects (from a database or API), processed through functions and array methods, rendered into a UI or report. When you add React or Node.js, you will recognise this foundation immediately.\n\nIn the code example below, you will see the complete Student Report System using every concept from this course."
+    },
+    "codeExample": {
+      "title": "Complete Student Report System",
+      "language": "javascript",
+      "code": "// =============================================\n// Student Report System — Mini Project\n// Uses: objects, arrays, functions, arrow fns,\n//       map, filter, sort, reduce, template literals\n// =============================================\n\nconst students = [\n    { name: \"Rahul\",  maths: 88, science: 75, english: 82 },\n    { name: \"Priya\",  maths: 95, science: 91, english: 89 },\n    { name: \"Amit\",   maths: 62, science: 55, english: 70 },\n    { name: \"Sneha\",  maths: 78, science: 83, english: 91 },\n    { name: \"Vikram\", maths: 45, science: 50, english: 48 },\n];\n\nconst getAverage = s => (s.maths + s.science + s.english) / 3;\n\nconst getGrade = avg =>\n    avg >= 90 ? \"A\" : avg >= 75 ? \"B\" : avg >= 60 ? \"C\" : \"F\";\n\n// Enrich: add average and grade to each student object\nconst enriched = students\n    .map(s => ({ ...s, average: getAverage(s) }))\n    .map(s => ({ ...s, grade: getGrade(s.average) }))\n    .sort((a, b) => b.average - a.average);\n\n// Print ranked table\nconsole.log(\"=\" .repeat(52));\nconsole.log(\" STUDENT REPORT SYSTEM\");\nconsole.log(\"=\" .repeat(52));\nconsole.log(`  ${'Rank'} ${'Name'.padEnd(8)} ${'M'.padStart(4)} ${'S'.padStart(4)} ${'E'.padStart(4)} ${'Avg'.padStart(7)} ${'G'}`);\nconsole.log(\"-\".repeat(52));\n\nenriched.forEach((s, i) => {\n    const avg = s.average.toFixed(1);\n    console.log(`  ${i + 1}.   ${s.name.padEnd(8)} ${s.maths.toString().padStart(4)} ${s.science.toString().padStart(4)} ${s.english.toString().padStart(4)} ${avg.padStart(7)}  ${s.grade}`);\n});\n\n// Summary\nconst classTotal = enriched.reduce((sum, s) => sum + s.average, 0);\nconst classAvg   = (classTotal / enriched.length).toFixed(1);\nconst passCount  = enriched.filter(s => s.average >= 40).length;\nconsole.log(\"=\".repeat(52));\nconsole.log(`  Class Average : ${classAvg}`);\nconsole.log(`  Passed        : ${passCount}/${enriched.length}`);\nconsole.log(`  Top Student   : ${enriched[0].name}`);",
+      "explanation": "- `getAverage` and `getGrade` — arrow functions; pure and reusable, each doing one job\n- `.map(s => ({ ...s, average: getAverage(s) }))` — spreads existing properties and adds a computed `average` field\n- `.sort((a, b) => b.average - a.average)` — sorts descending; `b - a` returns negative when `b < a`\n- `.padEnd(8)` and `.padStart(4)` — pad strings and numbers for aligned column output\n- `enriched.reduce((sum, s) => sum + s.average, 0)` — sums averages for the class total"
+    },
+    "exercise": {
+      "title": "Add a Remark Column to the Report",
+      "instructions": "Extend the Student Report System. Write an arrow function getRemark that accepts a grade string and returns: 'Excellent!' for A, 'Well done!' for B, 'Keep going!' for C, and 'Seek help.' for F. Then use map on the enriched array to add a remark property to each student. Finally, forEach over the result and print one line per student: name, grade, and remark.\n\nExpected output includes a line like: Priya A Excellent!",
+      "starterCode": "// Extend the Student Report System\n\nconst students = [\n    { name: \"Rahul\",  maths: 88, science: 75, english: 82 },\n    { name: \"Priya\",  maths: 95, science: 91, english: 89 },\n    { name: \"Amit\",   maths: 62, science: 55, english: 70 },\n    { name: \"Sneha\",  maths: 78, science: 83, english: 91 },\n    { name: \"Vikram\", maths: 45, science: 50, english: 48 },\n];\n\nconst getAverage = s => (s.maths + s.science + s.english) / 3;\nconst getGrade   = avg => avg >= 90 ? \"A\" : avg >= 75 ? \"B\" : avg >= 60 ? \"C\" : \"F\";\n\n// Write getRemark arrow function here\n\nconst withRemarks = students\n    .map(s => ({ ...s, average: getAverage(s) }))\n    .map(s => ({ ...s, grade: getGrade(s.average) }))\n    .map(s => ({ ...s, remark: getRemark(s.grade) }));\n\n// forEach to print name, grade, remark\nwithRemarks.forEach(s => console.log(`${s.name} ${s.grade} ${s.remark}`));",
+      "solutionCode": "const students = [\n    { name: \"Rahul\",  maths: 88, science: 75, english: 82 },\n    { name: \"Priya\",  maths: 95, science: 91, english: 89 },\n    { name: \"Amit\",   maths: 62, science: 55, english: 70 },\n    { name: \"Sneha\",  maths: 78, science: 83, english: 91 },\n    { name: \"Vikram\", maths: 45, science: 50, english: 48 },\n];\n\nconst getAverage = s => (s.maths + s.science + s.english) / 3;\nconst getGrade   = avg => avg >= 90 ? \"A\" : avg >= 75 ? \"B\" : avg >= 60 ? \"C\" : \"F\";\nconst getRemark  = grade =>\n    grade === \"A\" ? \"Excellent!\" :\n    grade === \"B\" ? \"Well done!\" :\n    grade === \"C\" ? \"Keep going!\" : \"Seek help.\";\n\nconst withRemarks = students\n    .map(s => ({ ...s, average: getAverage(s) }))\n    .map(s => ({ ...s, grade: getGrade(s.average) }))\n    .map(s => ({ ...s, remark: getRemark(s.grade) }));\n\nwithRemarks.forEach(s => console.log(`${s.name} ${s.grade} ${s.remark}`));",
+      "hints": [
+        "💡 Write getRemark as an arrow function using chained ternaries: grade === 'A' ? 'Excellent!' : grade === 'B' ? ... : 'Seek help.'",
+        "💡 The third .map adds remark using getRemark(s.grade) — the function is already called in the starter code.",
+        "💡 The forEach print line is already written — once getRemark is defined, the program runs correctly."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Priya A Excellent!",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m6-l3-q1",
+          "question": "Why is an array of objects a natural data structure for a list of student records?",
+          "options": [
+            "Arrays are the only structure JavaScript supports",
+            "Each object groups a student's named fields together; the array gives ordered access to all students",
+            "Objects are faster than arrays for all operations",
+            "JavaScript requires objects for any data that includes strings"
+          ],
+          "correct": 1,
+          "explanation": "An object groups related named fields (name, marks, grade) so you access them by meaningful key rather than by a hard-to-remember index. An array of these objects then lets you iterate, sort, filter, and map across all students with JavaScript's powerful array methods — the combination is the standard pattern for tabular data."
+        },
+        {
+          "id": "js-m6-l3-q2",
+          "question": "What does { ...s, grade: getGrade(s.average) } do inside a map callback?",
+          "options": [
+            "Modifies the original s object by adding grade",
+            "Creates a new object with all of s's properties plus a computed grade property",
+            "Removes all properties from s except grade",
+            "Throws an error because you cannot spread inside map"
+          ],
+          "correct": 1,
+          "explanation": "The spread operator ...s copies all of the original object's properties into the new object literal. Adding grade: getGrade(s.average) then appends the computed grade. The result is a brand new object — the original s is not modified. This is the standard immutable update pattern in functional JavaScript."
+        },
+        {
+          "id": "js-m6-l3-q3",
+          "question": "Which combination of array methods processes data without modifying the original array?",
+          "options": [
+            "sort() and reverse() — both are safe",
+            "push() and splice() — they create copies",
+            "map(), filter(), and reduce() — they return new arrays or values",
+            "forEach() — it always returns a new array"
+          ],
+          "correct": 2,
+          "explanation": "map(), filter(), and reduce() are non-mutating — they return new arrays or a single value without modifying the original. sort() and reverse() are mutating — they change the original array in place. forEach() iterates for side effects and returns undefined. Use [...arr].sort() to sort without mutation."
+        }
+      ]
+    }
+  }
+]

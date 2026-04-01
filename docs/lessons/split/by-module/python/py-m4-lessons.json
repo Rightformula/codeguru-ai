@@ -1,0 +1,223 @@
+[
+  {
+    "id": "py-m4-l1",
+    "moduleId": "py-m4",
+    "title": "for Loops and range()",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Repeating Actions with for Loops and range()",
+      "content": "# for Loops\n\nImagine a teacher who must hand a report card to each student in a class of 30. Instead of writing 30 identical `print()` calls, the teacher walks down the row and repeats the same action for each student. A `for` loop does exactly this — it repeats a block of code once for each item in a sequence.\n\n## Basic for Loop Syntax\n\n```python\nfruits = [\"apple\", \"banana\", \"mango\"]\nfor fruit in fruits:\n    print(fruit)\n```\n\nRead this as: \"for each fruit in the fruits list, print that fruit.\" The variable `fruit` is the **loop variable** — it takes the value of each item in turn.\n\n## The range() Function\n\n`range()` generates a sequence of integers without creating a list in memory. It is the standard way to repeat something a fixed number of times:\n\n| Call | Sequence produced |\n|---|---|\n| `range(5)` | `0, 1, 2, 3, 4` |\n| `range(1, 6)` | `1, 2, 3, 4, 5` |\n| `range(0, 10, 2)` | `0, 2, 4, 6, 8` |\n| `range(10, 0, -1)` | `10, 9, 8, 7, 6, 5, 4, 3, 2, 1` |\n\n`range(start, stop, step)` — the `stop` value is **never included**.\n\n```python\nfor i in range(1, 6):     # i takes values 1, 2, 3, 4, 5\n    print(i)\n```\n\n## Iterating with enumerate()\n\nWhen you need both the index and the value, use `enumerate()`:\n\n```python\nstudents = [\"Rahul\", \"Priya\", \"Amit\"]\nfor index, name in enumerate(students, start=1):\n    print(f\"{index}. {name}\")\n```\n\nOutput:\n```\n1. Rahul\n2. Priya\n3. Amit\n```\n\n## Accumulating Results Inside a Loop\n\nA common pattern is to initialise a variable before the loop and update it inside:\n\n```python\ntotal = 0\nfor i in range(1, 101):    # sum numbers 1 to 100\n    total += i\nprint(total)               # 5050\n```\n\nIn the code example below, you will see a loop that builds a multiplication table and another that computes a running total from a list of scores."
+    },
+    "codeExample": {
+      "title": "Score Summary and Times Table",
+      "language": "python",
+      "code": "# Score Summary — accumulate total and find max\nscores = [78, 92, 85, 67, 95, 88]\ntotal  = 0\nhighest = scores[0]   # start with the first score as the highest\n\nfor score in scores:\n    total += score                  # add each score to running total\n    if score > highest:\n        highest = score             # update highest if we find a bigger one\n\naverage = total / len(scores)\nprint(f\"Scores  : {scores}\")\nprint(f\"Total   : {total}\")\nprint(f\"Average : {average:.1f}\")\nprint(f\"Highest : {highest}\")\n\n# Times table using range()\nprint(\"\\n--- 7 Times Table ---\")\nfor i in range(1, 11):              # i goes from 1 to 10 inclusive\n    print(f\"7 x {i:2d} = {7 * i:3d}\")  # :2d pads i to 2 digits, :3d pads result",
+      "explanation": "- `for score in scores:` — each iteration assigns the next list element to `score`\n- `total += score` — the augmented assignment adds `score` to `total` on every pass through the loop\n- `if score > highest:` — a condition inside a loop body runs on every iteration\n- `range(1, 11)` — produces integers 1 through 10; the stop value 11 is never included\n- `{i:2d}` — the `:2d` format code right-aligns the integer in a field of width 2, keeping columns aligned"
+    },
+    "exercise": {
+      "title": "Print a Number Triangle Pattern",
+      "instructions": "Write a program using nested for loops to print the following right-angle triangle pattern of numbers. The outer loop controls the row number (1 to 5), and the inner loop prints the numbers from 1 up to the current row number. Use print() with end=\" \" in the inner loop so numbers stay on one line, then print() with no arguments to move to the next row.\n\nExpected output:\n1\n1 2\n1 2 3\n1 2 3 4\n1 2 3 4 5",
+      "starterCode": "# Number Triangle Pattern\n\nfor row in range(1, 6):            # row goes from 1 to 5\n    for col in range(1, row + 1):  # col goes from 1 to current row\n        print(col, end=\" \")        # stay on the same line\n    print()                        # move to the next line after each row",
+      "solutionCode": "for row in range(1, 6):\n    for col in range(1, row + 1):\n        print(col, end=\" \")\n    print()",
+      "hints": [
+        "💡 The outer loop range(1, 6) gives row values 1, 2, 3, 4, 5 — one value for each row of the triangle.",
+        "💡 The inner loop range(1, row + 1) goes from 1 up to and including the current row number.",
+        "💡 Use end=\" \" in the inner print() to stay on one line, then a plain print() after the inner loop to add the newline."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "1 2 3 4 5",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m4-l1-q1",
+          "question": "What sequence does range(2, 8, 2) produce?",
+          "options": [
+            "2, 4, 6, 8",
+            "2, 4, 6",
+            "1, 3, 5, 7",
+            "0, 2, 4, 6, 8"
+          ],
+          "correct": 1,
+          "explanation": "range(start, stop, step) starts at 2, increments by 2 each time, and stops before reaching 8. So the sequence is 2, 4, 6 — the value 8 is never included because range's stop is exclusive. If you need to include 8, use range(2, 9, 2)."
+        },
+        {
+          "id": "py-m4-l1-q2",
+          "question": "What does enumerate(items, start=1) provide on each iteration?",
+          "options": [
+            "Only the index, starting from 1",
+            "Only the item value",
+            "Both the index starting from 1 and the item value as a pair",
+            "The length of the items collection"
+          ],
+          "correct": 2,
+          "explanation": "enumerate() wraps an iterable and yields pairs of (index, value) on each iteration. The start parameter sets the beginning index value. With start=1, the first pair is (1, first_item), then (2, second_item), and so on. You unpack the pair in the for statement: for index, value in enumerate(items, start=1)."
+        },
+        {
+          "id": "py-m4-l1-q3",
+          "question": "What is the value of total after: total = 0; for i in range(1, 5): total += i?",
+          "options": [
+            "15",
+            "5",
+            "10",
+            "4"
+          ],
+          "correct": 2,
+          "explanation": "range(1, 5) produces 1, 2, 3, 4 — the stop value 5 is excluded. total starts at 0 and accumulates: 0+1=1, 1+2=3, 3+3=6, 6+4=10. The final value is 10. If you wanted to include 5 in the sum, you would use range(1, 6)."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m4-l2",
+    "moduleId": "py-m4",
+    "title": "while Loops",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Repeating Until a Condition Changes with while Loops",
+      "content": "# while Loops\n\nA `for` loop is ideal when you know in advance how many times to repeat. But sometimes you do not know the count — you just want to keep going until something changes. Think of waiting for a bus: you do not know exactly how many minutes you will wait, but you stop waiting when the bus arrives. A `while` loop expresses this perfectly.\n\n## Basic while Syntax\n\n```python\nwhile condition:\n    # body — runs as long as condition is True\n```\n\nThe condition is checked **before** each iteration. If it is `False` at the start, the body never runs at all.\n\n```python\ncountdown = 5\nwhile countdown > 0:\n    print(countdown)\n    countdown -= 1      # CRITICAL: must change the condition eventually\nprint(\"Liftoff!\")\n```\n\n## The Infinite Loop Danger\n\nIf the condition never becomes `False`, the loop runs forever. This is called an **infinite loop**:\n\n```python\n# DANGEROUS — condition never changes\nwhile True:\n    print(\"This runs forever\")\n```\n\nAlways ensure the loop body contains something that will eventually make the condition `False`.\n\n## while True with break\n\nA controlled infinite loop is sometimes intentional — run forever until an explicit `break` statement exits:\n\n```python\nattempts = 0\nwhile True:\n    answer = input(\"Enter the password: \")\n    attempts += 1\n    if answer == \"secret\":\n        print(\"Correct!\")\n        break             # exits the loop\n    if attempts >= 3:\n        print(\"Too many attempts.\")\n        break\n```\n\n## The do-while Pattern in Python\n\nPython has no `do-while` statement, but you can simulate one — run the body once, then check the condition:\n\n```python\nwhile True:\n    number = int(input(\"Enter a positive number: \"))\n    if number > 0:\n        break\nprint(f\"You entered: {number}\")\n```\n\nIn the code example below, you will see a `while` loop that simulates a bank ATM session continuing until the user decides to exit or the balance reaches zero."
+    },
+    "codeExample": {
+      "title": "ATM Session Simulator",
+      "language": "python",
+      "code": "# ATM Session Simulator — while loop keeps session open\n\nbalance     = 3000\nmax_tries   = 3\ntry_count   = 0\n\n# Simulate a sequence of withdrawal requests\nwithdrawals = [500, 1000, 2000, 100]   # predefined requests (no input())\nrequest_idx = 0\n\nprint(f\"Opening session. Balance: {balance}\")\n\nwhile balance > 0 and request_idx < len(withdrawals):\n    amount = withdrawals[request_idx]\n    request_idx += 1\n\n    print(f\"\\nRequested: {amount}\")\n\n    if amount <= 0:\n        print(\"Invalid amount.\")\n    elif amount > balance:\n        print(\"Insufficient funds — transaction declined.\")\n    else:\n        balance -= amount\n        print(f\"Dispensed: {amount}\")\n        print(f\"Remaining: {balance}\")\n\n    if balance == 0:\n        print(\"Balance reached zero. Session ending.\")\n        break\n\nprint(f\"\\nSession closed. Final balance: {balance}\")",
+      "explanation": "- `while balance > 0 and request_idx < len(withdrawals):` — two conditions joined with `and`; either becoming `False` stops the loop\n- `request_idx += 1` — advances through the pre-defined list; always changes each iteration to prevent an infinite loop\n- `elif amount > balance:` — a condition inside the `while` body; runs on every iteration\n- `break` — immediately exits the `while` loop regardless of whether the condition is still `True`\n- `print(f\"Session closed. Final balance: {balance}\")` — runs after the loop ends, whether from `break` or the condition"
+    },
+    "exercise": {
+      "title": "Simulate a Number Guessing Game",
+      "instructions": "Write a number guessing game using a while loop. The secret number is 42 (store it in a variable). Simulate guesses using a predefined list: guesses = [10, 70, 42]. Loop through each guess using an index variable, print 'Too low' or 'Too high' for wrong guesses, and print 'Correct! Found in X attempt(s).' when the guess equals 42, then break. Print the attempt count at the end.\n\nExpected output:\nGuess: 10 — Too low\nGuess: 70 — Too high\nGuess: 42 — Correct! Found in 3 attempt(s).",
+      "starterCode": "# Number Guessing Game\n\nsecret  = 42\nguesses = [10, 70, 42]\nidx     = 0\nattempts = 0\n\nwhile idx < len(guesses):\n    guess    = guesses[idx]\n    idx      += 1\n    attempts += 1\n\n    if guess < secret:\n        print(f\"Guess: {guess} — Too low\")\n    elif guess > secret:\n        print(f\"Guess: {guess} — Too high\")\n    else:\n        print(f\"Guess: {guess} — Correct! Found in {attempts} attempt(s).\")\n        break",
+      "solutionCode": "secret   = 42\nguesses  = [10, 70, 42]\nidx      = 0\nattempts = 0\n\nwhile idx < len(guesses):\n    guess     = guesses[idx]\n    idx      += 1\n    attempts += 1\n\n    if guess < secret:\n        print(f\"Guess: {guess} — Too low\")\n    elif guess > secret:\n        print(f\"Guess: {guess} — Too high\")\n    else:\n        print(f\"Guess: {guess} — Correct! Found in {attempts} attempt(s).\")\n        break",
+      "hints": [
+        "💡 Use idx to track your position in the guesses list and increment it with idx += 1 on every iteration.",
+        "💡 Increment attempts on every pass through the loop, before the if/elif/else comparison.",
+        "💡 When guess equals secret, print the success message with the attempt count and immediately call break to exit the loop."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Correct! Found in 3 attempt(s).",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m4-l2-q1",
+          "question": "When does a while loop check its condition?",
+          "options": [
+            "Once before the loop starts and never again",
+            "Once after the loop body completes",
+            "Before every iteration, including the very first one",
+            "Only when the break statement is reached"
+          ],
+          "correct": 2,
+          "explanation": "A while loop evaluates its condition before every iteration. If the condition is False when the loop is first reached, the body never executes at all. After each iteration completes, the condition is checked again before deciding whether to run the body once more."
+        },
+        {
+          "id": "py-m4-l2-q2",
+          "question": "What is the most common cause of an accidental infinite while loop?",
+          "options": [
+            "Using a variable in the condition",
+            "Forgetting to update the variable that controls the condition",
+            "Using while instead of for",
+            "Having more than one statement in the loop body"
+          ],
+          "correct": 1,
+          "explanation": "An infinite loop occurs when the condition never becomes False. This happens most often when the programmer forgets to change the variable that the condition checks — for example, incrementing a counter or updating a balance. Every while loop must contain at least one statement that will eventually make the condition False, or a break that exits."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m4-l3",
+    "moduleId": "py-m4",
+    "title": "break, continue, and Loop else",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Controlling Loop Flow with break, continue, and else",
+      "content": "# Controlling Loops\n\nPython gives you three tools to control what happens inside a loop beyond the basic condition: `break`, `continue`, and `else`.\n\n## break — Exit the Loop Immediately\n\n`break` stops the loop right now, regardless of the condition or how many iterations remain:\n\n```python\nfor number in range(1, 11):\n    if number == 5:\n        break           # stop the loop when number reaches 5\n    print(number)       # prints 1 2 3 4\n```\n\n## continue — Skip to the Next Iteration\n\n`continue` skips the rest of the current iteration's body and jumps straight to the next iteration:\n\n```python\nfor number in range(1, 11):\n    if number % 2 == 0:\n        continue        # skip even numbers\n    print(number)       # prints 1 3 5 7 9\n```\n\n## The loop else Clause\n\nPython's loops support an `else` block — a feature unique to Python among mainstream languages. The `else` block runs **only if the loop completed normally** (without hitting a `break`):\n\n```python\nfor name in [\"Alice\", \"Bob\", \"Charlie\"]:\n    if name == \"Bob\":\n        print(\"Found Bob!\")\n        break\nelse:\n    print(\"Bob was not found.\")   # only runs if break never executed\n```\n\nThis pattern is perfect for **search loops** — the `else` represents the \"not found\" case.\n\n## Combining break and continue\n\n```python\nfor i in range(1, 21):\n    if i % 3 == 0 and i % 5 == 0:\n        break           # stop completely at the first FizzBuzz\n    if i % 3 == 0:\n        print(\"Fizz\", end=\" \")\n        continue        # skip the print below\n    if i % 5 == 0:\n        print(\"Buzz\", end=\" \")\n        continue\n    print(i, end=\" \")\n```\n\n## Nested Loop break\n\n`break` only exits the **innermost** loop it is in. To break out of nested loops, you typically set a flag variable:\n\n```python\nfound = False\nfor row in matrix:\n    for item in row:\n        if item == target:\n            found = True\n            break       # breaks the inner loop only\n    if found:\n        break           # now breaks the outer loop\n```\n\nIn the code example below, you will see `break`, `continue`, and `else` applied to a prime number finder and a search task."
+    },
+    "codeExample": {
+      "title": "Prime Finder and Item Search",
+      "language": "python",
+      "code": "# --- Part 1: Prime Number Finder using for/else ---\nprint(\"Primes from 2 to 20:\")\nfor candidate in range(2, 21):\n    for divisor in range(2, candidate):\n        if candidate % divisor == 0:\n            break              # not prime — exit the inner loop\n    else:\n        print(candidate, end=\" \")   # only prints when no break occurred\nprint()\n\n# --- Part 2: Skip negatives with continue ---\nreadings = [12, -5, 34, -2, 0, 89, -11, 45]\nvalid_total = 0\nprint(\"\\nValid (non-negative) readings:\")\nfor r in readings:\n    if r < 0:\n        continue          # skip negative values\n    valid_total += r\n    print(r, end=\" \")\nprint(f\"\\nTotal of valid readings: {valid_total}\")\n\n# --- Part 3: Search with break and else ---\ninventory = [\"pen\", \"notebook\", \"ruler\", \"eraser\"]\nsearch    = \"stapler\"\nprint(f\"\\nSearching for '{search}':\")\nfor item in inventory:\n    if item == search:\n        print(f\"Found '{search}'.\")\n        break\nelse:\n    print(f\"'{search}' is not in inventory.\")",
+      "explanation": "- `for divisor in range(2, candidate): ... else:` — the `else` runs when the inner loop finished without `break`, confirming the candidate is prime\n- `break` inside the inner `for` — exits only the inner loop; the outer loop continues with the next `candidate`\n- `if r < 0: continue` — skips remaining body for negative readings and jumps to the next iteration immediately\n- `for item in inventory: ... else:` — the `else` block runs only if the item was never found and no `break` executed\n- `end=\" \"` — keeps values on one line; a separate `print()` afterwards adds the terminating newline"
+    },
+    "exercise": {
+      "title": "Filter and Search a Products List",
+      "instructions": "Given a list of product prices, write a program that: (1) uses a for loop with continue to skip any price below 100 and print only valid prices, (2) uses a for/else to search for a specific price (target = 450) and print 'Found 450' if it exists or 'Price not found' if the loop completes without a break. Print the count of valid prices at the end.\n\nPrices list: [50, 200, 450, 80, 300, 999, 30]\nExpected output shows valid prices, then search result.",
+      "starterCode": "# Filter and Search Products\n\nprices  = [50, 200, 450, 80, 300, 999, 30]\ntarget  = 450\ncount   = 0\n\nprint(\"Valid prices (>= 100):\")\nfor price in prices:\n    if price < 100:\n        continue          # skip prices below 100\n    print(price, end=\" \")\n    count += 1\nprint(f\"\\nValid count: {count}\")\n\n# Search for target using for/else\nfor price in prices:\n    if price == target:\n        print(f\"Found {target}\")\n        break\nelse:\n    print(\"Price not found\")",
+      "solutionCode": "prices = [50, 200, 450, 80, 300, 999, 30]\ntarget = 450\ncount  = 0\n\nprint(\"Valid prices (>= 100):\")\nfor price in prices:\n    if price < 100:\n        continue\n    print(price, end=\" \")\n    count += 1\nprint(f\"\\nValid count: {count}\")\n\nfor price in prices:\n    if price == target:\n        print(f\"Found {target}\")\n        break\nelse:\n    print(\"Price not found\")",
+      "hints": [
+        "💡 Inside the first loop, use if price < 100: continue to skip small prices without using a negative condition.",
+        "💡 Increment count += 1 after the continue check, so only valid prices are counted.",
+        "💡 The for/else search loop needs no extra flag variable — the else clause runs automatically when no break occurred."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Found 450",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Valid count: 4",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m4-l3-q1",
+          "question": "What is the difference between break and continue in a Python loop?",
+          "options": [
+            "break skips the current iteration; continue exits the entire loop",
+            "break exits the entire loop immediately; continue skips to the next iteration",
+            "They are identical and can be used interchangeably",
+            "break only works in for loops; continue only works in while loops"
+          ],
+          "correct": 1,
+          "explanation": "break immediately exits the loop and resumes execution after the loop. continue skips the rest of the current iteration's body and moves directly to the next iteration — the loop does not exit. Both work in both for and while loops."
+        },
+        {
+          "id": "py-m4-l3-q2",
+          "question": "When does the else clause of a for loop execute?",
+          "options": [
+            "When the loop body ran at least once",
+            "Always, after every loop finishes",
+            "Only when the loop completed all iterations without hitting a break",
+            "Only when the loop body never executed"
+          ],
+          "correct": 2,
+          "explanation": "A for loop's else clause runs only when the loop finished all its iterations naturally — without a break statement being triggered. If break exits the loop early, the else is skipped. This makes the for/else pattern ideal for search loops where else means 'the item was not found'."
+        },
+        {
+          "id": "py-m4-l3-q3",
+          "question": "If break is inside a nested for loop, which loop does it exit?",
+          "options": [
+            "All loops from the innermost to the outermost",
+            "Only the outermost loop",
+            "Only the innermost loop that directly contains the break",
+            "The entire program stops"
+          ],
+          "correct": 2,
+          "explanation": "break only exits the innermost loop that contains it. The outer loop continues normally. To exit multiple nested loops, the common Python approach is to use a boolean flag variable that the outer loop also checks, or to refactor the nested loops into a function and use return."
+        }
+      ]
+    }
+  }
+]

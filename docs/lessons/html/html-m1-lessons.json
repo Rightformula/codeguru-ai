@@ -1,0 +1,218 @@
+[
+  {
+    "id": "html-m1-l1",
+    "moduleId": "html-m1",
+    "title": "What is HTML?",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "9 min",
+    "explanation": {
+      "title": "What is HTML and What Does It Build?",
+      "content": "# What is HTML?\n\nImagine building a house. Before you paint the walls or lay the carpets, you need the bricks and beams — the raw structure that holds everything up. **HTML** (HyperText Markup Language) is exactly that structural layer for every webpage you have ever visited.\n\nHTML is not a programming language — it does not perform calculations or make decisions. It is a **markup language**, which means it uses special tags to label pieces of content and tell the browser what role each piece plays: this is a heading, this is a paragraph, this is an image, this is a link.\n\nWhen your browser receives an HTML file, it reads the tags and renders each piece of content according to its role.\n\n## A Brief History\n\nHTML was invented by Tim Berners-Lee in 1991 as a way to share documents between scientists over the internet. The current standard is **HTML5**, introduced in 2014, which added native support for video, audio, forms, and semantic elements.\n\n## The Three Languages of the Web\n\nEvery webpage is built from three languages working together:\n\n| Language | Role | Analogy |\n|---|---|---|\n| **HTML** | Structure and content | The bricks and walls |\n| **CSS** | Visual styling | The paint and decoration |\n| **JavaScript** | Behaviour and interaction | The electricity and plumbing |\n\nIn this course you will learn HTML first, then CSS, because structure must exist before style can be applied.\n\n## What HTML Files Look Like\n\nAn HTML file is a plain text file saved with the `.html` extension. You can open it in any text editor to write it, and in any browser to view it. No installation is required — every device already has a browser.\n\n## Tags, Elements, and Attributes\n\nHTML content is wrapped in **tags**. Most tags come in pairs:\n\n```html\n<p>This is a paragraph.</p>\n```\n\n- `<p>` is the **opening tag**\n- `</p>` is the **closing tag** (note the forward slash)\n- Together with the content, they form an **element**\n\nTags can also carry **attributes** — extra information written inside the opening tag:\n\n```html\n<a href=\"https://codeguru.ai\">Visit CodeGuru</a>\n```\n\nHere `href` is the attribute name and `\"https://codeguru.ai\"` is its value.\n\nIn the code example below, you will see a minimal but complete HTML page using the most essential tags."
+    },
+    "codeExample": {
+      "title": "Your First HTML Page",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My First Page</title>\n</head>\n<body>\n\n  <h1>Hello, World!</h1>\n  <p>This is my first HTML page.</p>\n\n  <p>HTML uses <strong>tags</strong> to give content meaning.</p>\n\n  <a href=\"https://codeguru.ai\">Visit CodeGuru AI</a>\n\n</body>\n</html>",
+      "explanation": "- `<!DOCTYPE html>` — tells the browser this is HTML5; always the very first line\n- `<html lang=\"en\">` — the root element; `lang` helps screen readers pronounce content\n- `<head>` — contains metadata the browser reads but does not display\n- `<meta charset=\"UTF-8\">` — allows all characters including Indian scripts and emoji\n- `<title>` — text shown in the browser tab and search results\n- `<body>` — all visible page content goes here\n- `<h1>` — the most important heading; every page should have exactly one\n- `<a href=\"...\">` — a hyperlink; `href` specifies the destination URL"
+    },
+    "exercise": {
+      "title": "Build Your Personal Introduction Page",
+      "instructions": "Create a complete HTML page that introduces you. The page must include: the full DOCTYPE and html/head/body structure, a title tag set to 'About Me', one h1 heading with your name, one paragraph describing what you study or do, and one anchor tag linking to any website. The page must be valid HTML5.\n\nExpected: a complete page with DOCTYPE, head, body, h1, p, and a tags all present.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>About Me</title>\n</head>\n<body>\n\n  <!-- Add your h1 heading here -->\n\n  <!-- Add a paragraph about yourself here -->\n\n  <!-- Add a link to any website here -->\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>About Me</title>\n</head>\n<body>\n\n  <h1>Rahul Sharma</h1>\n  <p>I am a first-year computer science student at Delhi University.</p>\n  <a href=\"https://codeguru.ai\">Visit CodeGuru AI</a>\n\n</body>\n</html>",
+      "hints": [
+        "💡 Place your h1 tag between the opening body tag and the closing body tag.",
+        "💡 A paragraph is written as: <p>Your text here.</p> — both tags are required.",
+        "💡 A link is written as: <a href=\"https://example.com\">Link text</a> — the href attribute holds the URL."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "About Me",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m1-l1-q1",
+          "question": "What does HTML stand for?",
+          "options": [
+            "Hyper Transfer Markup Language",
+            "HyperText Markup Language",
+            "High-level Text Management Language",
+            "Hyper Tool Marking Language"
+          ],
+          "correct": 1,
+          "explanation": "HTML stands for HyperText Markup Language. HyperText refers to text that contains links to other documents. Markup means the language uses tags to annotate or label content, telling the browser what role each piece of content plays on the page."
+        },
+        {
+          "id": "html-m1-l1-q2",
+          "question": "Which part of an HTML document is displayed to the user in the browser window?",
+          "options": [
+            "Everything inside the head element",
+            "Only the title element",
+            "Everything inside the body element",
+            "Only elements with a display attribute"
+          ],
+          "correct": 2,
+          "explanation": "The body element contains all the content that the browser renders and displays to the user: headings, paragraphs, images, links, and so on. The head element contains metadata like the page title, character encoding, and CSS links, which the browser reads but does not render as visible content."
+        },
+        {
+          "id": "html-m1-l1-q3",
+          "question": "What is the purpose of the DOCTYPE declaration at the top of an HTML file?",
+          "options": [
+            "It sets the background colour of the page",
+            "It tells the browser which version of HTML the document uses",
+            "It links the HTML file to a CSS stylesheet",
+            "It defines the page title shown in the browser tab"
+          ],
+          "correct": 1,
+          "explanation": "The DOCTYPE declaration instructs the browser which version of HTML the document is written in. Writing <!DOCTYPE html> triggers HTML5 mode, which ensures modern, standards-based rendering. Without it, browsers enter 'quirks mode' and may display pages inconsistently across different browsers."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m1-l2",
+    "moduleId": "html-m1",
+    "title": "HTML Document Structure",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "10 min",
+    "explanation": {
+      "title": "Inside an HTML Document: Head, Body, and Metadata",
+      "content": "# HTML Document Structure\n\nEvery valid HTML page follows the same skeleton — a predictable hierarchy of nested elements. Understanding this structure is essential because every mistake you will encounter in HTML usually traces back to a missing or misplaced element in this hierarchy.\n\n## The Full Skeleton\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"description\" content=\"Page description\">\n  <title>Page Title</title>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n  <!-- Visible content goes here -->\n</body>\n</html>\n```\n\n## The head Element — Invisible Metadata\n\nThe `<head>` contains information for the browser and search engines, not for the user:\n\n| Tag | Purpose |\n|---|---|\n| `<meta charset=\"UTF-8\">` | Allow all characters and scripts |\n| `<meta name=\"viewport\" ...>` | Enable correct scaling on mobile devices |\n| `<meta name=\"description\" ...>` | The text search engines show under your link |\n| `<title>` | Text shown in the browser tab |\n| `<link rel=\"stylesheet\" href=\"...\">` | Connect an external CSS file |\n| `<script src=\"...\">` | Connect an external JavaScript file |\n\n## The viewport meta Tag\n\nThis tag is critical for mobile users:\n\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n```\n\nWithout it, mobile browsers zoom out to show the desktop version of your page, making text tiny and unreadable. With it, the page scales correctly to the device width.\n\n## HTML Comments\n\nComments are notes in your HTML that the browser ignores completely:\n\n```html\n<!-- This is a comment -->\n<!-- Comments help explain your code -->\n```\n\n## Nesting Rules\n\nElements must be properly nested — every opened tag must be closed before its parent is closed:\n\n```html\n<!-- Correct nesting -->\n<p>This is <strong>bold</strong> text.</p>\n\n<!-- Incorrect — strong is not closed before p -->\n<p>This is <strong>bold text.</p></strong>\n```\n\nBrowsers often forgive incorrect nesting, but it causes unpredictable display bugs. Always nest correctly.\n\nIn the code example below, you will see a fully structured HTML document with all head metadata filled in correctly."
+    },
+    "codeExample": {
+      "title": "Complete Page Structure",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <!-- Metadata — not visible on the page -->\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"description\" content=\"CodeGuru AI — learn to code in India\">\n  <meta name=\"author\" content=\"Rahul Sharma\">\n  <title>CodeGuru AI | Learn to Code</title>\n  <!-- Inline style for demonstration -->\n  <style>\n    body { font-family: Arial, sans-serif; padding: 20px; }\n    h1   { color: #22c55e; }\n  </style>\n</head>\n<body>\n\n  <!-- Main visible content -->\n  <h1>Welcome to CodeGuru AI</h1>\n\n  <!-- HTML comments are invisible to users -->\n  <!-- This paragraph describes the site -->\n  <p>Learn Python, JavaScript, Java, and HTML/CSS with AI guidance.</p>\n\n  <p>Built for <strong>Indian learners</strong> at affordable prices.</p>\n\n</body>\n</html>",
+      "explanation": "- `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">` — the most important tag for mobile; makes the browser use the real device width\n- `<meta name=\"description\" content=\"...\">` — shown by Google under your page link; keep under 160 characters\n- `<style>` inside `<head>` — embeds CSS directly in the HTML file; use external `.css` files for larger projects\n- `<!-- comment -->` — the browser ignores everything between `<!--` and `-->`\n- `<strong>` — marks text as important; browsers render it bold by default"
+    },
+    "exercise": {
+      "title": "Build a Product Landing Page Shell",
+      "instructions": "Create a complete HTML document for a product page. Include in the head: charset meta, viewport meta, a description meta with content 'Affordable coding courses', and a title of 'CodeGuru Courses'. In the body, add one h1, one paragraph, and one HTML comment explaining what the page is. The document must be valid HTML5.\n\nExpected: complete structure with all required head tags and visible body content.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <!-- Add charset meta here -->\n\n  <!-- Add viewport meta here -->\n\n  <!-- Add description meta here -->\n\n  <title>CodeGuru Courses</title>\n</head>\n<body>\n\n  <!-- Add a comment describing this page -->\n\n  <!-- Add an h1 heading here -->\n\n  <!-- Add a paragraph here -->\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"description\" content=\"Affordable coding courses\">\n  <title>CodeGuru Courses</title>\n</head>\n<body>\n\n  <!-- This page showcases our coding courses -->\n\n  <h1>Our Courses</h1>\n  <p>Learn to code with AI-powered guidance at Indian prices.</p>\n\n</body>\n</html>",
+      "hints": [
+        "💡 The charset meta tag is: <meta charset=\"UTF-8\"> — no closing tag needed for meta elements.",
+        "💡 The viewport meta tag is: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+        "💡 A comment is written as: <!-- your comment text here --> — the browser ignores everything inside."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "CodeGuru Courses",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m1-l2-q1",
+          "question": "What is the purpose of the viewport meta tag in HTML?",
+          "options": [
+            "It sets the font size for all text on the page",
+            "It enables correct page scaling on mobile devices",
+            "It connects the HTML page to a CSS file",
+            "It sets the page background colour"
+          ],
+          "correct": 1,
+          "explanation": "The viewport meta tag tells mobile browsers to scale the page to the device's actual screen width rather than simulating a full desktop screen. Without it, mobile browsers zoom out so the page fits on the small screen, making all text tiny and unreadable. It is essential for any page that should work on phones."
+        },
+        {
+          "id": "html-m1-l2-q2",
+          "question": "Which HTML element contains information about the page that is not displayed to the user?",
+          "options": [
+            "body",
+            "header",
+            "head",
+            "meta"
+          ],
+          "correct": 2,
+          "explanation": "The head element is the container for all page metadata: the title shown in the browser tab, character encoding, viewport settings, CSS and JavaScript file links, and search engine descriptions. None of this content appears in the visible page. The body element contains all the visible content."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m1-l3",
+    "moduleId": "html-m1",
+    "title": "Headings, Paragraphs, and Text Tags",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Structuring Text with Headings, Paragraphs, and Inline Tags",
+      "content": "# Headings and Paragraphs\n\nText is the foundation of almost every webpage. HTML provides specific elements for every kind of text, from page titles down to individual important words. Choosing the right element is important for accessibility, search engine optimisation, and visual clarity.\n\n## The Six Heading Levels\n\nHTML has six levels of headings, `<h1>` through `<h6>`:\n\n```html\n<h1>Main Page Title</h1>\n<h2>Section Heading</h2>\n<h3>Subsection</h3>\n<h4>Sub-subsection</h4>\n<h5>Minor heading</h5>\n<h6>Smallest heading</h6>\n```\n\nKey rules:\n- Use only **one `<h1>`** per page — it tells search engines and screen readers what the page is about\n- Headings must be used in **logical order** — never skip from h1 to h4\n- Choose heading levels based on **document structure**, not visual size\n\n## Paragraphs\n\n```html\n<p>A paragraph groups related sentences into a block of text.</p>\n<p>Each paragraph element creates vertical spacing above and below.</p>\n```\n\nBrowsers collapse all whitespace inside HTML to a single space. To force a line break within a paragraph, use `<br>`:\n\n```html\n<p>Line one.<br>Line two on the same paragraph.</p>\n```\n\n## Inline Text Elements\n\nThese elements style or label individual words or phrases inside a paragraph:\n\n| Element | Default appearance | Semantic meaning |\n|---|---|---|\n| `<strong>` | **Bold** | Importance |\n| `<em>` | *Italic* | Emphasis |\n| `<u>` | Underline | Stylistic |\n| `<mark>` | Highlighted | Highlighted |\n| `<small>` | Smaller | Fine print |\n| `<del>` | ~~Strikethrough~~ | Deleted text |\n| `<sub>` | Subscript | H₂O |\n| `<sup>` | Superscript | x² |\n| `<code>` | `Monospace` | Code snippet |\n\n## Horizontal Rule and Line Break\n\n```html\n<hr>   <!-- horizontal line — a thematic break -->\n<br>   <!-- line break — not a new paragraph -->\n```\n\nBoth `<hr>` and `<br>` are **void elements** — they have no content and no closing tag.\n\nIn the code example below, you will see all six heading levels and several inline text elements used in a realistic article layout."
+    },
+    "codeExample": {
+      "title": "Article Text Elements",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Python Guide</title>\n</head>\n<body>\n\n  <h1>The Complete Python Guide</h1>\n  <p><small>Last updated: 2025 | 10 min read</small></p>\n\n  <h2>What is Python?</h2>\n  <p>Python is a <strong>powerful</strong> yet <em>beginner-friendly</em>\n  programming language used worldwide.</p>\n\n  <h2>Why Learn Python?</h2>\n  <p>Python powers <mark>artificial intelligence</mark>, web development,\n  and data science.</p>\n\n  <h3>Key Facts</h3>\n  <p>Python was created in <strong>1991</strong>. The latest version is\n  Python <sup>3</sup>. Water is H<sub>2</sub>O — just for demo!</p>\n\n  <hr>\n\n  <h2>A Simple Example</h2>\n  <p>The classic first program uses the <code>print()</code> function:</p>\n\n  <h3>Getting Started</h3>\n  <p>Install Python, then run:<br>\n  Open terminal and type <code>python --version</code>.</p>\n\n  <h2>Summary</h2>\n  <p><del>Python is difficult.</del> Python is easy to learn!</p>\n\n</body>\n</html>",
+      "explanation": "- `<h1>` through `<h3>` — three heading levels establish the content hierarchy for search engines and screen readers\n- `<strong>powerful</strong>` — bold text that also signals importance to assistive technology\n- `<em>beginner-friendly</em>` — italic text that signals stress emphasis\n- `<mark>artificial intelligence</mark>` — highlights text with a yellow background by default\n- `<hr>` — a horizontal line representing a thematic break; a void element with no closing tag\n- `<code>print()</code>` — renders text in a monospace font to indicate computer code"
+    },
+    "exercise": {
+      "title": "Write a Formatted Bio Article",
+      "instructions": "Create a bio page for a fictional person. Use: one h1 for the person's full name, one h2 for 'About', a paragraph with at least one strong and one em tag, one h2 for 'Skills', a paragraph with at least one code tag, one hr between sections, and one small tag for a footer note. The page must have complete HTML5 structure.\n\nExpected: page with h1, two h2 elements, hr, and inline text elements all used correctly.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Bio Page</title>\n</head>\n<body>\n\n  <!-- h1: person's full name -->\n\n  <h2>About</h2>\n  <!-- paragraph with strong and em -->\n\n  <hr>\n\n  <h2>Skills</h2>\n  <!-- paragraph with a code tag -->\n\n  <!-- small tag for footer note -->\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Bio Page</title>\n</head>\n<body>\n\n  <h1>Priya Verma</h1>\n\n  <h2>About</h2>\n  <p>Priya is a <strong>full-stack developer</strong> with <em>three years</em> of experience.</p>\n\n  <hr>\n\n  <h2>Skills</h2>\n  <p>She writes <code>Python</code> and <code>JavaScript</code> every day.</p>\n\n  <p><small>Last updated: January 2025</small></p>\n\n</body>\n</html>",
+      "hints": [
+        "💡 Place the h1 directly after the opening body tag with the person's name: <h1>Full Name</h1>",
+        "💡 Inline tags go inside a p tag: <p>She is a <strong>developer</strong> with <em>experience</em>.</p>",
+        "💡 The hr tag is a void element — write it as <hr> with no closing tag and no content."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "<h1>",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m1-l3-q1",
+          "question": "How many h1 elements should a well-structured HTML page have?",
+          "options": [
+            "As many as needed — one per section",
+            "Exactly one — it represents the main topic of the page",
+            "Between two and five",
+            "None — h1 is deprecated in HTML5"
+          ],
+          "correct": 1,
+          "explanation": "A well-structured HTML page should have exactly one h1 element representing the page's main topic. Search engines use the h1 to understand what the page is about, and screen readers use it as a navigation landmark. Using multiple h1 elements dilutes the page's focus for both users and search engines."
+        },
+        {
+          "id": "html-m1-l3-q2",
+          "question": "What is the semantic difference between strong and b in HTML?",
+          "options": [
+            "There is no difference — they render identically",
+            "strong signals importance to browsers and assistive technology; b is purely visual bold",
+            "b is stronger emphasis than strong",
+            "strong only works inside headings; b works everywhere"
+          ],
+          "correct": 1,
+          "explanation": "Both strong and b render text in bold by default, but they carry different semantic meanings. strong signals that the text is of serious importance — screen readers may announce it with extra emphasis. b is purely presentational bold with no extra meaning. HTML5 recommends using strong for important text and b only when no semantic meaning is intended."
+        },
+        {
+          "id": "html-m1-l3-q3",
+          "question": "Which element creates a line break without starting a new paragraph?",
+          "options": [
+            "<lb>",
+            "<nl>",
+            "<br>",
+            "<line>"
+          ],
+          "correct": 2,
+          "explanation": "The br element (break) inserts a single line break within the current paragraph or block without creating a new paragraph element. It is a void element — written as <br> with no closing tag. Use it sparingly; for separating unrelated content, a new p element is more semantically appropriate."
+        }
+      ]
+    }
+  }
+]

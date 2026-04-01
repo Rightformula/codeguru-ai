@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    /* ── Language & Environment ── */
+    "target": "ES2017",                  // Compile down to ES2017 for broad browser support
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,                     // Allow .js files alongside .ts
+    "skipLibCheck": true,                // Skip type checking node_modules (faster builds)
+
+    /* ── Module System ── */
+    "module": "esnext",
+    "moduleResolution": "bundler",       // Next.js 14 uses bundler resolution
+    "resolveJsonModule": true,           // Allow importing .json files
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* ── Strictness ── */
+    "strict": true,                      // Enable all strict type checks
+    "noUnusedLocals": false,             // Don't error on unused variables (too noisy during dev)
+    "noUnusedParameters": false,
+    "noImplicitAny": true,               // Error when type can't be inferred
+    "strictNullChecks": true,            // Catch null/undefined errors
+
+    /* ── Output ── */
+    "noEmit": true,                      // Next.js handles compilation — TS just type-checks
+    "isolatedModules": true,             // Required for Next.js fast refresh
+
+    /* ── JSX ── */
+    "jsx": "preserve",                   // Next.js transforms JSX itself
+
+    /* ── Path Aliases ── */
+    // This enables: import { Button } from '@/components/ui/Button'
+    // instead of:   import { Button } from '../../components/ui/Button'
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* ── Plugins ── */
+    "plugins": [
+      {
+        "name": "next"                   // Next.js TypeScript plugin for IDE support
+      }
+    ]
+  },
+
+  /* ── Files to include ── */
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+
+  /* ── Files to exclude ── */
+  "exclude": [
+    "node_modules"
+  ]
+}

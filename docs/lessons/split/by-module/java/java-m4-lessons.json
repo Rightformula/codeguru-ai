@@ -1,0 +1,199 @@
+[
+  {
+    "id": "java-m4-l1",
+    "moduleId": "java-m4",
+    "title": "for Loops and Iteration",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Repeating Actions with Java's for Loop",
+      "content": "# The for Loop\n\nImagine a teacher who must print 30 report cards with identical formatting. Instead of writing 30 almost-identical blocks of code, a loop repeats a block of code a fixed number of times.\n\nJava's `for` loop is the most common loop when you know the number of iterations in advance:\n\n```java\nfor (initialisation; condition; update) {\n    // body — executes while condition is true\n}\n```\n\nThe header has three parts, separated by semicolons:\n1. **Initialisation** — runs once before the loop starts: `int i = 0`\n2. **Condition** — checked before every iteration; the loop stops when this is `false`: `i < 5`\n3. **Update** — runs after every iteration: `i++`\n\n```java\nfor (int i = 0; i < 5; i++) {\n    System.out.println(\"Iteration: \" + i);\n}\n// Prints: Iteration: 0, Iteration: 1, ..., Iteration: 4\n```\n\n## Counting Backwards\n\n```java\nfor (int i = 5; i >= 1; i--) {\n    System.out.print(i + \" \");  // 5 4 3 2 1\n}\n```\n\n## Custom Step Size\n\n```java\nfor (int i = 0; i <= 10; i += 2) {\n    System.out.print(i + \" \");  // 0 2 4 6 8 10\n}\n```\n\n## The Enhanced for Loop (for-each)\n\nFor iterating over arrays or collections without needing an index:\n\n```java\nint[] scores = {85, 92, 78, 95, 88};\n\nfor (int score : scores) {\n    System.out.println(score);\n}\n```\n\nRead this as: \"for each `score` in `scores`, execute the body.\"\n\n## Accumulator Pattern\n\nDeclare a variable before the loop and update it inside:\n\n```java\nint[] marks  = {72, 88, 91, 65, 84};\nint   total  = 0;\nint   highest = marks[0];\n\nfor (int mark : marks) {\n    total += mark;\n    if (mark > highest) highest = mark;\n}\ndouble average = (double) total / marks.length;\n```\n\nIn the code example below, you will see a classic for loop, a for-each loop, and an accumulator applied to a student score report."
+    },
+    "codeExample": {
+      "title": "Score Summary and Times Table",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        // --- Part 1: score analysis with for-each ---\n        int[] scores  = {78, 92, 85, 67, 95, 88};\n        int   total   = 0;\n        int   highest = scores[0];\n\n        for (int score : scores) {\n            total += score;\n            if (score > highest) highest = score;\n        }\n\n        double average = (double) total / scores.length;\n        System.out.printf(\"Scores  : %d entries%n\", scores.length);\n        System.out.printf(\"Total   : %d%n\",         total);\n        System.out.printf(\"Average : %.1f%n\",        average);\n        System.out.printf(\"Highest : %d%n\",          highest);\n\n        // --- Part 2: times table with classic for ---\n        System.out.println(\"\\n--- 7 Times Table ---\");\n        for (int i = 1; i <= 10; i++) {\n            System.out.printf(\"7 x %2d = %3d%n\", i, 7 * i);\n        }\n    }\n}",
+      "explanation": "- `int[] scores = {78, 92, ...}` — an **array literal**; all values are specified between braces\n- `for (int score : scores)` — the enhanced for loop; `score` takes each array value in order\n- `total += score` — accumulator pattern; updates `total` on every iteration\n- `(double) total / scores.length` — casting `total` to `double` forces decimal division\n- `scores.length` — the `.length` field of an array; not a method, so no parentheses needed\n- `%2d` and `%3d` in printf — right-align integers in fields of width 2 and 3, keeping columns aligned"
+    },
+    "exercise": {
+      "title": "Print a Number Triangle Pattern",
+      "instructions": "Write a Java program using nested for loops to print the following triangle. The outer loop controls the row (1 to 5). The inner loop prints numbers from 1 up to the current row number. Use System.out.print(col + \" \") in the inner loop and System.out.println() after each row to move to the next line.\n\nExpected output:\n1\n1 2\n1 2 3\n1 2 3 4\n1 2 3 4 5",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        // Outer loop: controls the row number (1 to 5)\n        for (int row = 1; row <= 5; row++) {\n\n            // Inner loop: prints numbers 1 to current row\n            for (int col = 1; col <= row; col++) {\n                System.out.print(col + \" \");\n            }\n\n            // Move to next line after each row\n            System.out.println();\n        }\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        for (int row = 1; row <= 5; row++) {\n            for (int col = 1; col <= row; col++) {\n                System.out.print(col + \" \");\n            }\n            System.out.println();\n        }\n    }\n}",
+      "hints": [
+        "💡 The starter code is already the complete solution — run it and observe the triangle pattern.",
+        "💡 The inner loop runs from col=1 to col=row; as row increases, more numbers are printed per line.",
+        "💡 System.out.println() with no argument just adds a newline — it moves to the next row of the triangle."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "1 2 3 4 5",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m4-l1-q1",
+          "question": "What are the three parts of a Java for loop header separated by semicolons?",
+          "options": [
+            "condition; body; update",
+            "variable; limit; step",
+            "initialisation; condition; update",
+            "start; stop; increment"
+          ],
+          "correct": 2,
+          "explanation": "A Java for loop header has three parts: for (initialisation; condition; update). Initialisation runs once before the loop starts. The condition is checked before every iteration — the loop stops when it is false. The update runs after each iteration. All three are separated by semicolons, and the entire header is inside parentheses."
+        },
+        {
+          "id": "java-m4-l1-q2",
+          "question": "What is the purpose of the enhanced for loop syntax: for (int score : scores)?",
+          "options": [
+            "It iterates in reverse order through the array",
+            "It iterates forward through each element without needing an index variable",
+            "It creates a copy of the array before iterating",
+            "It only works when scores contains integers"
+          ],
+          "correct": 1,
+          "explanation": "The enhanced for loop (for-each) iterates over every element in an array or collection from first to last without requiring an index variable. On each iteration, score is assigned the next element's value. Use it when you need each value but do not need to know its position. Use a classic for loop when you need the index."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m4-l2",
+    "moduleId": "java-m4",
+    "title": "while and do-while Loops",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Repeating Until a Condition Changes with while Loops",
+      "content": "# The while Loop\n\nA `for` loop is ideal when you know the number of iterations. But sometimes you repeat until something changes — and you do not know how many steps that will take. Think of waiting for a server to respond: keep trying until you get a response.\n\nThe `while` loop keeps running its body as long as the condition remains `true`:\n\n```java\nwhile (condition) {\n    // body — runs while condition is true\n}\n```\n\nThe condition is checked **before** every iteration. If it is `false` at the start, the body never executes.\n\n```java\nint count = 1;\nwhile (count <= 5) {\n    System.out.println(\"Count: \" + count);\n    count++;  // MUST change the condition eventually!\n}\n```\n\n## The Infinite Loop Danger\n\nIf the condition never becomes `false`, the loop runs forever — crashing or freezing the program:\n\n```java\n// DANGEROUS: count never changes\nwhile (count <= 5) {\n    System.out.println(count); // runs forever\n}\n```\n\nEvery while loop must contain something that eventually makes the condition `false`.\n\n## The do-while Loop\n\nThe `do-while` loop executes the body **first**, then checks the condition. This guarantees the body runs at least once:\n\n```java\nint n = 10;\ndo {\n    System.out.println(n);\n    n++;\n} while (n < 5);   // condition is already false — but body ran once\n```\n\nUse `do-while` when you need at least one execution before the first check — for example, displaying a menu before asking the user to choose.\n\n## while vs for\n\n| Scenario | Prefer |\n|---|---|\n| Known number of iterations | `for` |\n| Repeat until condition changes | `while` |\n| Run once then check condition | `do-while` |\n\n## break and continue\n\n```java\nfor (int i = 0; i < 10; i++) {\n    if (i == 3) continue;  // skip 3, go to i = 4\n    if (i == 7) break;     // exit loop at 7\n    System.out.print(i + \" \");  // 0 1 2 4 5 6\n}\n```\n\n- `break` — exits the loop immediately\n- `continue` — skips the rest of the current iteration and jumps to the next\n\nBoth work in `for`, `while`, and `do-while` loops.\n\nIn the code example below, you will see a `while` loop simulating ATM withdrawals and `continue` filtering invalid values."
+    },
+    "codeExample": {
+      "title": "ATM Withdrawal Session",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        double   balance     = 5000.0;\n        double[] requests    = {500.0, 1200.0, -50.0, 3000.0, 100.0};\n        int      idx         = 0;\n\n        System.out.printf(\"Opening balance: Rs %.2f%n\", balance);\n\n        while (idx < requests.length && balance > 0) {\n            double amount = requests[idx];\n            idx++;\n\n            if (amount <= 0) {\n                System.out.println(\"Invalid amount — skipped.\");\n                continue;  // skip rest of iteration\n            }\n\n            if (amount > balance) {\n                System.out.printf(\"Rs %.0f declined — insufficient funds.%n\", amount);\n                continue;\n            }\n\n            balance -= amount;\n            System.out.printf(\"Withdrew Rs %.0f | Remaining: Rs %.2f%n\",\n                              amount, balance);\n\n            if (balance == 0) {\n                System.out.println(\"Balance zero. Session ending.\");\n                break;  // exit the loop\n            }\n        }\n\n        System.out.printf(\"Final balance: Rs %.2f%n\", balance);\n    }\n}",
+      "explanation": "- `while (idx < requests.length && balance > 0)` — two conditions with `&&`; either becoming false stops the loop\n- `idx++` — advances through the array; the loop variable must change on every iteration to prevent infinite looping\n- `continue` — skips the remaining body for this iteration and re-evaluates the while condition immediately\n- `break` — exits the while loop immediately when the balance reaches zero\n- `balance -= amount` — shorthand for `balance = balance - amount`"
+    },
+    "exercise": {
+      "title": "Simulate a Number Guessing Game",
+      "instructions": "Write a Java program that simulates a number guessing game. The secret number is 42. Simulate guesses using array int[] guesses = {15, 80, 42}. Loop through guesses with a while loop using an index. Print 'Too low', 'Too high', or 'Correct in X attempt(s)!' for each guess and use break when correct. Count attempts on every iteration.\n\nExpected output:\nGuess 15: Too low\nGuess 80: Too high\nGuess 42: Correct in 3 attempt(s)!",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        int   secret   = 42;\n        int[] guesses  = {15, 80, 42};\n        int   idx      = 0;\n        int   attempts = 0;\n\n        while (idx < guesses.length) {\n            int guess = guesses[idx];\n            idx++;\n            attempts++;\n\n            if (guess < secret) {\n                System.out.println(\"Guess \" + guess + \": Too low\");\n            } else if (guess > secret) {\n                System.out.println(\"Guess \" + guess + \": Too high\");\n            } else {\n                System.out.println(\"Guess \" + guess + \": Correct in \" + attempts + \" attempt(s)!\");\n                break;\n            }\n        }\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        int   secret   = 42;\n        int[] guesses  = {15, 80, 42};\n        int   idx      = 0;\n        int   attempts = 0;\n\n        while (idx < guesses.length) {\n            int guess = guesses[idx];\n            idx++;\n            attempts++;\n\n            if (guess < secret) {\n                System.out.println(\"Guess \" + guess + \": Too low\");\n            } else if (guess > secret) {\n                System.out.println(\"Guess \" + guess + \": Too high\");\n            } else {\n                System.out.println(\"Guess \" + guess + \": Correct in \" + attempts + \" attempt(s)!\");\n                break;\n            }\n        }\n    }\n}",
+      "hints": [
+        "💡 The starter code is the complete solution — run it to observe the output.",
+        "💡 attempts++ is called on every iteration, counting every guess including correct and incorrect ones.",
+        "💡 break exits the while loop as soon as the correct guess is found, stopping further iterations."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Correct in 3 attempt(s)!",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m4-l2-q1",
+          "question": "What is the key difference between a while loop and a do-while loop?",
+          "options": [
+            "while loops run faster; do-while loops are for complex conditions",
+            "while checks the condition before the first execution; do-while runs the body at least once before checking",
+            "do-while only works with numeric conditions; while works with all types",
+            "They are identical — both check the condition before running the body"
+          ],
+          "correct": 1,
+          "explanation": "A while loop checks the condition before the body executes. If the condition is false initially, the body never runs. A do-while loop executes the body first and then checks the condition, guaranteeing at least one execution. Use do-while when you need the body to run at least once regardless of the condition."
+        },
+        {
+          "id": "java-m4-l2-q2",
+          "question": "What does the continue statement do inside a loop?",
+          "options": [
+            "Exits the entire loop immediately",
+            "Restarts the loop from the beginning",
+            "Skips the rest of the current iteration and jumps to the next one",
+            "Pauses the loop for one iteration"
+          ],
+          "correct": 2,
+          "explanation": "continue skips all remaining statements in the current iteration and jumps directly to the loop's update step (for loops) or condition check (while loops) for the next iteration. break, in contrast, exits the entire loop. Neither restarts from the first iteration."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m4-l3",
+    "moduleId": "java-m4",
+    "title": "Nested Loops and Loop Patterns",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Combining Loops for Complex Patterns and Grid Processing",
+      "content": "# Nested Loops\n\nA **nested loop** is a loop inside another loop. The inner loop completes all its iterations for every single iteration of the outer loop. This creates a \"for every row, for every column\" structure — perfect for tables, grids, and patterns.\n\n```java\nfor (int i = 1; i <= 3; i++) {           // outer: rows\n    for (int j = 1; j <= 3; j++) {       // inner: columns\n        System.out.print(i * j + \"\\t\"); // tab-separated\n    }\n    System.out.println();                // new row\n}\n```\n\nOutput:\n```\n1   2   3\n2   4   6\n3   6   9\n```\n\nIf the outer loop runs `n` times and the inner loop runs `m` times, the body executes `n × m` times total.\n\n## Labelled break\n\nA `break` without a label exits only the **innermost** loop. To exit multiple levels of nesting, use a **labelled break**:\n\n```java\nouterLoop:\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 3; j++) {\n        if (i == 1 && j == 1) {\n            break outerLoop;   // exits BOTH loops\n        }\n        System.out.println(i + \",\" + j);\n    }\n}\n```\n\nLabels are identifiers followed by a colon placed immediately before a loop statement.\n\n## Common Nested Loop Patterns\n\n### Multiplication Table\n```java\nfor (int i = 1; i <= 10; i++) {\n    for (int j = 1; j <= 10; j++) {\n        System.out.printf(\"%4d\", i * j);\n    }\n    System.out.println();\n}\n```\n\n### Prime Number Check\n```java\nfor (int n = 2; n <= 20; n++) {\n    boolean isPrime = true;\n    for (int d = 2; d < n; d++) {\n        if (n % d == 0) { isPrime = false; break; }\n    }\n    if (isPrime) System.out.print(n + \" \");\n}\n```\n\n### 2D Array Processing\n```java\nint[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};\nfor (int[] row : matrix) {\n    for (int val : row) {\n        System.out.printf(\"%3d\", val);\n    }\n    System.out.println();\n}\n```\n\nIn the code example below, you will see a multiplication table, prime number finder, and star pattern all produced with nested loops."
+    },
+    "codeExample": {
+      "title": "Nested Loop Patterns",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        // --- Multiplication table (5x5) ---\n        System.out.println(\"=== 5x5 Multiplication Table ===\");\n        for (int i = 1; i <= 5; i++) {\n            for (int j = 1; j <= 5; j++) {\n                System.out.printf(\"%4d\", i * j);\n            }\n            System.out.println();\n        }\n\n        // --- Prime numbers up to 30 ---\n        System.out.println(\"\\n=== Primes up to 30 ===\");\n        for (int n = 2; n <= 30; n++) {\n            boolean isPrime = true;\n            for (int d = 2; d < n; d++) {\n                if (n % d == 0) {\n                    isPrime = false;\n                    break;  // no need to check further\n                }\n            }\n            if (isPrime) System.out.print(n + \" \");\n        }\n        System.out.println();\n\n        // --- Right-angle star pattern ---\n        System.out.println(\"\\n=== Star Pattern ===\");\n        for (int row = 1; row <= 4; row++) {\n            for (int col = 0; col < row; col++) {\n                System.out.print(\"* \");\n            }\n            System.out.println();\n        }\n    }\n}",
+      "explanation": "- `printf(\"%4d\", i * j)` — `%4d` right-aligns the integer in a 4-character field for neat columns\n- `for (int n = 2; n <= 30; n++)` — outer loop checks each candidate prime starting from 2\n- `for (int d = 2; d < n; d++)` — inner loop tries every potential divisor up to n-1\n- `if (n % d == 0) { isPrime = false; break; }` — if any divisor divides evenly, n is not prime; `break` exits early\n- `if (isPrime) System.out.print(n)` — executes after the inner loop finishes for each candidate\n- `for (int col = 0; col < row; col++)` — runs `row` times per outer iteration, printing one star per column"
+    },
+    "exercise": {
+      "title": "Print a Multiplication Row Table",
+      "instructions": "Write a Java program that prints a formatted multiplication table for the number 7 from 1 to 10. Use a single for loop (not nested). For each iteration i from 1 to 10, print in this exact format: '7 x  i =  result' using printf with %2d for i and %3d for the result to align columns.\n\nExpected output:\n7 x  1 =   7\n7 x  2 =  14\n...\n7 x 10 =  70",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        System.out.println(\"--- 7 Times Table ---\");\n\n        for (int i = 1; i <= 10; i++) {\n            // Use printf to print: 7 x <i> = <result>\n            // Use %2d for i and %3d for the result\n            // Your code here\n        }\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"--- 7 Times Table ---\");\n        for (int i = 1; i <= 10; i++) {\n            System.out.printf(\"7 x %2d = %3d%n\", i, 7 * i);\n        }\n    }\n}",
+      "hints": [
+        "💡 Inside the loop, use System.out.printf(\"7 x %2d = %3d%n\", i, 7 * i);",
+        "💡 %2d formats i right-aligned in a 2-character field; %3d formats the result in a 3-character field.",
+        "💡 7 * i computes the product inline inside the printf call — no extra variable needed."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "7 x  1 =   7",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "7 x 10 =  70",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m4-l3-q1",
+          "question": "If the outer loop runs 4 times and the inner loop runs 3 times, how many total times does the inner body execute?",
+          "options": [
+            "4 times",
+            "7 times",
+            "3 times",
+            "12 times"
+          ],
+          "correct": 3,
+          "explanation": "In a nested loop, the inner body executes once for every combination of outer and inner iterations. If the outer loop runs 4 times and the inner runs 3 times for each outer iteration, the inner body executes 4 × 3 = 12 times total. This multiplicative relationship is why nested loops can be expensive for large iteration counts."
+        },
+        {
+          "id": "java-m4-l3-q2",
+          "question": "What does a labelled break statement do in nested loops?",
+          "options": [
+            "Breaks out of only the innermost loop",
+            "Pauses execution of the specified loop",
+            "Skips the current iteration of the labelled loop",
+            "Breaks out of the loop identified by the label, including any loops inside it"
+          ],
+          "correct": 3,
+          "explanation": "A plain break exits only the innermost loop. A labelled break (break labelName) exits the loop that the label is attached to, along with all loops nested inside it. Labels are placed immediately before the loop statement they name. This avoids needing a boolean flag variable to signal an exit from deeply nested loops."
+        }
+      ]
+    }
+  }
+]

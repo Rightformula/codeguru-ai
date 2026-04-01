@@ -1,0 +1,221 @@
+[
+  {
+    "id": "html-m4-l1",
+    "moduleId": "html-m4",
+    "title": "CSS Display and Positioning",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Controlling Element Layout with Display and Position",
+      "content": "# The display Property\n\nThe `display` property is the most fundamental layout tool in CSS. It controls how an element participates in the document flow.\n\n## Core display Values\n\n| Value | Behaviour |\n|---|---|\n| `block` | Full width, starts a new line — `div`, `p`, `h1`–`h6`, `section` |\n| `inline` | Flows with text, ignores width/height — `span`, `a`, `em`, `strong` |\n| `inline-block` | Flows with text but accepts width/height and box properties |\n| `none` | Element is completely removed from layout and invisible |\n| `flex` | Creates a flex container (covered next lesson) |\n| `grid` | Creates a grid container |\n\n## The position Property\n\n`position` controls where an element is placed relative to its normal location or a parent:\n\n| Value | How it works |\n|---|---|\n| `static` | Default — follows normal document flow |\n| `relative` | Offset from its normal position using top/right/bottom/left |\n| `absolute` | Removed from flow; positioned relative to nearest positioned ancestor |\n| `fixed` | Removed from flow; always stays in the same viewport position |\n| `sticky` | Scrolls normally, then sticks to the viewport when reaching a threshold |\n\n```css\n/* Relative — shifts 20px down from its normal position */\n.badge {\n  position: relative;\n  top: 20px;\n}\n\n/* Absolute — top-right corner of its positioned parent */\n.tooltip {\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n\n/* Fixed — always visible in the bottom-right corner */\n.chat-button {\n  position: fixed;\n  bottom: 24px;\n  right: 24px;\n}\n```\n\n## Positioned Ancestor\n\nFor `position: absolute` to work predictably, the parent element must have `position: relative` (or absolute/fixed/sticky). If no positioned ancestor exists, the element positions itself relative to the `<body>`.\n\n## overflow Property\n\n```css\n.container {\n  overflow: hidden;   /* clips content that extends beyond bounds */\n  overflow: scroll;   /* always shows scrollbars */\n  overflow: auto;     /* shows scrollbars only when needed */\n  overflow-x: hidden; /* hide only horizontal overflow */\n}\n```\n\n## z-index — Stacking Order\n\nPositioned elements (not `static`) stack on top of each other. Higher `z-index` values appear in front:\n\n```css\n.overlay { position: fixed; z-index: 100; } /* in front */\n.content { position: relative; z-index: 1;  } /* behind */\n```\n\nIn the code example below, you will see a notification badge using absolute positioning and a sticky navigation bar."
+    },
+    "codeExample": {
+      "title": "Positioned Notification Badge",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Positioning</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n\n    /* Sticky nav stays at top while scrolling */\n    nav {\n      position: sticky;\n      top: 0;\n      background: #1e293b;\n      color: white;\n      padding: 14px 24px;\n      z-index: 10;\n    }\n\n    body { font-family: Arial, sans-serif; }\n    main { padding: 32px; }\n\n    /* Icon wrapper — relative so the badge can anchor to it */\n    .icon-wrapper {\n      position: relative;\n      display: inline-block;\n      font-size: 32px;\n      cursor: pointer;\n      margin: 16px;\n    }\n\n    /* Badge — absolutely positioned in top-right corner */\n    .badge {\n      position: absolute;\n      top: -6px;\n      right: -10px;\n      background: #ef4444;\n      color: white;\n      font-size: 11px;\n      font-weight: 700;\n      padding: 2px 6px;\n      border-radius: 999px;\n      min-width: 20px;\n      text-align: center;\n    }\n\n    /* Fixed button always in bottom-right corner */\n    .fab {\n      position: fixed;\n      bottom: 24px;\n      right: 24px;\n      background: #22c55e;\n      color: white;\n      border: none;\n      border-radius: 50%;\n      width: 56px;\n      height: 56px;\n      font-size: 24px;\n      cursor: pointer;\n    }\n  </style>\n</head>\n<body>\n\n  <nav>CodeGuru AI — Navigation (sticky)</nav>\n\n  <main>\n    <h1>Notification Badges</h1>\n    <p>The red badges use <code>position: absolute</code> on a\n       <code>position: relative</code> parent.</p>\n\n    <div class=\"icon-wrapper\">\n      📬\n      <span class=\"badge\">3</span>\n    </div>\n\n    <div class=\"icon-wrapper\">\n      🔔\n      <span class=\"badge\">12</span>\n    </div>\n  </main>\n\n  <button class=\"fab\">+</button>\n\n</body>\n</html>",
+      "explanation": "- `position: sticky; top: 0` on `nav` — scrolls with the page until it hits the top, then sticks there\n- `z-index: 10` on `nav` — keeps the nav above any content that scrolls underneath it\n- `position: relative` on `.icon-wrapper` — establishes the positioning context for the badge inside it\n- `position: absolute; top: -6px; right: -10px` on `.badge` — anchors the badge to the top-right corner of the wrapper\n- `position: fixed; bottom: 24px; right: 24px` on `.fab` — locks the button to the viewport corner regardless of scroll"
+    },
+    "exercise": {
+      "title": "Create a Card with an Absolute Badge",
+      "instructions": "Build a product card with an absolute-positioned sale badge. Create a div with class 'card' that has position relative, a border, padding 20px, max-width 260px, and border-radius 8px. Inside it add a span with class 'sale-badge' that has position absolute, top 0, right 0, background-color #ef4444, color white, padding 4px 10px, and border-radius 0 8px 0 8px. Also add an h3 product name and a p price inside the card.\n\nExpected: card with a red badge in the top-right corner.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Product Card</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; padding: 40px; background: #f8fafc; }\n\n    .card {\n      /* Add: position relative, border, padding 20px,\n         max-width 260px, border-radius 8px, background white */\n    }\n\n    .sale-badge {\n      /* Add: position absolute, top 0, right 0,\n         background #ef4444, color white,\n         padding 4px 10px, border-radius 0 8px 0 8px */\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <span class=\"sale-badge\">SALE</span>\n    <h3>Mechanical Keyboard</h3>\n    <p>₹2499 <del>₹3999</del></p>\n  </div>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Product Card</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; padding: 40px; background: #f8fafc; }\n    .card { position: relative; border: 1px solid #e2e8f0; padding: 20px; max-width: 260px; border-radius: 8px; background: white; }\n    .sale-badge { position: absolute; top: 0; right: 0; background: #ef4444; color: white; padding: 4px 10px; border-radius: 0 8px 0 8px; font-size: 12px; font-weight: 700; }\n  </style>\n</head>\n<body>\n  <div class=\"card\">\n    <span class=\"sale-badge\">SALE</span>\n    <h3>Mechanical Keyboard</h3>\n    <p>₹2499 <del>₹3999</del></p>\n  </div>\n</body>\n</html>",
+      "hints": [
+        "💡 Add position: relative to .card so the badge can position itself inside it.",
+        "💡 Add position: absolute; top: 0; right: 0; to .sale-badge to anchor it to the top-right of the card.",
+        "💡 border-radius: 0 8px 0 8px sets corners individually: top-left, top-right, bottom-right, bottom-left."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "position: relative",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "position: absolute",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m4-l1-q1",
+          "question": "What must a parent element have for position: absolute to work predictably on a child?",
+          "options": [
+            "display: block",
+            "position: relative (or absolute, fixed, or sticky)",
+            "overflow: hidden",
+            "z-index: 1"
+          ],
+          "correct": 1,
+          "explanation": "An absolutely positioned element is placed relative to its nearest ancestor that has a position other than static. If no such ancestor exists, it positions itself relative to the initial viewport. Adding position: relative to the parent element (without changing its visual position) creates the positioning context the child needs."
+        },
+        {
+          "id": "html-m4-l1-q2",
+          "question": "What is the difference between position: fixed and position: sticky?",
+          "options": [
+            "They are identical — both fix the element to the viewport",
+            "Fixed is always at the same viewport position; sticky scrolls normally then sticks at a threshold",
+            "Sticky is always at the same viewport position; fixed scrolls normally then sticks",
+            "Fixed only works horizontally; sticky only works vertically"
+          ],
+          "correct": 1,
+          "explanation": "position: fixed removes the element from document flow and fixes it at a specific viewport position regardless of scrolling — it never moves. position: sticky keeps the element in the document flow and scrolls with the page normally until it reaches the threshold set by top/bottom/left/right, at which point it sticks until its parent scrolls out of view."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m4-l2",
+    "moduleId": "html-m4",
+    "title": "Flexbox: Axes and Alignment",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Arranging Elements in One Direction with Flexbox",
+      "content": "# CSS Flexbox\n\nBefore Flexbox, centering a div vertically in CSS was famously difficult. Flexbox (Flexible Box Layout) changed everything. It lets you arrange items in a row or column, distribute space between them, and align them — all in a few lines of CSS.\n\n## Activating Flexbox\n\nAdd `display: flex` to a **container** element. All its direct children become **flex items**:\n\n```html\n<div class=\"container\">   <!-- flex container -->\n  <div>Item 1</div>        <!-- flex item -->\n  <div>Item 2</div>        <!-- flex item -->\n  <div>Item 3</div>        <!-- flex item -->\n</div>\n```\n\n```css\n.container { display: flex; }\n```\n\n## The Two Axes\n\nFlexbox works along two axes:\n\n- **Main axis** — the direction items flow (default: horizontal, left to right)\n- **Cross axis** — perpendicular to the main axis (default: vertical)\n\n`flex-direction` sets the main axis:\n\n| Value | Main axis direction |\n|---|---|\n| `row` | Left to right (default) |\n| `row-reverse` | Right to left |\n| `column` | Top to bottom |\n| `column-reverse` | Bottom to top |\n\n## Alignment Properties\n\n```css\n.container {\n  display: flex;\n  flex-direction: row;\n\n  /* Main axis alignment */\n  justify-content: flex-start;    /* default */\n  /* flex-end | center | space-between | space-around | space-evenly */\n\n  /* Cross axis alignment */\n  align-items: stretch;           /* default */\n  /* flex-start | flex-end | center | baseline */\n\n  /* Wrap when items overflow */\n  flex-wrap: nowrap;              /* default */\n  /* wrap | wrap-reverse */\n\n  gap: 16px;                     /* space between flex items */\n}\n```\n\n## Flex Item Properties\n\n```css\n.item {\n  flex: 1;          /* shorthand: grow=1, shrink=1, basis=0 */\n  flex-grow: 1;     /* how much extra space to absorb */\n  flex-shrink: 0;   /* do not shrink when space is tight */\n  align-self: center; /* override container's align-items for this item only */\n}\n```\n\n`flex: 1` on all items distributes available space equally. `flex: 2` on one item gives it twice as much space as the others.\n\nIn the code example below, you will see `justify-content` and `align-items` demonstrated with a navigation bar and a centred hero section."
+    },
+    "codeExample": {
+      "title": "Flexbox Navigation and Hero",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Flexbox Demo</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; }\n\n    /* Nav: logo left, links right */\n    nav {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background: #1e293b;\n      color: white;\n      padding: 14px 32px;\n    }\n    nav .links { display: flex; gap: 24px; }\n    nav a { color: #94a3b8; text-decoration: none; font-size: 14px; }\n    nav a:hover { color: white; }\n\n    /* Hero: content centred vertically and horizontally */\n    .hero {\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n      min-height: 320px;\n      background: #f1f5f9;\n      text-align: center;\n      padding: 40px 20px;\n      gap: 16px;\n    }\n    .hero h1 { font-size: 36px; color: #0f172a; }\n    .hero p  { color: #64748b; max-width: 500px; }\n    .hero .btn {\n      background: #22c55e;\n      color: white;\n      padding: 12px 28px;\n      border: none;\n      border-radius: 8px;\n      font-size: 16px;\n      cursor: pointer;\n    }\n\n    /* Three equal-width cards */\n    .cards {\n      display: flex;\n      gap: 16px;\n      padding: 32px;\n    }\n    .card {\n      flex: 1;\n      background: white;\n      border: 1px solid #e2e8f0;\n      border-radius: 8px;\n      padding: 20px;\n    }\n    .card h3 { color: #22c55e; margin-bottom: 8px; }\n  </style>\n</head>\n<body>\n\n  <nav>\n    <strong>CodeGuru AI</strong>\n    <div class=\"links\">\n      <a href=\"#\">Home</a>\n      <a href=\"#\">Courses</a>\n      <a href=\"#\">Pricing</a>\n    </div>\n  </nav>\n\n  <section class=\"hero\">\n    <h1>Learn to Code in India</h1>\n    <p>AI-powered lessons in Python, JavaScript, Java, and HTML/CSS.</p>\n    <button class=\"btn\">Start for Free</button>\n  </section>\n\n  <div class=\"cards\">\n    <div class=\"card\"><h3>Learn</h3><p>Expert-made lessons with live examples.</p></div>\n    <div class=\"card\"><h3>Practice</h3><p>Hands-on coding in every lesson.</p></div>\n    <div class=\"card\"><h3>Progress</h3><p>Track your XP and streak daily.</p></div>\n  </div>\n\n</body>\n</html>",
+      "explanation": "- `justify-content: space-between` on `nav` — pushes the logo to the left edge and links to the right edge\n- `align-items: center` on `nav` — vertically centres both the logo and the link group in the nav bar\n- `flex-direction: column` on `.hero` — stacks children vertically instead of horizontally\n- `justify-content: center; align-items: center` on `.hero` — centres children both vertically and horizontally\n- `gap: 16px` — adds uniform spacing between flex items without needing margins\n- `flex: 1` on `.card` — each card grows equally to fill the available width"
+    },
+    "exercise": {
+      "title": "Build a Flexbox Pricing Row",
+      "instructions": "Create a row of three pricing cards using Flexbox. The container div must have display flex, gap 24px, and padding 40px. Each card (class 'plan') must use flex: 1, have a border, border-radius 10px, padding 24px, and text-align center. The middle card should have background-color #22c55e and color white to highlight it. Each card needs an h3 plan name and a p description.\n\nExpected: three equal-width cards side by side, middle one green.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Pricing Plans</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; }\n\n    .plans {\n      /* Add: display flex, gap 24px, padding 40px */\n    }\n\n    .plan {\n      /* Add: flex 1, border, border-radius 10px, padding 24px, text-align center */\n      background: white;\n    }\n\n    .plan.featured {\n      background-color: #22c55e;\n      color: white;\n    }\n\n    .plan h3 { margin-bottom: 8px; font-size: 20px; }\n  </style>\n</head>\n<body>\n\n  <div class=\"plans\">\n    <div class=\"plan\">\n      <h3>Starter</h3>\n      <p>1 language, community support.</p>\n    </div>\n    <div class=\"plan featured\">\n      <h3>Pro</h3>\n      <p>All languages + AI mentor.</p>\n    </div>\n    <div class=\"plan\">\n      <h3>Bundle</h3>\n      <p>Teams and offline access.</p>\n    </div>\n  </div>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Pricing Plans</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; }\n    .plans { display: flex; gap: 24px; padding: 40px; }\n    .plan { flex: 1; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; text-align: center; background: white; }\n    .plan.featured { background-color: #22c55e; color: white; border-color: #16a34a; }\n    .plan h3 { margin-bottom: 8px; font-size: 20px; }\n  </style>\n</head>\n<body>\n  <div class=\"plans\">\n    <div class=\"plan\"><h3>Starter</h3><p>1 language, community support.</p></div>\n    <div class=\"plan featured\"><h3>Pro</h3><p>All languages + AI mentor.</p></div>\n    <div class=\"plan\"><h3>Bundle</h3><p>Teams and offline access.</p></div>\n  </div>\n</body>\n</html>",
+      "hints": [
+        "💡 Add display: flex; gap: 24px; padding: 40px; to .plans to activate Flexbox layout.",
+        "💡 Add flex: 1; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; text-align: center; to .plan.",
+        "💡 The .plan.featured rule targets elements that have both classes — no extra HTML changes needed."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "display: flex",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "flex: 1",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m4-l2-q1",
+          "question": "Which property do you add to a container to make it a flex container?",
+          "options": [
+            "flex: 1",
+            "display: flex",
+            "flexbox: enabled",
+            "flex-direction: row"
+          ],
+          "correct": 1,
+          "explanation": "display: flex applied to a container element activates Flexbox. All of its direct children automatically become flex items. flex: 1 is a property for flex items, not the container. flex-direction: row is a container property but only controls the direction of an already-activated flex container."
+        },
+        {
+          "id": "html-m4-l2-q2",
+          "question": "What does justify-content: space-between do in a flex container?",
+          "options": [
+            "Centres all items vertically",
+            "Adds equal space around all items",
+            "Places the first item at the start, last at the end, with equal gaps between",
+            "Makes all items the same width"
+          ],
+          "correct": 2,
+          "explanation": "justify-content: space-between distributes items along the main axis so the first item is flush with the start, the last item is flush with the end, and remaining space is distributed equally between the items. Compare with space-around (equal space on both sides of each item) and space-evenly (equal space between all items and edges)."
+        },
+        {
+          "id": "html-m4-l2-q3",
+          "question": "What does flex: 1 do when applied to multiple flex items?",
+          "options": [
+            "Sets each item's width to 1 pixel",
+            "Makes each item take up one row",
+            "Allows each item to grow equally and share available space",
+            "Fixes each item at the first position"
+          ],
+          "correct": 2,
+          "explanation": "flex: 1 is shorthand for flex-grow: 1, flex-shrink: 1, flex-basis: 0. When multiple items all have flex: 1, they share the available space equally. If one item has flex: 2 and two others have flex: 1, the first item takes half the space and the others share the remaining half."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m4-l3",
+    "moduleId": "html-m4",
+    "title": "Flexbox Layouts in Practice",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "14 min",
+    "explanation": {
+      "title": "Building Real Page Layouts with Flexbox",
+      "content": "# Building Layouts with Flexbox\n\nNow that you know the Flexbox properties, the skill is combining them to build the page layouts you see every day: navigation bars, card grids, sidebars, footers, and centred hero sections.\n\n## Common Layout Patterns\n\n### Pattern 1 — Horizontal Navigation Bar\n```css\nnav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n```\n\n### Pattern 2 — Equal-Width Card Row\n```css\n.cards { display: flex; gap: 16px; }\n.card  { flex: 1; }\n```\n\n### Pattern 3 — Centred Content (vertical + horizontal)\n```css\n.hero {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 400px;\n}\n```\n\n### Pattern 4 — Sidebar + Main Content\n```css\n.layout  { display: flex; gap: 24px; }\n.sidebar { width: 240px; flex-shrink: 0; }\n.main    { flex: 1; }\n```\n\n### Pattern 5 — Wrapping Card Grid\n```css\n.grid {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;\n}\n.grid-item {\n  flex: 0 0 calc(33.333% - 11px); /* 3 columns with gap */\n}\n```\n\n## flex-wrap for Responsive Rows\n\nBy default, flex items never wrap — they shrink to fit. Adding `flex-wrap: wrap` lets items drop to the next line when there is not enough space:\n\n```css\n.cards {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;\n}\n.card { flex: 0 0 300px; }  /* minimum 300px each */\n```\n\n## Centering a Single Item\n\n```css\n.parent {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n```\n\nThis is the modern replacement for the old `margin: auto` hack. Two lines of CSS and a child is perfectly centred both ways.\n\n## Order Property\n\n```css\n.item { order: 2; }  /* default is 0; higher = later in visual order */\n```\n\nYou can reorder flex items visually without changing the HTML source order. Useful for responsive design — show sidebar below content on mobile.\n\nIn the code example below, you will see a complete sidebar layout and a wrapping card grid built with Flexbox."
+    },
+    "codeExample": {
+      "title": "Sidebar and Wrapping Card Grid",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Flexbox Layouts</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; color: #1e293b; }\n\n    /* Sticky top nav */\n    header {\n      background: #1e293b; color: white;\n      display: flex; justify-content: space-between; align-items: center;\n      padding: 14px 24px;\n    }\n    header nav { display: flex; gap: 20px; }\n    header a  { color: #94a3b8; text-decoration: none; font-size: 14px; }\n\n    /* Sidebar + Main layout */\n    .page-layout {\n      display: flex;\n      min-height: calc(100vh - 50px);\n    }\n\n    .sidebar {\n      width: 220px;\n      flex-shrink: 0;          /* sidebar keeps its width */\n      background: #fff;\n      border-right: 1px solid #e2e8f0;\n      padding: 24px 16px;\n    }\n    .sidebar h3 { font-size: 12px; text-transform: uppercase;\n                  color: #94a3b8; letter-spacing: 0.08em; margin-bottom: 12px; }\n    .sidebar ul { list-style: none; }\n    .sidebar li { padding: 8px 12px; border-radius: 6px; cursor: pointer; }\n    .sidebar li:hover { background: #f1f5f9; }\n    .sidebar li.active { background: #dcfce7; color: #16a34a; font-weight: 600; }\n\n    /* Main content area */\n    .main { flex: 1; padding: 24px; }\n    .main h2 { margin-bottom: 16px; }\n\n    /* Wrapping card grid */\n    .grid {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 16px;\n    }\n    .course-card {\n      flex: 0 0 calc(50% - 8px); /* 2 columns */\n      background: white;\n      border: 1px solid #e2e8f0;\n      border-radius: 10px;\n      padding: 20px;\n    }\n    .course-card h4 { color: #22c55e; margin-bottom: 6px; }\n    .course-card p  { font-size: 14px; color: #64748b; }\n  </style>\n</head>\n<body>\n\n  <header>\n    <strong>CodeGuru AI</strong>\n    <nav><a href=\"#\">Home</a><a href=\"#\">Dashboard</a><a href=\"#\">Profile</a></nav>\n  </header>\n\n  <div class=\"page-layout\">\n    <aside class=\"sidebar\">\n      <h3>Menu</h3>\n      <ul>\n        <li class=\"active\">My Courses</li>\n        <li>Progress</li>\n        <li>Leaderboard</li>\n        <li>Settings</li>\n      </ul>\n    </aside>\n\n    <main class=\"main\">\n      <h2>My Courses</h2>\n      <div class=\"grid\">\n        <div class=\"course-card\"><h4>Python Beginner</h4><p>6 modules · 40 hours</p></div>\n        <div class=\"course-card\"><h4>JavaScript Basics</h4><p>6 modules · 35 hours</p></div>\n        <div class=\"course-card\"><h4>HTML &amp; CSS</h4><p>6 modules · 30 hours</p></div>\n        <div class=\"course-card\"><h4>Java Fundamentals</h4><p>6 modules · 45 hours</p></div>\n      </div>\n    </main>\n  </div>\n\n</body>\n</html>",
+      "explanation": "- `display: flex` on `.page-layout` with no `flex-direction` — items flow in a row (sidebar left, main right)\n- `flex-shrink: 0` on `.sidebar` — prevents the sidebar from shrinking when the window narrows\n- `flex: 1` on `.main` — the main content area absorbs all remaining horizontal space\n- `flex-wrap: wrap` on `.grid` — allows cards to drop to a new row when they cannot fit\n- `flex: 0 0 calc(50% - 8px)` on `.course-card` — sets grow=0, shrink=0, basis=half width minus half the 16px gap"
+    },
+    "exercise": {
+      "title": "Build a Two-Column Profile Layout",
+      "instructions": "Create a two-column layout using Flexbox. The outer container (class 'layout') needs display flex, gap 24px, padding 40px, and background #f8fafc. The left column (class 'sidebar') needs width 200px, flex-shrink 0, white background, border-radius 10px, and padding 20px. The right column (class 'content') needs flex 1, white background, border-radius 10px, and padding 20px.\n\nExpected: sidebar fixed at 200px, content fills remaining space.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Profile</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n\n    .layout {\n      /* Add: display flex, gap 24px, padding 40px, background #f8fafc */\n    }\n\n    .sidebar {\n      /* Add: width 200px, flex-shrink 0, background white,\n         border-radius 10px, padding 20px, text-align center */\n    }\n\n    .content {\n      /* Add: flex 1, background white, border-radius 10px, padding 20px */\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"layout\">\n    <aside class=\"sidebar\">\n      <h2>Priya Verma</h2>\n      <p style=\"color:#64748b; font-size:14px;\">Full-Stack Developer</p>\n    </aside>\n\n    <main class=\"content\">\n      <h2>About Me</h2>\n      <p>I build web applications using Python and JavaScript. Currently\n         learning advanced CSS layouts at CodeGuru AI.</p>\n    </main>\n  </div>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Profile</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    .layout { display: flex; gap: 24px; padding: 40px; background: #f8fafc; }\n    .sidebar { width: 200px; flex-shrink: 0; background: white; border-radius: 10px; padding: 20px; text-align: center; }\n    .content { flex: 1; background: white; border-radius: 10px; padding: 20px; }\n  </style>\n</head>\n<body>\n  <div class=\"layout\">\n    <aside class=\"sidebar\">\n      <h2>Priya Verma</h2>\n      <p style=\"color:#64748b; font-size:14px;\">Full-Stack Developer</p>\n    </aside>\n    <main class=\"content\">\n      <h2>About Me</h2>\n      <p>I build web applications using Python and JavaScript. Currently learning advanced CSS layouts at CodeGuru AI.</p>\n    </main>\n  </div>\n</body>\n</html>",
+      "hints": [
+        "💡 Add display: flex; gap: 24px; padding: 40px; background: #f8fafc; to .layout to activate the Flexbox row.",
+        "💡 Add width: 200px; flex-shrink: 0; to .sidebar so it stays at 200px and never shrinks.",
+        "💡 Add flex: 1; to .content so it absorbs all the remaining space not taken by the sidebar."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "display: flex",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "flex-shrink: 0",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m4-l3-q1",
+          "question": "What does flex-shrink: 0 prevent a flex item from doing?",
+          "options": [
+            "It prevents the item from growing when there is extra space",
+            "It prevents the item from shrinking when the container is too small",
+            "It prevents the item from wrapping to a new line",
+            "It prevents the item from accepting padding"
+          ],
+          "correct": 1,
+          "explanation": "By default, flex items have flex-shrink: 1, which allows them to shrink below their natural or specified size when the container runs out of space. Setting flex-shrink: 0 on an item like a sidebar prevents it from shrinking — it will always maintain its declared width even when the screen narrows."
+        },
+        {
+          "id": "html-m4-l3-q2",
+          "question": "What does flex-wrap: wrap do in a flex container?",
+          "options": [
+            "It wraps text inside each flex item",
+            "It allows flex items to flow onto multiple lines when they cannot fit on one line",
+            "It reverses the order of items",
+            "It makes all items the same height"
+          ],
+          "correct": 1,
+          "explanation": "By default, flex containers force all items onto a single line and shrink them to fit. Adding flex-wrap: wrap allows items to break onto additional lines when there is not enough space. This is essential for responsive card grids — at wide screens all cards fit in one row; on narrow screens they wrap into two or more rows."
+        }
+      ]
+    }
+  }
+]

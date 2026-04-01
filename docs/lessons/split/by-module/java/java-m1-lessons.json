@@ -1,0 +1,228 @@
+[
+  {
+    "id": "java-m1-l1",
+    "moduleId": "java-m1",
+    "title": "What is Java?",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "9 min",
+    "explanation": {
+      "title": "What is Java and Why Is It Everywhere?",
+      "content": "# What is Java?\n\nImagine an instruction manual written so clearly that it works for any machine ever built — no matter if the machine was made in India, Germany, or Japan. **Java** is a programming language with the same promise: write your code once, and it runs on any device that has a Java Virtual Machine installed.\n\nJava was created at Sun Microsystems by James Gosling and released in 1995. Its famous slogan is **\"Write Once, Run Anywhere\"** — meaning the same compiled Java code runs identically on Windows, macOS, Linux, Android phones, and even smart cards.\n\n## Where Java Is Used Today\n\n| Industry | What Java Powers |\n|---|---|\n| Mobile | Android apps (billions of devices) |\n| Enterprise | Banking systems, ERP software, insurance platforms |\n| Web Back-End | Netflix, LinkedIn, Amazon back-end services |\n| Big Data | Apache Hadoop and Spark processing pipelines |\n| Embedded | Smart cards, Blu-ray players, ATMs |\n\n## How Java Works\n\nJava is a **compiled and interpreted** language:\n\n1. You write `.java` source code\n2. The Java compiler (`javac`) compiles it into **bytecode** (`.class` files)\n3. The **Java Virtual Machine (JVM)** reads the bytecode and executes it\n\nThis two-step process is why Java is platform-independent — the bytecode is the same everywhere, and the JVM handles platform-specific details.\n\n## Java vs Python vs JavaScript\n\n| Feature | Java | Python | JavaScript |\n|---|---|---|---|\n| Typing | Static | Dynamic | Dynamic |\n| Speed | Fast | Moderate | Fast (V8) |\n| Primary use | Enterprise, Android | Data science, AI | Web front-end |\n| Verbosity | High | Low | Medium |\n\nJava requires more boilerplate than Python, but this explicitness makes large codebases easier to maintain. In the code example below, you will see the minimum required structure for any valid Java program."
+    },
+    "codeExample": {
+      "title": "Your First Java Program",
+      "language": "java",
+      "code": "// Every Java program starts with a class.\n// The class name MUST match the filename (here: Main.java).\npublic class Main {\n\n    // The main method is the entry point — Java starts here.\n    public static void main(String[] args) {\n\n        // System.out.println() prints text and moves to the next line.\n        System.out.println(\"Hello, World!\");\n        System.out.println(\"I am learning Java!\");\n\n        // You can print numbers directly — no quotes needed.\n        System.out.println(2025);\n\n        // Arithmetic is evaluated before printing.\n        System.out.println(100 + 200);\n    }\n}",
+      "explanation": "- `public class Main` — every Java program lives inside a class; the class name must match the filename\n- `public static void main(String[] args)` — the entry point; Java starts executing here when you run the program\n- `System.out.println()` — prints the argument and moves to a new line; `println` means 'print line'\n- `2025` without quotes — a number literal; Java prints it directly without conversion\n- `100 + 200` — arithmetic evaluated to `300` before printing; Java computes first, then displays"
+    },
+    "exercise": {
+      "title": "Print a Personal Profile",
+      "instructions": "Write a Java program that prints four lines: your full name on line 1, your city on line 2, your age as a number on line 3, and the current year (2025) on line 4. Each line must use System.out.println(). Text values must be in double quotes; numbers must not have quotes.\n\nExpected output example:\nAmit Sharma\nDelhi\n22\n2025",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        // Line 1: print your full name (use double quotes)\n        System.out.println(\"Your Name Here\");\n\n        // Line 2: print your city\n        System.out.println(\"Your City Here\");\n\n        // Line 3: print your age as a number (no quotes)\n        // Your code here\n\n        // Line 4: print the year 2025 as a number\n        // Your code here\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Amit Sharma\");\n        System.out.println(\"Delhi\");\n        System.out.println(22);\n        System.out.println(2025);\n    }\n}",
+      "hints": [
+        "💡 Each piece of information needs its own System.out.println() call on a separate line.",
+        "💡 Text values like your name and city must be inside double quotes: System.out.println(\"Delhi\");",
+        "💡 Numbers like your age and the year do not need quotes: System.out.println(22);"
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": null,
+          "checkType": "contains_print"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m1-l1-q1",
+          "question": "What does Java's 'Write Once, Run Anywhere' promise mean?",
+          "options": [
+            "Java code can only be written once and never modified",
+            "Java code compiles to bytecode that runs on any platform with a JVM",
+            "Java runs faster than all other programming languages",
+            "Java programs automatically install on any device"
+          ],
+          "correct": 1,
+          "explanation": "Write Once, Run Anywhere means Java source code is compiled into bytecode, which runs identically on any platform that has a Java Virtual Machine (JVM) installed. The JVM handles all platform-specific differences, so you do not need to rewrite or recompile code for Windows, macOS, or Linux."
+        },
+        {
+          "id": "java-m1-l1-q2",
+          "question": "Which method is the entry point that Java executes first in every program?",
+          "options": [
+            "public static void start(String[] args)",
+            "public void run()",
+            "public static void main(String[] args)",
+            "public static void begin()"
+          ],
+          "correct": 2,
+          "explanation": "public static void main(String[] args) is the mandatory entry point for every Java application. When you run a Java program, the JVM looks for this exact method signature inside the specified class and begins execution there. Every keyword in this signature — public, static, void, main — is required."
+        },
+        {
+          "id": "java-m1-l1-q3",
+          "question": "What is the role of the Java Virtual Machine (JVM)?",
+          "options": [
+            "It writes Java source code automatically",
+            "It converts bytecode into platform-specific machine instructions and executes them",
+            "It compiles Java source files into bytecode",
+            "It stores Java programs on the internet"
+          ],
+          "correct": 1,
+          "explanation": "The JVM reads the compiled bytecode (.class files) and converts it into machine instructions specific to the operating system and hardware it is running on. This is what makes Java platform-independent: the compiler produces bytecode once, and the JVM on each platform handles the final execution."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m1-l2",
+    "moduleId": "java-m1",
+    "title": "Printing Output and Comments",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "10 min",
+    "explanation": {
+      "title": "Displaying Output and Writing Comments in Java",
+      "content": "# Java Output Methods\n\nJava provides three ways to display output. Choosing the right one depends on whether you want a newline after your text.\n\n## System.out.println() — Print and Move to Next Line\n\n```java\nSystem.out.println(\"Hello\");  // prints Hello then goes to next line\nSystem.out.println(\"World\");  // prints World on a new line\n```\n\nOutput:\n```\nHello\nWorld\n```\n\n## System.out.print() — Print Without Newline\n\n```java\nSystem.out.print(\"Hello\");\nSystem.out.print(\" World\");\nSystem.out.println(\"!\");  // only this one adds a newline\n```\n\nOutput: `Hello World!`\n\n## System.out.printf() — Formatted Output\n\n`printf` uses **format specifiers** to control how values are inserted:\n\n```java\nString name  = \"Rahul\";\nint    score = 92;\ndouble gpa   = 3.85;\n\nSystem.out.printf(\"Name: %s, Score: %d, GPA: %.2f%n\", name, score, gpa);\n// Output: Name: Rahul, Score: 92, GPA: 3.85\n```\n\n| Specifier | Type | Example |\n|---|---|---|\n| `%s` | String | `\"Rahul\"` |\n| `%d` | Integer | `42` |\n| `%f` | Float/double | `3.14` |\n| `%.2f` | Float to 2 decimals | `3.85` |\n| `%n` | Newline (platform-safe) | |\n\n## Comments\n\nComments are notes for humans — the Java compiler ignores them completely:\n\n```java\n// Single-line comment — everything after // is ignored\n\n/* Multi-line comment\n   spans as many lines\n   as needed */\n\n/** Javadoc comment — used to generate API documentation */\n```\n\nWrite comments to explain **why** your code does something, not just what it does. Good comments are the mark of a professional programmer.\n\nIn the code example below, you will see all three output methods and all three comment styles used in a student report scenario."
+    },
+    "codeExample": {
+      "title": "Student Report Printer",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        // Student data\n        String name  = \"Priya Verma\";\n        int    marks = 88;\n        double gpa   = 3.75;\n\n        /* Print the report header using print (no newline)\n           then println for the final newline. */\n        System.out.print(\"=== \");\n        System.out.print(\"Student Report\");\n        System.out.println(\" ===\");\n\n        // Use println for each labelled field\n        System.out.println(\"Name  : \" + name);\n        System.out.println(\"Marks : \" + marks);\n\n        // Use printf for formatted decimal output\n        System.out.printf(\"GPA   : %.2f%n\", gpa);\n        System.out.printf(\"Grade : %s%n\", marks >= 90 ? \"A\" : \"B\");\n    }\n}",
+      "explanation": "- `System.out.print(\"=== \")` — prints without a newline; the next print continues on the same line\n- `System.out.println(\" ===\")` — completes the header line and moves to the next line\n- `\"Name  : \" + name` — the `+` operator concatenates a string literal with the variable value\n- `System.out.printf(\"GPA   : %.2f%n\", gpa)` — `%.2f` formats `gpa` to exactly two decimal places; `%n` adds a newline\n- `marks >= 90 ? \"A\" : \"B\"` — a ternary expression evaluated inside `printf`; produces `\"A\"` or `\"B\"` at runtime"
+    },
+    "exercise": {
+      "title": "Print a Formatted Invoice",
+      "instructions": "Write a Java program that prints a formatted invoice using all three output methods. Define: String item = \"Laptop\", int qty = 2, double price = 45000.0. Print a header line using print() and println() combined. Then print item and qty using println(). Finally, use printf() to print the total (qty * price) formatted to 2 decimal places. Label each line clearly.\n\nExpected output includes item name, quantity, and formatted total like 90000.00",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        String item  = \"Laptop\";\n        int    qty   = 2;\n        double price = 45000.0;\n\n        // Print header using print + println\n        System.out.print(\"--- \");\n        System.out.println(\"Invoice ---\");\n\n        // Print item and qty using println\n        System.out.println(\"Item     : \" + item);\n        // Your code: print qty\n\n        // Use printf to print total (qty * price) with 2 decimal places\n        // Your code here\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        String item  = \"Laptop\";\n        int    qty   = 2;\n        double price = 45000.0;\n\n        System.out.print(\"--- \");\n        System.out.println(\"Invoice ---\");\n        System.out.println(\"Item     : \" + item);\n        System.out.println(\"Quantity : \" + qty);\n        System.out.printf(\"Total    : %.2f%n\", qty * price);\n    }\n}",
+      "hints": [
+        "💡 Print qty with: System.out.println(\"Quantity : \" + qty);",
+        "💡 For printf, compute the total inline: System.out.printf(\"Total    : %.2f%n\", qty * price);",
+        "💡 %.2f formats a double to exactly two decimal places, and %n adds a platform-safe newline."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Invoice",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "90000",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m1-l2-q1",
+          "question": "What is the difference between System.out.print() and System.out.println()?",
+          "options": [
+            "print() is faster; println() formats numbers automatically",
+            "println() adds a newline after output; print() does not",
+            "print() only works with strings; println() works with all types",
+            "They are identical — both add a newline after printing"
+          ],
+          "correct": 1,
+          "explanation": "println() (print line) prints its argument and then moves the cursor to the beginning of the next line, so subsequent output appears on a new line. print() outputs its argument and leaves the cursor exactly where it stopped, so the next print() continues on the same line. Use println() for complete lines and print() when building a line piece by piece."
+        },
+        {
+          "id": "java-m1-l2-q2",
+          "question": "What does the format specifier %.2f do inside System.out.printf()?",
+          "options": [
+            "Prints a string with exactly 2 characters",
+            "Prints an integer divided by 2",
+            "Prints a floating-point number rounded to exactly 2 decimal places",
+            "Prints a boolean value twice"
+          ],
+          "correct": 2,
+          "explanation": "The format specifier %.2f instructs printf to format a float or double value with exactly two digits after the decimal point. The % starts the specifier, . sets decimal precision, 2 is the number of decimal places, and f indicates a floating-point argument. So 3.14159 formatted with %.2f displays as 3.14."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m1-l3",
+    "moduleId": "java-m1",
+    "title": "Variables and Primitive Data Types",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Storing Data with Variables and Java's Eight Primitive Types",
+      "content": "# Variables in Java\n\nA **variable** is a named storage location in memory. Unlike Python or JavaScript, Java is **statically typed** — you must declare the type of a variable before you use it, and that type cannot change:\n\n```java\nint    age  = 21;          // integer\ndouble gpa  = 3.85;        // decimal number\nchar   grade = 'A';        // single character\nboolean isEnrolled = true; // true or false\n```\n\nThe `=` sign is the **assignment operator** — it stores the value on the right into the variable on the left.\n\n## The Eight Primitive Types\n\n| Type | Size | Range / Use | Example |\n|---|---|---|---|\n| `byte` | 1 byte | -128 to 127 | `byte b = 100;` |\n| `short` | 2 bytes | -32,768 to 32,767 | `short s = 1000;` |\n| `int` | 4 bytes | ±2.1 billion | `int x = 42;` |\n| `long` | 8 bytes | ±9.2 quintillion | `long l = 10_000_000L;` |\n| `float` | 4 bytes | ~6-7 decimal digits | `float f = 3.14f;` |\n| `double` | 8 bytes | ~15-16 decimal digits | `double d = 3.14;` |\n| `char` | 2 bytes | One Unicode character | `char c = 'A';` |\n| `boolean` | 1 bit | `true` or `false` | `boolean b = true;` |\n\n## Important Suffixes\n\n- `long` literals need the `L` suffix: `long population = 1_400_000_000L;`\n- `float` literals need the `f` suffix: `float tax = 0.18f;`\n- Without these, Java treats integer literals as `int` and decimal literals as `double`\n\n## String — Not a Primitive\n\n`String` is a class, not a primitive type. It holds a sequence of characters and is written with a capital S:\n\n```java\nString name = \"Rahul Sharma\";   // double quotes only\nchar   init = 'R';              // char uses single quotes\n```\n\n## Variable Naming Conventions\n\nJava uses **camelCase** for variable names:\n```java\nint    totalMarks = 450;\nString firstName = \"Priya\";\nboolean isActive = false;\n```\n\nIn the code example below, you will see all eight primitive types declared together with a String, and type inspection using type-specific operations."
+    },
+    "codeExample": {
+      "title": "Data Types Explorer",
+      "language": "java",
+      "code": "public class Main {\n    public static void main(String[] args) {\n\n        // Integer types\n        byte  smallNum  = 100;\n        short medNum    = 30000;\n        int   age       = 21;\n        long  population = 1_400_000_000L;  // L suffix required\n\n        // Decimal types\n        float  taxRate = 0.18f;             // f suffix required\n        double price   = 1299.99;           // default for decimals\n\n        // Character and boolean\n        char    grade     = 'A';            // single quotes\n        boolean isActive  = true;\n\n        // String (not a primitive)\n        String  studentName = \"Kavitha\";\n\n        // Print each with its type\n        System.out.println(\"byte   : \" + smallNum);\n        System.out.println(\"int    : \" + age);\n        System.out.println(\"long   : \" + population);\n        System.out.printf (\"float  : %.2f%n\", taxRate);\n        System.out.printf (\"double : %.2f%n\", price);\n        System.out.println(\"char   : \" + grade);\n        System.out.println(\"boolean: \" + isActive);\n        System.out.println(\"String : \" + studentName);\n    }\n}",
+      "explanation": "- `long population = 1_400_000_000L` — `L` suffix marks a `long` literal; underscores improve readability\n- `float taxRate = 0.18f` — `f` suffix required; without it `0.18` is a `double`, causing a type mismatch\n- `char grade = 'A'` — `char` uses single quotes; `String` uses double quotes; mixing them causes a compile error\n- `boolean isActive = true` — only `true` or `false` are valid; Java is case-sensitive (`True` does not work)\n- `String studentName = \"Kavitha\"` — `String` is a class (capital S), not a primitive type"
+    },
+    "exercise": {
+      "title": "Build a Student Profile with Typed Variables",
+      "instructions": "Declare six typed variables for a student: String name, int rollNumber, double gpa, char grade, boolean isPassed, and long studentId. Set meaningful values for each. Then print all six on separate labelled lines using System.out.println(). Use printf for gpa with 2 decimal places. Each variable declaration must include the correct Java type.\n\nExpected: six labelled output lines with correct types used.",
+      "starterCode": "public class Main {\n    public static void main(String[] args) {\n\n        // Declare all six typed variables\n        String  name      = \"Vikram Singh\";\n        int     rollNumber = 42;\n        double  gpa        = 3.68;\n        char    grade      = 'B';\n        boolean isPassed   = true;\n        long    studentId  = 20250042L;\n\n        // Print each variable with a label\n        System.out.println(\"Name       : \" + name);\n        System.out.println(\"Roll No.   : \" + rollNumber);\n        // Your code: print gpa using printf with %.2f\n        // Your code: print grade, isPassed, studentId\n    }\n}",
+      "solutionCode": "public class Main {\n    public static void main(String[] args) {\n        String  name       = \"Vikram Singh\";\n        int     rollNumber = 42;\n        double  gpa        = 3.68;\n        char    grade      = 'B';\n        boolean isPassed   = true;\n        long    studentId  = 20250042L;\n\n        System.out.println(\"Name       : \" + name);\n        System.out.println(\"Roll No.   : \" + rollNumber);\n        System.out.printf (\"GPA        : %.2f%n\", gpa);\n        System.out.println(\"Grade      : \" + grade);\n        System.out.println(\"Passed     : \" + isPassed);\n        System.out.println(\"Student ID : \" + studentId);\n    }\n}",
+      "hints": [
+        "💡 Use System.out.printf(\"GPA : %.2f%n\", gpa); to print gpa with exactly two decimal places.",
+        "💡 Print the remaining variables with System.out.println(\"Grade : \" + grade); and repeat for isPassed and studentId.",
+        "💡 The + operator concatenates a String label with any variable — Java converts the variable to a string automatically."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Name",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "GPA",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m1-l3-q1",
+          "question": "Why does a float literal in Java require an 'f' suffix, like 3.14f?",
+          "options": [
+            "Without f, the number cannot be stored in memory",
+            "Without f, Java treats the decimal literal as a double and assigning it to a float causes a type mismatch",
+            "The f suffix makes the number compute faster",
+            "f stands for formatted — it triggers number formatting"
+          ],
+          "correct": 1,
+          "explanation": "In Java, any decimal literal like 3.14 is by default a double. Assigning a double to a float variable causes a possible loss of precision error because float has less precision than double. The f suffix tells the compiler this literal is a float, resolving the type mismatch. Similarly, long literals need an L suffix to distinguish them from int."
+        },
+        {
+          "id": "java-m1-l3-q2",
+          "question": "What is the key difference between char and String in Java?",
+          "options": [
+            "char holds any number of characters; String holds only one",
+            "char uses single quotes and holds exactly one character; String uses double quotes and holds a sequence",
+            "char and String are identical — both hold text values",
+            "char is faster than String for all operations"
+          ],
+          "correct": 1,
+          "explanation": "char is a primitive type that holds exactly one Unicode character and is written with single quotes: char c = 'A'. String is a class (not a primitive) that holds a sequence of zero or more characters and is written with double quotes: String s = \"Hello\". Using double quotes for a char or single quotes for a String causes a compile error."
+        },
+        {
+          "id": "java-m1-l3-q3",
+          "question": "Which Java primitive type should you use to store the population of India?",
+          "options": [
+            "int, because it handles most numbers",
+            "short, because population is a whole number",
+            "long, because 1.4 billion exceeds int's maximum of about 2.1 billion",
+            "double, because large numbers need decimal precision"
+          ],
+          "correct": 2,
+          "explanation": "int can hold values up to approximately 2.1 billion (2,147,483,647). India's population of roughly 1.4 billion fits in int, but to be safe for future growth or other large populations, long is the correct choice — it holds up to about 9.2 quintillion. The long literal must end with an L suffix: 1_400_000_000L."
+        }
+      ]
+    }
+  }
+]

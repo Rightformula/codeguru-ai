@@ -1,0 +1,216 @@
+[
+  {
+    "id": "html-m6-l1",
+    "moduleId": "html-m6",
+    "title": "Semantic HTML Elements",
+    "order": 1,
+    "xpReward": 15,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Writing Meaningful HTML with Semantic Elements",
+      "content": "# What is Semantic HTML?\n\nSemantic HTML means using elements that describe the **meaning** of their content, not just its visual appearance. Compare:\n\n```html\n<!-- Non-semantic: tells the browser nothing about content -->\n<div id=\"nav\">...</div>\n<div class=\"article\">...</div>\n<div id=\"footer\">...</div>\n\n<!-- Semantic: the element name reveals the content's role -->\n<nav>...</nav>\n<article>...</article>\n<footer>...</footer>\n```\n\nBoth render identically in a browser. But semantic HTML gives three major benefits:\n\n1. **Accessibility** — screen readers use semantic elements to help blind users navigate: `<nav>` means they can jump to the navigation, `<main>` means they can skip to the main content\n2. **SEO** — search engines use `<h1>`, `<article>`, `<main>` to understand what the page is about and rank it accordingly\n3. **Maintainability** — other developers (and your future self) understand the structure immediately\n\n## The Key Semantic Elements\n\n| Element | Meaning | Replaces |\n|---|---|---|\n| `<header>` | Page or section header | `<div id=\"header\">` |\n| `<nav>` | Navigation links | `<div id=\"nav\">` |\n| `<main>` | Primary page content (use once) | `<div id=\"main\">` |\n| `<article>` | Self-contained content (blog post, card) | `<div class=\"post\">` |\n| `<section>` | Thematic grouping of content | `<div class=\"section\">` |\n| `<aside>` | Related but secondary content | `<div id=\"sidebar\">` |\n| `<footer>` | Page or section footer | `<div id=\"footer\">` |\n| `<figure>` | Image with caption | `<div class=\"image\">` |\n| `<figcaption>` | Caption for a figure | `<p class=\"caption\">` |\n| `<time>` | Date or time value | `<span>Jan 2025</span>` |\n| `<mark>` | Highlighted/relevant text | `<span class=\"highlight\">` |\n\n## Landmark Elements for Screen Readers\n\nScreen reader users navigate by landmark: they press a key to jump between `<header>`, `<nav>`, `<main>`, `<footer>`. A page with no semantic structure forces them to read every line from top to bottom.\n\n## Nesting Rules\n\n- Only one `<main>` per page\n- `<article>` can contain its own `<header>` and `<footer>`\n- `<nav>` goes inside `<header>` or at the top level, not inside `<main>`\n- `<section>` should always have a heading (`<h2>` or lower)\n\nIn the code example below, you will see a fully semantic blog article page using every key landmark element."
+    },
+    "codeExample": {
+      "title": "Semantic Blog Article Page",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"description\" content=\"A guide to learning Python in 2025\">\n  <title>Python Guide 2025 | CodeGuru AI</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; color: #1e293b; line-height: 1.7; }\n    header { background: #1e293b; color: white; padding: 14px 32px;\n             display: flex; justify-content: space-between; align-items: center; }\n    nav a  { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; }\n    main   { max-width: 720px; margin: 0 auto; padding: 40px 24px; }\n    article header { background: none; color: inherit; padding: 0;\n                     display: block; margin-bottom: 24px; }\n    h1  { font-size: 28px; color: #0f172a; margin-bottom: 8px; }\n    .meta { font-size: 13px; color: #94a3b8; }\n    section { margin: 32px 0; }\n    h2  { font-size: 20px; color: #0f172a; margin-bottom: 12px; }\n    figure { margin: 24px 0; }\n    figure img { max-width: 100%; border-radius: 8px; }\n    figcaption { font-size: 13px; color: #64748b; margin-top: 6px; }\n    aside { background: #f1f5f9; border-left: 4px solid #22c55e;\n            padding: 16px; border-radius: 0 8px 8px 0; margin: 24px 0; }\n    footer { background: #0f172a; color: #64748b; text-align: center;\n             padding: 24px; font-size: 14px; margin-top: 48px; }\n  </style>\n</head>\n<body>\n\n  <header>\n    <strong>CodeGuru AI</strong>\n    <nav>\n      <a href=\"#\">Home</a>\n      <a href=\"#\">Courses</a>\n      <a href=\"#\">Blog</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <header>\n        <h1>Getting Started with Python in 2025</h1>\n        <p class=\"meta\">\n          By <strong>Rahul Sharma</strong> &middot;\n          <time datetime=\"2025-01-15\">15 January 2025</time>\n          &middot; 8 min read\n        </p>\n      </header>\n\n      <figure>\n        <img src=\"https://picsum.photos/680/280\" alt=\"Python programming workspace\">\n        <figcaption>Setting up a Python development environment</figcaption>\n      </figure>\n\n      <section>\n        <h2>Why Python?</h2>\n        <p>Python is the most beginner-friendly programming language and\n           the top choice for AI, data science, and web development.</p>\n      </section>\n\n      <aside>\n        <strong>Pro Tip:</strong> Start with the official Python tutorial at\n        python.org before moving to third-party resources.\n      </aside>\n\n      <section>\n        <h2>Installing Python</h2>\n        <p>Visit python.org/downloads and click the yellow button.\n           Always choose Python 3, never Python 2.</p>\n      </section>\n    </article>\n  </main>\n\n  <footer>\n    <p>&copy; 2025 CodeGuru AI. All rights reserved.</p>\n  </footer>\n\n</body>\n</html>",
+      "explanation": "- `position: sticky; top: 0; z-index: 10` on `header` — the nav sticks to the top as the user scrolls\n- `clamp(24px, 5vw, 44px)` on `h1` — fluid font size; scales between 24px and 44px with the viewport\n- Anchor links like `href=\"#projects\"` jump to the element with `id=\"projects\"` on the same page\n- `flex: 0 0 calc(33.333% - 14px)` — three-column cards with 20px gap compensation\n- Mobile breakpoints convert three columns to two at 768px and one at 480px"
+    },
+    "exercise": {
+      "title": "Convert Divs to Semantic Elements",
+      "instructions": "The starter code uses div elements with id attributes for all structure. Replace each div with the appropriate semantic element: div#header becomes header, div#nav becomes nav, div#main becomes main, div#article becomes article, div#sidebar becomes aside, and div#footer becomes footer. Keep all existing CSS classes and styles unchanged. Only change the HTML tag names.\n\nExpected: six semantic elements replacing six div elements.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Semantic Refactor</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; }\n    #header { background: #1e293b; color: white; padding: 14px 32px;\n              display: flex; justify-content: space-between; align-items: center; }\n    #nav a  { color: #94a3b8; text-decoration: none; margin-left: 16px; }\n    #main   { display: flex; gap: 24px; padding: 32px; max-width: 960px; margin: 0 auto; }\n    #article { flex: 1; }\n    #sidebar { width: 200px; background: #f1f5f9; padding: 16px; border-radius: 8px; }\n    #footer  { background: #0f172a; color: white; text-align: center; padding: 20px; }\n  </style>\n</head>\n<body>\n  <div id=\"header\">\n    <strong>My Site</strong>\n    <div id=\"nav\"><a href=\"#\">Home</a><a href=\"#\">About</a></div>\n  </div>\n  <div id=\"main\">\n    <div id=\"article\"><h1>Welcome</h1><p>Main content here.</p></div>\n    <div id=\"sidebar\"><h3>Links</h3><p>Related content.</p></div>\n  </div>\n  <div id=\"footer\"><p>&copy; 2025 My Site</p></div>\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Semantic Refactor</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; }\n    #header { background: #1e293b; color: white; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; }\n    #nav a  { color: #94a3b8; text-decoration: none; margin-left: 16px; }\n    #main   { display: flex; gap: 24px; padding: 32px; max-width: 960px; margin: 0 auto; }\n    #article { flex: 1; }\n    #sidebar { width: 200px; background: #f1f5f9; padding: 16px; border-radius: 8px; }\n    #footer  { background: #0f172a; color: white; text-align: center; padding: 20px; }\n  </style>\n</head>\n<body>\n  <header id=\"header\">\n    <strong>My Site</strong>\n    <nav id=\"nav\"><a href=\"#\">Home</a><a href=\"#\">About</a></nav>\n  </header>\n  <main id=\"main\">\n    <article id=\"article\"><h1>Welcome</h1><p>Main content here.</p></article>\n    <aside id=\"sidebar\"><h3>Links</h3><p>Related content.</p></aside>\n  </main>\n  <footer id=\"footer\"><p>&copy; 2025 My Site</p></footer>\n</body>\n</html>",
+      "hints": [
+        "💡 Replace <div id=\"header\"> with <header id=\"header\"> — keep the id so the CSS still targets it.",
+        "💡 Replace <div id=\"nav\"> with <nav id=\"nav\">, div#sidebar with <aside id=\"sidebar\">, div#article with <article id=\"article\">.",
+        "💡 Replace the outermost div#main with <main id=\"main\"> and div#footer with <footer id=\"footer\">."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "<header",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "<footer",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m6-l1-q1",
+          "question": "What is the main advantage of using semantic HTML elements over generic divs?",
+          "options": [
+            "Semantic elements load faster than divs",
+            "Semantic elements give meaning to content, helping screen readers and search engines",
+            "Semantic elements cannot be styled with CSS",
+            "Semantic elements automatically add visual styling"
+          ],
+          "correct": 1,
+          "explanation": "Semantic elements communicate the role of their content to browsers, screen readers, and search engines. A nav element tells assistive technology 'this is the navigation', enabling keyboard shortcuts for blind users. Search engines use article and main to understand page content better. Divs convey no meaning — they are purely structural containers."
+        },
+        {
+          "id": "html-m6-l1-q2",
+          "question": "How many main elements should a well-structured HTML page contain?",
+          "options": [
+            "One per section",
+            "One per article",
+            "Exactly one — it represents the single primary content area",
+            "As many as needed for layout"
+          ],
+          "correct": 2,
+          "explanation": "The main element should appear exactly once per page and contain the primary unique content of that page. Screen readers present main as a landmark that users can jump to directly. Having multiple main elements confuses both users and validators. Headers, footers, navigation, and sidebars all go outside main."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m6-l2",
+    "moduleId": "html-m6",
+    "title": "Building a Complete Web Page",
+    "order": 2,
+    "xpReward": 15,
+    "duration": "15 min",
+    "explanation": {
+      "title": "Combining HTML and CSS into a Full, Polished Page",
+      "content": "# Building a Complete Page\n\nUp to this point you have learned individual skills in isolation. In this lesson, you will see how they combine into a single production-quality page. Every professional page follows the same assembly process.\n\n## The Page Assembly Checklist\n\n**HTML structure:**\n- [ ] `<!DOCTYPE html>` and `<html lang=\"en\">`\n- [ ] `<head>` with charset, viewport, description, title\n- [ ] Semantic landmarks: `<header>`, `<nav>`, `<main>`, `<footer>`\n- [ ] One `<h1>` per page, heading hierarchy below it\n- [ ] All images have descriptive `alt` text\n- [ ] All form inputs have linked `<label>` elements\n\n**CSS foundations:**\n- [ ] Universal reset: `* { box-sizing: border-box; margin: 0; padding: 0; }`\n- [ ] CSS custom properties on `:root`\n- [ ] `img { max-width: 100%; height: auto; }`\n- [ ] Flexbox or Grid for all multi-column layouts\n- [ ] Media queries for tablet and mobile breakpoints\n\n**Visual polish:**\n- [ ] Consistent colour palette (2-3 colours)\n- [ ] One font family throughout\n- [ ] Adequate white space — padding and gap values\n- [ ] Hover states on all interactive elements\n\n## Common Page Sections\n\n```\n<header>  ← logo + navigation\n<main>\n  <section class=\"hero\">    ← big headline + call to action\n  <section class=\"features\"> ← icon + headline + text cards\n  <section class=\"pricing\">  ← plan comparison\n  <section class=\"contact\">  ← form or details\n</main>\n<footer>  ← links + copyright\n```\n\n## Performance Basics\n\n- Link CSS in `<head>` so styles apply before content renders\n- Put `<script>` tags before `</body>` so they do not block rendering\n- Use `loading=\"lazy\"` on images below the fold\n- Prefer system fonts for the fastest load times\n\n```html\n<img src=\"photo.jpg\" alt=\"Description\" loading=\"lazy\">\n```\n\n## Accessibility Quick Wins\n\n- Every page needs a clearly visible `:focus` style for keyboard users\n- Colour contrast must be at least 4.5:1 for body text (WCAG AA)\n- Use `aria-label` on icon-only buttons: `<button aria-label=\"Close menu\">`\n\nIn the code example below you will see a complete four-section landing page applying every concept from this course."
+    },
+    "codeExample": {
+      "title": "Complete Landing Page",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>CodeGuru AI | Learn to Code</title>\n  <style>\n    :root { --primary:#22c55e; --dark:#0f172a; --white:#fff; --radius:10px; }\n    * { box-sizing:border-box; margin:0; padding:0; }\n    body { font-family:Arial,sans-serif; background:#f8fafc; color:#475569; line-height:1.7; }\n    img  { max-width:100%; height:auto; }\n    header { background:var(--dark); padding:14px 32px; display:flex;\n             justify-content:space-between; align-items:center; }\n    header strong { color:var(--primary); font-size:20px; }\n    nav { display:flex; gap:20px; }\n    nav a { color:#94a3b8; text-decoration:none; font-size:14px; }\n    nav a:hover { color:var(--white); }\n    .hero { background:var(--dark); color:var(--white); text-align:center;\n            padding:80px 24px; display:flex; flex-direction:column;\n            align-items:center; gap:20px; }\n    .hero h1 { font-size:clamp(26px,5vw,48px); }\n    .hero p  { color:#94a3b8; max-width:520px; }\n    .btn { background:var(--primary); color:var(--white); padding:14px 32px;\n           border:none; border-radius:var(--radius); font-size:16px; cursor:pointer; }\n    .features { padding:60px 32px; max-width:960px; margin:0 auto; }\n    .features h2 { text-align:center; font-size:28px; color:var(--dark); margin-bottom:32px; }\n    .cards { display:flex; flex-wrap:wrap; gap:20px; }\n    .card { flex:0 0 calc(33.333% - 14px); background:white;\n            border-radius:var(--radius); padding:24px; border:1px solid #e2e8f0; }\n    .card h3 { color:var(--primary); margin-bottom:8px; }\n    footer { background:var(--dark); color:#64748b; text-align:center; padding:32px; font-size:14px; }\n    @media(max-width:768px){ .card { flex:0 0 calc(50% - 10px); } }\n    @media(max-width:480px){ .card { flex:0 0 100%; } }\n  </style>\n</head>\n<body>\n  <header>\n    <strong>CodeGuru AI</strong>\n    <nav><a href=\"#\">Home</a><a href=\"#\">Courses</a><a href=\"#\">Pricing</a></nav>\n  </header>\n  <main>\n    <section class=\"hero\">\n      <h1>Learn to Code.<br>Built for India.</h1>\n      <p>AI-powered courses in Python, JavaScript, Java, and HTML/CSS.</p>\n      <button class=\"btn\">Start for Free</button>\n    </section>\n    <section class=\"features\">\n      <h2>Why CodeGuru AI?</h2>\n      <div class=\"cards\">\n        <div class=\"card\"><h3>AI Hints</h3><p>Get smart hints when stuck.</p></div>\n        <div class=\"card\"><h3>XP &amp; Streaks</h3><p>Gamified progress daily.</p></div>\n        <div class=\"card\"><h3>Indian Prices</h3><p>Plans from Rs 199/month.</p></div>\n      </div>\n    </section>\n  </main>\n  <footer><p>&copy; 2025 CodeGuru AI &middot; Made with love in India</p></footer>\n</body>\n</html>",
+      "explanation": "- `:root` CSS variables — a single place to change the entire colour scheme of the page\n- `clamp(26px, 5vw, 48px)` on `h1` — fluid font size; scales between 26px and 48px with the viewport\n- `display: flex; flex-direction: column; align-items: center` on `.hero` — stacks and centres the hero content\n- `flex: 0 0 calc(33.333% - 14px)` — three-column card grid; the subtraction compensates for the `20px` gap\n- `@media` blocks at the bottom — mobile-last is fine here since base styles are desktop; production code should be mobile-first"
+    },
+    "exercise": {
+      "title": "Add a Pricing Section to the Page",
+      "instructions": "Add a pricing section to the landing page. Create a section element (class 'pricing') with an h2 heading 'Simple Pricing' and a flex row of two div elements (class 'plan'). Each plan needs an h3 name, a price paragraph, and two li items. Style .pricing with padding 60px 32px and max-width 800px centred. Style .plan with flex 1, white background, border-radius 10px, padding 24px, and border. Place the section inside main after the existing features section.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>CodeGuru AI</title>\n  <style>\n    :root { --primary: #22c55e; --dark: #0f172a; --radius: 10px; }\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; color: #475569; }\n    header { background: var(--dark); color: white; padding: 14px 32px;\n             display: flex; justify-content: space-between; align-items: center; }\n    header strong { color: var(--primary); }\n    /* Add .pricing and .plan styles here */\n    footer { background: var(--dark); color: #64748b; text-align: center; padding: 24px; font-size: 14px; }\n  </style>\n</head>\n<body>\n  <header><strong>CodeGuru AI</strong><nav></nav></header>\n  <main>\n    <!-- Add pricing section here -->\n  </main>\n  <footer><p>&copy; 2025 CodeGuru AI</p></footer>\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>CodeGuru AI</title>\n  <style>\n    :root { --primary: #22c55e; --dark: #0f172a; --radius: 10px; }\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; color: #475569; }\n    header { background: var(--dark); color: white; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; }\n    header strong { color: var(--primary); }\n    .pricing { padding: 60px 32px; max-width: 800px; margin: 0 auto; }\n    .pricing h2 { text-align: center; color: var(--dark); margin-bottom: 32px; }\n    .plans { display: flex; gap: 24px; }\n    .plan { flex: 1; background: white; border-radius: var(--radius); padding: 24px; border: 1px solid #e2e8f0; }\n    .plan h3 { color: var(--primary); margin-bottom: 8px; }\n    .plan ul { margin-top: 12px; padding-left: 20px; }\n    footer { background: var(--dark); color: #64748b; text-align: center; padding: 24px; font-size: 14px; }\n  </style>\n</head>\n<body>\n  <header><strong>CodeGuru AI</strong><nav></nav></header>\n  <main>\n    <section class=\"pricing\">\n      <h2>Simple Pricing</h2>\n      <div class=\"plans\">\n        <div class=\"plan\">\n          <h3>Free</h3>\n          <p>₹0 / month</p>\n          <ul><li>Python Basics</li><li>Community support</li></ul>\n        </div>\n        <div class=\"plan\">\n          <h3>Pro</h3>\n          <p>₹299 / month</p>\n          <ul><li>All 4 languages</li><li>AI mentor hints</li></ul>\n        </div>\n      </div>\n    </section>\n  </main>\n  <footer><p>&copy; 2025 CodeGuru AI</p></footer>\n</body>\n</html>",
+      "hints": [
+        "💡 Add .pricing { padding: 60px 32px; max-width: 800px; margin: 0 auto; } to the style block.",
+        "💡 Add .plans { display: flex; gap: 24px; } and .plan { flex: 1; background: white; border-radius: var(--radius); padding: 24px; border: 1px solid #e2e8f0; }",
+        "💡 Inside main, add a section.pricing with an h2 and a div.plans containing two div.plan elements each with h3, p, and ul."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Simple Pricing",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "display: flex",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m6-l2-q1",
+          "question": "Where should a link to an external CSS stylesheet be placed in an HTML document?",
+          "options": [
+            "At the end of the body element",
+            "Inside the body, before any content",
+            "Inside the head element",
+            "After the closing html tag"
+          ],
+          "correct": 2,
+          "explanation": "CSS link tags must go inside the head element so styles load before the browser renders any content. If you place them in the body, users briefly see unstyled content (a 'flash of unstyled content') before styles apply. JavaScript files, in contrast, are usually placed just before the closing body tag so they do not block HTML rendering."
+        },
+        {
+          "id": "html-m6-l2-q2",
+          "question": "What does the loading=\"lazy\" attribute on an img element do?",
+          "options": [
+            "Makes the image load at low resolution first, then high resolution",
+            "Defers loading the image until it is close to entering the visible viewport",
+            "Prevents the image from loading at all until a button is clicked",
+            "Reduces the image file size automatically"
+          ],
+          "correct": 1,
+          "explanation": "loading=\"lazy\" tells the browser to defer downloading an image until the user scrolls near it. Images below the fold (not immediately visible) are not fetched on page load, reducing initial page weight and speeding up the time-to-interactive. Images above the fold (in the first screenful) should use loading=\"eager\" or omit the attribute entirely."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m6-l3",
+    "moduleId": "html-m6",
+    "title": "Mini Project: Personal Portfolio Website",
+    "order": 3,
+    "xpReward": 25,
+    "duration": "20 min",
+    "explanation": {
+      "title": "Putting It All Together: Build Your Personal Portfolio",
+      "content": "# The Mini Project\n\nYou have now learned every fundamental skill in HTML and CSS:\n\n1. **HTML structure** — DOCTYPE, head, body, metadata\n2. **Text elements** — headings, paragraphs, lists, inline tags\n3. **Links and images** — anchors, img, tables, forms\n4. **CSS selectors** — element, class, ID, pseudo-class, descendant\n5. **Box model** — margin, padding, border, box-sizing\n6. **Typography and colour** — font stacks, colours, CSS variables\n7. **Flexbox** — axes, alignment, flex-wrap, flex-grow\n8. **Responsive design** — media queries, mobile-first, fluid units\n9. **Semantic HTML** — header, nav, main, article, section, footer\n\nIn this lesson, you will build a **personal portfolio website** — the most useful project a beginner can make. Employers and clients look at portfolios before deciding whether to hire someone.\n\n## Portfolio Structure\n\nA minimal portfolio has four sections:\n\n```\nheader  ← your name + nav links\nhero    ← your headline + one-sentence description\nprojects ← 3-4 cards, each with a title, description, and link\ncontact ← email link or a form\nfooter  ← copyright + social links\n```\n\n## What Makes a Good Portfolio?\n\n- **One clear h1** — your name or professional title\n- **A specific description** — not \"I am a developer\" but \"I build Python and JavaScript web apps\"\n- **Real project links** — even small projects count\n- **Clean, readable design** — white space is your friend\n- **Mobile responsive** — recruiters check on phones\n\n## Deploying Your Portfolio\n\nGitHub Pages is the fastest free hosting for HTML/CSS sites:\n\n1. Create a repository named `yourusername.github.io`\n2. Push your `index.html` and `style.css` files\n3. Your site is live at `https://yourusername.github.io`\n\nNetlify and Vercel are also free and require no Git knowledge — drag and drop your folder.\n\nIn the code example below, you will see a complete, fully styled, responsive portfolio page using every concept from this course. Study the structure carefully — your exercise is to personalise and extend it."
+    },
+    "codeExample": {
+      "title": "Complete Personal Portfolio",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Priya Verma | Developer</title>\n  <style>\n    :root{--p:#6366f1;--d:#0f172a;--w:#fff;--r:10px;}\n    *{box-sizing:border-box;margin:0;padding:0;}\n    body{font-family:Arial,sans-serif;background:#f8fafc;color:#475569;}\n    header{background:var(--d);padding:14px 32px;display:flex;\n           justify-content:space-between;align-items:center;}\n    header strong{color:var(--w);}\n    nav a{color:#94a3b8;text-decoration:none;margin-left:16px;font-size:14px;}\n    .hero{background:var(--d);color:var(--w);text-align:center;padding:60px 24px;}\n    .hero h1{font-size:clamp(24px,5vw,42px);margin-bottom:8px;}\n    .hero p{color:#94a3b8;}\n    .btn{background:var(--p);color:var(--w);padding:12px 28px;\n         border:none;border-radius:var(--r);cursor:pointer;\n         margin-top:16px;display:inline-block;text-decoration:none;}\n    section{padding:48px 32px;max-width:920px;margin:0 auto;}\n    h2{text-align:center;color:var(--d);font-size:24px;margin-bottom:24px;}\n    .skills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}\n    .tag{background:#ede9fe;color:#7c3aed;padding:4px 14px;\n         border-radius:999px;font-size:13px;font-weight:600;}\n    .grid{display:flex;flex-wrap:wrap;gap:16px;}\n    .card{flex:0 0 calc(33.333% - 11px);background:white;\n          border-radius:var(--r);padding:20px;border:1px solid #e2e8f0;}\n    .card h3{color:var(--d);margin-bottom:6px;}\n    .card p{font-size:13px;margin-bottom:10px;}\n    footer{background:var(--d);color:#64748b;text-align:center;\n           padding:24px;font-size:13px;}\n    @media(max-width:720px){.card{flex:0 0 calc(50% - 8px);}}\n    @media(max-width:480px){.card{flex:0 0 100%;}}\n  </style>\n</head>\n<body>\n  <header>\n    <strong>Priya Verma</strong>\n    <nav>\n      <a href=\"#skills\">Skills</a>\n      <a href=\"#projects\">Projects</a>\n    </nav>\n  </header>\n  <main>\n    <div class=\"hero\">\n      <h1>Priya Verma</h1>\n      <p>Full-Stack Developer &mdash; Python &amp; JavaScript</p>\n      <a class=\"btn\" href=\"#projects\">View Work</a>\n    </div>\n    <section id=\"skills\"><h2>Skills</h2>\n      <div class=\"skills\">\n        <span class=\"tag\">HTML</span>\n        <span class=\"tag\">CSS</span>\n        <span class=\"tag\">JavaScript</span>\n        <span class=\"tag\">Python</span>\n      </div>\n    </section>\n    <section id=\"projects\"><h2>Projects</h2>\n      <div class=\"grid\">\n        <div class=\"card\"><h3>Task Manager</h3>\n          <p>Full-stack to-do app.</p><a href=\"#\">View &rarr;</a></div>\n        <div class=\"card\"><h3>Weather App</h3>\n          <p>Live weather data.</p><a href=\"#\">View &rarr;</a></div>\n        <div class=\"card\"><h3>Portfolio</h3>\n          <p>Built with HTML &amp; CSS.</p><a href=\"#\">Source &rarr;</a></div>\n      </div>\n    </section>\n  </main>\n  <footer><p>&copy; 2025 Priya Verma</p></footer>\n</body>\n</html>",
+      "explanation": "- `position: sticky; top: 0; z-index: 10` on `header` — the nav sticks to the top while the user scrolls through the page\n- `clamp(24px, 5vw, 44px)` on `h1` — the name scales fluidly between phone and desktop sizes\n- Anchor links like `href=\"#projects\"` — jump to the element with `id=\"projects\"` on the same page\n- `flex: 0 0 calc(33.333% - 14px)` for project cards — three columns with 20px gap compensation\n- Mobile breakpoints convert the three-column grid to two columns at 768px and one column at 480px"
+    },
+    "exercise": {
+      "title": "Personalise the Portfolio",
+      "instructions": "Take the portfolio starter and personalise it: change the name in header strong and h1 to your name, update the role paragraph to your actual role or aspiration, replace the four skill span tags with your real skills, update the three project cards with your own project names and descriptions, and update the contact email href to your address. Keep all HTML structure and CSS unchanged.\n\nExpected: your name visible, four skill tags, three project cards.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Portfolio</title>\n  <style>\n    :root { --primary: #6366f1; --dark: #0f172a; --white: #fff; --radius: 10px; }\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; color: #475569; }\n    header { background: var(--dark); padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; }\n    header strong { color: var(--white); }\n    nav a { color: #94a3b8; text-decoration: none; margin-left: 16px; font-size: 14px; }\n    .hero { background: var(--dark); color: var(--white); text-align: center; padding: 60px 24px; }\n    .hero h1 { font-size: 36px; margin-bottom: 8px; }\n    .hero p  { color: #94a3b8; }\n    .skills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 40px 24px; }\n    .skill-tag { background: #ede9fe; color: #7c3aed; padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; }\n    footer { background: var(--dark); color: #64748b; text-align: center; padding: 20px; font-size: 14px; }\n  </style>\n</head>\n<body>\n  <header>\n    <strong>Your Name Here</strong>\n    <nav><a href=\"#\">Skills</a><a href=\"#\">Projects</a></nav>\n  </header>\n  <main>\n    <div class=\"hero\">\n      <h1>Your Name Here</h1>\n      <p>Your role or aspiration here</p>\n    </div>\n    <div class=\"skills\">\n      <span class=\"skill-tag\">Skill 1</span>\n      <span class=\"skill-tag\">Skill 2</span>\n      <span class=\"skill-tag\">Skill 3</span>\n      <span class=\"skill-tag\">Skill 4</span>\n    </div>\n  </main>\n  <footer><p>&copy; 2025 Your Name</p></footer>\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Rahul Sharma | Developer</title>\n  <style>\n    :root { --primary: #6366f1; --dark: #0f172a; --white: #fff; --radius: 10px; }\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background: #f8fafc; color: #475569; }\n    header { background: var(--dark); padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; }\n    header strong { color: var(--white); }\n    nav a { color: #94a3b8; text-decoration: none; margin-left: 16px; font-size: 14px; }\n    .hero { background: var(--dark); color: var(--white); text-align: center; padding: 60px 24px; }\n    .hero h1 { font-size: 36px; margin-bottom: 8px; }\n    .hero p  { color: #94a3b8; }\n    .skills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 40px 24px; }\n    .skill-tag { background: #ede9fe; color: #7c3aed; padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; }\n    footer { background: var(--dark); color: #64748b; text-align: center; padding: 20px; font-size: 14px; }\n  </style>\n</head>\n<body>\n  <header>\n    <strong>Rahul Sharma</strong>\n    <nav><a href=\"#\">Skills</a><a href=\"#\">Projects</a></nav>\n  </header>\n  <main>\n    <div class=\"hero\">\n      <h1>Rahul Sharma</h1>\n      <p>Python and JavaScript Developer from Delhi</p>\n    </div>\n    <div class=\"skills\">\n      <span class=\"skill-tag\">HTML</span>\n      <span class=\"skill-tag\">CSS</span>\n      <span class=\"skill-tag\">Python</span>\n      <span class=\"skill-tag\">JavaScript</span>\n    </div>\n  </main>\n  <footer><p>&copy; 2025 Rahul Sharma</p></footer>\n</body>\n</html>",
+      "hints": [
+        "💡 Replace 'Your Name Here' in the header strong tag and h1 tag with your actual name.",
+        "💡 Replace each 'Skill N' span text with a real skill you have or want to learn.",
+        "💡 Update the footer copyright line to include your name instead of 'Your Name'."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "<span class=\"skill-tag\">",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m6-l3-q1",
+          "question": "What is the fastest free way to host a personal HTML/CSS website publicly?",
+          "options": [
+            "Buying a server and installing Apache",
+            "Emailing the HTML file to visitors",
+            "Using GitHub Pages, Netlify, or Vercel — all support static HTML for free",
+            "Uploading to Google Drive and sharing the link"
+          ],
+          "correct": 2,
+          "explanation": "GitHub Pages, Netlify, and Vercel all offer free hosting for static websites (pure HTML, CSS, and JavaScript). GitHub Pages is set up by creating a repository named yourusername.github.io. Netlify and Vercel support drag-and-drop deployment — no terminal required. All three provide HTTPS automatically."
+        },
+        {
+          "id": "html-m6-l3-q2",
+          "question": "Which of the following is the most important thing to include on a developer portfolio?",
+          "options": [
+            "A photo of your workspace",
+            "Animated transitions on every element",
+            "Actual links to real projects you have built",
+            "A long list of every technology you have heard of"
+          ],
+          "correct": 2,
+          "explanation": "Employers and clients hire based on what you can build, not what you claim. Links to real projects — even small ones — are far more convincing than a list of skills. A project link proves ability; a skill tag only makes a claim. Start with one or two genuine projects rather than an impressive-looking but empty portfolio."
+        },
+        {
+          "id": "html-m6-l3-q3",
+          "question": "What do the six concepts HTML, CSS selectors, box model, Flexbox, media queries, and semantic HTML have in common?",
+          "options": [
+            "They are all optional features only used by advanced developers",
+            "They are the complete foundation needed to build any static webpage",
+            "They only apply to mobile development",
+            "They must be learned in a different order than listed"
+          ],
+          "correct": 1,
+          "explanation": "These six areas form the complete foundation of static web development. HTML provides structure, CSS selectors target elements, the box model controls spacing and sizing, Flexbox handles layout, media queries add responsiveness, and semantic HTML adds meaning and accessibility. With these six skills you can build any website that does not require a server or database."
+        }
+      ]
+    }
+  }
+]

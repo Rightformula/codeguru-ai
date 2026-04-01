@@ -1,0 +1,218 @@
+[
+  {
+    "id": "js-m1-l1",
+    "moduleId": "js-m1",
+    "title": "What is JavaScript?",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "9 min",
+    "explanation": {
+      "title": "What is JavaScript and Where Does It Run?",
+      "content": "# What is JavaScript?\n\nImagine a web page as a building. HTML is the bricks and walls that give the building its structure. CSS is the paint and decoration that makes it look attractive. **JavaScript** is the electricity — it makes everything move, respond, and come alive.\n\nJavaScript is a **programming language** created by Brendan Eich in 1995. It was originally built to make web pages interactive: validate a form before it is submitted, show a menu when a button is clicked, update a counter without reloading the page. Today it does far more.\n\n## Where JavaScript Runs\n\n| Environment | What it means |\n|---|---|\n| **Browser** | Every modern browser has a built-in JavaScript engine (Chrome uses V8, Firefox uses SpiderMonkey). Code runs when a page loads. |\n| **Server (Node.js)** | JavaScript can also run on a server, outside any browser, using the Node.js runtime. |\n| **Mobile** | Frameworks like React Native let you build iOS and Android apps with JavaScript. |\n| **Desktop** | Electron lets you build desktop apps (VS Code itself is built with it). |\n\n## JavaScript vs Python vs Java\n\n| Feature | JavaScript | Python | Java |\n|---|---|---|---|\n| Primary use | Web and server apps | Data science, scripting | Enterprise software |\n| Typing | Dynamic | Dynamic | Static |\n| Runs in browser | Yes — natively | No | No |\n| Beginner-friendly | Yes | Very easy | Moderate |\n\n## The Console: Your Sandbox\n\nEvery browser has a **developer console** where you can run JavaScript instantly. Open it with `F12` → Console tab. Type any JavaScript and press Enter to run it immediately.\n\nIn this course, all code examples run in the **Node.js** environment (via Judge0), which behaves like the browser console but without the DOM. The `console.log()` function is your main output tool — it works identically in both environments.\n\nIn the code example below, you will see `console.log()` used in several ways to display text, numbers, and expressions."
+    },
+    "codeExample": {
+      "title": "JavaScript Says Hello",
+      "language": "javascript",
+      "code": "// JavaScript executes from top to bottom, one statement at a time.\n// Lines beginning with // are single-line comments — JavaScript ignores them.\n\n/* This is a multi-line comment.\n   It spans as many lines as needed. */\n\n// console.log() displays output in the console.\nconsole.log(\"Hello, World!\");\n\n// You can log any value: strings, numbers, booleans.\nconsole.log(\"JavaScript was created in 1995.\");\nconsole.log(42);\nconsole.log(true);\n\n// console.log() accepts multiple arguments — prints them separated by spaces.\nconsole.log(\"Years since creation:\", 2025 - 1995);\n\n// The semicolon ; ends a statement. It is optional but recommended.\nconsole.log(\"Semicolons end statements\");",
+      "explanation": "- `// comment` — a single-line comment; JavaScript ignores everything after `//` on that line\n- `/* ... */` — a multi-line comment; everything between the delimiters is ignored\n- `console.log(\"Hello, World!\")` — calls the built-in `console.log()` function; the argument is displayed in the console\n- `console.log(\"Years since:\", 2025 - 1995)` — multiple arguments are separated by a space; arithmetic is evaluated first\n- The semicolon `;` terminates a statement; JavaScript can often infer it, but writing it explicitly avoids subtle bugs"
+    },
+    "exercise": {
+      "title": "Write Your JavaScript Introduction",
+      "instructions": "Write a JavaScript program that logs four lines to the console: your name on line 1, your city on line 2, your age as a number on line 3, and your favourite programming language on line 4. Use console.log() for each line. A number does not need quotes; text must be in quotes.\n\nExpected output example:\nPriya Sharma\nMumbai\n21\nJavaScript",
+      "starterCode": "// My JavaScript Introduction\n// Each console.log() prints one line.\n\n// Line 1 — your name\nconsole.log(\"Your Name Here\");\n\n// Line 2 — your city\nconsole.log(\"Your City Here\");\n\n// Line 3 — your age (number, no quotes)\n// Your code here\n\n// Line 4 — your favourite language\n// Your code here",
+      "solutionCode": "console.log(\"Priya Sharma\");\nconsole.log(\"Mumbai\");\nconsole.log(21);\nconsole.log(\"JavaScript\");",
+      "hints": [
+        "💡 Each piece of information needs its own console.log() call on a separate line.",
+        "💡 Text values like your name and city must be inside quotes; a number like your age must not have quotes.",
+        "💡 Copy the pattern of the first two console.log() calls and add two more below them for age and language."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": null,
+          "checkType": "contains_print"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m1-l1-q1",
+          "question": "Which function is used to display output in the JavaScript console?",
+          "options": [
+            "print()",
+            "output()",
+            "console.log()",
+            "display()"
+          ],
+          "correct": 2,
+          "explanation": "console.log() is JavaScript's primary output function. It writes its arguments to the browser console or terminal (in Node.js). Python uses print(), but JavaScript uses console.log(). There is no print() or display() function in standard JavaScript."
+        },
+        {
+          "id": "js-m1-l1-q2",
+          "question": "What does the // symbol do at the start of a line in JavaScript?",
+          "options": [
+            "Divides the value on the left by the value on the right",
+            "Starts a single-line comment that JavaScript ignores",
+            "Declares a new variable",
+            "Causes a syntax error"
+          ],
+          "correct": 1,
+          "explanation": "In JavaScript, // starts a single-line comment. Everything from // to the end of that line is ignored by the JavaScript engine when the program runs. Comments are notes written by the programmer for other humans. For multi-line comments, use /* ... */."
+        },
+        {
+          "id": "js-m1-l1-q3",
+          "question": "Where can JavaScript code run natively, without any extra installation?",
+          "options": [
+            "Only on Windows operating systems",
+            "Only on a dedicated JavaScript server",
+            "Inside every modern web browser",
+            "Only when Python is installed"
+          ],
+          "correct": 2,
+          "explanation": "Every modern browser — Chrome, Firefox, Safari, Edge — includes a built-in JavaScript engine. This means any JavaScript code can run directly in a browser without installing anything. This is what makes JavaScript the only language that runs natively on both the client (browser) and server (Node.js)."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m1-l2",
+    "moduleId": "js-m1",
+    "title": "Variables: let, const, and var",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Storing Values with let, const, and var",
+      "content": "# Variables in JavaScript\n\nA **variable** is a named container for storing a value. Think of it as a labelled jar: you put something inside, give the jar a name, and later you pick it up by that name. JavaScript has three keywords for creating variables: `let`, `const`, and `var`.\n\n## let — the modern default for changeable values\n\n```javascript\nlet score = 0;\nscore = 10;       // reassignment is allowed\nscore = score + 5; // score is now 15\n```\n\nUse `let` when the value will change over time.\n\n## const — for values that should not change\n\n```javascript\nconst PI = 3.14159;\nconst MAX_USERS = 100;\n// PI = 3;   // TypeError — cannot reassign a const\n```\n\nUse `const` when the value must stay fixed. The name does not need to be uppercase, but uppercase is the convention for true constants.\n\n## var — the legacy keyword (avoid in modern code)\n\n`var` was the only option before 2015. It still works but has confusing scoping rules that `let` and `const` fixed. You will encounter it in older codebases, but prefer `let`/`const` for new code.\n\n## Naming Rules\n\n| Rule | Valid | Invalid | Reason |\n|---|---|---|---|\n| Start with letter, `$`, or `_` | `score` | `1score` | Cannot start with digit |\n| Letters, digits, `$`, `_` only | `user_name` | `user-name` | Hyphens not allowed |\n| Case-sensitive | `Score` ≠ `score` | | |\n| Not a keyword | `total` | `let` | Reserved word |\n\nBy convention, JavaScript uses **camelCase** for variable names: `firstName`, `totalScore`, `isLoggedIn`.\n\n## Declaring Without Initialising\n\n```javascript\nlet city;             // declared but not yet assigned\nconsole.log(city);    // undefined\ncity = \"Delhi\";       // now it has a value\n```\n\nA declared but unassigned variable holds the special value `undefined`.\n\nIn the code example below, you will see `let` and `const` used together in a realistic ticket booking scenario."
+    },
+    "codeExample": {
+      "title": "Cinema Ticket Booking",
+      "language": "javascript",
+      "code": "// Cinema ticket booking — let and const in action\n\n// Constants: values that will never change\nconst TICKET_PRICE   = 200;    // price in rupees\nconst MAX_SEATS      = 100;    // total seats in the hall\nconst MOVIE_TITLE    = \"Dune: Part Three\";\n\n// Variables: values that will change as tickets are sold\nlet seatsBooked  = 0;\nlet totalRevenue = 0;\n\n// Simulate booking 3 tickets\nseatsBooked  += 3;\ntotalRevenue  = seatsBooked * TICKET_PRICE;\n\nconsole.log(\"Movie:\",         MOVIE_TITLE);\nconsole.log(\"Seats booked:\",  seatsBooked);\nconsole.log(\"Seats left:\",    MAX_SEATS - seatsBooked);\nconsole.log(\"Revenue (₹):\",   totalRevenue);\n\n// let allows reassignment\nlet customerName = \"Ananya\";\nconsole.log(\"Booked by:\", customerName);\ncustomerName = \"Rahul\";          // change the name\nconsole.log(\"Updated to:\", customerName);",
+      "explanation": "- `const TICKET_PRICE = 200` — a constant; attempting to reassign it would throw a `TypeError` at runtime\n- `let seatsBooked = 0` — a mutable variable; its value will change as tickets are sold\n- `seatsBooked += 3` — shorthand for `seatsBooked = seatsBooked + 3`; updates the variable in place\n- `MAX_SEATS - seatsBooked` — arithmetic on a constant and a variable; constants can be read but not reassigned\n- `customerName = \"Rahul\"` — reassigning a `let` variable is legal; the old value `\"Ananya\"` is replaced"
+    },
+    "exercise": {
+      "title": "Build a Shopping Cart Tracker",
+      "instructions": "Create a shopping cart program. Declare const ITEM_PRICE = 350, let itemCount = 0, and let cartTotal = 0. Set itemCount to 4 and compute cartTotal as itemCount * ITEM_PRICE. Apply a 10% discount: compute discountAmount = cartTotal * 0.10 and finalTotal = cartTotal - discountAmount. Print itemCount, cartTotal, discountAmount, and finalTotal.\n\nExpected output:\nItems: 4\nCart Total: 1400\nDiscount: 140\nFinal Total: 1260",
+      "starterCode": "// Shopping Cart Tracker\n\nconst ITEM_PRICE = 350;\n\nlet itemCount  = 0;\nlet cartTotal  = 0;\n\n// Add 4 items\nitemCount = 4;\ncartTotal = itemCount * ITEM_PRICE;\n\n// Apply 10% discount\nlet discountAmount = cartTotal * 0.10;\nlet finalTotal     = cartTotal - discountAmount;\n\n// Print all values\nconsole.log(\"Items:\",      itemCount);\nconsole.log(\"Cart Total:\", cartTotal);\n// Print discountAmount and finalTotal here",
+      "solutionCode": "const ITEM_PRICE = 350;\n\nlet itemCount      = 0;\nlet cartTotal      = 0;\n\nitemCount = 4;\ncartTotal = itemCount * ITEM_PRICE;\n\nlet discountAmount = cartTotal * 0.10;\nlet finalTotal     = cartTotal - discountAmount;\n\nconsole.log(\"Items:\",      itemCount);\nconsole.log(\"Cart Total:\", cartTotal);\nconsole.log(\"Discount:\",   discountAmount);\nconsole.log(\"Final Total:\", finalTotal);",
+      "hints": [
+        "💡 Add two more console.log() calls — one for discountAmount and one for finalTotal.",
+        "💡 Follow the same pattern: console.log(\"Discount:\", discountAmount); and console.log(\"Final Total:\", finalTotal);",
+        "💡 The discount is already calculated — you only need to print it with the correct label."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Final Total: 1260",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m1-l2-q1",
+          "question": "Which keyword should you use when a variable's value will never change?",
+          "options": [
+            "var",
+            "let",
+            "const",
+            "fixed"
+          ],
+          "correct": 2,
+          "explanation": "const declares a constant — a variable whose binding cannot be reassigned after creation. Attempting to reassign a const throws a TypeError. Use const by default and switch to let only when you know the value must change. var is the legacy keyword from before 2015 and should be avoided in modern JavaScript."
+        },
+        {
+          "id": "js-m1-l2-q2",
+          "question": "What is the value of a let variable that has been declared but not yet assigned?",
+          "options": [
+            "null",
+            "0",
+            "\"\"",
+            "undefined"
+          ],
+          "correct": 3,
+          "explanation": "A declared but unassigned variable holds the special value undefined. This is JavaScript's way of saying 'this variable exists but has no value yet'. It is different from null, which is an explicit 'no value' that a programmer assigns intentionally, and from 0 or \"\" which are valid values of specific types."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m1-l3",
+    "moduleId": "js-m1",
+    "title": "Data Types and typeof",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "JavaScript's Seven Primitive Data Types",
+      "content": "# Data Types in JavaScript\n\nEvery value in a program has a **type** — a category that determines what kind of operations you can perform on it. You cannot multiply a name by a city, but you can multiply a price by a quantity. JavaScript has seven **primitive** types.\n\n## The Seven Primitive Types\n\n| Type | Example values | Used for |\n|---|---|---|\n| `string` | `\"hello\"`, `'Rahul'` | Text |\n| `number` | `42`, `3.14`, `-7` | All numbers (integers and decimals) |\n| `boolean` | `true`, `false` | Yes/no, on/off decisions |\n| `undefined` | `undefined` | Declared but not yet assigned |\n| `null` | `null` | Explicitly empty — no value |\n| `bigint` | `9007199254740991n` | Integers too large for number |\n| `symbol` | `Symbol(\"id\")` | Unique identifiers (advanced) |\n\nFor beginner code, you will use `string`, `number`, `boolean`, `undefined`, and `null` most of the time.\n\n## Strings in Detail\n\nStrings can use single quotes, double quotes, or backticks (template literals):\n\n```javascript\nconst a = 'single quotes';\nconst b = \"double quotes\";    // same result\nconst c = `template literal`; // backticks allow embedded expressions\n\nconst name  = \"Priya\";\nconst score = 95;\nconst msg   = `${name} scored ${score} marks.`; // interpolation\n```\n\nTemplate literals (backticks) are the modern preferred style because they support **string interpolation** — embedding expressions directly inside the string with `${}`.\n\n## The typeof Operator\n\n`typeof` returns a string describing the type of a value:\n\n```javascript\ntypeof 42           // \"number\"\ntypeof \"hello\"      // \"string\"\ntypeof true         // \"boolean\"\ntypeof undefined    // \"undefined\"\ntypeof null         // \"object\"  ← famous JavaScript quirk!\n```\n\nThe `typeof null` returning `\"object\"` is a known historical bug in JavaScript that was never fixed for backwards-compatibility reasons.\n\n## Type Coercion Warning\n\nJavaScript automatically converts types in some situations — this can produce surprising results:\n\n```javascript\n\"5\" + 3     // \"53\"  — number 3 coerced to string\n\"5\" - 3     // 2     — string \"5\" coerced to number\n```\n\nThe `+` operator with a string triggers **concatenation**, not addition. Always be explicit about types when doing arithmetic. In the code example below, you will see all five common types used and inspected with `typeof`."
+    },
+    "codeExample": {
+      "title": "Exploring JavaScript Types",
+      "language": "javascript",
+      "code": "// Exploring all five common primitive types\n\n// string — text in quotes or backticks\nconst productName  = \"CodeGuru Pro Plan\";\nconst city         = 'Mumbai';\nconst templateDemo = `Product: ${productName}`; // template literal\n\n// number — integers and decimals use the same type\nconst price        = 2999;\nconst taxRate      = 0.18;\nconst discounted   = price * (1 - taxRate);\n\n// boolean — only two possible values\nconst isAvailable  = true;\nconst isExpired    = false;\n\n// undefined — declared but not assigned\nlet promoCode;\nconsole.log(\"promoCode:\", promoCode);   // undefined\n\n// null — explicitly empty\nconst selectedItem = null;\n\n// Log everything with their types\nconsole.log(productName,  \"|\", typeof productName);\nconsole.log(price,         \"|\", typeof price);\nconsole.log(isAvailable,  \"|\", typeof isAvailable);\nconsole.log(promoCode,    \"|\", typeof promoCode);\nconsole.log(selectedItem, \"|\", typeof selectedItem);  // note: typeof null\nconsole.log(templateDemo);\nconsole.log(\"After tax (₹):\", discounted.toFixed(2));",
+      "explanation": "- `const templateDemo = \\`Product: ${productName}\\`` — a template literal; `${}` embeds any expression inside the string\n- `price * (1 - taxRate)` — standard arithmetic; parentheses control evaluation order\n- `let promoCode;` — declared without assignment; its value is `undefined` until explicitly set\n- `const selectedItem = null` — explicitly set to `null`; signals deliberate absence of a value\n- `typeof null` — returns `\"object\"`, a well-known historical JavaScript quirk, not a bug in your code\n- `.toFixed(2)` — a number method that formats the value to exactly two decimal places as a string"
+    },
+    "exercise": {
+      "title": "Type Inspector Program",
+      "instructions": "Declare five variables: userName (a string), userAge (a number), isPremium (a boolean), referralCode (set to null), and lastLogin (declared but not assigned, so it is undefined). For each variable, use console.log() to print the variable's value and its type using typeof, separated by a pipe character. Use template literals for the output.\n\nExpected output format:\nrahul | string\n25 | number\ntrue | boolean\nnull | object\nundefined | undefined",
+      "starterCode": "// Type Inspector Program\n\nconst userName    = \"rahul\";\nconst userAge     = 25;\nconst isPremium   = true;\nconst referralCode = null;\nlet   lastLogin;          // deliberately left undefined\n\n// Print each value and its type using template literals\nconsole.log(`${userName} | ${typeof userName}`);\nconsole.log(`${userAge} | ${typeof userAge}`);\n// Print isPremium, referralCode, and lastLogin the same way",
+      "solutionCode": "const userName     = \"rahul\";\nconst userAge      = 25;\nconst isPremium    = true;\nconst referralCode = null;\nlet   lastLogin;\n\nconsole.log(`${userName}     | ${typeof userName}`);\nconsole.log(`${userAge}      | ${typeof userAge}`);\nconsole.log(`${isPremium}    | ${typeof isPremium}`);\nconsole.log(`${referralCode} | ${typeof referralCode}`);\nconsole.log(`${lastLogin}    | ${typeof lastLogin}`);",
+      "hints": [
+        "💡 Follow the exact same pattern as the first two lines: console.log(`${variable} | ${typeof variable}`);",
+        "💡 typeof null returns 'object' — this is expected JavaScript behaviour, not an error.",
+        "💡 typeof lastLogin returns 'undefined' because the variable was declared but never assigned a value."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "undefined | undefined",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m1-l3-q1",
+          "question": "What does the typeof operator return for the value null?",
+          "options": [
+            "\"null\"",
+            "\"undefined\"",
+            "\"object\"",
+            "\"empty\""
+          ],
+          "correct": 2,
+          "explanation": "typeof null returns \"object\" — this is a well-known historical bug in JavaScript that was never corrected because fixing it would break millions of existing programs. To correctly check for null, use strict equality: value === null. Do not rely on typeof for detecting null."
+        },
+        {
+          "id": "js-m1-l3-q2",
+          "question": "What is the result of \"5\" + 3 in JavaScript?",
+          "options": [
+            "8",
+            "\"53\"",
+            "\"8\"",
+            "TypeError"
+          ],
+          "correct": 1,
+          "explanation": "When the + operator encounters a string on either side, JavaScript converts the other operand to a string and concatenates rather than adds. So \"5\" + 3 produces the string \"53\", not the number 8. Use Number(\"5\") + 3 or parseInt(\"5\") + 3 to force numeric addition."
+        },
+        {
+          "id": "js-m1-l3-q3",
+          "question": "What is the difference between null and undefined in JavaScript?",
+          "options": [
+            "They are identical and can always be used interchangeably",
+            "null means a variable was declared but not assigned; undefined means it was explicitly set to empty",
+            "undefined means declared but not assigned; null is an explicit intentional empty value",
+            "null is for numbers; undefined is for strings"
+          ],
+          "correct": 2,
+          "explanation": "undefined is the automatic value JavaScript assigns when a variable is declared but not given a value. null is a value that a programmer assigns explicitly to signal 'intentionally no value'. Think of undefined as 'not yet known' and null as 'known to be empty'."
+        }
+      ]
+    }
+  }
+]

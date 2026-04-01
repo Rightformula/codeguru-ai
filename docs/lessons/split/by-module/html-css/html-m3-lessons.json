@@ -1,0 +1,221 @@
+[
+  {
+    "id": "html-m3-l1",
+    "moduleId": "html-m3",
+    "title": "Introduction to CSS and Selectors",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "How CSS Works and How to Target Elements with Selectors",
+      "content": "# What is CSS?\n\nIf HTML is the skeleton of a webpage, **CSS** (Cascading Style Sheets) is the skin, clothes, and cosmetics. It controls everything visual: colours, fonts, spacing, sizes, animations, and layout.\n\nCSS is a separate language from HTML. You write rules that say: find these elements, then apply these styles.\n\n## Three Ways to Add CSS\n\n**1. Inline** — directly on one element (least maintainable):\n```html\n<p style=\"color: red; font-size: 18px;\">Red text</p>\n```\n\n**2. Internal** — inside a `<style>` tag in `<head>` (fine for small pages):\n```html\n<style>\n  p { color: red; }\n</style>\n```\n\n**3. External** — a separate `.css` file (recommended for all real projects):\n```html\n<link rel=\"stylesheet\" href=\"styles.css\">\n```\n\n## CSS Rule Anatomy\n\n```css\nselector {\n  property: value;\n  property: value;\n}\n```\n\n- **Selector** — which HTML elements to style\n- **Property** — what to change (color, font-size, margin…)\n- **Value** — the new setting\n- Each property-value pair ends with a semicolon `;`\n\n## The Core Selectors\n\n| Selector | Syntax | Targets |\n|---|---|---|\n| Element | `p` | All `<p>` elements |\n| Class | `.card` | All elements with `class=\"card\"` |\n| ID | `#hero` | The one element with `id=\"hero\"` |\n| Group | `h1, h2, h3` | All h1, h2, and h3 elements |\n| Descendant | `nav a` | All `<a>` inside a `<nav>` |\n| Child | `ul > li` | Direct `<li>` children of `<ul>` |\n| Pseudo-class | `a:hover` | An `<a>` when the mouse is over it |\n\n## The Cascade and Specificity\n\n\"Cascading\" in CSS means that when multiple rules target the same element, the winner is determined by **specificity** (how specific the selector is):\n\n- ID selectors win over class selectors\n- Class selectors win over element selectors\n- Later rules beat earlier rules when specificity is equal\n- `!important` overrides everything (use sparingly)\n\nIn the code example below, you will see element, class, ID, and pseudo-class selectors all applied to the same page."
+    },
+    "codeExample": {
+      "title": "CSS Selectors in Action",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>CSS Selectors</title>\n  <style>\n    /* Element selector — targets all p elements */\n    p {\n      font-size: 16px;\n      line-height: 1.6;\n      color: #334155;\n    }\n\n    /* Class selector — targets elements with class=\"highlight\" */\n    .highlight {\n      background-color: #fef08a;\n      padding: 4px 8px;\n      border-radius: 4px;\n    }\n\n    /* ID selector — targets the one element with id=\"hero\" */\n    #hero {\n      font-size: 32px;\n      color: #22c55e;\n      text-align: center;\n    }\n\n    /* Group selector — targets both h2 and h3 */\n    h2, h3 {\n      color: #1e293b;\n      border-bottom: 2px solid #22c55e;\n      padding-bottom: 4px;\n    }\n\n    /* Descendant selector — only links inside nav */\n    nav a {\n      color: white;\n      text-decoration: none;\n      margin-right: 16px;\n    }\n\n    /* Pseudo-class — link on hover */\n    nav a:hover {\n      text-decoration: underline;\n    }\n\n    nav {\n      background: #1e293b;\n      padding: 12px 20px;\n    }\n  </style>\n</head>\n<body>\n\n  <nav>\n    <a href=\"#\">Home</a>\n    <a href=\"#\">Courses</a>\n    <a href=\"#\">About</a>\n  </nav>\n\n  <h1 id=\"hero\">Learn to Code</h1>\n\n  <h2>Why CodeGuru?</h2>\n  <p>We offer <span class=\"highlight\">free beginner courses</span> in multiple languages.</p>\n\n  <h3>Our Approach</h3>\n  <p>Every lesson includes a <span class=\"highlight\">code example</span> and an exercise.</p>\n\n</body>\n</html>",
+      "explanation": "- `p { ... }` — element selector; applies to every `<p>` on the page\n- `.highlight { ... }` — class selector; the dot prefix targets elements with that class name\n- `#hero { ... }` — ID selector; the hash prefix targets the unique element with that id\n- `h2, h3 { ... }` — group selector; comma separates multiple targets sharing the same rules\n- `nav a { ... }` — descendant selector; styles only `<a>` elements that are inside `<nav>`\n- `nav a:hover { ... }` — pseudo-class; applies only when the cursor is positioned over the link"
+    },
+    "exercise": {
+      "title": "Style a Profile Card with Selectors",
+      "instructions": "Create an HTML page with a CSS style block that uses at least four different selector types. The page must have: an element selector styling all p tags, a class selector for a class named 'card' with a border and padding, an ID selector for id='headline' with a green color, and a pseudo-class hover style on anchor tags. Include matching HTML elements in the body to demonstrate each selector.\n\nExpected: page with element, class, ID, and pseudo-class selectors all applied.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Profile Card</title>\n  <style>\n    /* Element selector: all p elements */\n    p {\n      font-size: 15px;\n      color: #334155;\n    }\n\n    /* Class selector: .card */\n    /* Add border: 1px solid #ccc and padding: 16px */\n\n    /* ID selector: #headline */\n    /* Add color: #22c55e */\n\n    /* Pseudo-class: a:hover */\n    /* Add text-decoration: underline and color: #16a34a */\n  </style>\n</head>\n<body>\n\n  <h1 id=\"headline\">Priya Verma</h1>\n\n  <div class=\"card\">\n    <p>Full-stack developer from Bangalore.</p>\n    <p>Loves Python and JavaScript.</p>\n    <a href=\"#\">View Portfolio</a>\n  </div>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Profile Card</title>\n  <style>\n    p { font-size: 15px; color: #334155; }\n    .card { border: 1px solid #ccc; padding: 16px; border-radius: 8px; }\n    #headline { color: #22c55e; }\n    a:hover { text-decoration: underline; color: #16a34a; }\n  </style>\n</head>\n<body>\n\n  <h1 id=\"headline\">Priya Verma</h1>\n\n  <div class=\"card\">\n    <p>Full-stack developer from Bangalore.</p>\n    <p>Loves Python and JavaScript.</p>\n    <a href=\"#\">View Portfolio</a>\n  </div>\n\n</body>\n</html>",
+      "hints": [
+        "💡 A class selector starts with a dot: .card { border: 1px solid #ccc; padding: 16px; }",
+        "💡 An ID selector starts with a hash: #headline { color: #22c55e; }",
+        "💡 A hover pseudo-class is written as a:hover { text-decoration: underline; } inside the style block."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": ".card",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "#headline",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m3-l1-q1",
+          "question": "Which CSS selector targets an element with the attribute class=\"card\"?",
+          "options": [
+            "#card",
+            "card",
+            ".card",
+            "@card"
+          ],
+          "correct": 2,
+          "explanation": "Class selectors in CSS start with a dot (period): .card targets all elements that have class=\"card\" in their HTML. The hash symbol (#) is used for ID selectors. Writing just card without a prefix would target elements with that tag name, which is only valid for actual HTML elements like p or h1."
+        },
+        {
+          "id": "html-m3-l1-q2",
+          "question": "What does a CSS pseudo-class like :hover do?",
+          "options": [
+            "It creates a fake element that appears on hover",
+            "It applies styles only when the element is in a specific state",
+            "It selects all hidden elements",
+            "It overrides all other CSS rules"
+          ],
+          "correct": 1,
+          "explanation": "A pseudo-class applies styles to an element only when it is in a particular state. a:hover applies styles when the cursor is over a link. Other common pseudo-classes include :focus (when an input is selected), :active (when a button is clicked), and :nth-child(n) (targeting elements by position)."
+        },
+        {
+          "id": "html-m3-l1-q3",
+          "question": "When two CSS rules target the same element with equal specificity, which one wins?",
+          "options": [
+            "The first rule defined always wins",
+            "The shorter rule wins",
+            "The later rule defined in the stylesheet wins",
+            "Both rules are applied and merge their values"
+          ],
+          "correct": 2,
+          "explanation": "When two rules have identical specificity, the cascade applies and the rule that appears later in the stylesheet wins. This is the 'cascading' part of Cascading Style Sheets. For properties that do not conflict, both rules apply. Understanding this order is essential for debugging unexpected CSS behaviour."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m3-l2",
+    "moduleId": "html-m3",
+    "title": "Colors and Typography",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Choosing Colours and Styling Text with CSS",
+      "content": "# Colours in CSS\n\nColour is the single most impactful visual decision on any page. CSS offers five ways to specify colour:\n\n| Format | Example | Notes |\n|---|---|---|\n| Named | `red`, `coral`, `steelblue` | 140+ predefined names |\n| Hex | `#22c55e` | 6-digit RGB in hexadecimal |\n| Short hex | `#fff` | 3-digit shorthand when pairs match |\n| RGB | `rgb(34, 197, 94)` | Red, Green, Blue 0-255 |\n| RGBA | `rgba(34, 197, 94, 0.5)` | Same + alpha (0=transparent, 1=opaque) |\n| HSL | `hsl(142, 71%, 45%)` | Hue, Saturation, Lightness |\n\nHex and HSL are the formats professionals use most. Hex for precision, HSL for creating colour palettes (just change the lightness value).\n\n## Colour Properties\n\n```css\np {\n  color: #1e293b;            /* text colour */\n  background-color: #f8fafc; /* background fill */\n}\n```\n\n## Typography Properties\n\n```css\nbody {\n  font-family: 'Segoe UI', Arial, sans-serif; /* font stack */\n  font-size: 16px;      /* base size */\n  line-height: 1.6;     /* spacing between lines */\n  font-weight: 400;     /* normal weight */\n  font-style: normal;   /* or italic */\n  letter-spacing: 0.02em;\n  text-align: left;     /* left | center | right | justify */\n  text-transform: none; /* uppercase | lowercase | capitalize */\n  text-decoration: none; /* underline | line-through | none */\n}\n```\n\n## Font Stacks\n\nAlways specify a **font stack** — multiple fonts in priority order:\n\n```css\nfont-family: 'Poppins', 'Segoe UI', Arial, sans-serif;\n```\n\nIf Poppins is not installed, the browser tries Segoe UI, then Arial, then any available sans-serif font. Always end with a generic family: `serif`, `sans-serif`, `monospace`, or `cursive`.\n\n## Google Fonts\n\nGoogle Fonts provides hundreds of free, web-safe fonts:\n\n```html\n<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap\" rel=\"stylesheet\">\n```\n\nThen use it in CSS:\n```css\nbody { font-family: 'Poppins', sans-serif; }\n```\n\nIn the code example below, you will see a styled blog post card that uses colour variables, Google Fonts, and multiple typography properties."
+    },
+    "codeExample": {
+      "title": "Styled Blog Post Card",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Blog Post</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap\"\n        rel=\"stylesheet\">\n  <style>\n    body {\n      font-family: 'Poppins', sans-serif;\n      background-color: #f1f5f9;\n      padding: 40px 20px;\n      color: #1e293b;\n      line-height: 1.7;\n    }\n\n    .card {\n      background-color: #ffffff;\n      border-radius: 12px;\n      padding: 32px;\n      max-width: 600px;\n      margin: 0 auto;\n      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);\n    }\n\n    .tag {\n      background-color: #dcfce7;\n      color: #16a34a;\n      font-size: 12px;\n      font-weight: 600;\n      text-transform: uppercase;\n      letter-spacing: 0.08em;\n      padding: 4px 10px;\n      border-radius: 999px;\n    }\n\n    h1 {\n      font-size: 24px;\n      font-weight: 700;\n      color: #0f172a;\n      margin: 12px 0 8px;\n    }\n\n    .meta {\n      font-size: 13px;\n      color: #94a3b8;\n      margin-bottom: 16px;\n    }\n\n    p {\n      font-size: 15px;\n      color: #475569;\n    }\n\n    a {\n      color: #22c55e;\n      font-weight: 600;\n      text-decoration: none;\n    }\n\n    a:hover {\n      text-decoration: underline;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <span class=\"tag\">Python</span>\n    <h1>Getting Started with Python in 2025</h1>\n    <p class=\"meta\">By Rahul Sharma &middot; 8 min read</p>\n    <p>Python remains the most beginner-friendly language for coding.\n       In this guide you will set up your environment and write your\n       first real program in under 30 minutes.</p>\n    <a href=\"#\">Read more &rarr;</a>\n  </div>\n\n</body>\n</html>",
+      "explanation": "- `font-family: 'Poppins', sans-serif` — uses Google Fonts Poppins; falls back to any system sans-serif\n- `background-color: #f1f5f9` on body sets the page background; `#ffffff` on `.card` creates contrast\n- `box-shadow: 0 4px 12px rgba(0,0,0,0.08)` — a subtle shadow; `rgba` alpha of `0.08` keeps it very light\n- `text-transform: uppercase; letter-spacing: 0.08em` — all-caps with extra spacing for the badge label\n- `border-radius: 999px` on `.tag` — a very large radius creates a pill shape on a short element\n- `&middot;` and `&rarr;` — HTML entities for the middle dot · and right arrow →"
+    },
+    "exercise": {
+      "title": "Style a Pricing Card with Colours",
+      "instructions": "Create a pricing card page. Apply a body background-color of #f8fafc. Create a div with class 'price-card' that has a white background, border-radius of 12px, padding of 32px, and max-width of 360px with margin 40px auto. Inside the card add an h2 with color #22c55e, a paragraph with font-size 15px and color #64748b, and a span showing a price with font-size 36px and font-weight 700.\n\nExpected: card with background-color, border-radius, green heading, and styled price.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Pricing</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f8fafc;\n      padding: 40px 20px;\n    }\n\n    .price-card {\n      /* Add: background-color white, border-radius 12px,\n         padding 32px, max-width 360px, margin 40px auto */\n    }\n\n    .price-card h2 {\n      /* Add: color #22c55e */\n    }\n\n    .price-card p {\n      /* Add: font-size 15px, color #64748b */\n    }\n\n    .price {\n      /* Add: font-size 36px, font-weight 700, color #0f172a */\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"price-card\">\n    <h2>Starter Plan</h2>\n    <span class=\"price\">₹299</span><span>/month</span>\n    <p>Access to 2 beginner courses with AI-powered hints.</p>\n  </div>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Pricing</title>\n  <style>\n    body { font-family: Arial, sans-serif; background-color: #f8fafc; padding: 40px 20px; }\n    .price-card { background-color: white; border-radius: 12px; padding: 32px; max-width: 360px; margin: 40px auto; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }\n    .price-card h2 { color: #22c55e; }\n    .price-card p { font-size: 15px; color: #64748b; }\n    .price { font-size: 36px; font-weight: 700; color: #0f172a; }\n  </style>\n</head>\n<body>\n  <div class=\"price-card\">\n    <h2>Starter Plan</h2>\n    <span class=\"price\">₹299</span><span>/month</span>\n    <p>Access to 2 beginner courses with AI-powered hints.</p>\n  </div>\n</body>\n</html>",
+      "hints": [
+        "💡 Add background-color: white; border-radius: 12px; padding: 32px; max-width: 360px; margin: 40px auto; to .price-card.",
+        "💡 Set .price-card h2 { color: #22c55e; } to colour the heading green.",
+        "💡 Set .price { font-size: 36px; font-weight: 700; } to make the price large and bold."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "background-color",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "border-radius",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m3-l2-q1",
+          "question": "What does the alpha value in rgba(255, 0, 0, 0.5) control?",
+          "options": [
+            "The shade of red — 0.5 means medium red",
+            "The opacity — 0 is fully transparent, 1 is fully opaque",
+            "The size of the element",
+            "The border thickness"
+          ],
+          "correct": 1,
+          "explanation": "The fourth value in rgba() is the alpha channel, which controls opacity. A value of 0 makes the colour completely transparent (invisible), 1 makes it fully opaque (solid), and 0.5 makes it 50% transparent — the content beneath shows through. This is useful for overlays, shadows, and subtle backgrounds."
+        },
+        {
+          "id": "html-m3-l2-q2",
+          "question": "Why should you always end a font-family stack with a generic family like sans-serif?",
+          "options": [
+            "The generic family sets the font size",
+            "It provides a guaranteed fallback if none of the named fonts are available",
+            "It improves page load performance",
+            "Generic families are required by the CSS specification"
+          ],
+          "correct": 1,
+          "explanation": "Named fonts like 'Poppins' or 'Arial' may not be installed on every user's device. A generic family (sans-serif, serif, monospace) at the end of the font stack ensures the browser always has a fallback — it selects any available font in that category. Without it, the browser uses its own default, which varies between devices."
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-m3-l3",
+    "moduleId": "html-m3",
+    "title": "The CSS Box Model",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Understanding the Box Model: margin, border, padding, and content",
+      "content": "# The CSS Box Model\n\nEvery single element on a webpage — every heading, paragraph, image, button — is a rectangular box. CSS treats them all this way. The **box model** describes how that box is structured from the inside out:\n\n```\n┌─────────────────────────────┐  ← margin (outside the border)\n│  ┌───────────────────────┐  │  ← border\n│  │  ┌─────────────────┐  │  │  ← padding (inside the border)\n│  │  │    CONTENT      │  │  │\n│  │  └─────────────────┘  │  │\n│  └───────────────────────┘  │\n└─────────────────────────────┘\n```\n\n- **Content** — the actual text, image, or child elements\n- **Padding** — transparent space between the content and the border\n- **Border** — the line around the padding and content\n- **Margin** — transparent space outside the border, pushing other elements away\n\n## Setting Each Layer\n\n```css\n.box {\n  /* Content size */\n  width: 300px;\n  height: 150px;\n\n  /* Padding — inside the border */\n  padding: 16px;               /* all four sides */\n  padding: 8px 16px;           /* top/bottom  left/right */\n  padding: 4px 8px 12px 16px;  /* top right bottom left (clockwise) */\n\n  /* Border */\n  border: 2px solid #22c55e;\n  border-radius: 8px;\n\n  /* Margin — outside the border */\n  margin: 24px;\n  margin: 0 auto;  /* centre horizontally */\n}\n```\n\n## box-sizing: border-box\n\nBy default, `width` and `height` apply only to the content area. Padding and border add to the total size:\n\n```css\n/* Default (content-box): width=300 + 32px padding + 4px border = 336px total */\n.box { width: 300px; padding: 16px; border: 2px solid; }\n\n/* border-box: total stays 300px — padding and border go INSIDE */\n* { box-sizing: border-box; }\n.box { width: 300px; padding: 16px; border: 2px solid; }\n```\n\nAdding `* { box-sizing: border-box; }` to every project makes sizing predictable. It is the first rule in almost every professional CSS file.\n\n## display Property\n\nEach element has a default `display` value:\n\n- `block` — takes the full width, starts on a new line (`div`, `p`, `h1`)\n- `inline` — flows with text, no width/height control (`span`, `a`, `em`)\n- `inline-block` — flows with text but accepts width/height\n- `none` — hides the element completely (removed from layout)\n\nIn the code example below, you will see the box model demonstrated with visible borders and background colours, plus box-sizing applied."
+    },
+    "codeExample": {
+      "title": "Box Model Visual Demo",
+      "language": "html-css",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Box Model Demo</title>\n  <style>\n    /* Apply border-box to every element — always do this */\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n\n    body { font-family: Arial, sans-serif; padding: 32px; background: #f8fafc; }\n\n    /* Block element: full width, new line */\n    .block-box {\n      background-color: #dbeafe;\n      border: 3px solid #3b82f6;\n      padding: 24px;\n      margin-bottom: 24px;\n      width: 100%;\n    }\n\n    /* Fixed-width centred box */\n    .centred-box {\n      background-color: #dcfce7;\n      border: 3px solid #22c55e;\n      border-radius: 8px;\n      padding: 32px 24px;\n      margin: 0 auto 24px;\n      max-width: 400px;\n      text-align: center;\n    }\n\n    /* Inline-block: sit side by side */\n    .inline-block-box {\n      display: inline-block;\n      background-color: #fef9c3;\n      border: 2px solid #eab308;\n      padding: 12px 24px;\n      margin: 8px;\n      border-radius: 4px;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"block-box\">\n    <strong>Block box</strong> — takes full width, starts on its own line.\n    Padding pushes content inward from the border.\n  </div>\n\n  <div class=\"centred-box\">\n    <strong>Centred box</strong><br>\n    max-width: 400px<br>\n    margin: 0 auto centres horizontally\n  </div>\n\n  <span class=\"inline-block-box\">Inline-block 1</span>\n  <span class=\"inline-block-box\">Inline-block 2</span>\n  <span class=\"inline-block-box\">Inline-block 3</span>\n\n</body>\n</html>",
+      "explanation": "- `* { box-sizing: border-box; margin: 0; padding: 0; }` — the universal reset; makes sizing predictable across all elements\n- `padding: 24px` — adds 24px of space between the content and the border on all four sides\n- `margin-bottom: 24px` — pushes the next element 24px away from the bottom border\n- `margin: 0 auto` — zeroes top/bottom margin and centres a block element horizontally\n- `max-width: 400px` — the element cannot grow wider than 400px even on a large screen\n- `display: inline-block` — spans sit side-by-side but accept width, padding, and border"
+    },
+    "exercise": {
+      "title": "Build a Feature Card Grid",
+      "instructions": "Create a page with the universal box-sizing reset. Define a class 'feature' with: display inline-block, width 200px, background-color white, border 2px solid #e2e8f0, border-radius 8px, padding 20px, margin 12px, and text-align center. Add three div elements with class 'feature', each containing an h3 and a paragraph. The body should have background-color #f1f5f9 and padding 32px.\n\nExpected: three side-by-side styled feature cards.",
+      "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Features</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f1f5f9;\n      padding: 32px;\n    }\n\n    .feature {\n      /* Add: display inline-block, width 200px,\n         background-color white, border 2px solid #e2e8f0,\n         border-radius 8px, padding 20px, margin 12px,\n         text-align center */\n    }\n\n    .feature h3 {\n      color: #22c55e;\n      margin-bottom: 8px;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"feature\">\n    <h3>Learn</h3>\n    <p>Watch expert-led lessons.</p>\n  </div>\n\n  <div class=\"feature\">\n    <h3>Practice</h3>\n    <p>Write real code every day.</p>\n  </div>\n\n  <div class=\"feature\">\n    <h3>Earn XP</h3>\n    <p>Level up as you progress.</p>\n  </div>\n\n</body>\n</html>",
+      "solutionCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Features</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: Arial, sans-serif; background-color: #f1f5f9; padding: 32px; }\n    .feature { display: inline-block; width: 200px; background-color: white; border: 2px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 12px; text-align: center; }\n    .feature h3 { color: #22c55e; margin-bottom: 8px; }\n  </style>\n</head>\n<body>\n  <div class=\"feature\"><h3>Learn</h3><p>Watch expert-led lessons.</p></div>\n  <div class=\"feature\"><h3>Practice</h3><p>Write real code every day.</p></div>\n  <div class=\"feature\"><h3>Earn XP</h3><p>Level up as you progress.</p></div>\n</body>\n</html>",
+      "hints": [
+        "💡 Add display: inline-block; width: 200px; to .feature so the cards sit side by side.",
+        "💡 Add padding: 20px; margin: 12px; background-color: white; to give each card internal space.",
+        "💡 Add border: 2px solid #e2e8f0; border-radius: 8px; text-align: center; to complete the card style."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "inline-block",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "border-radius",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "html-m3-l3-q1",
+          "question": "What is the difference between padding and margin in the CSS box model?",
+          "options": [
+            "Padding is outside the border; margin is inside",
+            "They are identical — both add space around the content",
+            "Padding is inside the border; margin is outside and pushes other elements away",
+            "Padding controls element height; margin controls element width"
+          ],
+          "correct": 2,
+          "explanation": "Padding is the transparent space between the content area and the border — it sits inside the border and takes the element's background-color. Margin is the transparent space outside the border — it creates distance between this element and its neighbours and is always transparent. Adding background-color to an element colours the padding but not the margin."
+        },
+        {
+          "id": "html-m3-l3-q2",
+          "question": "What does * { box-sizing: border-box } do in CSS?",
+          "options": [
+            "It makes all elements square",
+            "It removes all default browser styles",
+            "It makes width and height include padding and border, not just the content area",
+            "It adds a border to every element on the page"
+          ],
+          "correct": 2,
+          "explanation": "With the default content-box sizing, padding and border add to an element's declared width. So width: 300px with padding: 20px produces a 340px wide element. With border-box, the width declaration includes padding and border — the element stays at exactly 300px. This makes layout arithmetic much easier and is used in virtually every professional CSS project."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,101 @@
+rules_version = '2';
+// CodeGuru AI — Production Firestore Security Rules
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helpers ─────────────────────────────────────────────
+    function isSignedIn()   { return request.auth != null; }
+    function isOwner(uid)   { return isSignedIn() && request.auth.uid == uid; }
+    function onlyUpdating(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
+    // ─── Users ───────────────────────────────────────────────
+    match /users/{uid} {
+      allow read:   if isOwner(uid);
+      allow create: if isOwner(uid)
+        && request.resource.data.plan == 'free'
+        && request.resource.data.xp   == 0;
+      allow update: if isOwner(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+             .hasAny(['plan','xp','streak','badges','level',
+                      'totalLessonsCompleted','planExpiresAt','enrolledCourses']);
+      allow delete: if false;
+
+      match /notifications/{n} {
+        allow read:           if isOwner(uid);
+        allow update:         if isOwner(uid) && onlyUpdating(['read']) && request.resource.data.read == true;
+        allow create, delete: if false;
+      }
+      match /chat_history/{m} {
+        allow read:           if isOwner(uid);
+        allow create:         if isOwner(uid)
+          && request.resource.data.role in ['user', 'assistant']
+          && request.resource.data.content.size() <= 10000;
+        allow update, delete: if false;
+      }
+      match /badges/{b} {
+        allow read:                    if isOwner(uid);
+        allow create, update, delete:  if false;
+      }
+    }
+
+    // ─── Progress ─────────────────────────────────────────────
+    match /progress/{docId} {
+      allow read:   if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid
+        && request.resource.data.get('totalXP', 0) == 0;
+      allow update: if isSignedIn() && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.get('totalXP', 0) >= resource.data.get('totalXP', 0);
+      allow delete: if false;
+    }
+
+    // ─── Quiz Results ─────────────────────────────────────────
+    match /quiz_results/{docId} {
+      allow read:   if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid
+        && request.resource.data.score <= request.resource.data.total;
+      allow update: if isSignedIn() && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.lessonId == resource.data.lessonId;
+      allow delete: if false;
+    }
+
+    // ─── Subscriptions — Cloud Functions only ────────────────
+    match /subscriptions/{uid} {
+      allow read:                    if isOwner(uid);
+      allow create, update, delete:  if false;
+    }
+
+    // ─── Courses — public read ────────────────────────────────
+    match /courses/{courseId} {
+      allow read:                    if true;
+      allow create, update, delete:  if false;
+    }
+
+    // ─── System config ────────────────────────────────────────
+    match /system/{docId} {
+      allow read:                    if isSignedIn();
+      allow create, update, delete:  if false;
+    }
+
+
+    // ─── Lessons — public read, Admin SDK write only ──────────
+    // The seeding script uses Firebase Admin SDK which bypasses
+    // these rules entirely. This block governs client reads.
+    // All authenticated users can read any lesson.
+    // Lessons are immutable from the client — only the seed
+    // script (Admin SDK) can create or update them.
+    match /lessons/{lessonId} {
+      allow read:                    if isSignedIn();
+      allow create, update, delete:  if false;
+    }
+
+    // ─── Deny everything else ─────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

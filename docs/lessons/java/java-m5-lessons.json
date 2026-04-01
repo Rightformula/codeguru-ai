@@ -1,0 +1,221 @@
+[
+  {
+    "id": "java-m5-l1",
+    "moduleId": "java-m5",
+    "title": "Defining and Calling Methods",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Creating Reusable Blocks of Code with Java Methods",
+      "content": "# Methods in Java\n\nImagine a coffee machine. You press one button and the entire brewing sequence — heating water, grinding beans, extracting espresso — runs automatically. You do not repeat the steps every time. A **method** in Java works the same way: you write a block of code once, give it a name, and call it by that name whenever you need it.\n\n## Method Anatomy\n\n```java\naccess_modifier return_type methodName(parameters) {\n    // method body\n    return value;  // if return_type is not void\n}\n```\n\n```java\npublic static int add(int a, int b) {\n    return a + b;\n}\n```\n\n- `public` — access modifier (visible everywhere)\n- `static` — belongs to the class, not an object instance\n- `int` — return type (the type of value this method sends back)\n- `add` — the method name (camelCase convention)\n- `int a, int b` — parameters (typed input variables)\n- `return a + b` — the result sent back to the caller\n\n## void Methods — No Return Value\n\nIf a method produces output (like printing) but has no value to return, use `void`:\n\n```java\npublic static void printSeparator(int length) {\n    for (int i = 0; i < length; i++) {\n        System.out.print(\"-\");\n    }\n    System.out.println();\n}\n```\n\n## Calling a Method\n\n```java\npublic static void main(String[] args) {\n    int result = add(10, 5);        // result = 15\n    System.out.println(result);\n    printSeparator(20);             // calls void method\n}\n```\n\n## Parameters vs Arguments\n\n- **Parameter** — the variable declared in the method definition (`int a`)\n- **Argument** — the actual value passed when calling the method (`10`)\n\n## Why Methods Matter\n\n- **No repetition** — write the logic once, use it everywhere\n- **Testability** — each method can be tested independently\n- **Readability** — `calculateGST(price)` is clearer than 15 lines of arithmetic\n- **Maintainability** — fix a bug once in the method and it is fixed everywhere\n\nIn the code example below, you will see a complete set of utility methods for an invoice system, demonstrating void methods, return methods, and method calling patterns."
+    },
+    "codeExample": {
+      "title": "Invoice Utility Methods",
+      "language": "java",
+      "code": "public class Main {\n\n    // void method — no return value\n    public static void printHeader(String title) {\n        System.out.println(\"==============================\");\n        System.out.println(\"  \" + title);\n        System.out.println(\"==============================\");\n    }\n\n    // Returns a double — calculated result\n    public static double calculateTotal(double price, int qty) {\n        return price * qty;\n    }\n\n    // Returns a double — applies GST\n    public static double applyGST(double subtotal, double rate) {\n        return subtotal * (1 + rate);\n    }\n\n    // Returns a String — letter grade\n    public static String getGrade(int score) {\n        if      (score >= 90) return \"A\";\n        else if (score >= 80) return \"B\";\n        else if (score >= 70) return \"C\";\n        else                  return \"F\";\n    }\n\n    public static void main(String[] args) {\n        printHeader(\"GST Invoice\");\n\n        double subtotal = calculateTotal(1250.0, 4);   // 5000.0\n        double total    = applyGST(subtotal, 0.18);    // 5900.0\n\n        System.out.printf(\"Subtotal : Rs %.2f%n\", subtotal);\n        System.out.printf(\"Total    : Rs %.2f%n\", total);\n\n        // Methods can be called multiple times with different arguments\n        System.out.println(\"Grade 95 : \" + getGrade(95));\n        System.out.println(\"Grade 72 : \" + getGrade(72));\n    }\n}",
+      "explanation": "- `public static void printHeader(String title)` — `void` means no return; `static` lets it be called from `main` without an object\n- `return price * qty` — computes the product and sends it back immediately; the method ends here\n- `applyGST(subtotal, 0.18)` — passes the result of `calculateTotal` as an argument to the next method\n- `if (score >= 90) return \"A\";` — multiple return statements are allowed; Java exits at the first one hit\n- Methods can be called many times with different arguments — each call produces its own independent result"
+    },
+    "exercise": {
+      "title": "Write a Temperature Converter with Methods",
+      "instructions": "Write two static methods: celsiusToFahrenheit(double c) that returns (c * 9.0/5.0) + 32, and fahrenheitToCelsius(double f) that returns (f - 32) * 5.0/9.0. In main, call each with a test value and print the results using printf with one decimal place.\n\nTest: celsiusToFahrenheit(100.0) should give 212.0, fahrenheitToCelsius(98.6) should give 37.0.\n\nExpected output:\n100.0C = 212.0F\n98.6F = 37.0C",
+      "starterCode": "public class Main {\n\n    // Method 1: Celsius to Fahrenheit\n    public static double celsiusToFahrenheit(double c) {\n        // Return (c * 9.0/5.0) + 32\n        // Your code here\n        return 0; // placeholder\n    }\n\n    // Method 2: Fahrenheit to Celsius\n    public static double fahrenheitToCelsius(double f) {\n        // Return (f - 32) * 5.0/9.0\n        // Your code here\n        return 0; // placeholder\n    }\n\n    public static void main(String[] args) {\n        double fResult = celsiusToFahrenheit(100.0);\n        double cResult = fahrenheitToCelsius(98.6);\n        System.out.printf(\"100.0C = %.1fF%n\", fResult);\n        System.out.printf(\"98.6F = %.1fC%n\",  cResult);\n    }\n}",
+      "solutionCode": "public class Main {\n\n    public static double celsiusToFahrenheit(double c) {\n        return (c * 9.0 / 5.0) + 32;\n    }\n\n    public static double fahrenheitToCelsius(double f) {\n        return (f - 32) * 5.0 / 9.0;\n    }\n\n    public static void main(String[] args) {\n        double fResult = celsiusToFahrenheit(100.0);\n        double cResult = fahrenheitToCelsius(98.6);\n        System.out.printf(\"100.0C = %.1fF%n\", fResult);\n        System.out.printf(\"98.6F = %.1fC%n\",  cResult);\n    }\n}",
+      "hints": [
+        "💡 Replace return 0; with return (c * 9.0 / 5.0) + 32; in celsiusToFahrenheit.",
+        "💡 Replace return 0; with return (f - 32) * 5.0 / 9.0; in fahrenheitToCelsius.",
+        "💡 Use 9.0 and 5.0 (not 9 and 5) to ensure double division — otherwise integer division truncates the result."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "100.0C = 212.0F",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "98.6F = 37.0C",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m5-l1-q1",
+          "question": "What does the void keyword in a method signature indicate?",
+          "options": [
+            "The method takes no parameters",
+            "The method is not allowed to contain loops",
+            "The method does not return a value to its caller",
+            "The method can only be called once"
+          ],
+          "correct": 2,
+          "explanation": "void is the return type that means the method performs an action but does not produce a value to send back. A void method can still use the return statement with no value (just return;) to exit early, but it cannot return a value. If a method needs to send data back, replace void with the appropriate type: int, double, String, etc."
+        },
+        {
+          "id": "java-m5-l1-q2",
+          "question": "What is the difference between a method parameter and an argument?",
+          "options": [
+            "They are identical — just two names for the same thing",
+            "A parameter is the variable in the method definition; an argument is the value passed at the call site",
+            "A parameter is the returned value; an argument is the method name",
+            "Parameters are for void methods; arguments are for methods that return values"
+          ],
+          "correct": 1,
+          "explanation": "A parameter is the typed variable name declared in the method signature: double c in celsiusToFahrenheit(double c). An argument is the actual value passed when the method is called: celsiusToFahrenheit(100.0) — 100.0 is the argument. The argument's value is assigned to the parameter for the duration of the method call."
+        },
+        {
+          "id": "java-m5-l1-q3",
+          "question": "Why must a Java method be declared with static to be called directly from main?",
+          "options": [
+            "static makes the method run faster",
+            "main is a static method and can only call other static methods without creating an object",
+            "Non-static methods are not allowed in a class that has a main method",
+            "static prevents the method from being called more than once"
+          ],
+          "correct": 1,
+          "explanation": "main is a static method, which means it belongs to the class itself rather than to any specific object instance. A static method can only directly call other static methods. To call a non-static method from main, you would first need to create an object of the class. Marking utility methods as static is standard practice for beginner Java programs."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m5-l2",
+    "moduleId": "java-m5",
+    "title": "Parameters, Return Values, and Scope",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "How Java Passes Arguments and Controls Variable Scope",
+      "content": "# Pass by Value\n\nJava always passes **primitive** arguments by value — the method receives a copy of the original value. Modifying the copy inside the method does not affect the original variable:\n\n```java\npublic static void doubleIt(int x) {\n    x = x * 2;   // modifies the local copy only\n}\n\npublic static void main(String[] args) {\n    int num = 10;\n    doubleIt(num);\n    System.out.println(num);  // still 10 — unchanged\n}\n```\n\nTo change a value, the method must `return` the new value:\n\n```java\npublic static int doubleIt(int x) {\n    return x * 2;\n}\nnum = doubleIt(num);   // num is now 20\n```\n\n## Multiple Return Values (via array)\n\nJava methods can return only one value. To return multiple values, return an array or use output parameters with arrays:\n\n```java\npublic static double[] getStats(int[] data) {\n    double total = 0;\n    for (int v : data) total += v;\n    double avg = total / data.length;\n    double max = data[0];\n    for (int v : data) if (v > max) max = v;\n    return new double[]{avg, max};   // return as array\n}\n```\n\n## Variable Scope\n\n**Scope** defines where a variable is visible and accessible.\n\n- **Local variable** — declared inside a method; exists only during that method's execution\n- **Parameter** — a special local variable initialised by the argument value\n- **Block variable** — declared inside a `{}` block (if/for/while); visible only within that block\n\n```java\npublic static void demo() {\n    int x = 10;              // local — visible in entire method\n    if (x > 5) {\n        int y = 20;          // block — visible only inside this if\n        System.out.println(x + y);  // OK\n    }\n    // System.out.println(y);  // ERROR — y is out of scope here\n}\n```\n\n## Returning from Multiple Points\n\nA method can have multiple `return` statements — execution ends at the first one reached:\n\n```java\npublic static String classify(int n) {\n    if (n > 0) return \"Positive\";\n    if (n < 0) return \"Negative\";\n    return \"Zero\";           // only reached when n == 0\n}\n```\n\nIn the code example below, you will see pass-by-value demonstrated, a method returning an array, and scope illustrated with a banking simulation."
+    },
+    "codeExample": {
+      "title": "Bank Account Method Simulation",
+      "language": "java",
+      "code": "public class Main {\n\n    // Returns new balance — does not modify original directly\n    public static double deposit(double balance, double amount) {\n        if (amount <= 0) return balance;  // invalid amount\n        return balance + amount;\n    }\n\n    public static double withdraw(double balance, double amount) {\n        if (amount <= 0 || amount > balance) return balance;\n        return balance - amount;\n    }\n\n    // Returns two values as an array: {min, max}\n    public static double[] findMinMax(double[] values) {\n        double min = values[0], max = values[0];\n        for (double v : values) {\n            if (v < min) min = v;\n            if (v > max) max = v;\n        }\n        return new double[]{min, max};\n    }\n\n    public static void main(String[] args) {\n\n        // Pass-by-value demo\n        double balance = 5000.0;\n        balance = deposit(balance, 2000.0);   // must re-assign\n        balance = withdraw(balance, 1500.0);\n        System.out.printf(\"Balance: Rs %.2f%n\", balance);\n\n        // Block scope: i is only visible inside the loop\n        for (int i = 0; i < 3; i++) {\n            double bonus = 100.0 * (i + 1);   // bonus is block-scoped\n            System.out.println(\"Bonus: \" + bonus);\n        }\n        // i and bonus are not accessible here\n\n        // Multiple return values via array\n        double[] history  = {3200.0, 4800.0, 1500.0, 9100.0, 600.0};\n        double[] minMax   = findMinMax(history);\n        System.out.printf(\"Min: Rs %.0f, Max: Rs %.0f%n\",\n                          minMax[0], minMax[1]);\n    }\n}",
+      "explanation": "- `balance = deposit(balance, 2000.0)` — reassignment required; Java passes primitives by value so the method works on a copy\n- `if (amount <= 0) return balance` — guard clause; returns the balance unchanged when input is invalid\n- `return new double[]{min, max}` — creates and returns an anonymous array literal with two values\n- `double[] minMax = findMinMax(history)` — the returned array is captured in a local variable, accessed by index\n- `double bonus` inside the for loop — block-scoped; destroyed when the loop block ends"
+    },
+    "exercise": {
+      "title": "Write a Grade Statistics Method",
+      "instructions": "Write a static method getStats(int[] marks) that returns a double[] array containing three values in order: [average, minimum, maximum]. In main, call getStats with int[] marks = {72, 88, 95, 61, 83}. Print the average with one decimal place, and the minimum and maximum as integers using printf.\n\nExpected output:\nAverage: 79.8\nMin: 61\nMax: 95",
+      "starterCode": "public class Main {\n\n    public static double[] getStats(int[] marks) {\n        double total = 0;\n        int min = marks[0], max = marks[0];\n\n        for (int m : marks) {\n            total += m;\n            if (m < min) min = m;\n            if (m > max) max = m;\n        }\n\n        double avg = total / marks.length;\n        // Return array containing avg, min, max\n        // Your code here\n        return new double[]{0, 0, 0}; // placeholder\n    }\n\n    public static void main(String[] args) {\n        int[] marks = {72, 88, 95, 61, 83};\n        double[] stats = getStats(marks);\n\n        System.out.printf(\"Average: %.1f%n\", stats[0]);\n        // Your code: print min and max\n    }\n}",
+      "solutionCode": "public class Main {\n\n    public static double[] getStats(int[] marks) {\n        double total = 0;\n        int min = marks[0], max = marks[0];\n\n        for (int m : marks) {\n            total += m;\n            if (m < min) min = m;\n            if (m > max) max = m;\n        }\n\n        double avg = total / marks.length;\n        return new double[]{avg, min, max};\n    }\n\n    public static void main(String[] args) {\n        int[] marks = {72, 88, 95, 61, 83};\n        double[] stats = getStats(marks);\n\n        System.out.printf(\"Average: %.1f%n\", stats[0]);\n        System.out.printf(\"Min: %d%n\", (int) stats[1]);\n        System.out.printf(\"Max: %d%n\", (int) stats[2]);\n    }\n}",
+      "hints": [
+        "💡 Replace return new double[]{0, 0, 0}; with return new double[]{avg, min, max}; to return computed values.",
+        "💡 Print min: System.out.printf(\"Min: %d%n\", (int) stats[1]); — cast to int because %d requires an integer.",
+        "💡 Print max the same way: System.out.printf(\"Max: %d%n\", (int) stats[2]);"
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Average: 79.8",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Min: 61",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m5-l2-q1",
+          "question": "If a Java method modifies a primitive parameter inside its body, what happens to the original variable?",
+          "options": [
+            "The original variable is also modified",
+            "A runtime exception is thrown",
+            "Nothing — the method receives a copy, so the original is unchanged",
+            "The original variable is set to zero"
+          ],
+          "correct": 2,
+          "explanation": "Java passes primitive types by value — the method receives a copy of the argument. Modifying the copy inside the method has no effect on the original variable. To change the original, the method must return the new value and the caller must reassign it: num = doubleIt(num)."
+        },
+        {
+          "id": "java-m5-l2-q2",
+          "question": "A variable declared inside a for loop body — where is it accessible?",
+          "options": [
+            "Anywhere in the class",
+            "Anywhere in the method that contains the loop",
+            "Only within the loop body where it is declared",
+            "Only in the first iteration of the loop"
+          ],
+          "correct": 2,
+          "explanation": "Variables declared inside a block — including a for loop body — are block-scoped. They are created fresh on each iteration and destroyed when the block ends. Trying to access a for-loop variable outside the loop causes a compile error because the variable no longer exists at that point."
+        }
+      ]
+    }
+  },
+  {
+    "id": "java-m5-l3",
+    "moduleId": "java-m5",
+    "title": "Method Overloading",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Defining Multiple Methods with the Same Name Using Overloading",
+      "content": "# Method Overloading\n\nImagine a calculator with a single ADD button. You can add two integers, two decimals, or even three numbers — but you press the same ADD button each time. Java's **method overloading** lets you define multiple methods with the same name, as long as they differ in their parameter lists.\n\n## What Overloading Means\n\n```java\n// Three methods named 'add' — all valid in the same class\npublic static int    add(int a, int b)              { return a + b; }\npublic static double add(double a, double b)        { return a + b; }\npublic static int    add(int a, int b, int c)       { return a + b + c; }\n```\n\nThe compiler determines which version to call based on the **argument types and count** at the call site:\n\n```java\nadd(2, 3)          // calls add(int, int) → 5\nadd(2.5, 3.5)      // calls add(double, double) → 6.0\nadd(1, 2, 3)       // calls add(int, int, int) → 6\n```\n\n## Rules for Overloading\n\nOverloaded methods must differ in at least one of:\n- **Number of parameters** (2 vs 3 parameters)\n- **Type of parameters** (int vs double)\n- **Order of parameter types** (int, double vs double, int)\n\nThey cannot differ only in **return type** — that causes a compile error:\n```java\npublic static int  add(int a, int b)    { return a + b; }\npublic static void add(int a, int b)    { ... }  // compile error!\n```\n\n## Widening and Overloading\n\nWhen no exact match exists, Java widens the argument type to find the closest match:\n\n```java\nint x = 5;\nadd(x, 3.0);  // x is widened from int to double; calls add(double, double)\n```\n\n## Why Use Overloading?\n\nOverloading creates a clean, intuitive API. Instead of `printInt()`, `printDouble()`, `printString()`, Java's `System.out.println()` is overloaded to accept any type:\n\n```java\nSystem.out.println(42);        // println(int)\nSystem.out.println(3.14);      // println(double)\nSystem.out.println(\"Hello\");   // println(String)\nSystem.out.println(true);      // println(boolean)\n```\n\nIn the code example below, you will see an overloaded `describe()` method that works with different data types and parameter counts."
+    },
+    "codeExample": {
+      "title": "Overloaded Describe Methods",
+      "language": "java",
+      "code": "public class Main {\n\n    // Overload 1: String only\n    public static void describe(String name) {\n        System.out.println(\"Name: \" + name);\n    }\n\n    // Overload 2: String + int\n    public static void describe(String name, int age) {\n        System.out.println(\"Name: \" + name + \", Age: \" + age);\n    }\n\n    // Overload 3: String + int + String\n    public static void describe(String name, int age, String city) {\n        System.out.println(\"Name: \" + name +\n                           \", Age: \" + age +\n                           \", City: \" + city);\n    }\n\n    // Overloaded area() methods\n    public static double area(double radius) {\n        return Math.PI * radius * radius;   // circle\n    }\n\n    public static double area(double width, double height) {\n        return width * height;              // rectangle\n    }\n\n    public static void main(String[] args) {\n        // Compiler picks the right overload automatically\n        describe(\"Rahul\");\n        describe(\"Priya\", 22);\n        describe(\"Amit\",  28, \"Mumbai\");\n\n        System.out.printf(\"Circle area    : %.2f%n\", area(5.0));\n        System.out.printf(\"Rectangle area : %.2f%n\", area(4.0, 6.0));\n    }\n}",
+      "explanation": "- `describe(String name)` vs `describe(String name, int age)` — same name, different parameter count; both valid\n- `area(double radius)` vs `area(double width, double height)` — same name and types but different count\n- `describe(\"Rahul\")` — compiler matches to the one-parameter overload automatically\n- `describe(\"Amit\", 28, \"Mumbai\")` — compiler selects the three-parameter overload\n- `Math.PI` — a predefined constant in the `Math` class; no parentheses because it is a field, not a method"
+    },
+    "exercise": {
+      "title": "Write Overloaded calculateDiscount Methods",
+      "instructions": "Write three overloaded static methods named calculateDiscount. Method 1: calculateDiscount(double price) returns 10% off (price * 0.10). Method 2: calculateDiscount(double price, double rate) returns price * rate. Method 3: calculateDiscount(double price, double rate, String code) returns price * rate * 1.05 if code equals 'EXTRA', otherwise price * rate. In main, call all three and print results with printf.\n\nExpected: three different discount amounts printed.",
+      "starterCode": "public class Main {\n\n    // Overload 1: default 10% discount\n    public static double calculateDiscount(double price) {\n        return price * 0.10;\n    }\n\n    // Overload 2: custom rate\n    public static double calculateDiscount(double price, double rate) {\n        // Your code here\n        return 0;\n    }\n\n    // Overload 3: custom rate + promo code\n    public static double calculateDiscount(double price, double rate, String code) {\n        // If code equals \"EXTRA\", apply extra 5% (multiply rate result by 1.05)\n        // Your code here\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        System.out.printf(\"Default 10%%: Rs %.2f%n\",  calculateDiscount(2000.0));\n        System.out.printf(\"Custom 20%%: Rs %.2f%n\",   calculateDiscount(2000.0, 0.20));\n        System.out.printf(\"EXTRA code: Rs %.2f%n\",    calculateDiscount(2000.0, 0.20, \"EXTRA\"));\n    }\n}",
+      "solutionCode": "public class Main {\n\n    public static double calculateDiscount(double price) {\n        return price * 0.10;\n    }\n\n    public static double calculateDiscount(double price, double rate) {\n        return price * rate;\n    }\n\n    public static double calculateDiscount(double price, double rate, String code) {\n        double discount = price * rate;\n        if (code.equals(\"EXTRA\")) return discount * 1.05;\n        return discount;\n    }\n\n    public static void main(String[] args) {\n        System.out.printf(\"Default 10%%: Rs %.2f%n\",  calculateDiscount(2000.0));\n        System.out.printf(\"Custom 20%%: Rs %.2f%n\",   calculateDiscount(2000.0, 0.20));\n        System.out.printf(\"EXTRA code: Rs %.2f%n\",    calculateDiscount(2000.0, 0.20, \"EXTRA\"));\n    }\n}",
+      "hints": [
+        "💡 Overload 2: replace return 0; with return price * rate;",
+        "💡 Overload 3: compute double discount = price * rate; then return discount * 1.05; if code.equals(\"EXTRA\"), else return discount;",
+        "💡 Use .equals() to compare the code String — never use == for String content comparison in Java."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Default 10%",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "EXTRA code",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "java-m5-l3-q1",
+          "question": "Which of the following correctly describes method overloading in Java?",
+          "options": [
+            "Defining the same method in a subclass with different behaviour",
+            "Defining multiple methods with the same name but different parameter lists in the same class",
+            "Calling a method more than once in the same program",
+            "Replacing a method body with an empty implementation"
+          ],
+          "correct": 1,
+          "explanation": "Method overloading means defining two or more methods with the same name in the same class, where each method has a different parameter list (different number, types, or order of parameters). The compiler selects the correct version at compile time based on the argument types. Overloading is different from overriding, which applies to subclasses."
+        },
+        {
+          "id": "java-m5-l3-q2",
+          "question": "Can two overloaded methods differ only in their return type?",
+          "options": [
+            "Yes — different return types make methods unique",
+            "Yes — if the method names are also different",
+            "No — overloaded methods must differ in their parameter list",
+            "No — overloaded methods are only allowed to differ in parameter count"
+          ],
+          "correct": 2,
+          "explanation": "Overloaded methods must differ in their parameter list (number, type, or order of parameters). Return type alone is not enough to distinguish overloads because the compiler cannot determine which version to call from just the method name and argument types. Attempting to define two methods that differ only in return type causes a compile error: 'method already defined'."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,235 @@
+[
+  {
+    "id": "py-m1-l1",
+    "moduleId": "py-m1",
+    "title": "What is Python?",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "8 min",
+    "explanation": {
+      "title": "What is Python and Why Does It Matter?",
+      "content": "# What is Python?\n\nImagine you want to give a set of instructions to a very obedient helper. The helper will do exactly what you say, every time, without complaint — but only if you speak in a language it understands. **Python** is one of those languages, designed for giving precise instructions to a computer.\n\nPython is a **programming language** — a formal set of words and rules that humans use to write programs. A **program** is simply a list of instructions the computer executes from top to bottom. Python was created by Guido van Rossum and first released in 1991. The name comes from the British comedy series *Monty Python's Flying Circus*, not from the reptile.\n\n## Why Python Is Unique\n\nAmong the hundreds of programming languages that exist, Python is consistently ranked the most popular in the world. Several properties make it stand out:\n\n- **Readable syntax** — Python code reads almost like plain English, so beginners can understand a program without memorising a long list of symbols\n- **Versatility** — the same language powers web servers, machine learning models, automation scripts, games, and scientific research\n- **Large standard library** — Python ships with thousands of pre-written tools so you do not have to build everything from scratch\n- **Active community** — millions of developers have published free packages you can use immediately\n\n## Where Python Is Used in the Real World\n\n| Industry | What Python Does There |\n|---|---|\n| Artificial Intelligence | Training models behind ChatGPT and image recognition |\n| Web Development | Running the backend of Instagram and Pinterest |\n| Data Science | Analysing stock prices, medical records, and census data |\n| Automation | Filling forms, renaming files, sending emails automatically |\n| Education | Taught as the first language at MIT, IITs, and most CS programs |\n\n## How Python Compares to Other Languages\n\n| Language | Lines to print \"Hello\" | Main use case | Difficulty for beginners |\n|---|---|---|---|\n| Python | 1 | Everything | Very easy |\n| Java | 5 | Enterprise software | Moderate |\n| C++ | 4 | System software | Difficult |\n\nPython's one-line \"Hello, World!\" — `print(\"Hello, World!\")` — perfectly illustrates why beginners choose it first. In the code example below, you will see this simplicity in action alongside a few other fundamental `print()` calls."
+    },
+    "codeExample": {
+      "title": "Python Introduces Itself",
+      "language": "python",
+      "code": "# Python executes instructions from top to bottom, one line at a time.\n# Lines beginning with # are comments — Python ignores them completely.\n\n# The print() function displays text on the screen.\nprint(\"Hello, World!\")\n\n# You can print any text inside the quotes.\nprint(\"Python was created in 1991.\")\nprint(\"It is the most popular programming language today.\")\n\n# Python can also evaluate arithmetic and display the result.\nprint(\"Years since Python was created:\", 2025 - 1991)\n\n# Printing multiple items separated by commas adds a space between them.\nprint(\"Python\", \"is\", \"beginner\", \"friendly!\")",
+      "explanation": "- `# text` — a **comment**; Python skips this line entirely; use comments to explain your code to other humans\n- `print(\"Hello, World!\")` — calls the built-in `print()` function; whatever you pass inside the parentheses is displayed\n- `\"Hello, World!\"` — a **string literal**; any characters surrounded by double quotes form a string\n- `2025 - 1991` — Python evaluates arithmetic before printing; the screen shows `34`, not the expression\n- `print(\"A\", \"B\", \"C\")` — commas separate multiple items; Python inserts one space between each automatically"
+    },
+    "exercise": {
+      "title": "Write Your First Introduction Program",
+      "instructions": "Write a Python program that prints exactly four lines about yourself: your name on line 1, your city on line 2, your age as a number on line 3, and your favourite subject on line 4. Each line must use its own print() statement. A number does not need quotes; text does. Expected output example:\nPriya Sharma\nMumbai\n19\nMathematics",
+      "starterCode": "# My Introduction Program\n# Each print() statement outputs one line.\n\n# Line 1 — print your name\nprint(\"Your Name Here\")\n\n# Line 2 — print your city\nprint(\"Your City Here\")\n\n# Line 3 — print your age (a number, no quotes needed)\n# Your code here\n\n# Line 4 — print your favourite subject\n# Your code here",
+      "solutionCode": "# My Introduction Program\n\nprint(\"Priya Sharma\")\nprint(\"Mumbai\")\nprint(19)\nprint(\"Mathematics\")",
+      "hints": [
+        "💡 Each piece of information needs its own print() statement on a separate line.",
+        "💡 Text values like your name and city must go inside double quotes; a number like your age does not need quotes.",
+        "💡 Copy the pattern of the first two print() calls and write two more below them for age and subject."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": null,
+          "checkType": "contains_print"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m1-l1-q1",
+          "question": "Which of the following best describes what Python is?",
+          "options": [
+            "A hardware component that makes computers faster",
+            "A programming language used to write instructions for computers",
+            "A type of database for storing information",
+            "An operating system like Windows or macOS"
+          ],
+          "correct": 1,
+          "explanation": "Python is a programming language — a formal set of rules and words that lets humans write instructions a computer can execute. It is not hardware, a database, or an operating system. After you write a Python program, the Python interpreter reads and runs those instructions."
+        },
+        {
+          "id": "py-m1-l1-q2",
+          "question": "What does the # symbol do at the beginning of a line in Python?",
+          "options": [
+            "It prints the rest of the line to the screen",
+            "It multiplies the value that follows it",
+            "It marks the line as a comment that Python ignores",
+            "It declares a new variable"
+          ],
+          "correct": 2,
+          "explanation": "The # symbol starts a comment. Python skips everything on that line after the # character when the program runs. Comments are notes written by the programmer to explain the code to other humans. They have no effect on the program's output or behaviour."
+        },
+        {
+          "id": "py-m1-l1-q3",
+          "question": "What will Python display when it runs print(\"Hello\", \"World\")?",
+          "options": [
+            "HelloWorld",
+            "Hello,World",
+            "Hello World",
+            "\"Hello\" \"World\""
+          ],
+          "correct": 2,
+          "explanation": "When you separate multiple items with a comma inside print(), Python automatically places a single space between them. So print(\"Hello\", \"World\") displays Hello World — no comma, just one space. The quotation marks are not displayed; they only mark where the string begins and ends."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m1-l2",
+    "moduleId": "py-m1",
+    "title": "print() Function and Comments",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "10 min",
+    "explanation": {
+      "title": "How print() Works and Why Comments Matter",
+      "content": "# The print() Function\n\nThink of `print()` as Python's loudspeaker. Anything you hand it, it broadcasts to the screen. You have already used it once, but it is capable of much more than displaying a single line of text.\n\n## Printing Different Kinds of Values\n\nPython can print several kinds of data:\n\n```python\nprint(\"Hello\")       # a string — text in quotes\nprint(42)            # an integer — a whole number\nprint(3.14)          # a float — a decimal number\nprint(True)          # a boolean — True or False\n```\n\nEach call to `print()` adds a **newline** at the end, so the next output starts on a fresh line.\n\n## Controlling the Separator and End Character\n\nBy default, `print()` puts a space between multiple items and a newline at the end. You can change both:\n\n```python\nprint(\"Name\", \"Age\", sep=\" | \")   # Name | Age\nprint(\"Loading\", end=\"...\")        # Loading... (no newline)\nprint(\" done\")                     # Loading... done\n```\n\n- `sep` sets the string placed **between** items (default is one space)\n- `end` sets the string placed **after** the last item (default is `\"\\n\"`, a newline)\n\n## Printing with f-strings\n\nAn **f-string** lets you embed variable values directly inside a string. Place `f` immediately before the opening quote, then put variable names inside `{}` braces:\n\n```python\nname  = \"Rahul\"\nmarks = 88\nprint(f\"{name} scored {marks} out of 100.\")\n```\n\nOutput: `Rahul scored 88 out of 100.`\n\n## Comments — Notes in Your Code\n\nA **comment** starts with `#` and runs to the end of the line. Python ignores comments entirely. You should use them to:\n\n- Explain *why* you wrote a piece of code\n- Leave a note for your future self\n- Temporarily disable a line while testing\n\n```python\n# This calculates the discounted price\nprice    = 500\ndiscount = 0.10        # 10% off\nfinal    = price - (price * discount)\nprint(final)           # expected: 450.0\n```\n\nWell-commented code is a mark of a professional programmer. In the code example below, you will see `print()` used with `sep`, `end`, and an f-string together."
+    },
+    "codeExample": {
+      "title": "print() Options Showcase",
+      "language": "python",
+      "code": "# Demonstrate the many ways print() can display output\n\n# 1. Basic print — adds newline at end automatically\nprint(\"Line one\")\nprint(\"Line two\")\n\n# 2. Print multiple items — default separator is one space\nprint(\"Python\", \"3\", \"is\", \"great\")\n\n# 3. Custom separator between items\nprint(\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\", sep=\"-\")\n\n# 4. Custom end character — stays on same line\nprint(\"Connecting\", end=\"\")\nprint(\"...\")\nprint(\"Connected!\")\n\n# 5. f-string — embed variable values inside text\ncourse = \"Python\"\nlevel  = \"Beginner\"\nprint(f\"Welcome to {course} {level}!\")\n\n# 6. Arithmetic result inside f-string\nyear_started = 1991\nage_of_python = 2025 - year_started\nprint(f\"Python has been around for {age_of_python} years.\")",
+      "explanation": "- `print(\"Line one\")` — the simplest form; displays text and moves to the next line automatically\n- `sep=\"-\"` — replaces the default space separator; the five day names appear as `Mon-Tue-Wed-Thu-Fri`\n- `end=\"\"` — replaces the default newline with an empty string, so the next `print()` continues on the same line\n- `f\"Welcome to {course} {level}!\"` — an **f-string**; variables inside `{}` are substituted with their values before the string is displayed\n- `2025 - year_started` inside an f-string — Python evaluates the expression first and inserts the result"
+    },
+    "exercise": {
+      "title": "Build a Formatted Name Badge",
+      "instructions": "Create a program that prints a name badge for a student. Define two variables: name (a string) and batch (a string such as '2024'). Then print three lines: a separator line of 30 dashes, the badge content using an f-string that says 'Name: [name] | Batch: [batch]', and another separator line of 30 dashes. The dashes must be printed using the * operator: print('-' * 30).\n\nExpected output:\n------------------------------\nName: Rahul | Batch: 2024\n------------------------------",
+      "starterCode": "# Name Badge Generator\n\n# Step 1 — define the variables\nname  = \"Rahul\"\nbatch = \"2024\"\n\n# Step 2 — print the top border (30 dashes)\nprint(\"-\" * 30)\n\n# Step 3 — print the badge content using an f-string\n# Your code here\n\n# Step 4 — print the bottom border (30 dashes)\n# Your code here",
+      "solutionCode": "# Name Badge Generator\n\nname  = \"Rahul\"\nbatch = \"2024\"\n\nprint(\"-\" * 30)\nprint(f\"Name: {name} | Batch: {batch}\")\nprint(\"-\" * 30)",
+      "hints": [
+        "💡 Use an f-string: start the string with f before the quote, then put variable names inside curly braces like {name}.",
+        "💡 The separator line is already shown as print(\"-\" * 30) — the * operator repeats the dash character 30 times.",
+        "💡 The badge line should look like f\"Name: {name} | Batch: {batch}\" — both variables go inside their own pair of curly braces."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "------------------------------",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m1-l2-q1",
+          "question": "What does print(\"A\", \"B\", \"C\", sep=\"-\") display?",
+          "options": [
+            "A B C",
+            "A-B-C",
+            "ABC",
+            "A, B, C"
+          ],
+          "correct": 1,
+          "explanation": "The sep keyword argument sets the string placed between each item in a print() call. With sep=\"-\", Python places a dash between each adjacent item, producing A-B-C. The default separator is a single space, which is why print(\"A\", \"B\") normally shows A B."
+        },
+        {
+          "id": "py-m1-l2-q2",
+          "question": "Which line correctly uses an f-string to display 'Score: 95'?",
+          "options": [
+            "print(\"Score: \" + score)",
+            "print(f\"Score: {score}\")",
+            "print(f\"Score: score\")",
+            "print(\"Score: {score}\")"
+          ],
+          "correct": 1,
+          "explanation": "An f-string requires the letter f immediately before the opening quote: f\"...\". Variables are placed inside curly braces {}. Without the f prefix, Python treats the curly braces as literal characters and prints Score: {score} rather than the variable's value. Concatenation with + also works but f-strings are the modern, preferred approach."
+        },
+        {
+          "id": "py-m1-l2-q3",
+          "question": "What does the end parameter in print() control?",
+          "options": [
+            "The separator placed between multiple items",
+            "The number of items you can print",
+            "The character or string placed after the last item instead of a newline",
+            "The colour of the printed text"
+          ],
+          "correct": 2,
+          "explanation": "The end parameter replaces the default newline character that print() adds after the last item. Setting end=\"\" prevents moving to a new line, so the next print() continues on the same line. Setting end=\"\\n\\n\" would add an extra blank line after each call. The sep parameter (not end) controls what goes between items."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m1-l3",
+    "moduleId": "py-m1",
+    "title": "Variables and User Input",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Storing Information in Variables and Reading User Input",
+      "content": "# Variables\n\nA **variable** is a named storage location in the computer's memory. Think of it as a labelled box: you put a value inside the box, give the box a name, and later you can open the box by using that name.\n\n```python\nstudent_name = \"Ananya\"\nage          = 20\ngpa          = 3.8\n```\n\nThe `=` sign is the **assignment operator** — it places the value on the right into the container on the left. It does not mean equality in the mathematical sense.\n\n## Naming Variables\n\nPython variable names must follow these rules:\n\n| Rule | Valid example | Invalid example | Reason |\n|---|---|---|---|\n| Start with a letter or `_` | `city` | `1city` | Cannot start with a digit |\n| Letters, digits, underscores only | `user_age` | `user-age` | Hyphens not allowed |\n| Case-sensitive | `Score` and `score` are different | | |\n| Not a Python keyword | `total` | `for` | Reserved word |\n\nBy convention, Python uses **snake_case** for variable names: all lowercase letters with underscores between words (`first_name`, `item_count`).\n\n## The Four Core Data Types\n\n| Type | Keyword | Example | Stores |\n|---|---|---|---|\n| String | `str` | `\"Rahul\"` | Text — any characters in quotes |\n| Integer | `int` | `21` | Whole numbers |\n| Float | `float` | `3.14` | Decimal numbers |\n| Boolean | `bool` | `True` | Only `True` or `False` |\n\n## Reading Input from the User\n\nThe `input()` function pauses the program and waits for the user to type something and press Enter. Whatever the user types is returned as a **string**:\n\n```python\nname = input(\"What is your name? \")\nprint(f\"Hello, {name}!\")\n```\n\nBecause `input()` always returns a string, you must convert it if you need a number:\n\n```python\nage = int(input(\"Enter your age: \"))   # convert string to integer\n```\n\nIn the code example below, you will see variables of all four types created, and `input()` used to personalise the program's greeting."
+    },
+    "codeExample": {
+      "title": "Student Profile Builder",
+      "language": "python",
+      "code": "# Student Profile Builder\n# Demonstrates variables, data types, and user input\n\n# --- String variables ---\nfirst_name  = \"Vikram\"\nlast_name   = \"Mehta\"\ncity        = \"Pune\"\n\n# --- Integer variable ---\nroll_number = 17\n\n# --- Float variable ---\ngpa         = 3.75\n\n# --- Boolean variable ---\nis_enrolled = True\n\n# --- Print the profile ---\nprint(\"===== Student Profile =====\")\nprint(f\"Name      : {first_name} {last_name}\")\nprint(f\"City      : {city}\")\nprint(f\"Roll No.  : {roll_number}\")\nprint(f\"GPA       : {gpa}\")\nprint(f\"Enrolled  : {is_enrolled}\")\n\n# --- Demonstrate type() ---\nprint(\"\\n--- Data Types ---\")\nprint(type(first_name))    # <class 'str'>\nprint(type(roll_number))   # <class 'int'>\nprint(type(gpa))           # <class 'float'>\nprint(type(is_enrolled))   # <class 'bool'>",
+      "explanation": "- `first_name = \"Vikram\"` — creates a **string** variable; the value is text enclosed in quotes\n- `roll_number = 17` — creates an **integer** variable; no quotes because it is a number, not text\n- `gpa = 3.75` — creates a **float** variable; contains a decimal point\n- `is_enrolled = True` — creates a **boolean** variable; `True` is always capitalised in Python\n- `f\"{first_name} {last_name}\"` — an f-string combining two variables with a space between them\n- `type(variable)` — a built-in function that returns the data type of any value"
+    },
+    "exercise": {
+      "title": "Create a Personalised Greeting Card",
+      "instructions": "Write a program that uses four variables: recipient (a string for the person's name), sender (a string for your name), age (an integer), and is_birthday (a boolean set to True). Using only these variables and f-strings, print three lines: 'Dear [recipient],' on line 1, 'Happy Birthday! You are [age] years old.' on line 2, and 'From: [sender]' on line 3. Do not use input() — set the values directly as shown.\n\nExpected output:\nDear Sneha,\nHappy Birthday! You are 21 years old.\nFrom: Rahul",
+      "starterCode": "# Personalised Greeting Card\n\n# Step 1 — set the variables\nrecipient  = \"Sneha\"\nsender     = \"Rahul\"\nage        = 21\nis_birthday = True\n\n# Step 2 — print the three lines using f-strings\n# Line 1: Dear [recipient],\nprint(f\"Dear {recipient},\")\n\n# Line 2: Happy Birthday! You are [age] years old.\n# Your code here\n\n# Line 3: From: [sender]\n# Your code here",
+      "solutionCode": "# Personalised Greeting Card\n\nrecipient   = \"Sneha\"\nsender      = \"Rahul\"\nage         = 21\nis_birthday = True\n\nprint(f\"Dear {recipient},\")\nprint(f\"Happy Birthday! You are {age} years old.\")\nprint(f\"From: {sender}\")",
+      "hints": [
+        "💡 An f-string starts with f before the quote and uses {variable_name} to insert variable values.",
+        "💡 Line 2 needs both the fixed text 'Happy Birthday! You are' and the variable age inside curly braces, followed by 'years old.'",
+        "💡 Line 3 follows the same pattern as line 1 — write f\"From: {sender}\" to insert the sender variable."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Dear",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "From:",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m1-l3-q1",
+          "question": "What does the = operator do in the statement city = \"Delhi\"?",
+          "options": [
+            "Tests whether city is equal to 'Delhi'",
+            "Stores the string 'Delhi' in a variable named city",
+            "Prints the word Delhi to the screen",
+            "Declares city as a constant that cannot be changed"
+          ],
+          "correct": 1,
+          "explanation": "In Python, = is the assignment operator — it stores the value on the right side into the variable named on the left side. It does not test equality. To compare two values, Python uses == (two equals signs). After city = \"Delhi\", the variable city holds the string \"Delhi\" and you can use it anywhere in the program."
+        },
+        {
+          "id": "py-m1-l3-q2",
+          "question": "What type does the input() function always return?",
+          "options": [
+            "int, because the user usually types a number",
+            "str, regardless of what the user types",
+            "float, because input can contain decimals",
+            "bool, because input is either given or not"
+          ],
+          "correct": 1,
+          "explanation": "input() always returns a string (str), no matter what the user types. If the user types 42, input() returns the string \"42\", not the integer 42. You must explicitly convert it using int() or float() if you need to do arithmetic with the value."
+        },
+        {
+          "id": "py-m1-l3-q3",
+          "question": "Which variable name follows Python naming conventions correctly?",
+          "options": [
+            "2nd-score",
+            "StudentName",
+            "student_name",
+            "student name"
+          ],
+          "correct": 2,
+          "explanation": "student_name follows Python's snake_case convention — all lowercase letters with underscores separating words. The name 2nd-score is invalid because it starts with a digit and contains a hyphen. StudentName uses PascalCase, which Python reserves for class names. student name is invalid because spaces are never allowed in variable names."
+        }
+      ]
+    }
+  }
+]

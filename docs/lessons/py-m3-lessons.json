@@ -1,0 +1,230 @@
+[
+  {
+    "id": "py-m3-l1",
+    "moduleId": "py-m3",
+    "title": "if, elif, and else Statements",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Making Decisions in Python with if, elif, and else",
+      "content": "# Making Decisions with Conditions\n\nEvery useful program must make decisions. Think of a traffic light: it checks the current colour and acts accordingly — green means go, yellow means slow down, red means stop. An `if` statement works the same way in Python: it checks a condition and runs a block of code only when that condition is `True`.\n\n## The if Statement\n\n```python\ntemperature = 38\nif temperature > 37:\n    print(\"You have a fever.\")\n```\n\nNotice the two essential syntax rules:\n1. The condition is followed by a **colon** `:`\n2. The body is **indented** by four spaces (or one tab)\n\nPython uses indentation to define which lines belong to the `if` block. This is different from many other languages that use curly braces.\n\n## Adding an else Branch\n\n```python\nif temperature > 37:\n    print(\"You have a fever.\")\nelse:\n    print(\"Your temperature is normal.\")\n```\n\nThe `else` block runs when the condition is `False`. It is optional — you do not always need one.\n\n## Multiple Conditions with elif\n\nWhen you have more than two possible outcomes, use `elif` (short for \"else if\"):\n\n```python\nscore = 75\nif score >= 90:\n    print(\"Grade: A\")\nelif score >= 80:\n    print(\"Grade: B\")\nelif score >= 70:\n    print(\"Grade: C\")\nelse:\n    print(\"Grade: F\")\n```\n\nPython evaluates conditions top to bottom and stops at the **first** one that is `True`. Once a match is found, all remaining `elif` and `else` branches are skipped.\n\n## The Ternary Expression\n\nFor simple two-outcome decisions, Python offers a one-line shortcut:\n\n```python\nlabel = \"Adult\" if age >= 18 else \"Minor\"\n```\n\nThis is equivalent to an `if/else` block but fits on a single line when both outcomes are short.\n\nIn the code example below, you will see a grade classifier that uses `if`, `elif`, and `else` to assign a letter grade and feedback message."
+    },
+    "codeExample": {
+      "title": "Student Grade Classifier",
+      "language": "python",
+      "code": "# Student Grade Classifier\n# Assigns a letter grade and feedback based on a numeric score\n\nstudent = \"Kiran\"\nscore   = 82\n\nif score >= 90:\n    grade    = \"A\"\n    feedback = \"Outstanding performance!\"\nelif score >= 80:\n    grade    = \"B\"\n    feedback = \"Great work, keep it up!\"\nelif score >= 70:\n    grade    = \"C\"\n    feedback = \"Good effort, room to improve.\"\nelif score >= 60:\n    grade    = \"D\"\n    feedback = \"Needs more practice.\"\nelse:\n    grade    = \"F\"\n    feedback = \"Please seek extra help.\"\n\nprint(f\"Student  : {student}\")\nprint(f\"Score    : {score}/100\")\nprint(f\"Grade    : {grade}\")\nprint(f\"Feedback : {feedback}\")\n\n# Ternary expression example\nstatus = \"Pass\" if score >= 50 else \"Fail\"\nprint(f\"Status   : {status}\")",
+      "explanation": "- `if score >= 90:` — evaluates whether `score` is 90 or more; the colon is mandatory and the body must be indented\n- `elif score >= 80:` — only evaluated when all previous conditions were `False`; stops at the first `True` match\n- `grade = \"B\"` inside an `elif` block — any variable assigned inside a block is still accessible after the block ends\n- `else:` — catches everything that did not match any `if` or `elif`; has no condition of its own\n- `\"Pass\" if score >= 50 else \"Fail\"` — the ternary expression; the value before `if` is chosen when the condition is `True`"
+    },
+    "exercise": {
+      "title": "Write a Ticket Price Calculator",
+      "instructions": "Write a program that calculates the ticket price for a cinema based on the customer's age. Define a variable age (integer). Apply these rules: under 5 is free (price = 0), age 5 to 12 pays 100, age 13 to 17 pays 150, age 18 to 59 pays 200, and age 60 or above pays 120. Print the age and the ticket price on separate labelled lines.\n\nTest with age = 25. Expected output:\nAge: 25\nTicket Price: 200",
+      "starterCode": "# Cinema Ticket Price Calculator\n\nage = 25\n\n# Use if, elif, and else to set ticket_price\nif age < 5:\n    ticket_price = 0\nelif age <= 12:\n    ticket_price = 100\n# Your code here for ages 13-17\n# Your code here for ages 18-59\n# Your code here for 60 and above\n\nprint(\"Age:\",          age)\nprint(\"Ticket Price:\", ticket_price)",
+      "solutionCode": "age = 25\n\nif age < 5:\n    ticket_price = 0\nelif age <= 12:\n    ticket_price = 100\nelif age <= 17:\n    ticket_price = 150\nelif age <= 59:\n    ticket_price = 200\nelse:\n    ticket_price = 120\n\nprint(\"Age:\",          age)\nprint(\"Ticket Price:\", ticket_price)",
+      "hints": [
+        "💡 Think about the order — check from the smallest age range upward so earlier conditions eliminate lower ranges.",
+        "💡 For ages 13 to 17, write elif age <= 17: because earlier branches already ruled out ages below 13.",
+        "💡 The last range (60 and above) does not need a condition — use else: since all lower ages were already handled."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Ticket Price: 200",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m3-l1-q1",
+          "question": "What is the correct syntax to start an if statement in Python?",
+          "options": [
+            "if (condition) {",
+            "if condition:",
+            "if condition then",
+            "IF condition:"
+          ],
+          "correct": 1,
+          "explanation": "Python's if statement syntax is: if condition: — no parentheses around the condition (they are optional but not required), a colon at the end, and the body indented on the next line. Python is case-sensitive, so IF would cause a NameError. There are no curly braces in Python; indentation defines the block."
+        },
+        {
+          "id": "py-m3-l1-q2",
+          "question": "When does the else block of an if/elif/else chain execute?",
+          "options": [
+            "Always, regardless of the conditions above it",
+            "Only when the first if condition is False",
+            "When none of the if or elif conditions evaluated to True",
+            "When every condition in the chain evaluated to True"
+          ],
+          "correct": 2,
+          "explanation": "The else block runs only when every if and elif condition above it evaluated to False. If any if or elif condition is True, Python executes that block and then skips the rest of the chain including else. The else has no condition of its own — it acts as the default fallback."
+        },
+        {
+          "id": "py-m3-l1-q3",
+          "question": "What is the output of: label = \"Yes\" if 10 > 5 else \"No\" followed by print(label)?",
+          "options": [
+            "No",
+            "True",
+            "Yes",
+            "10 > 5"
+          ],
+          "correct": 2,
+          "explanation": "The ternary expression evaluates the condition 10 > 5, which is True. When the condition is True, the expression returns the value before the if keyword — which is \"Yes\". So label is assigned \"Yes\" and print(label) displays Yes."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m3-l2",
+    "moduleId": "py-m3",
+    "title": "Comparison and Logical Operators",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Comparing Values and Combining Conditions",
+      "content": "# Comparison Operators\n\nA condition in an `if` statement always evaluates to `True` or `False`. The most direct way to produce this result is with a **comparison operator**, which compares two values:\n\n| Operator | Meaning | Example | Result |\n|---|---|---|---|\n| `==` | Equal to | `5 == 5` | `True` |\n| `!=` | Not equal to | `5 != 3` | `True` |\n| `>` | Greater than | `7 > 3` | `True` |\n| `<` | Less than | `3 < 7` | `True` |\n| `>=` | Greater than or equal | `5 >= 5` | `True` |\n| `<=` | Less than or equal | `4 <= 3` | `False` |\n\n**Critical distinction:** `=` assigns a value; `==` compares two values. Confusing them is one of the most common bugs beginners write.\n\n## Logical Operators\n\nTo combine multiple conditions, use the three logical operators:\n\n| Operator | Meaning | Example |\n|---|---|---|\n| `and` | Both must be `True` | `age >= 18 and has_id` |\n| `or` | At least one must be `True` | `is_admin or is_owner` |\n| `not` | Reverses `True`/`False` | `not is_banned` |\n\n### Truth tables\n\n| A | B | A and B | A or B |\n|---|---|---|---|\n| True | True | True | True |\n| True | False | False | True |\n| False | True | False | True |\n| False | False | False | False |\n\n## The in Operator\n\nThe `in` operator checks membership — whether a value exists inside a collection or string:\n\n```python\nfruits = [\"apple\", \"banana\", \"mango\"]\nif \"mango\" in fruits:\n    print(\"Mango is available!\")\n\nif \"@\" in email:\n    print(\"Email looks valid.\")\n```\n\n## Chaining Comparisons\n\nPython allows a readable shortcut for range checks:\n\n```python\nif 18 <= age <= 60:    # same as age >= 18 and age <= 60\n    print(\"Working age group\")\n```\n\nIn the code example below, you will see logical operators and comparison operators combined to build a login validator."
+    },
+    "codeExample": {
+      "title": "Login Access Validator",
+      "language": "python",
+      "code": "# Login Access Validator — uses comparison and logical operators\n\nusername    = \"rahul_dev\"\npassword    = \"secret123\"\nlogin_count = 3\nis_banned   = False\n\n# Correct credentials (case-sensitive)\ncorrect_user = \"rahul_dev\"\ncorrect_pass = \"secret123\"\nmax_attempts = 5\n\n# Check all conditions\nvalid_credentials = (username == correct_user) and (password == correct_pass)\nwithin_limit      = login_count <= max_attempts\naccount_active    = not is_banned\n\nprint(\"Credentials OK :\", valid_credentials)\nprint(\"Within limit   :\", within_limit)\nprint(\"Account active :\", account_active)\n\nif valid_credentials and within_limit and account_active:\n    print(\"\\nAccess GRANTED — welcome!\", username)\nelif not account_active:\n    print(\"\\nAccess DENIED — account is banned.\")\nelif not within_limit:\n    print(\"\\nAccess DENIED — too many attempts.\")\nelse:\n    print(\"\\nAccess DENIED — incorrect username or password.\")",
+      "explanation": "- `username == correct_user` — the `==` operator compares two string values; a single `=` would assign, not compare\n- `(username == correct_user) and (password == correct_pass)` — `and` requires both comparisons to be `True`\n- `not is_banned` — the `not` operator flips `False` to `True`, making `account_active` `True` when the account is not banned\n- `valid_credentials and within_limit and account_active` — all three boolean variables must be `True` for access to be granted\n- `not account_active` in the `elif` — shorthand for `account_active == False`; `not` is cleaner and more readable"
+    },
+    "exercise": {
+      "title": "Build a Loan Eligibility Checker",
+      "instructions": "Write a program that checks loan eligibility. Use three variables: age (integer), monthly_income (float), and has_existing_loan (boolean). Rules: age must be 21-60 inclusive, monthly_income must be at least 25000, and has_existing_loan must be False. Print \"Eligible for loan\" if all rules are met, otherwise print \"Not eligible\".\n\nTest: age=30, monthly_income=35000.0, has_existing_loan=False.\nExpected: Eligible for loan",
+      "starterCode": "# Loan Eligibility Checker\n\nage               = 30\nmonthly_income    = 35000.0\nhas_existing_loan = False\n\n# Check all three conditions together using and\n# Age: 21 to 60 inclusive (use chained comparison)\n# Income: at least 25000\n# No existing loan: has_existing_loan must be False\n\nif 21 <= age <= 60 and monthly_income >= 25000 and not has_existing_loan:\n    print(\"Eligible for loan\")\nelse:\n    print(\"Not eligible\")",
+      "solutionCode": "age               = 30\nmonthly_income    = 35000.0\nhas_existing_loan = False\n\nif 21 <= age <= 60 and monthly_income >= 25000 and not has_existing_loan:\n    print(\"Eligible for loan\")\nelse:\n    print(\"Not eligible\")",
+      "hints": [
+        "💡 Use a chained comparison for the age range: 21 <= age <= 60 is cleaner than two separate conditions joined with and.",
+        "💡 Check income with monthly_income >= 25000 and combine it with the age check using and.",
+        "💡 Use not has_existing_loan to check that no existing loan exists — this reads as 'does not have an existing loan'."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Eligible for loan",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m3-l2-q1",
+          "question": "What is the difference between = and == in Python?",
+          "options": [
+            "They are identical and can be used interchangeably",
+            "= compares two values; == assigns a value to a variable",
+            "= assigns a value to a variable; == compares two values",
+            "= is used for integers; == is used for strings"
+          ],
+          "correct": 2,
+          "explanation": "= is the assignment operator — it stores a value in a variable: x = 5. == is the equality comparison operator — it checks whether two values are equal and returns True or False: x == 5. Using = inside an if condition is a SyntaxError in Python (unlike some other languages where it is a silent bug)."
+        },
+        {
+          "id": "py-m3-l2-q2",
+          "question": "What does the expression True and False evaluate to?",
+          "options": [
+            "True",
+            "False",
+            "None",
+            "Error"
+          ],
+          "correct": 1,
+          "explanation": "The and operator returns True only when both operands are True. Since False is on the right side, True and False evaluates to False. If you think of and as 'both must agree', one False is enough to make the whole expression False."
+        },
+        {
+          "id": "py-m3-l2-q3",
+          "question": "What does 18 <= age <= 60 mean in Python?",
+          "options": [
+            "age is exactly 18 or exactly 60",
+            "age is greater than 18 but less than 60",
+            "age is at least 18 and at most 60 — a chained comparison",
+            "This is a syntax error in Python"
+          ],
+          "correct": 2,
+          "explanation": "Python supports chained comparisons, so 18 <= age <= 60 is valid and is equivalent to age >= 18 and age <= 60. Python evaluates both halves and requires both to be True. This syntax is more readable than the equivalent written with and, so it is widely used for range checks."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m3-l3",
+    "moduleId": "py-m3",
+    "title": "Nested Conditions and match Statements",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Nested Conditions and Python's match Statement",
+      "content": "# Nested if Statements\n\nSometimes a decision depends on another decision. Imagine a vending machine: it first checks whether you inserted enough money, and only if you did, it then checks which button you pressed. This layered logic is called **nested conditions** — an `if` statement inside another `if` statement.\n\n```python\nbalance = 50\nitem    = \"chips\"\n\nif balance >= 10:\n    if item == \"chips\":\n        print(\"Dispensing chips.\")\n        balance -= 10\n    elif item == \"soda\":\n        print(\"Dispensing soda.\")\n        balance -= 15\n    else:\n        print(\"Unknown item.\")\nelse:\n    print(\"Insufficient balance.\")\n```\n\nEach level of nesting adds four spaces of indentation. Python uses indentation to determine which `if` owns which `elif`/`else`.\n\n## When to Avoid Deep Nesting\n\nNesting beyond two levels makes code hard to read. A common technique to reduce nesting is the **early return** or **guard clause** pattern — check failure conditions first and exit early:\n\n```python\n# Deep nesting (harder to read)\nif is_logged_in:\n    if has_permission:\n        if not is_banned:\n            process_request()\n\n# Guard clauses (easier to read)\nif not is_logged_in:   return\nif not has_permission: return\nif is_banned:          return\nprocess_request()\n```\n\n## The match Statement (Python 3.10+)\n\nPython 3.10 introduced `match`, a cleaner alternative to long `if/elif` chains when you are matching a value against a fixed set of possibilities:\n\n```python\nday_number = 3\n\nmatch day_number:\n    case 1: print(\"Monday\")\n    case 2: print(\"Tuesday\")\n    case 3: print(\"Wednesday\")\n    case 4: print(\"Thursday\")\n    case 5: print(\"Friday\")\n    case _: print(\"Weekend\")   # _ is the default case\n```\n\nThe `case _:` block (underscore) is the wildcard — it matches anything that did not match an earlier case, equivalent to `else`.\n\n## match with Multiple Values per Case\n\n```python\nmatch status_code:\n    case 200 | 201 | 204:\n        print(\"Success\")\n    case 400 | 422:\n        print(\"Client error\")\n    case 500 | 502 | 503:\n        print(\"Server error\")\n    case _:\n        print(\"Unknown code\")\n```\n\nThe `|` operator inside a `case` matches any of several values. In the code example below, you will see nested conditions and a `match` statement applied to a simple ATM simulator."
+    },
+    "codeExample": {
+      "title": "Simple ATM Transaction Simulator",
+      "language": "python",
+      "code": "# ATM Transaction Simulator — nested conditions + match\n\npin_correct  = True\nbalance      = 5000\ntransaction  = \"withdraw\"   # options: withdraw, deposit, balance\namount       = 1500\n\n# Outer condition: pin must be correct before anything\nif pin_correct:\n    match transaction:\n        case \"withdraw\":\n            if amount <= 0:\n                print(\"Invalid amount.\")\n            elif amount > balance:\n                print(\"Insufficient funds.\")\n            else:\n                balance -= amount\n                print(f\"Withdrew: {amount}\")\n                print(f\"Remaining balance: {balance}\")\n        case \"deposit\":\n            if amount <= 0:\n                print(\"Invalid deposit amount.\")\n            else:\n                balance += amount\n                print(f\"Deposited: {amount}\")\n                print(f\"New balance: {balance}\")\n        case \"balance\":\n            print(f\"Current balance: {balance}\")\n        case _:\n            print(\"Unknown transaction type.\")\nelse:\n    print(\"Incorrect PIN. Access denied.\")",
+      "explanation": "- `if pin_correct:` — the outer guard; nothing inside runs unless the PIN is correct\n- `match transaction:` — evaluates the string in `transaction` and jumps to the matching `case`\n- `case \"withdraw\":` — matches when `transaction` equals the string `\"withdraw\"` exactly\n- `elif amount > balance:` — nested inside the `\"withdraw\"` case; only reached when `amount > 0`\n- `balance -= amount` — the augmented subtraction operator; shorthand for `balance = balance - amount`\n- `case _:` — the wildcard default; runs when no other case matched"
+    },
+    "exercise": {
+      "title": "Build a Restaurant Menu Order System",
+      "instructions": "Write a menu ordering program. Define two variables: category (a string: 'food', 'drink', or 'dessert') and item (a string). Use a match statement on category. Inside each case, use nested if/elif to check the item name and set a price. For food: pizza=250, burger=150. For drink: cola=50, juice=80. For dessert: icecream=90, cake=120. Default case and unknown items should print 'Not available'. Print the item and its price.\n\nTest: category='food', item='pizza'. Expected output: pizza: 250",
+      "starterCode": "# Restaurant Menu Order System\n\ncategory = \"food\"\nitem     = \"pizza\"\nprice    = 0\n\nmatch category:\n    case \"food\":\n        if item == \"pizza\":\n            price = 250\n        elif item == \"burger\":\n            price = 150\n        else:\n            price = -1    # -1 means not available\n    # Your code here for case \"drink\" (cola=50, juice=80)\n    # Your code here for case \"dessert\" (icecream=90, cake=120)\n    case _:\n        price = -1\n\nif price == -1:\n    print(\"Not available\")\nelse:\n    print(f\"{item}: {price}\")",
+      "solutionCode": "category = \"food\"\nitem     = \"pizza\"\nprice    = 0\n\nmatch category:\n    case \"food\":\n        if   item == \"pizza\":   price = 250\n        elif item == \"burger\":  price = 150\n        else:                   price = -1\n    case \"drink\":\n        if   item == \"cola\":    price = 50\n        elif item == \"juice\":   price = 80\n        else:                   price = -1\n    case \"dessert\":\n        if   item == \"icecream\": price = 90\n        elif item == \"cake\":     price = 120\n        else:                    price = -1\n    case _:\n        price = -1\n\nif price == -1:\n    print(\"Not available\")\nelse:\n    print(f\"{item}: {price}\")",
+      "hints": [
+        "💡 Add case \"drink\": followed by indented if/elif blocks for cola and juice, using the same pattern as the food case.",
+        "💡 Add case \"dessert\": the same way, with if/elif for icecream and cake, and an else that sets price = -1.",
+        "💡 The final if price == -1 check handles both unknown categories and unknown items within a known category."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "pizza: 250",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m3-l3-q1",
+          "question": "In Python's match statement, what does case _ mean?",
+          "options": [
+            "It matches only the value None",
+            "It matches only empty strings",
+            "It is the wildcard default case that matches any value not caught above",
+            "It causes a SyntaxError because _ is not a valid case value"
+          ],
+          "correct": 2,
+          "explanation": "In a Python match statement, case _: is the wildcard pattern — the underscore matches any value that was not matched by any earlier case. It works like else in an if/elif chain. If no case _ is present and no case matches, the match statement simply does nothing."
+        },
+        {
+          "id": "py-m3-l3-q2",
+          "question": "What version of Python introduced the match statement?",
+          "options": [
+            "Python 2.7",
+            "Python 3.6",
+            "Python 3.8",
+            "Python 3.10"
+          ],
+          "correct": 3,
+          "explanation": "The match statement (structural pattern matching) was introduced in Python 3.10. If you run code containing match on Python 3.9 or earlier, you will get a SyntaxError. For older Python versions, use a chain of if/elif statements to achieve the same effect."
+        },
+        {
+          "id": "py-m3-l3-q3",
+          "question": "What is the main risk of deeply nested if statements?",
+          "options": [
+            "Python raises an error when nesting goes deeper than two levels",
+            "Deeply nested code becomes difficult to read and maintain",
+            "Nested if statements run slower than flat if/elif chains",
+            "Variables defined inside inner if blocks are deleted after the block"
+          ],
+          "correct": 1,
+          "explanation": "Python does not limit nesting depth, but deeply nested code is hard to read, test, and maintain. Each new level of indentation makes it harder to track which else belongs to which if. The professional solution is to use guard clauses — check failure conditions early and handle them at the top of the function — keeping the main logic at the lowest indentation level."
+        }
+      ]
+    }
+  }
+]

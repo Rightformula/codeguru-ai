@@ -1,0 +1,245 @@
+[
+  {
+    "id": "py-m6-l1",
+    "moduleId": "py-m6",
+    "title": "Lists and Loops Together",
+    "order": 1,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Storing and Processing Collections with Lists and Loops",
+      "content": "# Lists\n\nA **list** is an ordered, mutable collection of values. Think of it as a numbered shelf where each slot holds one item. You can read any item by its slot number, add new items, remove existing ones, and change what is stored in any slot.\n\n```python\nscores = [85, 92, 78, 95, 88]\nnames  = [\"Rahul\", \"Priya\", \"Amit\"]\nmixed  = [42, \"hello\", True, 3.14]    # different types are allowed\nempty  = []                           # an empty list\n```\n\n## Accessing List Items\n\nList indexing is zero-based — the first item is at index 0:\n\n```python\nscores[0]     # 85  — first item\nscores[-1]    # 88  — last item (negative counts from the end)\nscores[1:3]   # [92, 78]  — slice from index 1 up to (not including) 3\n```\n\n## Modifying Lists\n\n| Operation | Code | Effect |\n|---|---|---|\n| Add to end | `scores.append(90)` | Adds one item |\n| Insert at position | `scores.insert(0, 100)` | Inserts before index 0 |\n| Remove by value | `scores.remove(78)` | Removes the first match |\n| Remove by index | `del scores[2]` | Deletes item at index 2 |\n| Get and remove last | `scores.pop()` | Returns and removes last item |\n| Sort ascending | `scores.sort()` | Modifies in place |\n| Reverse | `scores.reverse()` | Modifies in place |\n| Length | `len(scores)` | Returns item count |\n| Check membership | `90 in scores` | Returns `True` or `False` |\n\n## Iterating Over a List\n\nThe most natural way to process every item is a `for` loop:\n\n```python\nfor score in scores:\n    print(score)\n```\n\nFor both index and value, use `enumerate()`:\n\n```python\nfor i, score in enumerate(scores, start=1):\n    print(f\"{i}. {score}\")\n```\n\n## List Comprehension — a Pythonic Shortcut\n\nA **list comprehension** creates a new list by applying an expression to every item in an existing iterable, optionally filtered by a condition:\n\n```python\ndoubled  = [x * 2 for x in scores]            # double every score\npassing  = [x for x in scores if x >= 60]     # keep only passing scores\n```\n\nIn the code example below, you will see a list comprehension, `sorted()`, and a loop working together to build a student ranking."
+    },
+    "codeExample": {
+      "title": "Student Ranking Builder",
+      "language": "python",
+      "code": "# Student Ranking Builder — lists, loops, and list comprehension\n\n# Data as parallel lists\nnames  = [\"Kiran\", \"Divya\", \"Arjun\", \"Neha\", \"Rohan\"]\nscores = [72, 91, 85, 68, 95]\n\n# Pair names with scores using zip(), then sort by score descending\npaired  = list(zip(names, scores))\nranked  = sorted(paired, key=lambda pair: pair[1], reverse=True)\n\nprint(\"=== Rankings ===\")\nfor position, (name, score) in enumerate(ranked, start=1):\n    grade = \"A\" if score >= 90 else \"B\" if score >= 75 else \"C\"\n    print(f\"{position}. {name:<8} {score:3d}  ({grade})\")\n\n# List comprehension — extract only passing students (score >= 60)\npassing_names = [name for name, score in ranked if score >= 60]\nprint(f\"\\nAll {len(passing_names)} students passed.\")\n\n# Quick stats using built-ins\nprint(f\"Highest : {max(scores)}\")\nprint(f\"Lowest  : {min(scores)}\")\nprint(f\"Average : {sum(scores)/len(scores):.1f}\")",
+      "explanation": "- `zip(names, scores)` — pairs each name with its corresponding score; `list()` converts the zip object into a concrete list\n- `sorted(paired, key=lambda pair: pair[1], reverse=True)` — sorts by the second element (score) in descending order\n- `for position, (name, score) in enumerate(ranked, start=1):` — unpacks the tuple pair directly in the loop header\n- `{name:<8}` — the `<8` format code left-aligns the name in a field of width 8, keeping columns tidy\n- `[name for name, score in ranked if score >= 60]` — a list comprehension with a filter condition"
+    },
+    "exercise": {
+      "title": "Build a Marks Analyser",
+      "instructions": "Given a list of student marks, write a program that: (1) prints all marks, (2) uses a list comprehension to create a new list of marks that are 80 or above and prints it, (3) calculates and prints the average of all marks rounded to 1 decimal place, (4) prints the count of marks below 50.\n\nMarks list: [55, 82, 90, 45, 73, 88, 38, 91, 60, 47]\n\nExpected output:\nAll marks: [55, 82, 90, 45, 73, 88, 38, 91, 60, 47]\nHigh marks (>=80): [82, 90, 88, 91]\nAverage: 66.9\nBelow 50: 3",
+      "starterCode": "# Marks Analyser\n\nmarks = [55, 82, 90, 45, 73, 88, 38, 91, 60, 47]\n\n# 1. Print all marks\nprint(\"All marks:\", marks)\n\n# 2. List comprehension: marks >= 80\nhigh_marks = [m for m in marks if m >= 80]\nprint(\"High marks (>=80):\", high_marks)\n\n# 3. Calculate and print average\n# Your code here\n\n# 4. Count marks below 50 using a list comprehension or loop\n# Your code here",
+      "solutionCode": "marks = [55, 82, 90, 45, 73, 88, 38, 91, 60, 47]\n\nprint(\"All marks:\", marks)\n\nhigh_marks = [m for m in marks if m >= 80]\nprint(\"High marks (>=80):\", high_marks)\n\naverage = sum(marks) / len(marks)\nprint(f\"Average: {average:.1f}\")\n\nbelow_50 = len([m for m in marks if m < 50])\nprint(\"Below 50:\", below_50)",
+      "hints": [
+        "💡 Calculate average with sum(marks) / len(marks) and print using f\"{average:.1f}\" for one decimal place.",
+        "💡 Count marks below 50 with a list comprehension: [m for m in marks if m < 50], then use len() on the result.",
+        "💡 You can also count with a loop: start count=0, then for m in marks: if m < 50: count += 1."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "High marks (>=80): [82, 90, 88, 91]",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Average: 66.9",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m6-l1-q1",
+          "question": "What does scores[-1] return when scores = [85, 92, 78]?",
+          "options": [
+            "85 — the first element",
+            "None — negative indices are invalid",
+            "78 — the last element",
+            "92 — the middle element"
+          ],
+          "correct": 2,
+          "explanation": "Negative indices in Python count from the end of the list. Index -1 is always the last element, -2 is the second-to-last, and so on. For scores = [85, 92, 78], scores[-1] is 78. This is more reliable than scores[len(scores)-1] when you need the last element."
+        },
+        {
+          "id": "py-m6-l1-q2",
+          "question": "What does the expression [x * 2 for x in [1, 2, 3]] produce?",
+          "options": [
+            "6",
+            "[2, 4, 6]",
+            "[1, 2, 3, 1, 2, 3]",
+            "(2, 4, 6)"
+          ],
+          "correct": 1,
+          "explanation": "A list comprehension [expression for item in iterable] evaluates the expression for each item and collects the results in a new list. [x * 2 for x in [1, 2, 3]] doubles each element, producing [2, 4, 6]. The result is always a list (square brackets), not a tuple."
+        },
+        {
+          "id": "py-m6-l1-q3",
+          "question": "What is the difference between .sort() and sorted() on a list?",
+          "options": [
+            "They are identical in every way",
+            ".sort() modifies the list in place and returns None; sorted() returns a new sorted list",
+            "sorted() modifies the list in place; .sort() returns a new list",
+            ".sort() only works on numbers; sorted() works on any type"
+          ],
+          "correct": 1,
+          "explanation": "list.sort() is a method that modifies the list in place and returns None — the original list is changed. sorted() is a built-in function that returns a brand new sorted list and leaves the original unchanged. Use sorted() when you need to keep the original order and also have a sorted version."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m6-l2",
+    "moduleId": "py-m6",
+    "title": "Dictionaries: Key-Value Storage",
+    "order": 2,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Organising Data as Key-Value Pairs with Dictionaries",
+      "content": "# Dictionaries\n\nA **dictionary** stores data as **key-value pairs**. Think of a real dictionary: you look up a word (the key) and find its definition (the value). In Python, the key can be any immutable value (string, integer, tuple), and the value can be anything at all.\n\n```python\nstudent = {\n    \"name\":  \"Priya\",\n    \"age\":   21,\n    \"gpa\":   3.8,\n    \"active\": True\n}\n```\n\n## Accessing Values\n\n```python\nstudent[\"name\"]              # \"Priya\" — key access\nstudent.get(\"phone\")         # None — safe access (no KeyError)\nstudent.get(\"phone\", \"N/A\")  # \"N/A\" — default if missing\n```\n\n## Modifying Dictionaries\n\n| Operation | Code |\n|---|---|\n| Add or update a key | `student[\"email\"] = \"p@mail.com\"` |\n| Delete a key | `del student[\"active\"]` |\n| Remove and return | `student.pop(\"age\")` |\n| Check if key exists | `\"name\" in student` |\n\n## Iterating Over Dictionaries\n\n```python\nfor key in student:                     # iterate over keys\n    print(key, \":\", student[key])\n\nfor key, value in student.items():     # iterate over key-value pairs\n    print(f\"{key}: {value}\")\n\nstudent.keys()     # view of all keys\nstudent.values()   # view of all values\n```\n\n## Nested Dictionaries\n\nValues can themselves be dictionaries, creating nested structures:\n\n```python\nclassroom = {\n    \"student1\": {\"name\": \"Rahul\",  \"score\": 85},\n    \"student2\": {\"name\": \"Sneha\",  \"score\": 92},\n}\nprint(classroom[\"student1\"][\"name\"])    # Rahul\n```\n\n## Dictionary Comprehension\n\n```python\nscores  = [85, 92, 78]\nnames   = [\"Rahul\", \"Sneha\", \"Amit\"]\nresults = {name: score for name, score in zip(names, scores)}\n# {\"Rahul\": 85, \"Sneha\": 92, \"Amit\": 78}\n```\n\nIn the code example below, you will see a dictionary used to build a word frequency counter and a contact manager."
+    },
+    "codeExample": {
+      "title": "Word Frequency Counter",
+      "language": "python",
+      "code": "# Word Frequency Counter — dictionary as a counter\n\nsentence = \"to be or not to be that is the question to be\"\nwords    = sentence.split()    # split on spaces into a list\n\n# Build frequency dictionary\nfrequency = {}\nfor word in words:\n    frequency[word] = frequency.get(word, 0) + 1\n\nprint(\"Word frequencies:\")\nfor word, count in sorted(frequency.items(), key=lambda x: x[1], reverse=True):\n    bar = \"#\" * count\n    print(f\"  {word:<12} {count:2d}  {bar}\")\n\n# Find the most common word\nmost_common = max(frequency, key=frequency.get)\nprint(f\"\\nMost common: '{most_common}' appears {frequency[most_common]} times.\")\n\n# Dictionary comprehension — words appearing more than once\nrepeated = {w: c for w, c in frequency.items() if c > 1}\nprint(f\"Repeated words: {repeated}\")",
+      "explanation": "- `frequency.get(word, 0) + 1` — safely reads the current count (defaulting to 0 if unseen) and increments it\n- `sorted(frequency.items(), key=lambda x: x[1], reverse=True)` — sorts the `(word, count)` tuples by count in descending order\n- `{word:<12}` — left-aligns the word in a 12-character field; `{count:2d}` right-aligns the count in 2 characters\n- `max(frequency, key=frequency.get)` — iterates over keys and returns the key whose value `frequency.get` returns the maximum\n- `{w: c for w, c in frequency.items() if c > 1}` — dictionary comprehension with a filter"
+    },
+    "exercise": {
+      "title": "Build a Student Grade Book",
+      "instructions": "Create a grade book using a dictionary. The dictionary maps student names to their scores. Write a function add_student(book, name, score) that adds the name-score pair. Write a function class_average(book) that returns the average of all scores. Call add_student four times, then print all entries, the average, and the highest scorer.\n\nTest: Rahul=88, Priya=95, Amit=72, Sneha=91.\nExpected output includes 'Class Average:' and 'Top Scorer: Priya'.",
+      "starterCode": "# Student Grade Book\n\ndef add_student(book, name, score):\n    \"\"\"Add a student and their score to the grade book.\"\"\"\n    book[name] = score\n\ndef class_average(book):\n    \"\"\"Return the average score of all students.\"\"\"\n    # Your code here — return sum of values / count\n    pass\n\ngrade_book = {}\nadd_student(grade_book, \"Rahul\",  88)\nadd_student(grade_book, \"Priya\",  95)\nadd_student(grade_book, \"Amit\",   72)\nadd_student(grade_book, \"Sneha\",  91)\n\nprint(\"Grade Book:\")\nfor name, score in grade_book.items():\n    print(f\"  {name}: {score}\")\n\navg = class_average(grade_book)\nprint(f\"Class Average: {avg:.1f}\")\n\n# Find top scorer — name with the maximum value\ntop = max(grade_book, key=grade_book.get)\nprint(f\"Top Scorer: {top}\")",
+      "solutionCode": "def add_student(book, name, score):\n    book[name] = score\n\ndef class_average(book):\n    return sum(book.values()) / len(book)\n\ngrade_book = {}\nadd_student(grade_book, \"Rahul\",  88)\nadd_student(grade_book, \"Priya\",  95)\nadd_student(grade_book, \"Amit\",   72)\nadd_student(grade_book, \"Sneha\",  91)\n\nprint(\"Grade Book:\")\nfor name, score in grade_book.items():\n    print(f\"  {name}: {score}\")\n\navg = class_average(grade_book)\nprint(f\"Class Average: {avg:.1f}\")\n\ntop = max(grade_book, key=grade_book.get)\nprint(f\"Top Scorer: {top}\")",
+      "hints": [
+        "💡 In class_average, use sum(book.values()) to add all scores and len(book) to get the count.",
+        "💡 Return the result of dividing: return sum(book.values()) / len(book).",
+        "💡 max(grade_book, key=grade_book.get) finds the key (name) whose associated value (score) is the maximum."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Class Average: 86.5",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Top Scorer: Priya",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m6-l2-q1",
+          "question": "What does dict.get(\"key\", \"default\") return when the key does not exist?",
+          "options": [
+            "It raises a KeyError",
+            "It returns None always",
+            "It returns the default value you provided",
+            "It returns an empty string"
+          ],
+          "correct": 2,
+          "explanation": "dict.get(key, default) is the safe way to access a dictionary. If the key exists, it returns the associated value. If the key does not exist, it returns the default value you provide as the second argument. Without a default, get() returns None. This avoids the KeyError that occurs with direct bracket access dict[key] on a missing key."
+        },
+        {
+          "id": "py-m6-l2-q2",
+          "question": "Which method returns all key-value pairs from a dictionary so you can iterate over them?",
+          "options": [
+            ".pairs()",
+            ".entries()",
+            ".items()",
+            ".tuples()"
+          ],
+          "correct": 2,
+          "explanation": ".items() returns a view of all (key, value) pairs as tuples. Use it in a for loop: for key, value in my_dict.items(). The dict also provides .keys() for all keys and .values() for all values. There is no .pairs(), .entries(), or .tuples() method."
+        },
+        {
+          "id": "py-m6-l2-q3",
+          "question": "What does the expression {name: score for name, score in zip(names, scores)} create?",
+          "options": [
+            "A list of tuples pairing each name with a score",
+            "A set of name-score pairs",
+            "A dictionary where each name is a key and its score is the value",
+            "A generator that yields name-score pairs"
+          ],
+          "correct": 2,
+          "explanation": "This is a dictionary comprehension with curly braces and a colon separating key and value. zip(names, scores) pairs up the two lists, and the comprehension builds a dictionary from those pairs. The result is {\"Rahul\": 85, \"Sneha\": 92, ...}. List comprehensions use square brackets; dictionary comprehensions use curly braces with key: value."
+        }
+      ]
+    }
+  },
+  {
+    "id": "py-m6-l3",
+    "moduleId": "py-m6",
+    "title": "Mini Project: Student Report System",
+    "order": 3,
+    "xpReward": 25,
+    "duration": "20 min",
+    "explanation": {
+      "title": "Putting It All Together: A Complete Student Report System",
+      "content": "# The Mini Project\n\nYou have now learned the six fundamental building blocks of Python programming:\n\n1. **Variables and data types** — storing information\n2. **print() and f-strings** — displaying output\n3. **Conditions** — making decisions\n4. **Loops** — repeating actions\n5. **Functions** — organising reusable logic\n6. **Lists and dictionaries** — storing collections\n\nA real program combines all of these together to solve a complete problem. In this lesson, you will see and build a **Student Report System** — a small application that stores student records, calculates grades, and prints a formatted report.\n\n## Designing the System\n\nBefore writing code, think about the data and the operations:\n\n**Data:** Each student has a name, and three subject scores.\n\n**Operations needed:**\n- Add a student to the system\n- Calculate the student's average score\n- Assign a letter grade based on the average\n- Print a formatted report for one student\n- Print a summary of the whole class\n\n**Data structure choice:** A list of dictionaries — each dictionary represents one student with keys for `name` and the three scores.\n\n```python\nstudents = [\n    {\"name\": \"Rahul\",  \"maths\": 88, \"science\": 75, \"english\": 82},\n    {\"name\": \"Priya\",  \"maths\": 95, \"science\": 91, \"english\": 89},\n]\n```\n\n## Function Design\n\nEach function should do exactly one thing:\n\n- `calculate_average(student)` — takes a student dict, returns float\n- `assign_grade(average)` — takes a float, returns letter string\n- `print_student_report(student)` — prints one student's card\n- `print_class_summary(students)` — prints the overall summary\n\n## Why This Matters\n\nEvery professional Python application — whether a web API, a data pipeline, or a desktop tool — is built using exactly these same elements. A web framework's request handler is a function. The database rows are dictionaries. The business rules are conditions. The data processing is loops. Mastering these six building blocks means you can read and write real Python code immediately.\n\nIn the code example below, you will see the complete Student Report System implemented using every concept from this course."
+    },
+    "codeExample": {
+      "title": "Complete Student Report System",
+      "language": "python",
+      "code": "# ============================================\n# Student Report System — Mini Project\n# Uses: variables, conditions, loops, functions,\n#       lists, dictionaries, f-strings\n# ============================================\n\n# --- Data: list of student dictionaries ---\nstudents = [\n    {\"name\": \"Rahul\",  \"maths\": 88, \"science\": 75, \"english\": 82},\n    {\"name\": \"Priya\",  \"maths\": 95, \"science\": 91, \"english\": 89},\n    {\"name\": \"Amit\",   \"maths\": 62, \"science\": 55, \"english\": 70},\n    {\"name\": \"Sneha\",  \"maths\": 78, \"science\": 83, \"english\": 91},\n    {\"name\": \"Vikram\", \"maths\": 45, \"science\": 50, \"english\": 48},\n]\n\ndef calculate_average(student):\n    scores = [student[\"maths\"], student[\"science\"], student[\"english\"]]\n    return sum(scores) / len(scores)\n\ndef assign_grade(average):\n    if   average >= 90: return \"A\"\n    elif average >= 75: return \"B\"\n    elif average >= 60: return \"C\"\n    elif average >= 40: return \"D\"\n    else:               return \"F\"\n\ndef print_student_report(student):\n    avg   = calculate_average(student)\n    grade = assign_grade(avg)\n    status = \"PASS\" if avg >= 40 else \"FAIL\"\n    print(f\"  {student['name']:<10} M:{student['maths']:3d} \"\n          f\"S:{student['science']:3d} E:{student['english']:3d} \"\n          f\"Avg:{avg:5.1f}  {grade}  {status}\")\n\ndef print_class_summary(students):\n    all_averages = [calculate_average(s) for s in students]\n    class_avg    = sum(all_averages) / len(all_averages)\n    top_student  = max(students, key=calculate_average)\n    pass_count   = sum(1 for avg in all_averages if avg >= 40)\n    print(f\"\\n  Class Average : {class_avg:.1f}\")\n    print(f\"  Top Student   : {top_student['name']}\")\n    print(f\"  Passed        : {pass_count}/{len(students)}\")\n\n# --- Main program ---\nprint(\"=\" * 58)\nprint(\" STUDENT REPORT SYSTEM\")\nprint(\"=\" * 58)\nprint(f\"  {'Name':<10} {'M':>4} {'S':>4} {'E':>4} {'Avg':>6}  {'G'}  {'Status'}\")\nprint(\"-\" * 58)\nfor student in students:\n    print_student_report(student)\nprint(\"=\" * 58)\nprint_class_summary(students)\nprint(\"=\" * 58)",
+      "explanation": "- `students` — a list of dictionaries; each dictionary stores one student's complete record\n- `calculate_average(student)` — builds a list of three scores and uses `sum()` / `len()` for the average\n- `assign_grade(average)` — a pure function: takes a number, returns a letter string; no side effects\n- `[calculate_average(s) for s in students]` — list comprehension calling a function on every item\n- `max(students, key=calculate_average)` — returns the student dict whose average is the highest\n- `sum(1 for avg in all_averages if avg >= 40)` — generator expression counting averages at least 40"
+    },
+    "exercise": {
+      "title": "Extend the Report System with Remarks",
+      "instructions": "Extend the Student Report System. Add a function get_remark(grade) that returns: 'Excellent!' for A, 'Well done!' for B, 'Good effort!' for C, 'Needs improvement.' for D, and 'Please seek help.' for F. Then loop over the students list and for each student calculate the average and grade, then print name, average (1 decimal place), grade, and remark on one line.\n\nExpected output for Priya (avg 91.7, grade A): Priya: 91.7 A Excellent!",
+      "starterCode": "# Extended Student Report System\n\nstudents = [\n    {\"name\": \"Rahul\",  \"maths\": 88, \"science\": 75, \"english\": 82},\n    {\"name\": \"Priya\",  \"maths\": 95, \"science\": 91, \"english\": 89},\n    {\"name\": \"Amit\",   \"maths\": 62, \"science\": 55, \"english\": 70},\n    {\"name\": \"Sneha\",  \"maths\": 78, \"science\": 83, \"english\": 91},\n    {\"name\": \"Vikram\", \"maths\": 45, \"science\": 50, \"english\": 48},\n]\n\ndef calculate_average(student):\n    scores = [student[\"maths\"], student[\"science\"], student[\"english\"]]\n    return sum(scores) / len(scores)\n\ndef assign_grade(average):\n    if   average >= 90: return \"A\"\n    elif average >= 75: return \"B\"\n    elif average >= 60: return \"C\"\n    elif average >= 40: return \"D\"\n    else:               return \"F\"\n\ndef get_remark(grade):\n    # Return a remark string based on the grade\n    # Your code here\n    pass\n\n# Loop over students and print name, average, grade, remark\nfor student in students:\n    avg    = calculate_average(student)\n    grade  = assign_grade(avg)\n    remark = get_remark(grade)\n    # Your print statement here",
+      "solutionCode": "students = [\n    {\"name\": \"Rahul\",  \"maths\": 88, \"science\": 75, \"english\": 82},\n    {\"name\": \"Priya\",  \"maths\": 95, \"science\": 91, \"english\": 89},\n    {\"name\": \"Amit\",   \"maths\": 62, \"science\": 55, \"english\": 70},\n    {\"name\": \"Sneha\",  \"maths\": 78, \"science\": 83, \"english\": 91},\n    {\"name\": \"Vikram\", \"maths\": 45, \"science\": 50, \"english\": 48},\n]\n\ndef calculate_average(s):\n    return sum([s[\"maths\"], s[\"science\"], s[\"english\"]]) / 3\n\ndef assign_grade(avg):\n    if   avg >= 90: return \"A\"\n    elif avg >= 75: return \"B\"\n    elif avg >= 60: return \"C\"\n    elif avg >= 40: return \"D\"\n    else:           return \"F\"\n\ndef get_remark(grade):\n    remarks = {\"A\": \"Excellent!\", \"B\": \"Well done!\", \"C\": \"Good effort!\",\n               \"D\": \"Needs improvement.\", \"F\": \"Please seek help.\"}\n    return remarks.get(grade, \"\")\n\nfor student in students:\n    avg    = calculate_average(student)\n    grade  = assign_grade(avg)\n    remark = get_remark(grade)\n    print(f\"{student['name']}: {avg:.1f} {grade} {remark}\")",
+      "hints": [
+        "💡 Use a dictionary inside get_remark to map each grade letter to its remark string, then return remarks.get(grade, '').",
+        "💡 Calculate avg and grade for each student inside the loop before calling get_remark(grade).",
+        "💡 Print with f\"{student['name']}: {avg:.1f} {grade} {remark}\" — note single quotes around dictionary keys inside f-strings."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Excellent!",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "Priya",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "py-m6-l3-q1",
+          "question": "Why is a list of dictionaries a good data structure for storing multiple student records?",
+          "options": [
+            "Because dictionaries are always faster than other structures",
+            "Each dictionary groups one student's named fields together, and the list provides ordered access to all students",
+            "Python requires this structure for any program involving names",
+            "Because lists cannot store raw numbers without a dictionary wrapper"
+          ],
+          "correct": 1,
+          "explanation": "A dictionary naturally groups related fields (name, score, grade) under meaningful key names, making the code readable: student['name'] is clearer than student[0]. A list of these dictionaries lets you iterate over all students with a for loop, sort them, filter them, and pass the whole collection to functions."
+        },
+        {
+          "id": "py-m6-l3-q2",
+          "question": "What is the main benefit of breaking a program into multiple small functions?",
+          "options": [
+            "Smaller functions always run faster",
+            "Each function can be tested and understood independently, making the whole program easier to maintain",
+            "Python requires at least five functions in every program",
+            "Functions reduce the total number of lines in a file"
+          ],
+          "correct": 1,
+          "explanation": "Small, single-purpose functions are easier to test (you can call each one individually), easier to understand (each has one job), and easier to reuse (the same grade logic used in the report can also be used in a dashboard). This principle is called the Single Responsibility Principle and is fundamental to writing professional software."
+        },
+        {
+          "id": "py-m6-l3-q3",
+          "question": "Which concept allows a loop to call a function on every item in a list in a single line?",
+          "options": [
+            "A while loop with a counter",
+            "A list comprehension",
+            "A global variable",
+            "A nested dictionary"
+          ],
+          "correct": 1,
+          "explanation": "A list comprehension [f(item) for item in collection] calls the function f on every item in collection and collects the results in a new list, all in one line. For example, [calculate_average(s) for s in students] computes the average for every student and returns all averages as a list."
+        }
+      ]
+    }
+  }
+]

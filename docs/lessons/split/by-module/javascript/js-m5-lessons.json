@@ -1,0 +1,211 @@
+[
+  {
+    "id": "js-m5-l1",
+    "moduleId": "js-m5",
+    "title": "Defining and Calling Functions",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Creating Reusable Blocks of Code with Functions",
+      "content": "# Functions\n\nImagine a coffee machine. You press one button and a complex sequence of steps — heat water, grind beans, extract espresso — happens automatically. You do not need to understand or repeat all those steps every time you want coffee. A **function** works the same way: you write a set of instructions once, give them a name, and call that name whenever you need those instructions executed.\n\n## Function Declaration\n\n```javascript\nfunction greet(name) {\n    console.log(`Hello, ${name}!`);\n}\n\ngreet(\"Rahul\");  // Hello, Rahul!\ngreet(\"Priya\");  // Hello, Priya!\n```\n\nThe keyword `function` starts the declaration. Inside the parentheses are **parameters** — placeholder names for the values the function will receive. The body is the block inside `{}`.\n\n## Parameters and Arguments\n\n- **Parameter** — the name listed in the function definition (`name` above)\n- **Argument** — the actual value passed when calling the function (`\"Rahul\"` above)\n\n## Returning a Value\n\nA function that only `console.log()` is fine for output, but often you want the function to **compute** a result and send it back:\n\n```javascript\nfunction add(a, b) {\n    return a + b;       // sends the value back to the caller\n}\n\nconst sum = add(10, 5);  // sum = 15\nconsole.log(sum);\n```\n\nA function without a `return` statement automatically returns `undefined`.\n\n## Function Expressions\n\nIn JavaScript, functions are values. You can store them in variables:\n\n```javascript\nconst multiply = function(a, b) {\n    return a * b;\n};\n\nconsole.log(multiply(4, 5));  // 20\n```\n\n## Hoisting\n\nFunction **declarations** are hoisted — JavaScript moves them to the top of their scope, so you can call them before the line where they are defined. Function **expressions** are not hoisted.\n\n```javascript\nconsole.log(add(2, 3));   // 5 — works even before the declaration\n\nfunction add(a, b) {\n    return a + b;\n}\n```\n\nIn the code example below, you will see a set of pure functions that calculate invoice totals and grades."
+    },
+    "codeExample": {
+      "title": "Invoice and Grade Functions",
+      "language": "javascript",
+      "code": "// Pure functions — take inputs, return outputs, no side effects\n\nfunction calculateGST(amount, rate) {\n    return amount * rate;\n}\n\nfunction calculateTotal(price, quantity, gstRate) {\n    const subtotal = price * quantity;\n    const gst      = calculateGST(subtotal, gstRate);\n    return subtotal + gst;\n}\n\nfunction assignGrade(score) {\n    if      (score >= 90) return \"A\";\n    else if (score >= 80) return \"B\";\n    else if (score >= 70) return \"C\";\n    else if (score >= 60) return \"D\";\n    else                  return \"F\";\n}\n\nfunction formatCurrency(amount) {\n    return `₹${amount.toFixed(2)}`;\n}\n\n// Use the functions\nconst total = calculateTotal(1500, 3, 0.18);\nconsole.log(\"Total (with GST):\", formatCurrency(total));\n\nconst examScores = [88, 95, 72, 55, 91];\nconsole.log(\"\\n--- Grades ---\");\nexamScores.forEach((score, i) => {\n    console.log(`Student ${i + 1}: ${score} → ${assignGrade(score)}`);\n});",
+      "explanation": "- `function calculateGST(amount, rate)` — a pure function; given the same inputs, it always returns the same output\n- `return amount * rate` — sends the computed value back; execution ends here inside the function\n- `calculateGST(subtotal, gstRate)` — calling one function from inside another; the return value is used directly\n- `formatCurrency(amount)` — uses a template literal and `.toFixed(2)` to format numbers as currency strings\n- `.forEach((score, i) => { ... })` — passes a function as a callback; `i` is the index starting from 0"
+    },
+    "exercise": {
+      "title": "Write a Temperature Converter with Functions",
+      "instructions": "Write two functions: celsiusToFahrenheit(c) that returns (c * 9/5) + 32, and fahrenheitToCelsius(f) that returns (f - 32) * 5/9. Call each with a test value, round each result to one decimal place using toFixed(1), and print the conversions on separate lines.\n\nTest: celsiusToFahrenheit(100) should be 212.0, fahrenheitToCelsius(98.6) should be 37.0.\n\nExpected output:\n100C = 212.0F\n98.6F = 37.0C",
+      "starterCode": "// Temperature Converter Functions\n\nfunction celsiusToFahrenheit(c) {\n    // Return (c * 9/5) + 32\n    // Your code here\n}\n\nfunction fahrenheitToCelsius(f) {\n    // Return (f - 32) * 5/9\n    // Your code here\n}\n\nconst fResult = celsiusToFahrenheit(100);\nconst cResult = fahrenheitToCelsius(98.6);\n\nconsole.log(`100C = ${fResult.toFixed(1)}F`);\nconsole.log(`98.6F = ${cResult.toFixed(1)}C`);",
+      "solutionCode": "function celsiusToFahrenheit(c) {\n    return (c * 9 / 5) + 32;\n}\n\nfunction fahrenheitToCelsius(f) {\n    return (f - 32) * 5 / 9;\n}\n\nconst fResult = celsiusToFahrenheit(100);\nconst cResult = fahrenheitToCelsius(98.6);\n\nconsole.log(`100C = ${fResult.toFixed(1)}F`);\nconsole.log(`98.6F = ${cResult.toFixed(1)}C`);",
+      "hints": [
+        "💡 Add return (c * 9 / 5) + 32; as the single line inside celsiusToFahrenheit.",
+        "💡 Add return (f - 32) * 5 / 9; inside fahrenheitToCelsius — mind the parentheses.",
+        "💡 .toFixed(1) is called on the number returned by each function — it formats to one decimal place."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "100C = 212.0F",
+          "checkType": "contains"
+        },
+        {
+          "input": "",
+          "expectedOutput": "98.6F = 37.0C",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m5-l1-q1",
+          "question": "What does a JavaScript function return when it has no return statement?",
+          "options": [
+            "0",
+            "null",
+            "An empty string",
+            "undefined"
+          ],
+          "correct": 3,
+          "explanation": "A function without a return statement, or one that reaches the end of the function body, automatically returns undefined. This is also true of return; with no value. If you want the function to produce a result, you must include an explicit return statement with a value."
+        },
+        {
+          "id": "js-m5-l1-q2",
+          "question": "What is the difference between a parameter and an argument?",
+          "options": [
+            "Parameters are for arrow functions; arguments are for regular functions",
+            "A parameter is the variable in the function definition; an argument is the value passed when calling",
+            "A parameter is the returned value; an argument is the function name",
+            "They are two names for exactly the same thing"
+          ],
+          "correct": 1,
+          "explanation": "A parameter is the placeholder name written in the function definition: function greet(name) — name is the parameter. An argument is the actual value you supply at the call site: greet('Rahul') — 'Rahul' is the argument. The argument's value is bound to the parameter for the duration of the function call."
+        },
+        {
+          "id": "js-m5-l1-q3",
+          "question": "What is function hoisting in JavaScript?",
+          "options": [
+            "Moving functions to a separate file automatically",
+            "Function declarations are moved to the top of their scope, allowing calls before the definition",
+            "Arrow functions can be called before they are declared",
+            "JavaScript copies functions into every block where they are used"
+          ],
+          "correct": 1,
+          "explanation": "JavaScript hoists function declarations to the top of their scope before code runs. This means you can call a function declaration before the line where it is written. Function expressions (const fn = function() {}) and arrow functions (const fn = () => {}) are not hoisted — calling them before their assignment throws a ReferenceError."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m5-l2",
+    "moduleId": "js-m5",
+    "title": "Default Parameters and Multiple Returns",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Default Parameters, Rest Arguments, and Returning Objects",
+      "content": "# Default Parameters\n\nA **default parameter** gives a function a fallback value when the caller does not provide that argument:\n\n```javascript\nfunction greet(name, language = \"English\") {\n    if (language === \"Hindi\") return `Namaste, ${name}!`;\n    return `Hello, ${name}!`;\n}\n\ngreet(\"Rahul\");              // Hello, Rahul! — default used\ngreet(\"Priya\", \"Hindi\");    // Namaste, Priya! — default overridden\n```\n\nDefault parameters must come **after** required parameters.\n\n## Rest Parameters\n\nWhen you do not know how many arguments a caller will pass, use a **rest parameter** — it collects all extra arguments into an array:\n\n```javascript\nfunction sum(...numbers) {\n    return numbers.reduce((total, n) => total + n, 0);\n}\n\nconsole.log(sum(1, 2, 3));           // 6\nconsole.log(sum(10, 20, 30, 40));    // 100\n```\n\nThe `...` syntax before the last parameter name turns it into a rest parameter. Only one rest parameter is allowed and it must be last.\n\n## Returning Multiple Values\n\nJavaScript functions can return only one value — but that value can be an **object** or **array** containing multiple pieces of data:\n\n```javascript\nfunction getStats(scores) {\n    const total = scores.reduce((s, n) => s + n, 0);\n    return {\n        count:   scores.length,\n        total,                       // shorthand: total: total\n        average: total / scores.length,\n        max:     Math.max(...scores),\n        min:     Math.min(...scores),\n    };\n}\n\nconst stats = getStats([85, 92, 78, 95, 88]);\nconsole.log(stats.average);  // 87.6\n```\n\n## Destructuring Return Values\n\nYou can unpack an object return value immediately:\n\n```javascript\nconst { average, max, min } = getStats([85, 92, 78]);\nconsole.log(average, max, min);\n```\n\nIn the code example below, you will see default parameters, rest parameters, and an object return used in a statistics calculator."
+    },
+    "codeExample": {
+      "title": "Flexible Statistics Calculator",
+      "language": "javascript",
+      "code": "// Flexible Statistics Calculator\n\n// Rest parameter — accepts any number of values\nfunction computeStats(...values) {\n    if (values.length === 0) return null;\n    const total   = values.reduce((sum, v) => sum + v, 0);\n    const average = total / values.length;\n    return {\n        count:   values.length,\n        total,\n        average: parseFloat(average.toFixed(2)),\n        max:     Math.max(...values),\n        min:     Math.min(...values),\n    };\n}\n\n// Default parameter — label defaults to \"Data\"\nfunction printStats(stats, label = \"Data\") {\n    console.log(`\\n=== ${label} Statistics ===`);\n    console.log(`Count   : ${stats.count}`);\n    console.log(`Total   : ${stats.total}`);\n    console.log(`Average : ${stats.average}`);\n    console.log(`Max     : ${stats.max}`);\n    console.log(`Min     : ${stats.min}`);\n}\n\n// Call with any number of values\nconst examStats = computeStats(78, 92, 85, 67, 95, 88);\nprintStats(examStats, \"Exam Scores\");\n\nconst salesStats = computeStats(15000, 22000, 18500, 9000);\nprintStats(salesStats);   // uses default label \"Data\"\n\n// Destructure the return value\nconst { average, max } = computeStats(10, 20, 30, 40, 50);\nconsole.log(`\\nQuick: avg=${average}, max=${max}`);",
+      "explanation": "- `function computeStats(...values)` — rest parameter; all arguments are collected into the `values` array\n- `values.reduce((sum, v) => sum + v, 0)` — iterates the array, accumulating a running sum starting from `0`\n- `total` inside the returned object — shorthand property: when key and variable have the same name, write it once\n- `Math.max(...values)` — the spread operator `...` expands the array into individual arguments for `Math.max`\n- `function printStats(stats, label = \"Data\")` — `label` defaults to `\"Data\"` if the caller passes only one argument"
+    },
+    "exercise": {
+      "title": "Build a Configurable Discount Function",
+      "instructions": "Write a function applyDiscount(price, discountPct = 10) where discountPct defaults to 10. Return an object with: original (the price), discountAmount (price * discountPct / 100), and finalPrice (original minus discount). Call it twice and print all three properties.\n\nTest: applyDiscount(2000) → discountAmount 200, finalPrice 1800.\nTest: applyDiscount(2000, 25) → discountAmount 500, finalPrice 1500.",
+      "starterCode": "// Configurable Discount Function\n\nfunction applyDiscount(price, discountPct = 10) {\n    const discountAmount = price * discountPct / 100;\n    const finalPrice     = price - discountAmount;\n    // Return an object with original, discountAmount, finalPrice\n    // Your code here\n}\n\nconst result1 = applyDiscount(2000);\nconsole.log(\"Default 10%:\",   result1.original, result1.discountAmount, result1.finalPrice);\n\nconst result2 = applyDiscount(2000, 25);\nconsole.log(\"Custom 25%:\", result2.original, result2.discountAmount, result2.finalPrice);",
+      "solutionCode": "function applyDiscount(price, discountPct = 10) {\n    const discountAmount = price * discountPct / 100;\n    const finalPrice     = price - discountAmount;\n    return { original: price, discountAmount, finalPrice };\n}\n\nconst result1 = applyDiscount(2000);\nconsole.log(\"Default 10%:\", result1.original, result1.discountAmount, result1.finalPrice);\n\nconst result2 = applyDiscount(2000, 25);\nconsole.log(\"Custom 25%:\",  result2.original, result2.discountAmount, result2.finalPrice);",
+      "hints": [
+        "💡 Return an object literal: return { original: price, discountAmount, finalPrice };",
+        "💡 discountAmount and finalPrice are already computed — just include them in the returned object.",
+        "💡 The shorthand { discountAmount } is the same as { discountAmount: discountAmount } when key and variable share the same name."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "200 1800",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m5-l2-q1",
+          "question": "What does a rest parameter (...args) collect in a function?",
+          "options": [
+            "The first argument only",
+            "All keyword arguments as an object",
+            "All remaining positional arguments into an array",
+            "Only arguments that are numbers"
+          ],
+          "correct": 2,
+          "explanation": "A rest parameter, written as ...paramName, collects all remaining positional arguments that were not matched by earlier parameters into a real JavaScript array. For example, function f(first, ...rest) called as f(1, 2, 3, 4) gives first=1 and rest=[2, 3, 4]."
+        },
+        {
+          "id": "js-m5-l2-q2",
+          "question": "Where must default parameters appear in a function signature?",
+          "options": [
+            "Before all required parameters",
+            "After all required parameters",
+            "They can appear in any position",
+            "Default parameters are not allowed in JavaScript"
+          ],
+          "correct": 1,
+          "explanation": "Default parameters must come after all required (non-default) parameters. Placing a default parameter before a required one causes confusion about which argument maps to which parameter. JavaScript will throw a SyntaxError or behave unexpectedly if defaults precede required parameters."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m5-l3",
+    "moduleId": "js-m5",
+    "title": "Arrow Functions and Scope",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "13 min",
+    "explanation": {
+      "title": "Arrow Functions and Understanding Variable Scope",
+      "content": "# Arrow Functions\n\nArrow functions are a concise syntax for writing functions, introduced in ES6. They are especially useful as callbacks:\n\n```javascript\n// Regular function\nconst double = function(x) { return x * 2; };\n\n// Arrow function — equivalent\nconst double = (x) => { return x * 2; };\n\n// Concise body — single expression, no braces, implicit return\nconst double = x => x * 2;\n```\n\n### Concise body rules\n\n- Omit braces `{}` when the body is a single expression\n- Omit `return` — the expression value is returned automatically\n- Omit parentheses `()` around the parameter when there is exactly one\n\n```javascript\nconst square   = x => x ** 2;               // one param, one expr\nconst add      = (a, b) => a + b;            // two params\nconst getObj   = x => ({ value: x });        // return object: wrap in ()\nconst greet    = () => \"Hello!\";             // no params\n```\n\n## Variable Scope\n\n**Scope** defines which parts of a program can access a variable.\n\n### Global scope\n\nVariables declared outside any function are **global** — accessible everywhere:\n\n```javascript\nconst appName = \"CodeGuru AI\";   // global\n\nfunction showName() {\n    console.log(appName);        // accessible inside functions\n}\n```\n\n### Function (local) scope\n\nVariables declared inside a function are **local** to that function:\n\n```javascript\nfunction calculate() {\n    const result = 100;    // local\n}\nconsole.log(result);       // ReferenceError: result is not defined\n```\n\n### Block scope with let and const\n\n`let` and `const` are **block-scoped** — limited to the `{}` block they are declared in:\n\n```javascript\nif (true) {\n    let x = 10;\n    const y = 20;\n}\nconsole.log(x);  // ReferenceError — x is not accessible here\n```\n\n`var` is function-scoped, not block-scoped — one reason to avoid it.\n\n## Closures\n\nA **closure** is a function that remembers variables from its outer scope even after that scope has exited:\n\n```javascript\nfunction makeCounter() {\n    let count = 0;\n    return () => ++count;   // inner function closes over count\n}\n\nconst counter = makeCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n\nIn the code example below, you will see arrow functions, block scope, and a closure used in a practical counter utility."
+    },
+    "codeExample": {
+      "title": "Arrow Functions and Closures",
+      "language": "javascript",
+      "code": "// Arrow functions — concise syntax\nconst square   = x => x ** 2;\nconst add      = (a, b) => a + b;\nconst isEven   = n => n % 2 === 0;\nconst greet    = name => `Hello, ${name}!`;\n\nconsole.log(square(7));          // 49\nconsole.log(add(12, 8));         // 20\nconsole.log(isEven(4));          // true\nconsole.log(greet(\"Ananya\"));    // Hello, Ananya!\n\n// Arrow functions as callbacks\nconst scores  = [78, 92, 55, 88, 61];\nconst passing = scores.filter(s => s >= 60);\nconst graded  = passing.map(s => ({ score: s, grade: s >= 90 ? \"A\" : \"B\" }));\nconsole.log(\"Passing with grades:\", graded);\n\n// Closure — makeMultiplier returns a function that \"remembers\" factor\nfunction makeMultiplier(factor) {\n    return x => x * factor;   // closes over factor\n}\n\nconst double = makeMultiplier(2);\nconst triple = makeMultiplier(3);\n\nconsole.log(double(5));   // 10\nconsole.log(triple(5));   // 15\n\n// Block scope\nfor (let i = 0; i < 3; i++) {\n    const msg = `Iteration ${i}`;  // new const on every loop\n    console.log(msg);\n}\n// i and msg are not accessible here",
+      "explanation": "- `x => x ** 2` — concise arrow function: one parameter, one expression, implicit return\n- `(a, b) => a + b` — two parameters require parentheses; the expression `a + b` is the implicit return value\n- `scores.filter(s => s >= 60)` — arrow function as a callback; cleaner than writing `function(s) { return s >= 60; }`\n- `return x => x * factor` — returns an arrow function that closes over `factor`; each call to `makeMultiplier` creates an independent closure\n- `const msg` inside the `for` loop — block-scoped to one iteration; a fresh `msg` is created each time"
+    },
+    "exercise": {
+      "title": "Build an Arrow Function Toolkit",
+      "instructions": "Write three arrow functions: (1) clamp(value, min, max) that returns min if value < min, max if value > max, and value otherwise; (2) percentage(part, total) that returns (part / total * 100) rounded to 1 decimal place; (3) initials(fullName) that takes a full name string, splits it on spaces, and returns the first letter of each word joined with dots. Test all three and print the results.\n\nExpected output:\nClamp: 5 100 75\nPercentage: 85.0\nInitials: R.K.S",
+      "starterCode": "// Arrow Function Toolkit\n\n// 1. clamp: keep value within [min, max]\nconst clamp = (value, min, max) => {\n    if (value < min) return min;\n    if (value > max) return max;\n    return value;\n};\n\n// 2. percentage: compute percentage rounded to 1 decimal\nconst percentage = (part, total) => parseFloat((part / total * 100).toFixed(1));\n\n// 3. initials: get first letter of each word, joined with dots\n// Your code here — store in const initials\n\nconsole.log(\"Clamp:\",      clamp(-5, 0, 100), clamp(150, 0, 100), clamp(75, 0, 100));\nconsole.log(\"Percentage:\", percentage(85, 100));\nconsole.log(\"Initials:\",   initials(\"Rahul Kumar Sharma\"));",
+      "solutionCode": "const clamp = (value, min, max) => {\n    if (value < min) return min;\n    if (value > max) return max;\n    return value;\n};\n\nconst percentage = (part, total) => parseFloat((part / total * 100).toFixed(1));\n\nconst initials = fullName =>\n    fullName.split(\" \").map(w => w[0]).join(\".\");\n\nconsole.log(\"Clamp:\",      clamp(-5, 0, 100), clamp(150, 0, 100), clamp(75, 0, 100));\nconsole.log(\"Percentage:\", percentage(85, 100));\nconsole.log(\"Initials:\",   initials(\"Rahul Kumar Sharma\"));",
+      "hints": [
+        "💡 For initials: split the fullName on spaces, then map each word to its first character with w => w[0].",
+        "💡 Join the array of first letters with dots: .join(\".\")",
+        "💡 The whole initials function fits on one line: fullName => fullName.split(\" \").map(w => w[0]).join(\".\")"
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Initials: R.K.S",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m5-l3-q1",
+          "question": "What does an arrow function's concise body (without braces) return?",
+          "options": [
+            "undefined — you must always use a return statement",
+            "The value of the single expression — implicit return",
+            "A new arrow function",
+            "null"
+          ],
+          "correct": 1,
+          "explanation": "When an arrow function body is a single expression without curly braces, the expression is evaluated and its value is implicitly returned. So x => x * 2 is exactly equivalent to x => { return x * 2; }. If you add braces, you must include an explicit return statement."
+        },
+        {
+          "id": "js-m5-l3-q2",
+          "question": "What is a closure in JavaScript?",
+          "options": [
+            "A way to close or end a function early",
+            "A function that has access to variables from its outer scope even after that scope has exited",
+            "A method that prevents a variable from being modified",
+            "The curly braces that define a function body"
+          ],
+          "correct": 1,
+          "explanation": "A closure is a function that retains access to variables from the scope in which it was created, even after that outer scope has finished executing. In makeMultiplier(factor), the returned arrow function closes over factor and remembers it permanently. Each call to makeMultiplier creates a separate closure with its own factor."
+        }
+      ]
+    }
+  }
+]

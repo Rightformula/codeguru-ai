@@ -1,0 +1,197 @@
+[
+  {
+    "id": "js-m2-l1",
+    "moduleId": "js-m2",
+    "title": "Numbers and Arithmetic Operators",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Working with Numbers and Math in JavaScript",
+      "content": "# Numbers in JavaScript\n\nUnlike Python or Java, JavaScript uses a **single type for all numbers** — both integers and decimals are represented as `number`. Under the hood, every number is a 64-bit floating-point value following the IEEE 754 standard.\n\n```javascript\nconst seats    = 30;       // integer — still type 'number'\nconst price    = 199.99;   // decimal — still type 'number'\nconst negative = -42;\nconst huge     = 1_000_000; // underscores improve readability\n```\n\n## Arithmetic Operators\n\n| Operator | Name | Example | Result |\n|---|---|---|---|\n| `+` | Addition | `7 + 3` | `10` |\n| `-` | Subtraction | `7 - 3` | `4` |\n| `*` | Multiplication | `7 * 3` | `21` |\n| `/` | Division | `7 / 2` | `3.5` |\n| `%` | Modulo (remainder) | `7 % 2` | `1` |\n| `**` | Exponentiation | `2 ** 8` | `256` |\n\nThere is no separate integer division operator in JavaScript. `7 / 2` always returns `3.5`.\n\n## Augmented Assignment Operators\n\n```javascript\nlet x = 10;\nx += 5;   // x = 15\nx -= 3;   // x = 12\nx *= 2;   // x = 24\nx /= 4;   // x = 6\nx **= 2;  // x = 36\n```\n\n## Increment and Decrement\n\n```javascript\nlet count = 0;\ncount++;   // count = 1  (post-increment)\ncount--;   // count = 0  (post-decrement)\n```\n\n## The Math Object\n\nJavaScript provides a built-in `Math` object with useful functions:\n\n| Method | What it does | Example |\n|---|---|---|\n| `Math.round(x)` | Round to nearest integer | `Math.round(4.6)` → `5` |\n| `Math.floor(x)` | Round down | `Math.floor(4.9)` → `4` |\n| `Math.ceil(x)` | Round up | `Math.ceil(4.1)` → `5` |\n| `Math.abs(x)` | Absolute value | `Math.abs(-7)` → `7` |\n| `Math.max(a,b)` | Larger value | `Math.max(3, 9)` → `9` |\n| `Math.min(a,b)` | Smaller value | `Math.min(3, 9)` → `3` |\n| `Math.sqrt(x)` | Square root | `Math.sqrt(16)` → `4` |\n\nIn the code example below, you will see arithmetic operators and several `Math` methods applied to a GST invoice calculation."
+    },
+    "codeExample": {
+      "title": "GST Invoice Calculator",
+      "language": "javascript",
+      "code": "// GST Invoice Calculator\n\nconst unitPrice  = 1250;       // price before tax\nconst quantity   = 4;          // number of units\nconst GST_RATE   = 0.18;       // 18% GST\n\n// Basic arithmetic\nconst subtotal   = unitPrice * quantity;   // 5000\nconst gstAmount  = subtotal * GST_RATE;    // 900\nconst grandTotal = subtotal + gstAmount;   // 5900\n\nconsole.log(\"Unit Price :₹\", unitPrice);\nconsole.log(\"Quantity   :\",   quantity);\nconsole.log(\"Subtotal   :₹\", subtotal);\nconsole.log(\"GST (18%)  :₹\", gstAmount);\nconsole.log(\"Grand Total:₹\", grandTotal);\n\n// Math methods\nconst rawAvgPerUnit = grandTotal / quantity;         // 1475 exactly\nconst rounded       = Math.round(rawAvgPerUnit);     // 1475\nconst flooredDis    = Math.floor(grandTotal * 0.05); // floor of 5% discount\n\nconsole.log(\"Avg per unit:\", rounded);\nconsole.log(\"5% discount :\", flooredDis);\n\n// Modulo — check if quantity is even\nconsole.log(\"Even quantity?\", quantity % 2 === 0);",
+      "explanation": "- `unitPrice * quantity` — multiplies two `number` values; result is always a `number`\n- `subtotal * GST_RATE` — multiplying by `0.18` computes 18% of the subtotal\n- `Math.round(rawAvgPerUnit)` — rounds to the nearest whole number; `.5` rounds up\n- `Math.floor(grandTotal * 0.05)` — rounds down, ensuring a discount does not exceed the actual computed value\n- `quantity % 2 === 0` — the modulo operator returns the remainder; `=== 0` checks for exact equality without type coercion"
+    },
+    "exercise": {
+      "title": "Build a Simple Loan EMI Estimator",
+      "instructions": "Write a program that estimates a monthly EMI (Equated Monthly Instalment) for a loan. Declare const PRINCIPAL = 100000, const ANNUAL_RATE = 0.12, and const MONTHS = 12. Compute monthlyRate = ANNUAL_RATE / 12 and simpleEMI = (PRINCIPAL + PRINCIPAL * ANNUAL_RATE) / MONTHS. Round simpleEMI using Math.round(). Print PRINCIPAL, ANNUAL_RATE, MONTHS, and the rounded EMI.\n\nExpected output:\nPrincipal: 100000\nAnnual Rate: 0.12\nMonths: 12\nEMI: 9333",
+      "starterCode": "// Simple Loan EMI Estimator\n\nconst PRINCIPAL   = 100000;\nconst ANNUAL_RATE = 0.12;\nconst MONTHS      = 12;\n\n// Compute monthly rate and simple EMI\nconst monthlyRate = ANNUAL_RATE / 12;\nconst simpleEMI   = (PRINCIPAL + PRINCIPAL * ANNUAL_RATE) / MONTHS;\nconst roundedEMI  = Math.round(simpleEMI);\n\nconsole.log(\"Principal:   \", PRINCIPAL);\nconsole.log(\"Annual Rate: \", ANNUAL_RATE);\nconsole.log(\"Months:      \", MONTHS);\n// Print rounded EMI here",
+      "solutionCode": "const PRINCIPAL   = 100000;\nconst ANNUAL_RATE = 0.12;\nconst MONTHS      = 12;\n\nconst monthlyRate = ANNUAL_RATE / 12;\nconst simpleEMI   = (PRINCIPAL + PRINCIPAL * ANNUAL_RATE) / MONTHS;\nconst roundedEMI  = Math.round(simpleEMI);\n\nconsole.log(\"Principal:   \", PRINCIPAL);\nconsole.log(\"Annual Rate: \", ANNUAL_RATE);\nconsole.log(\"Months:      \", MONTHS);\nconsole.log(\"EMI:         \", roundedEMI);",
+      "hints": [
+        "💡 The rounded EMI is already stored in the variable roundedEMI — you only need to print it.",
+        "💡 Add console.log(\"EMI:\", roundedEMI); below the last existing console.log().",
+        "💡 Math.round() rounds to the nearest integer — 9333.33 becomes 9333."
+      ],
+      "testCases": [
+        { "input": "", "expectedOutput": "EMI:", "checkType": "contains" }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m2-l1-q1",
+          "question": "What does the % operator return in JavaScript?",
+          "options": [
+            "The percentage of the left number relative to the right",
+            "The remainder after dividing the left number by the right",
+            "The rounded result of dividing two numbers",
+            "The absolute difference between two numbers"
+          ],
+          "correct": 1,
+          "explanation": "The % operator (modulo) returns the remainder after integer division. For example, 17 % 5 is 2 because 17 divided by 5 is 3 with 2 left over. It is commonly used to check divisibility: n % 2 === 0 is true when n is even."
+        },
+        {
+          "id": "js-m2-l1-q2",
+          "question": "What does Math.floor(4.9) return?",
+          "options": [
+            "5",
+            "4",
+            "4.9",
+            "undefined"
+          ],
+          "correct": 1,
+          "explanation": "Math.floor() always rounds down to the nearest integer, regardless of the decimal part. Math.floor(4.9) is 4, Math.floor(4.1) is also 4. Use Math.ceil() to round up, Math.round() to round to the nearest integer, or Math.floor() when you need a guaranteed lower bound."
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "js-m2-l2",
+    "moduleId": "js-m2",
+    "title": "Strings and Template Literals",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Working with Text: Strings and Template Literals",
+      "content": "# Strings in JavaScript\n\nA **string** is a sequence of characters used to represent text. Strings are one of the most frequently used types in any program. JavaScript offers three ways to delimit them:\n\n```javascript\nconst a = 'single quotes';    // traditional\nconst b = \"double quotes\";    // traditional\nconst c = `template literal`; // modern — backticks\n```\n\nAll three store text equally well. Template literals (backticks) are the modern preference because they support interpolation and multi-line text.\n\n## String Concatenation vs Template Literals\n\n```javascript\nconst name  = \"Rahul\";\nconst score = 92;\n\n// Old way — concatenation with +\nconsole.log(\"Hello, \" + name + \"! Score: \" + score);\n\n// Modern way — template literal\nconsole.log(`Hello, ${name}! Score: ${score}`);\n```\n\nTemplate literals are cleaner: you embed any expression inside `${}` and it is evaluated and inserted automatically.\n\n## Essential String Properties and Methods\n\n| Property/Method | What it does | Example |\n|---|---|---|\n| `.length` | Character count | `\"hello\".length` → `5` |\n| `.toUpperCase()` | All uppercase | `\"hello\".toUpperCase()` → `\"HELLO\"` |\n| `.toLowerCase()` | All lowercase | `\"HELLO\".toLowerCase()` → `\"hello\"` |\n| `.trim()` | Remove surrounding whitespace | `\" hi \".trim()` → `\"hi\"` |\n| `.includes(s)` | Check if substring present | `\"hello\".includes(\"ell\")` → `true` |\n| `.startsWith(s)` | Check prefix | `\"hello\".startsWith(\"he\")` → `true` |\n| `.indexOf(s)` | Position of first match | `\"hello\".indexOf(\"l\")` → `2` |\n| `.slice(s, e)` | Extract substring | `\"hello\".slice(1, 4)` → `\"ell\"` |\n| `.replace(a, b)` | Replace first match | `\"cats\".replace(\"cats\",\"dogs\")` → `\"dogs\"` |\n| `.split(sep)` | Split into array | `\"a,b,c\".split(\",\")` → `[\"a\",\"b\",\"c\"]` |\n\n## Strings Are Immutable\n\nYou cannot change a character inside a string — string methods always return a **new** string without modifying the original:\n\n```javascript\nconst word = \"hello\";\nconst upper = word.toUpperCase(); // new string\nconsole.log(word);   // \"hello\" — unchanged\nconsole.log(upper);  // \"HELLO\"\n```\n\nIn the code example below, you will see string methods and template literals applied to an email address validator."
+    },
+    "codeExample": {
+      "title": "Email and Name Formatter",
+      "language": "javascript",
+      "code": "// Email and Name Formatter — string methods in action\n\nconst rawName  = \"  ananya krishnan  \";   // messy input\nconst rawEmail = \"Ananya.Krishnan@Example.COM\";\n\n// Clean up the name\nconst trimmedName  = rawName.trim();            // remove spaces\nconst formattedName = trimmedName              // chain methods\n    .split(\" \")                                 // split into words\n    .map(w => w[0].toUpperCase() + w.slice(1)) // capitalise each\n    .join(\" \");                                 // rejoin\n\n// Normalise email\nconst cleanEmail = rawEmail.toLowerCase();\n\n// Extract username (before @)\nconst atIndex  = cleanEmail.indexOf(\"@\");\nconst username = cleanEmail.slice(0, atIndex);\n\n// Validate email has @ and .\nconst isValid  = cleanEmail.includes(\"@\") && cleanEmail.includes(\".\");\n\nconsole.log(`Name     : ${formattedName}`);\nconsole.log(`Email    : ${cleanEmail}`);\nconsole.log(`Username : ${username}`);\nconsole.log(`Valid    : ${isValid}`);\nconsole.log(`Length   : ${cleanEmail.length} characters`);",
+      "explanation": "- `.trim()` — removes all leading and trailing whitespace without affecting internal spaces\n- `.split(\" \")` — splits the string on every space, producing an array of words\n- `.map(w => w[0].toUpperCase() + w.slice(1))` — capitalises the first letter of each word\n- `.join(\" \")` — reassembles the array back into a single string with spaces between words\n- `.indexOf(\"@\")` — returns the integer position of the first `@`; used to know where to slice\n- `.includes(\"@\") && .includes(\".\")` — combines two boolean checks with `&&`"
+    },
+    "exercise": {
+      "title": "Build a Username Generator",
+      "instructions": "Given the variable fullName = '  Rahul Sharma  ', create a username by: (1) trimming whitespace, (2) converting to lowercase, (3) replacing all spaces with underscores using replaceAll(). Print the original trimmed name and the generated username on separate labelled lines.\n\nExpected output:\nOriginal: Rahul Sharma\nUsername: rahul_sharma",
+      "starterCode": "// Username Generator\n\nconst fullName = \"  Rahul Sharma  \";\n\n// Step 1 — trim whitespace\nconst trimmed  = fullName.trim();\n\n// Step 2 — convert to lowercase\nconst lower    = trimmed.toLowerCase();\n\n// Step 3 — replace all spaces with underscores\n// Your code here — store result in 'username'\n\nconsole.log(\"Original:\", trimmed);\nconsole.log(\"Username:\", username);",
+      "solutionCode": "const fullName = \"  Rahul Sharma  \";\n\nconst trimmed  = fullName.trim();\nconst lower    = trimmed.toLowerCase();\nconst username = lower.replaceAll(\" \", \"_\");\n\nconsole.log(\"Original:\", trimmed);\nconsole.log(\"Username:\", username);",
+      "hints": [
+        "💡 Use lower.replaceAll(\" \", \"_\") to replace every space with an underscore and store it as username.",
+        "💡 replaceAll() replaces every occurrence; replace() only replaces the first match.",
+        "💡 The trimmed name and lowercase steps are already done — username only needs the replaceAll() step applied to lower."
+      ],
+      "testCases": [
+        { "input": "", "expectedOutput": "rahul_sharma", "checkType": "contains" }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m2-l2-q1",
+          "question": "What is the key advantage of template literals over string concatenation?",
+          "options": [
+            "Template literals are faster to execute",
+            "Template literals support embedded expressions with ${} and multi-line text",
+            "Template literals do not require quotes",
+            "Template literals automatically convert numbers to strings"
+          ],
+          "correct": 1,
+          "explanation": "Template literals (backtick strings) support two features concatenation cannot match easily: expression interpolation with ${} — which embeds any expression directly in the string — and multi-line strings without escape characters. Both make code more readable and less error-prone."
+        },
+        {
+          "id": "js-m2-l2-q2",
+          "question": "What does \"hello\".slice(1, 4) return?",
+          "options": [
+            "\"hello\"",
+            "\"ello\"",
+            "\"ell\"",
+            "\"hel\""
+          ],
+          "correct": 2,
+          "explanation": "slice(start, end) extracts characters from index start up to but not including index end. For \"hello\", index 1 is 'e', index 2 is 'l', index 3 is 'l' — so slice(1, 4) returns \"ell\". The character at index 4 ('o') is excluded because the end index is non-inclusive."
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "js-m2-l3",
+    "moduleId": "js-m2",
+    "title": "Type Conversion and Coercion",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Converting Types Explicitly and Understanding Coercion",
+      "content": "# Type Conversion in JavaScript\n\nBecause JavaScript is dynamically typed, values often need to move between types. There are two kinds of type change: **explicit conversion** (you control it) and **implicit coercion** (JavaScript does it automatically, sometimes unexpectedly).\n\n## Explicit Conversion\n\nUse these built-in functions to convert types deliberately:\n\n| From → To | Function | Example | Result |\n|---|---|---|---|\n| string → number | `Number(x)` | `Number(\"42\")` | `42` |\n| string → integer | `parseInt(x)` | `parseInt(\"42.9\")` | `42` |\n| string → float | `parseFloat(x)` | `parseFloat(\"3.14\")` | `3.14` |\n| number → string | `String(x)` | `String(42)` | `\"42\"` |\n| anything → boolean | `Boolean(x)` | `Boolean(0)` | `false` |\n\n## Falsy Values\n\nThese six values are **falsy** — they convert to `false`:\n\n```\nfalse   0   \"\"   null   undefined   NaN\n```\n\nEvery other value is **truthy** — it converts to `true`.\n\n## Implicit Coercion — the Surprises\n\nJavaScript coerces types automatically in certain operations:\n\n```javascript\n\"5\" + 2      // \"52\"   — + with string triggers concatenation\n\"5\" - 2      // 3      — - forces numeric conversion\n\"5\" * \"3\"    // 15     — both coerced to numbers\ntrue + 1     // 2      — true coerces to 1\nnull + 1     // 1      — null coerces to 0\n```\n\n## NaN — Not a Number\n\n`NaN` is a special `number` value that means a numeric operation failed:\n\n```javascript\nNumber(\"hello\")  // NaN — \"hello\" is not a valid number\n0 / 0            // NaN — zero divided by zero is undefined\n```\n\nCheck for `NaN` with `isNaN()` or `Number.isNaN()`. Never use `x === NaN` — it always returns `false`.\n\n## Strict vs Loose Equality\n\n```javascript\n0  == false    // true  — loose equality coerces types first\n0  === false   // false — strict equality checks type AND value\n\"\"  == false   // true  — loose\n\"\"  === false  // false — strict\n```\n\nAlways prefer `===` (strict equality) to avoid coercion surprises. In the code example below, you will see explicit conversion, falsy checks, and the difference between `==` and `===`."
+    },
+    "codeExample": {
+      "title": "Type Conversion Showcase",
+      "language": "javascript",
+      "code": "// Type Conversion Showcase\n\n// --- Explicit number conversion ---\nconst ageStr    = \"25\";\nconst ageNum    = Number(ageStr);     // 25 as number\nconst priceStr  = \"1299.99\";\nconst priceNum  = parseFloat(priceStr); // 1299.99\nconst pageStr   = \"42 pages\";\nconst pageNum   = parseInt(pageStr);  // 42 — stops at first non-digit\n\nconsole.log(ageNum   + 5);   // 30 (numeric addition)\nconsole.log(ageStr   + 5);   // \"255\" (string concat — coercion trap)\nconsole.log(priceNum.toFixed(2)); // \"1299.99\"\nconsole.log(pageNum);         // 42\n\n// --- Falsy check ---\nconst values = [0, \"\", null, undefined, \"hello\", 42, false];\nconsole.log(\"\\n--- Falsy / Truthy ---\");\nvalues.forEach(v => {\n    console.log(`${String(v).padEnd(10)} → ${Boolean(v)}`);\n});\n\n// --- Strict vs loose equality ---\nconsole.log(\"\\n--- Equality ---\");\nconsole.log(0 == false);   // true  (loose)\nconsole.log(0 === false);  // false (strict — different types)\nconsole.log(\"5\" == 5);     // true  (loose)\nconsole.log(\"5\" === 5);    // false (strict)",
+      "explanation": "- `Number(\"25\")` — converts a clean numeric string to a number; returns `NaN` for non-numeric strings\n- `parseInt(\"42 pages\")` — parses digits from the start and stops at the first non-digit character\n- `ageStr + 5` — the `+` operator sees a string on the left and concatenates, producing `\"255\"` not `30`\n- `Boolean(v)` — explicitly converts each value; `0`, `\"\"`, `null`, `undefined`, `false` all produce `false`\n- `0 == false` is `true` because loose equality coerces types; `0 === false` is `false` because they differ in type"
+    },
+    "exercise": {
+      "title": "Fix a Type Bug in a Score Calculator",
+      "instructions": "The following program has a type bug: scores arrive as strings from a form, so adding them concatenates instead of summing. Fix the bug by converting each score to a number before summing. The three scores are score1 = '88', score2 = '92', score3 = '75'. Compute their numeric sum and average (rounded to 1 decimal with toFixed(1)). Print the total and average.\n\nExpected output:\nTotal: 255\nAverage: 85.0",
+      "starterCode": "// Score Calculator — fix the type bug\n\nconst score1 = \"88\";   // comes in as a string\nconst score2 = \"92\";\nconst score3 = \"75\";\n\n// BUG: score1 + score2 + score3 concatenates strings!\n// Fix: convert each to a number first using Number()\nconst s1 = Number(score1);\n// Your code: convert score2 and score3\n\n// Compute total and average\nconst total   = s1 + s2 + s3;\nconst average = (total / 3).toFixed(1);\n\nconsole.log(\"Total:\",   total);\nconsole.log(\"Average:\", average);",
+      "solutionCode": "const score1 = \"88\";\nconst score2 = \"92\";\nconst score3 = \"75\";\n\nconst s1 = Number(score1);\nconst s2 = Number(score2);\nconst s3 = Number(score3);\n\nconst total   = s1 + s2 + s3;\nconst average = (total / 3).toFixed(1);\n\nconsole.log(\"Total:\",   total);\nconsole.log(\"Average:\", average);",
+      "hints": [
+        "💡 Declare const s2 = Number(score2); and const s3 = Number(score3); following the same pattern as s1.",
+        "💡 After converting, s1 + s2 + s3 will be numeric addition (255), not string concatenation.",
+        "💡 .toFixed(1) is a number method that returns a string with exactly 1 decimal place — call it on the division result."
+      ],
+      "testCases": [
+        { "input": "", "expectedOutput": "Total:   255",   "checkType": "contains" },
+        { "input": "", "expectedOutput": "Average: 85.0",  "checkType": "contains" }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m2-l3-q1",
+          "question": "Why should you use === instead of == when comparing values in JavaScript?",
+          "options": [
+            "=== is faster to execute",
+            "=== checks both value and type without coercion, preventing unexpected matches",
+            "== only works with numbers; === works with all types",
+            "They behave identically in all situations"
+          ],
+          "correct": 1,
+          "explanation": "=== is strict equality — it returns true only when both the value and the type are identical. == is loose equality — it coerces types before comparing, so 0 == false is true and \"\" == false is true. Using === everywhere prevents entire categories of subtle bugs caused by unexpected coercion."
+        },
+        {
+          "id": "js-m2-l3-q2",
+          "question": "What does Number(\"hello\") return in JavaScript?",
+          "options": [
+            "0",
+            "null",
+            "undefined",
+            "NaN"
+          ],
+          "correct": 3,
+          "explanation": "When Number() cannot parse its argument as a valid number, it returns NaN (Not a Number). NaN is a special number value that propagates through calculations — any arithmetic involving NaN produces NaN. To check for NaN, use Number.isNaN(value), not value === NaN (which always returns false)."
+        },
+        {
+          "id": "js-m2-l3-q3",
+          "question": "Which of the following values is truthy in JavaScript?",
+          "options": [
+            "0",
+            "\"\"",
+            "null",
+            "\"false\""
+          ],
+          "correct": 3,
+          "explanation": "The string \"false\" is truthy because it is a non-empty string. JavaScript's six falsy values are: false, 0, \"\" (empty string), null, undefined, and NaN. Any value not in that list is truthy — including the string \"false\", the string \"0\", empty arrays, and empty objects."
+        }
+      ]
+    }
+  }
+]

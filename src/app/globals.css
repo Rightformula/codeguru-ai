@@ -1,0 +1,251 @@
+/* ══════════════════════════════════════════════════════════
+   CodeGuru AI — Global Styles
+   This file is imported in src/app/layout.tsx
+   Tailwind directives MUST be here for the framework to work
+══════════════════════════════════════════════════════════ */
+
+/* ── Tailwind Directives (REQUIRED — do not remove) ────── */
+@tailwind base;        /* Normalizes browser styles */
+@tailwind components;  /* Registers @apply component classes */
+@tailwind utilities;   /* Generates all utility classes */
+
+/* ── Google Fonts Import ────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ── CSS Variables (Design Tokens) ─────────────────────── */
+:root {
+  /* Colors */
+  --color-bg:          #0A0A0F;
+  --color-card:        #12121A;
+  --color-card-2:      #18182A;
+  --color-border:      #1E1E2E;
+  --color-border-2:    #2A2A3C;
+  --color-text:        #E2E8F0;
+  --color-muted:       #64748B;
+  --color-subtle:      #3A4560;
+
+  /* Brand Colors */
+  --color-green:       #22C55E;
+  --color-green-dim:   #052A0F;
+  --color-blue:        #3B82F6;
+  --color-blue-dim:    #051530;
+  --color-yellow:      #FFD166;
+  --color-orange:      #FF6B35;
+  --color-purple:      #7C3AED;
+  --color-red:         #EF4444;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing & Shape */
+  --radius:    10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* ── Base Resets ────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape on iOS */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Typography Defaults ────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Scrollbar Styling ──────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-card);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ── Selection Color ────────────────────────────────────── */
+::selection {
+  background: rgba(34, 197, 94, 0.25);
+  color: var(--color-text);
+}
+
+/* ── Focus Styles (Accessibility) ───────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Animations ─────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes xpFill {
+  from { width: 0%; }
+  to   { width: var(--xp-target-width, 60%); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes xpPop {
+  0%   { transform: translateY(0)    scale(1);    opacity: 1; }
+  50%  { transform: translateY(-30px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-60px) scale(0.8); opacity: 0; }
+}
+
+/* ── Utility Animation Classes ──────────────────────────── */
+.animate-fade-in       { animation: fadeIn 0.4s ease both; }
+.animate-slide-up      { animation: slideUp 0.4s ease both; }
+.animate-slide-down    { animation: slideDown 0.3s ease both; }
+.animate-slide-right   { animation: slideInRight 0.3s ease both; }
+.animate-spin          { animation: spin 0.8s linear infinite; }
+.animate-pulse-slow    { animation: pulse 2s ease infinite; }
+.animate-bounce-slow   { animation: bounce 2s ease infinite; }
+.animate-xp-pop        { animation: xpPop 1.5s ease forwards; }
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ── Component Base Classes (used with @apply in components) */
+
+/* Card base */
+.card-base {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Glass effect for modals/overlays */
+.glass {
+  background: rgba(18, 18, 26, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Code block styling */
+.code-block {
+  background: #0D1117;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-green), var(--color-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Grid dot background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Mobile-First Responsive Helpers ────────────────────── */
+/* These supplement Tailwind's responsive prefixes */
+
+/* Safe area padding for iPhone notch */
+.safe-top    { padding-top:    env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Tap highlight removal for mobile */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent text selection on interactive elements */
+button {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Dark Mode Overrides (already dark by default) ──────── */
+/* CodeGuru AI is dark-first, so no light mode needed in MVP */
+/* Future: add @media (prefers-color-scheme: light) here */
+
+/* ── Print Styles ────────────────────────────────────────── */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "devCommand": "npm run dev",
+
+  "regions": ["bom1"],
+
+  "functions": {
+    "src/app/api/ai/**": {
+      "maxDuration": 30,
+      "memory": 512
+    },
+    "src/app/api/code/**": {
+      "maxDuration": 15,
+      "memory": 256
+    },
+    "src/app/api/payment/**": {
+      "maxDuration": 15,
+      "memory": 256
+    },
+    "src/app/api/progress/**": {
+      "maxDuration": 10,
+      "memory": 256
+    }
+  },
+
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+
+  "rewrites": [
+    {
+      "source": "/monitoring",
+      "destination": "/api/monitoring/tunnel"
+    }
+  ],
+
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+
+  "crons": [
+    {
+      "path": "/api/cron/cleanup-sessions",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/cache-warmup",
+      "schedule": "0 6 * * *"
+    }
+  ]
+}

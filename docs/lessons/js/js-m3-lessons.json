@@ -1,0 +1,194 @@
+[
+  {
+    "id": "js-m3-l1",
+    "moduleId": "js-m3",
+    "title": "if, else if, and else",
+    "order": 1,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Making Decisions with if, else if, and else",
+      "content": "# Conditional Statements\n\nEvery useful program makes decisions. Think of an ATM: it checks your balance before dispensing cash. If the balance is sufficient, it dispenses. Otherwise it declines. An `if` statement lets your program do the same — run a block of code only when a condition is met.\n\n## The if Statement\n\n```javascript\nconst temperature = 38;\nif (temperature > 37) {\n    console.log(\"You have a fever.\");\n}\n```\n\nTwo important syntax rules:\n1. The condition goes inside **parentheses** `()`\n2. The body goes inside **curly braces** `{}`\n\nUnlike Python, JavaScript uses braces instead of indentation to define blocks.\n\n## Adding else\n\n```javascript\nif (temperature > 37) {\n    console.log(\"You have a fever.\");\n} else {\n    console.log(\"Temperature is normal.\");\n}\n```\n\nThe `else` block runs when the `if` condition is `false`. It has no condition of its own.\n\n## Multiple Conditions with else if\n\n```javascript\nconst score = 75;\n\nif (score >= 90) {\n    console.log(\"Grade: A\");\n} else if (score >= 80) {\n    console.log(\"Grade: B\");\n} else if (score >= 70) {\n    console.log(\"Grade: C\");\n} else {\n    console.log(\"Grade: F\");\n}\n```\n\nJavaScript evaluates `else if` conditions top to bottom and executes only the first matching block. All remaining branches are skipped.\n\n## One-Line if (no braces) — Use with Caution\n\nBraces are technically optional when the body is a single statement, but omitting them is a common source of bugs. Always use braces.\n\n## Truthy and Falsy in Conditions\n\nAny value can be used as a condition — not just booleans:\n\n```javascript\nconst username = \"Rahul\";\nif (username) {\n    console.log(\"Logged in as:\", username);\n}\n// '' (empty string) would be falsy, so the block would not run\n```\n\nIn the code example below, you will see a complete grade classifier using `if`, `else if`, and `else`."
+    },
+    "codeExample": {
+      "title": "Exam Grade Classifier",
+      "language": "javascript",
+      "code": "// Exam Grade Classifier\n\nconst studentName = \"Kavitha\";\nconst score       = 83;\n\nlet grade, feedback;\n\nif (score >= 90) {\n    grade    = \"A\";\n    feedback = \"Outstanding! Keep it up.\";\n} else if (score >= 80) {\n    grade    = \"B\";\n    feedback = \"Great work!\";\n} else if (score >= 70) {\n    grade    = \"C\";\n    feedback = \"Good effort, room to improve.\";\n} else if (score >= 60) {\n    grade    = \"D\";\n    feedback = \"Needs more practice.\";\n} else {\n    grade    = \"F\";\n    feedback = \"Please seek extra help.\";\n}\n\nconsole.log(`Student  : ${studentName}`);\nconsole.log(`Score    : ${score}/100`);\nconsole.log(`Grade    : ${grade}`);\nconsole.log(`Feedback : ${feedback}`);\n\n// Truthy / falsy in a condition\nconst promoCode = \"SAVE20\";\nif (promoCode) {\n    console.log(`Promo code applied: ${promoCode}`);\n}",
+      "explanation": "- `let grade, feedback;` — declares two `let` variables without assigning them yet; they will be set inside the branches\n- `if (score >= 90)` — the parentheses hold the boolean condition; `>=` is greater-than-or-equal\n- `} else if (score >= 80) {` — only evaluated when `score < 90`; once a branch matches, the rest are skipped\n- `grade = \"B\";` — variables declared with `let` outside the block are still in scope inside it\n- `if (promoCode)` — a non-empty string is truthy; if `promoCode` were `\"\"` or `null`, the block would not run"
+    },
+    "exercise": {
+      "title": "Write an Age Category Classifier",
+      "instructions": "Write a program that classifies a person into an age category. Declare const age = 17. Use if/else if/else to assign a category string: under 13 is 'Child', 13 to 17 is 'Teenager', 18 to 59 is 'Adult', and 60 or above is 'Senior'. Print the age and the category on separate labelled lines.\n\nExpected output with age = 17:\nAge: 17\nCategory: Teenager",
+      "starterCode": "// Age Category Classifier\n\nconst age = 17;\nlet category;\n\nif (age < 13) {\n    category = \"Child\";\n} else if (age <= 17) {\n    category = \"Teenager\";\n}\n// Add else if for Adult (18-59) and else for Senior\n\nconsole.log(\"Age:\",      age);\nconsole.log(\"Category:\", category);",
+      "solutionCode": "const age = 17;\nlet category;\n\nif (age < 13) {\n    category = \"Child\";\n} else if (age <= 17) {\n    category = \"Teenager\";\n} else if (age <= 59) {\n    category = \"Adult\";\n} else {\n    category = \"Senior\";\n}\n\nconsole.log(\"Age:\",      age);\nconsole.log(\"Category:\", category);",
+      "hints": [
+        "💡 Add else if (age <= 59) { category = \"Adult\"; } after the Teenager branch.",
+        "💡 The final category (Senior) needs only else { category = \"Senior\"; } because all lower ages are already handled.",
+        "💡 Each else if only needs to check the upper bound — the lower bound is guaranteed by the previous branch having been false."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Category: Teenager",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m3-l1-q1",
+          "question": "How many else if branches can a single if statement have in JavaScript?",
+          "options": [
+            "Only one",
+            "At most three",
+            "At most ten",
+            "As many as needed"
+          ],
+          "correct": 3,
+          "explanation": "There is no limit on the number of else if branches. You can chain as many as your logic requires. JavaScript evaluates them top to bottom and executes the first branch whose condition is true. If none match, the optional else block runs."
+        },
+        {
+          "id": "js-m3-l1-q2",
+          "question": "What does the grade classifier print when score = 85, given: if (score >= 90) A; else if (score >= 80) B; else C?",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "B and C"
+          ],
+          "correct": 1,
+          "explanation": "JavaScript evaluates conditions top to bottom and stops at the first match. score >= 90 is false (85 < 90), so it moves to else if (score >= 80). Since 85 >= 80 is true, it prints B and skips the else. Only one branch executes in an if/else if/else chain."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m3-l2",
+    "moduleId": "js-m3",
+    "title": "Comparison and Logical Operators",
+    "order": 2,
+    "xpReward": 10,
+    "duration": "11 min",
+    "explanation": {
+      "title": "Comparing Values and Combining Conditions",
+      "content": "# Comparison Operators\n\nA condition inside an `if` statement evaluates to `true` or `false`. Comparison operators produce these boolean values by comparing two operands:\n\n| Operator | Meaning | Example | Result |\n|---|---|---|---|\n| `===` | Strict equal | `5 === 5` | `true` |\n| `!==` | Strict not equal | `5 !== 3` | `true` |\n| `>` | Greater than | `7 > 3` | `true` |\n| `<` | Less than | `3 < 7` | `true` |\n| `>=` | Greater or equal | `5 >= 5` | `true` |\n| `<=` | Less or equal | `4 <= 3` | `false` |\n\nAlways use `===` and `!==` (strict), not `==` and `!=` (loose), to avoid coercion surprises.\n\n## Logical Operators\n\nCombine multiple conditions with logical operators:\n\n| Operator | Meaning | Returns true when |\n|---|---|---|\n| `&&` | AND | Both operands are truthy |\n| `\\|\\|` | OR | At least one operand is truthy |\n| `!` | NOT | The operand is falsy |\n\n```javascript\nconst age   = 25;\nconst hasId = true;\n\nif (age >= 18 && hasId) {\n    console.log(\"Access granted\");\n}\n```\n\n## Short-Circuit Evaluation\n\nJavaScript evaluates `&&` and `||` lazily:\n\n- `a && b` — if `a` is falsy, `b` is never evaluated\n- `a || b` — if `a` is truthy, `b` is never evaluated\n\nThis is used idiomatically to provide default values:\n\n```javascript\nconst username = inputName || \"Guest\";  // use \"Guest\" if inputName is falsy\nconst display  = user && user.name;     // safe — only reads .name if user exists\n```\n\n## The in Operator\n\n```javascript\nconst plan = \"pro\";\nconst validPlans = [\"starter\", \"pro\", \"bundle\"];\nif (validPlans.includes(plan)) {\n    console.log(\"Valid plan.\");\n}\n```\n\nIn the code example below, you will see logical operators used to build a complete access control check."
+    },
+    "codeExample": {
+      "title": "Subscription Access Controller",
+      "language": "javascript",
+      "code": "// Subscription Access Controller\n\nconst isLoggedIn     = true;\nconst plan           = \"pro\";\nconst accountActive  = true;\nconst trialDaysLeft  = 0;\n\n// AND: all three must be true\nconst hasFullAccess = isLoggedIn && accountActive && plan === \"pro\";\n\n// OR: either trial or paid plan provides access\nconst hasAnyAccess  = hasFullAccess || trialDaysLeft > 0;\n\n// NOT: flip a boolean\nconst isBlocked     = !accountActive;\n\nconsole.log(\"Full access :\", hasFullAccess);  // true\nconsole.log(\"Any access  :\", hasAnyAccess);   // true\nconsole.log(\"Blocked     :\", isBlocked);      // false\n\n// Short-circuit default value\nconst displayName = \"\" || \"Guest User\"; // empty string is falsy\nconsole.log(\"Display     :\", displayName); // \"Guest User\"\n\n// Logical operators in if conditions\nif (isLoggedIn && plan !== \"free\") {\n    console.log(\"Premium features unlocked.\");\n}\n\nif (!isLoggedIn || !accountActive) {\n    console.log(\"Please log in or reactivate your account.\");\n}",
+      "explanation": "- `isLoggedIn && accountActive && plan === \"pro\"` — all three conditions must be truthy for `hasFullAccess` to be `true`\n- `hasFullAccess || trialDaysLeft > 0` — `true` if either condition is met; `||` stops at the first truthy value\n- `!accountActive` — the `!` operator flips `true` to `false` and vice versa\n- `\"\" || \"Guest User\"` — short-circuit default: the empty string is falsy so JavaScript evaluates and returns the right side\n- `plan !== \"free\"` — strict not-equal; true for any plan string that is not exactly `\"free\"`"
+    },
+    "exercise": {
+      "title": "Build a Loan Eligibility Checker",
+      "instructions": "Write a program that checks loan eligibility using three variables: age (number), monthlyIncome (number), and hasExistingLoan (boolean). The criteria are: age must be between 21 and 60 inclusive, monthlyIncome must be at least 25000, and hasExistingLoan must be false. Print 'Eligible' if all criteria pass, otherwise print 'Not eligible'.\n\nTest values: age=30, monthlyIncome=35000, hasExistingLoan=false.\nExpected output: Eligible",
+      "starterCode": "// Loan Eligibility Checker\n\nconst age              = 30;\nconst monthlyIncome    = 35000;\nconst hasExistingLoan  = false;\n\n// Check all three criteria with &&\nif (age >= 21 && age <= 60 && monthlyIncome >= 25000 && !hasExistingLoan) {\n    console.log(\"Eligible\");\n} else {\n    console.log(\"Not eligible\");\n}",
+      "solutionCode": "const age             = 30;\nconst monthlyIncome   = 35000;\nconst hasExistingLoan = false;\n\nif (age >= 21 && age <= 60 && monthlyIncome >= 25000 && !hasExistingLoan) {\n    console.log(\"Eligible\");\n} else {\n    console.log(\"Not eligible\");\n}",
+      "hints": [
+        "💡 Use && to combine all conditions: age range, income threshold, and no existing loan.",
+        "💡 Check the age range with age >= 21 && age <= 60 — both bounds must hold simultaneously.",
+        "💡 Use !hasExistingLoan instead of hasExistingLoan === false — both work, but ! is more concise."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Eligible",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m3-l2-q1",
+          "question": "What does the && operator return when the left operand is falsy?",
+          "options": [
+            "true",
+            "The left operand without evaluating the right",
+            "false",
+            "undefined"
+          ],
+          "correct": 1,
+          "explanation": "JavaScript's && operator uses short-circuit evaluation. If the left operand is falsy, JavaScript immediately returns that falsy value without evaluating the right operand at all. For example, null && someFunction() returns null and someFunction is never called. This is why && is used as a safe property access guard."
+        },
+        {
+          "id": "js-m3-l2-q2",
+          "question": "What is the value of the expression: const name = '' || 'Anonymous'?",
+          "options": [
+            "''",
+            "true",
+            "'Anonymous'",
+            "null"
+          ],
+          "correct": 2,
+          "explanation": "The || operator returns the first truthy value it encounters, or the last value if none are truthy. An empty string '' is falsy, so JavaScript evaluates the right side and returns 'Anonymous'. This pattern is the standard JavaScript way to provide a default value when a variable might be falsy."
+        }
+      ]
+    }
+  },
+  {
+    "id": "js-m3-l3",
+    "moduleId": "js-m3",
+    "title": "Ternary Operator and switch",
+    "order": 3,
+    "xpReward": 15,
+    "duration": "12 min",
+    "explanation": {
+      "title": "Concise Decisions with the Ternary Operator and switch",
+      "content": "# The Ternary Operator\n\nThe ternary operator is JavaScript's one-line `if/else`. Its syntax is:\n\n```\ncondition ? valueIfTrue : valueIfFalse\n```\n\nIt is an **expression** — it produces a value, so you can use it anywhere a value is expected:\n\n```javascript\nconst age    = 20;\nconst status = age >= 18 ? \"Adult\" : \"Minor\";\nconsole.log(status); // \"Adult\"\n```\n\nCompared to `if/else`:\n\n```javascript\n// if/else version — 5 lines\nlet status;\nif (age >= 18) {\n    status = \"Adult\";\n} else {\n    status = \"Minor\";\n}\n\n// ternary — 1 line, same result\nconst status = age >= 18 ? \"Adult\" : \"Minor\";\n```\n\nUse ternary for simple two-outcome assignments. For complex logic, stick with `if/else if/else`.\n\n## The switch Statement\n\n`switch` compares one expression against a fixed list of values. It is cleaner than a long `if/else if` chain when you are matching a single variable against many specific values:\n\n```javascript\nconst day = \"Wednesday\";\n\nswitch (day) {\n    case \"Monday\":\n    case \"Tuesday\":\n    case \"Wednesday\":\n        console.log(\"Early week\");\n        break;\n    case \"Thursday\":\n    case \"Friday\":\n        console.log(\"Late week\");\n        break;\n    default:\n        console.log(\"Weekend\");\n}\n```\n\n### Important: the break keyword\n\nWithout `break`, execution **falls through** to the next case and runs it too. Always end each case with `break` (or `return` inside a function) unless you intentionally want fall-through.\n\n## Nullish Coalescing Operator ??\n\n```javascript\nconst input   = null;\nconst display = input ?? \"No value provided\";\n```\n\n`??` is similar to `||` but only falls back when the left side is `null` or `undefined` — not when it is `0` or `\"\"`. This makes it safer for optional fields that might legitimately be zero.\n\nIn the code example below, you will see the ternary operator, a `switch` statement, and `??` used in a plan feature checker."
+    },
+    "codeExample": {
+      "title": "Plan Feature Checker",
+      "language": "javascript",
+      "code": "// Plan Feature Checker — ternary, switch, and ??\n\nconst userPlan   = \"pro\";\nconst userScore  = 87;\nconst nickname   = null;\n\n// Ternary — simple two-outcome\nconst accessLevel = userPlan === \"bundle\" ? \"Full\" : \"Limited\";\nconsole.log(`Access: ${accessLevel}`);\n\n// Ternary for inline grade display\nconst grade = userScore >= 90 ? \"A\" : userScore >= 80 ? \"B\" : \"C\";\nconsole.log(`Grade: ${grade}`);\n\n// switch — match plan to feature list\nswitch (userPlan) {\n    case \"bundle\":\n        console.log(\"Features: all 4 languages + AI mentor + offline\");\n        break;\n    case \"pro\":\n        console.log(\"Features: 2 languages + AI mentor\");\n        break;\n    case \"starter\":\n        console.log(\"Features: 1 language\");\n        break;\n    default:\n        console.log(\"Features: Python only (free tier)\");\n}\n\n// ?? — nullish coalescing\nconst displayName = nickname ?? \"CodeGuru Learner\";\nconsole.log(`Hello, ${displayName}!`);",
+      "explanation": "- `userPlan === \"bundle\" ? \"Full\" : \"Limited\"` — evaluates the condition, returns `\"Full\"` when true, `\"Limited\"` when false\n- `userScore >= 90 ? \"A\" : userScore >= 80 ? \"B\" : \"C\"` — a chained ternary; equivalent to nested `if/else if/else`\n- `switch (userPlan)` — evaluates `userPlan` once and jumps to the matching `case` label\n- `break` — required to exit the `switch` block; without it execution falls into the next case\n- `nickname ?? \"CodeGuru Learner\"` — `??` returns the right side only when `nickname` is `null` or `undefined`"
+    },
+    "exercise": {
+      "title": "Build a Day Type Classifier with switch",
+      "instructions": "Write a program using a switch statement that classifies a day number (1=Mon through 7=Sun) into a type. Cases 1 and 2 should print 'Start of week', cases 3 and 4 print 'Mid week', case 5 prints 'End of week', and default (6 or 7) prints 'Weekend'. Then use a ternary to set isWorkday as true if dayNumber is 1-5, else false. Print the day number, day type, and isWorkday.\n\nTest with dayNumber = 3. Expected output:\nDay: 3\nType: Mid week\nWork day: true",
+      "starterCode": "// Day Type Classifier\n\nconst dayNumber = 3;\nlet dayType;\n\nswitch (dayNumber) {\n    case 1:\n    case 2:\n        dayType = \"Start of week\";\n        break;\n    case 3:\n    case 4:\n        dayType = \"Mid week\";\n        break;\n    // Add case 5 and default here\n}\n\n// Ternary: isWorkday is true if dayNumber <= 5\nconst isWorkday = dayNumber <= 5 ? true : false;\n\nconsole.log(\"Day:\",      dayNumber);\nconsole.log(\"Type:\",     dayType);\nconsole.log(\"Work day:\", isWorkday);",
+      "solutionCode": "const dayNumber = 3;\nlet dayType;\n\nswitch (dayNumber) {\n    case 1:\n    case 2:\n        dayType = \"Start of week\";\n        break;\n    case 3:\n    case 4:\n        dayType = \"Mid week\";\n        break;\n    case 5:\n        dayType = \"End of week\";\n        break;\n    default:\n        dayType = \"Weekend\";\n}\n\nconst isWorkday = dayNumber <= 5 ? true : false;\n\nconsole.log(\"Day:\",      dayNumber);\nconsole.log(\"Type:\",     dayType);\nconsole.log(\"Work day:\", isWorkday);",
+      "hints": [
+        "💡 Add case 5: dayType = \"End of week\"; break; after the Mid week block.",
+        "💡 Add default: dayType = \"Weekend\"; after case 5 — no break needed on the last case.",
+        "💡 The ternary is already written — it assigns true when dayNumber <= 5, otherwise false."
+      ],
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Type: Mid week",
+          "checkType": "contains"
+        }
+      ]
+    },
+    "quiz": {
+      "questions": [
+        {
+          "id": "js-m3-l3-q1",
+          "question": "What happens in a switch statement if you forget to add break at the end of a case?",
+          "options": [
+            "The program throws a SyntaxError",
+            "Only the matching case runs",
+            "Execution falls through and runs the next case's code too",
+            "The switch statement exits immediately"
+          ],
+          "correct": 2,
+          "explanation": "Without break, a switch statement falls through — after running the matched case's code, execution continues into the next case regardless of whether its label matches. This is occasionally useful (grouping multiple cases to share code), but usually a bug. Always add break unless fall-through is intentional."
+        },
+        {
+          "id": "js-m3-l3-q2",
+          "question": "What is the difference between || and ?? for providing a default value?",
+          "options": [
+            "They are completely identical in all situations",
+            "|| falls back when left is any falsy value; ?? falls back only when left is null or undefined",
+            "?? falls back when left is any falsy value; || only for null or undefined",
+            "|| works with strings; ?? works only with numbers"
+          ],
+          "correct": 1,
+          "explanation": "|| falls back when the left side is any falsy value (false, 0, '', null, undefined, NaN). ?? (nullish coalescing) only falls back when the left side is null or undefined. This distinction matters when 0 or '' are valid values: count || 10 replaces a count of 0, but count ?? 10 keeps the 0 as intended."
+        }
+      ]
+    }
+  }
+]
