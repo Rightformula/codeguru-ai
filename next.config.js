@@ -19,7 +19,6 @@ const nextConfig = {
   },
 
   // ── Bundle size: exclude heavy server-only packages from client ──
-  serverExternalPackages: ['firebase-admin'],
 
   // ── Webpack ────────────────────────────────────────────────────
   webpack: (config, { isServer }) => {
@@ -92,15 +91,13 @@ const nextConfig = {
   },
 
   // ── Redirects ────────────────────────────────────────────────────
-  async redirects() {
-    return [
-      { source: '/home',    destination: '/',          permanent: true },
-      { source: '/login',   destination: '/(auth)/login',   permanent: false },
-      { source: '/signup',  destination: '/(auth)/signup',  permanent: false },
-    ];
-  },
-};
-
+// async redirects() {
+//   return [
+//     { source: '/home', destination: '/', permanent: true },
+//     { source: '/login', destination: '/(auth)/login', permanent: false },
+//     { source: '/signup', destination: '/(auth)/signup', permanent: false },
+//   ];
+// }
 // ── Sentry integration (only if DSN is configured) ──────────────
 const sentinelDSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
